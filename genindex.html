@@ -16,7 +16,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Index &mdash; librosa 0.2.0 documentation</title>
+    <title>Index &mdash; librosa 0.2.1 documentation</title>
     
     <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,7 +26,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '0.2.0',
+        VERSION:     '0.2.1',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -39,7 +39,7 @@
     <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
     <script type="text/javascript" src="_static/bootstrap-3.0.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="librosa 0.2.0 documentation" href="index.html" />
+    <link rel="top" title="librosa 0.2.1 documentation" href="index.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -146,10 +146,18 @@
   <dt><a href="librosa.html#librosa.segment.agglomerative">agglomerative() (in module librosa.segment)</a>
   </dt>
 
+      
+  <dt><a href="librosa.html#librosa.output.annotation">annotation() (in module librosa.output)</a>
+  </dt>
+
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="librosa.html#librosa.core.autocorrelate">autocorrelate() (in module librosa.core)</a>
+  </dt>
+
+      
+  <dt><a href="librosa.html#librosa.util.axis_sort">axis_sort() (in module librosa.util)</a>
   </dt>
 
   </dl></td>
@@ -245,11 +253,19 @@
   </dt>
 
       
-  <dt><a href="librosa.html#librosa.output.frames_csv">frames_csv() (in module librosa.output)</a>
+  <dt><a href="librosa.html#librosa.util.find_files">find_files() (in module librosa.util)</a>
+  </dt>
+
+      
+  <dt><a href="librosa.html#librosa.util.frame">frame() (in module librosa.util)</a>
   </dt>
 
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="librosa.html#librosa.output.frames_csv">frames_csv() (in module librosa.output)</a>
+  </dt>
+
       
   <dt><a href="librosa.html#librosa.core.frames_to_time">frames_to_time() (in module librosa.core)</a>
   </dt>
@@ -332,14 +348,18 @@
   <dt><a href="librosa.html#module-librosa.onset">librosa.onset (module)</a>
   </dt>
 
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="librosa.html#module-librosa.output">librosa.output (module)</a>
   </dt>
 
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="librosa.html#module-librosa.segment">librosa.segment (module)</a>
+  </dt>
+
+      
+  <dt><a href="librosa.html#module-librosa.util">librosa.util (module)</a>
   </dt>
 
       
@@ -409,6 +429,12 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
       
+  <dt><a href="librosa.html#librosa.util.normalize">normalize() (in module librosa.util)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
   <dt><a href="librosa.html#librosa.core.note_to_midi">note_to_midi() (in module librosa.core)</a>
   </dt>
 
@@ -439,15 +465,19 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="librosa.html#librosa.core.peak_pick">peak_pick() (in module librosa.core)</a>
+  <dt><a href="librosa.html#librosa.util.pad_center">pad_center() (in module librosa.util)</a>
   </dt>
 
       
-  <dt><a href="librosa.html#librosa.feature.perceptual_weighting">perceptual_weighting() (in module librosa.feature)</a>
+  <dt><a href="librosa.html#librosa.core.peak_pick">peak_pick() (in module librosa.core)</a>
   </dt>
 
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="librosa.html#librosa.feature.perceptual_weighting">perceptual_weighting() (in module librosa.feature)</a>
+  </dt>
+
       
   <dt><a href="librosa.html#librosa.core.phase_vocoder">phase_vocoder() (in module librosa.core)</a>
   </dt>
@@ -506,10 +536,14 @@
   <dt><a href="librosa.html#librosa.display.time_ticks">time_ticks() (in module librosa.display)</a>
   </dt>
 
+      
+  <dt><a href="librosa.html#librosa.core.time_to_frames">time_to_frames() (in module librosa.core)</a>
+  </dt>
+
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="librosa.html#librosa.core.time_to_frames">time_to_frames() (in module librosa.core)</a>
+  <dt><a href="librosa.html#librosa.output.times_csv">times_csv() (in module librosa.output)</a>
   </dt>
 
   </dl></td>
@@ -538,7 +572,7 @@
       
     </p>
     <p>
-        &copy; Copyright 2013, Dawen Liang, Brian McFee, Matt McVicar, Colin Raffel.<br/>
+        &copy; Copyright 2014, Dawen Liang, Brian McFee, Matt McVicar, Colin Raffel.<br/>
       Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.<br/>
     </p>
   </div>
