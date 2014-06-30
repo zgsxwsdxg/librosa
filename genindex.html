@@ -1,14 +1,4 @@
 
-
-
-
-  
-  
- 
-  
- 
-
-
 <!DOCTYPE html>
 
 
@@ -16,17 +6,17 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Index &mdash; librosa 0.2.1 documentation</title>
+    <title>Index &mdash; librosa 0.3.0 documentation</title>
     
     <link rel="stylesheet" href="_static/basic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootswatch/3.0.0/flatly/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="_static/bootswatch-3.1.0/yeti/bootstrap.min.css" type="text/css" />
     <link rel="stylesheet" href="_static/bootstrap-sphinx.css" type="text/css" />
     
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
-        VERSION:     '0.2.1',
+        URL_ROOT:    './',
+        VERSION:     '0.3.0',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -35,11 +25,11 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <script type="text/javascript" src="_static/js/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="_static/js/jquery-1.11.0.min.js"></script>
     <script type="text/javascript" src="_static/js/jquery-fix.js"></script>
-    <script type="text/javascript" src="_static/bootstrap-3.0.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="_static/bootstrap-3.1.0/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="_static/bootstrap-sphinx.js"></script>
-    <link rel="top" title="librosa 0.2.1 documentation" href="index.html" />
+    <link rel="top" title="librosa 0.3.0 documentation" href="index.html" />
 <meta charset='utf-8'>
 <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'>
 <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1'>
@@ -57,8 +47,9 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.html">LibROSA</a>
-        <span class="navbar-text navbar-version pull-left"><b>0.2</b></span>
+        <a class="navbar-brand" href="index.html">
+          LibROSA</a>
+        <span class="navbar-text navbar-version pull-left"><b>0.3</b></span>
       </div>
 
         <div class="collapse navbar-collapse nav-collapse">
@@ -67,27 +58,38 @@
             
             
               <li class="dropdown globaltoc-container">
-  <a href="index.html"
-     class="dropdown-toggle"
-     data-toggle="dropdown">Site <b class="caret"></b></a>
+  <a role="button"
+     id="dLabelGlobalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="index.html">Site <b class="caret"></b></a>
   <ul class="dropdown-menu globaltoc"
-    ><ul>
-<li class="toctree-l1"><a class="reference internal" href="librosa.html">librosa Package</a></li>
+      role="menu"
+      aria-labelledby="dLabelGlobalToc"><ul>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a></li>
+<li class="toctree-l1"><a class="reference internal" href="librosa.html">Package reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
 </ul>
 </ul>
 </li>
               
                 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Page <b class="caret"></b></a>
-  <ul class="dropdown-menu localtoc"></ul>
+  <a role="button"
+     id="dLabelLocalToc"
+     data-toggle="dropdown"
+     data-target="#"
+     href="#">Page <b class="caret"></b></a>
+  <ul class="dropdown-menu localtoc"
+      role="menu"
+      aria-labelledby="dLabelLocalToc"></ul>
 </li>
               
             
             
               
-
-   
-
+                
+              
             
             
             
@@ -171,11 +173,25 @@
   </dt>
 
   </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="librosa.html#librosa.chord.beats_to_chords">beats_to_chords() (in module librosa.chord)</a>
+  </dt>
+
+  </dl></td>
 </tr></table>
 
 <h2 id="C">C</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="librosa.html#librosa.chord.ChordHMM">ChordHMM (class in librosa.chord)</a>
+  </dt>
+
+      
+  <dt><a href="glossary.html#term-chroma"><strong>chroma</strong></a>
+  </dt>
+
       
   <dt><a href="librosa.html#librosa.filters.chroma">chroma() (in module librosa.filters)</a>
   </dt>
@@ -188,12 +204,12 @@
   <dt><a href="librosa.html#librosa.display.cmap">cmap() (in module librosa.display)</a>
   </dt>
 
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="librosa.html#librosa.filters.constant_q">constant_q() (in module librosa.filters)</a>
   </dt>
 
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="librosa.html#librosa.filters.cq_to_chroma">cq_to_chroma() (in module librosa.filters)</a>
   </dt>
@@ -236,10 +252,14 @@
   <dt><a href="librosa.html#librosa.beat.estimate_tempo">estimate_tempo() (in module librosa.beat)</a>
   </dt>
 
+      
+  <dt><a href="librosa.html#librosa.feature.estimate_tuning">estimate_tuning() (in module librosa.feature)</a>
+  </dt>
+
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="librosa.html#librosa.feature.estimate_tuning">estimate_tuning() (in module librosa.feature)</a>
+  <dt><a href="librosa.html#librosa.util.example_audio_file">example_audio_file() (in module librosa.util)</a>
   </dt>
 
   </dl></td>
@@ -249,6 +269,10 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
       
+  <dt><a href="librosa.html#librosa.util.FeatureExtractor">FeatureExtractor (class in librosa.util)</a>
+  </dt>
+
+      
   <dt><a href="librosa.html#librosa.core.fft_frequencies">fft_frequencies() (in module librosa.core)</a>
   </dt>
 
@@ -257,11 +281,33 @@
   </dt>
 
       
-  <dt><a href="librosa.html#librosa.util.frame">frame() (in module librosa.util)</a>
+  <dt><a href="librosa.html#librosa.chord.ChordHMM.fit">fit() (librosa.chord.ChordHMM method)</a>
+  </dt>
+
+      <dd><dl>
+        
+  <dt><a href="librosa.html#librosa.util.FeatureExtractor.fit">(librosa.util.FeatureExtractor method)</a>
+  </dt>
+
+      </dl></dd>
+      
+  <dt><a href="librosa.html#librosa.util.fix_length">fix_length() (in module librosa.util)</a>
   </dt>
 
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="glossary.html#term-frame"><strong>frame</strong></a>
+  </dt>
+
+      
+  <dt><a href="glossary.html#term-frame-length"><strong>frame length</strong></a>
+  </dt>
+
+      
+  <dt><a href="librosa.html#librosa.util.frame">frame() (in module librosa.util)</a>
+  </dt>
+
       
   <dt><a href="librosa.html#librosa.output.frames_csv">frames_csv() (in module librosa.output)</a>
   </dt>
@@ -277,15 +323,29 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
       
+  <dt><a href="librosa.html#librosa.effects.harmonic">harmonic() (in module librosa.effects)</a>
+  </dt>
+
+      
+  <dt><a href="glossary.html#term-hop-length"><strong>hop length</strong></a>
+  </dt>
+
+      
   <dt><a href="librosa.html#librosa.decompose.hpss">hpss() (in module librosa.decompose)</a>
   </dt>
 
+      <dd><dl>
+        
+  <dt><a href="librosa.html#librosa.effects.hpss">(in module librosa.effects)</a>
+  </dt>
+
+      </dl></dd>
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="librosa.html#librosa.core.hz_to_mel">hz_to_mel() (in module librosa.core)</a>
   </dt>
 
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="librosa.html#librosa.core.hz_to_midi">hz_to_midi() (in module librosa.core)</a>
   </dt>
@@ -325,6 +385,10 @@
   </dt>
 
       
+  <dt><a href="librosa.html#module-librosa.chord">librosa.chord (module)</a>
+  </dt>
+
+      
   <dt><a href="librosa.html#module-librosa.core">librosa.core (module)</a>
   </dt>
 
@@ -334,6 +398,10 @@
 
       
   <dt><a href="librosa.html#module-librosa.display">librosa.display (module)</a>
+  </dt>
+
+      
+  <dt><a href="librosa.html#module-librosa.effects">librosa.effects (module)</a>
   </dt>
 
       
@@ -348,12 +416,12 @@
   <dt><a href="librosa.html#module-librosa.onset">librosa.onset (module)</a>
   </dt>
 
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="librosa.html#module-librosa.output">librosa.output (module)</a>
   </dt>
 
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="librosa.html#module-librosa.segment">librosa.segment (module)</a>
   </dt>
@@ -390,6 +458,10 @@
   <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="librosa.html#librosa.core.magphase">magphase() (in module librosa.core)</a>
+  </dt>
+
+      
+  <dt><a href="librosa.html#librosa.util.match_intervals">match_intervals() (in module librosa.util)</a>
   </dt>
 
       
@@ -449,11 +521,15 @@
   </dt>
 
       
-  <dt><a href="librosa.html#librosa.onset.onset_detect">onset_detect() (in module librosa.onset)</a>
+  <dt><a href="glossary.html#term-onset-strength-envelope"><strong>onset (strength) envelope</strong></a>
   </dt>
 
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="librosa.html#librosa.onset.onset_detect">onset_detect() (in module librosa.onset)</a>
+  </dt>
+
       
   <dt><a href="librosa.html#librosa.onset.onset_strength">onset_strength() (in module librosa.onset)</a>
   </dt>
@@ -472,14 +548,34 @@
   <dt><a href="librosa.html#librosa.core.peak_pick">peak_pick() (in module librosa.core)</a>
   </dt>
 
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="librosa.html#librosa.feature.perceptual_weighting">perceptual_weighting() (in module librosa.feature)</a>
+  <dt><a href="librosa.html#librosa.core.perceptual_weighting">perceptual_weighting() (in module librosa.core)</a>
+  </dt>
+
+      
+  <dt><a href="librosa.html#librosa.effects.percussive">percussive() (in module librosa.effects)</a>
   </dt>
 
       
   <dt><a href="librosa.html#librosa.core.phase_vocoder">phase_vocoder() (in module librosa.core)</a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="librosa.html#librosa.feature.piptrack">piptrack() (in module librosa.feature)</a>
+  </dt>
+
+      
+  <dt><a href="librosa.html#librosa.effects.pitch_shift">pitch_shift() (in module librosa.effects)</a>
+  </dt>
+
+      
+  <dt><a href="librosa.html#librosa.feature.pitch_tuning">pitch_tuning() (in module librosa.feature)</a>
+  </dt>
+
+      
+  <dt><a href="librosa.html#librosa.chord.ChordHMM.predict_chords">predict_chords() (librosa.chord.ChordHMM method)</a>
   </dt>
 
   </dl></td>
@@ -505,19 +601,31 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
       
+  <dt><a href="glossary.html#term-sampling-rate"><strong>sampling rate</strong></a>
+  </dt>
+
+      
+  <dt><a href="librosa.html#librosa.util.FeatureExtractor.set_params">set_params() (librosa.util.FeatureExtractor method)</a>
+  </dt>
+
+      
   <dt><a href="librosa.html#librosa.display.specshow">specshow() (in module librosa.display)</a>
   </dt>
 
       
-  <dt><a href="librosa.html#librosa.segment.stack_memory">stack_memory() (in module librosa.segment)</a>
+  <dt><a href="glossary.html#term-spectrogram"><strong>spectrogram</strong></a>
+  </dt>
+
+  </dl></td>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="librosa.html#librosa.feature.stack_memory">stack_memory() (in module librosa.feature)</a>
   </dt>
 
       
   <dt><a href="librosa.html#librosa.core.stft">stft() (in module librosa.core)</a>
   </dt>
 
-  </dl></td>
-  <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="librosa.html#librosa.segment.structure_feature">structure_feature() (in module librosa.segment)</a>
   </dt>
@@ -533,17 +641,29 @@
 <table style="width: 100%" class="indextable genindextable"><tr>
   <td style="width: 33%" valign="top"><dl>
       
-  <dt><a href="librosa.html#librosa.display.time_ticks">time_ticks() (in module librosa.display)</a>
+  <dt><a href="glossary.html#term-time-series"><strong>time series</strong></a>
   </dt>
 
       
-  <dt><a href="librosa.html#librosa.core.time_to_frames">time_to_frames() (in module librosa.core)</a>
+  <dt><a href="librosa.html#librosa.effects.time_stretch">time_stretch() (in module librosa.effects)</a>
+  </dt>
+
+      
+  <dt><a href="librosa.html#librosa.display.time_ticks">time_ticks() (in module librosa.display)</a>
   </dt>
 
   </dl></td>
   <td style="width: 33%" valign="top"><dl>
       
+  <dt><a href="librosa.html#librosa.core.time_to_frames">time_to_frames() (in module librosa.core)</a>
+  </dt>
+
+      
   <dt><a href="librosa.html#librosa.output.times_csv">times_csv() (in module librosa.output)</a>
+  </dt>
+
+      
+  <dt><a href="librosa.html#librosa.util.FeatureExtractor.transform">transform() (librosa.util.FeatureExtractor method)</a>
   </dt>
 
   </dl></td>
@@ -551,6 +671,16 @@
 
 <h2 id="W">W</h2>
 <table style="width: 100%" class="indextable genindextable"><tr>
+  <td style="width: 33%" valign="top"><dl>
+      
+  <dt><a href="glossary.html#term-window"><strong>window</strong></a>
+  </dt>
+
+      
+  <dt><a href="glossary.html#term-window-length"><strong>window length</strong></a>
+  </dt>
+
+  </dl></td>
   <td style="width: 33%" valign="top"><dl>
       
   <dt><a href="librosa.html#librosa.output.write_wav">write_wav() (in module librosa.output)</a>
@@ -573,7 +703,7 @@
     </p>
     <p>
         &copy; Copyright 2014, Dawen Liang, Brian McFee, Matt McVicar, Colin Raffel.<br/>
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.<br/>
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.2.2.<br/>
     </p>
   </div>
 </footer>
