@@ -1,0 +1,569 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>librosa.core.cqt &mdash; librosa 0.4.0 documentation</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  
+
+  
+
+  
+    <link rel="top" title="librosa 0.4.0 documentation" href="../index.html"/>
+        <link rel="up" title="Core IO and DSP" href="../core.html"/>
+        <link rel="next" title="librosa.core.hybrid_cqt" href="librosa.core.hybrid_cqt.html"/>
+        <link rel="prev" title="librosa.core.ifgram" href="librosa.core.ifgram.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+
+        
+          <a href="../index.html" class="icon icon-home"> librosa
+        
+
+        
+        </a>
+
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+        
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../install.html">Installation instructions</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#additional-notes">Additional notes</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial.html#overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial.html#quickstart">Quickstart</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial.html#advanced-usage">Advanced usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial.html#more-examples">More examples</a></li>
+</ul>
+</li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../core.html">Core IO and DSP</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../core.html#audio-processing">Audio processing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="librosa.core.load.html">librosa.core.load</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.core.to_mono.html">librosa.core.to_mono</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.core.resample.html">librosa.core.resample</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.core.get_duration.html">librosa.core.get_duration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.core.autocorrelate.html">librosa.core.autocorrelate</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.core.zero_crossings.html">librosa.core.zero_crossings</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="../core.html#spectral-representations">Spectral representations</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="librosa.core.stft.html">librosa.core.stft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.core.istft.html">librosa.core.istft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.core.ifgram.html">librosa.core.ifgram</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="">librosa.core.cqt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.core.hybrid_cqt.html">librosa.core.hybrid_cqt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.core.pseudo_cqt.html">librosa.core.pseudo_cqt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.core.phase_vocoder.html">librosa.core.phase_vocoder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.core.magphase.html">librosa.core.magphase</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.core.logamplitude.html">librosa.core.logamplitude</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.core.perceptual_weighting.html">librosa.core.perceptual_weighting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.core.A_weighting.html">librosa.core.A_weighting</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core.html#time-and-frequency-conversion">Time and frequency conversion</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="librosa.core.frames_to_samples.html">librosa.core.frames_to_samples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.core.frames_to_time.html">librosa.core.frames_to_time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.core.samples_to_frames.html">librosa.core.samples_to_frames</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.core.samples_to_time.html">librosa.core.samples_to_time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.core.time_to_frames.html">librosa.core.time_to_frames</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.core.time_to_samples.html">librosa.core.time_to_samples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.core.hz_to_note.html">librosa.core.hz_to_note</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.core.hz_to_midi.html">librosa.core.hz_to_midi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.core.midi_to_hz.html">librosa.core.midi_to_hz</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.core.midi_to_note.html">librosa.core.midi_to_note</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.core.note_to_hz.html">librosa.core.note_to_hz</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.core.note_to_midi.html">librosa.core.note_to_midi</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.core.hz_to_mel.html">librosa.core.hz_to_mel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.core.hz_to_octs.html">librosa.core.hz_to_octs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.core.mel_to_hz.html">librosa.core.mel_to_hz</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.core.octs_to_hz.html">librosa.core.octs_to_hz</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.core.fft_frequencies.html">librosa.core.fft_frequencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.core.cqt_frequencies.html">librosa.core.cqt_frequencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.core.mel_frequencies.html">librosa.core.mel_frequencies</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core.html#pitch-and-tuning">Pitch and tuning</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="librosa.core.estimate_tuning.html">librosa.core.estimate_tuning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.core.pitch_tuning.html">librosa.core.pitch_tuning</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.core.piptrack.html">librosa.core.piptrack</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../core.html#deprecated">Deprecated</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="librosa.core.ifptrack.html">librosa.core.ifptrack</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../display.html">Display</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="librosa.display.specshow.html">librosa.display.specshow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="librosa.display.waveplot.html">librosa.display.waveplot</a></li>
+<li class="toctree-l2"><a class="reference internal" href="librosa.display.time_ticks.html">librosa.display.time_ticks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="librosa.display.cmap.html">librosa.display.cmap</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../feature.html">Feature extraction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../feature.html#spectral-features">Spectral features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="librosa.feature.chroma_stft.html">librosa.feature.chroma_stft</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.feature.chroma_cqt.html">librosa.feature.chroma_cqt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.feature.melspectrogram.html">librosa.feature.melspectrogram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.feature.mfcc.html">librosa.feature.mfcc</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.feature.rmse.html">librosa.feature.rmse</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.feature.spectral_centroid.html">librosa.feature.spectral_centroid</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.feature.spectral_bandwidth.html">librosa.feature.spectral_bandwidth</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.feature.spectral_contrast.html">librosa.feature.spectral_contrast</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.feature.spectral_rolloff.html">librosa.feature.spectral_rolloff</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.feature.poly_features.html">librosa.feature.poly_features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.feature.tonnetz.html">librosa.feature.tonnetz</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.feature.zero_crossing_rate.html">librosa.feature.zero_crossing_rate</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../feature.html#feature-manipulation">Feature manipulation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="librosa.feature.delta.html">librosa.feature.delta</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.feature.stack_memory.html">librosa.feature.stack_memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.feature.sync.html">librosa.feature.sync</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../feature.html#deprecated">Deprecated</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="librosa.feature.logfsgram.html">librosa.feature.logfsgram</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../onset.html">Onset detection</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="librosa.onset.onset_detect.html">librosa.onset.onset_detect</a></li>
+<li class="toctree-l2"><a class="reference internal" href="librosa.onset.onset_strength.html">librosa.onset.onset_strength</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../beat.html">Beat and tempo</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="librosa.beat.beat_track.html">librosa.beat.beat_track</a></li>
+<li class="toctree-l2"><a class="reference internal" href="librosa.beat.estimate_tempo.html">librosa.beat.estimate_tempo</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../decompose.html">Spectrogram decomposition</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="librosa.decompose.decompose.html">librosa.decompose.decompose</a></li>
+<li class="toctree-l2"><a class="reference internal" href="librosa.decompose.hpss.html">librosa.decompose.hpss</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../effects.html">Effects</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../effects.html#harmonic-percussive-source-separation">Harmonic-percussive source separation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="librosa.effects.hpss.html">librosa.effects.hpss</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.effects.harmonic.html">librosa.effects.harmonic</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.effects.percussive.html">librosa.effects.percussive</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../effects.html#time-and-frequency">Time and frequency</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="librosa.effects.time_stretch.html">librosa.effects.time_stretch</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.effects.pitch_shift.html">librosa.effects.pitch_shift</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../effects.html#miscellaneous">Miscellaneous</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="librosa.effects.remix.html">librosa.effects.remix</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../output.html">Output</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../output.html#text-output">Text output</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="librosa.output.annotation.html">librosa.output.annotation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.output.times_csv.html">librosa.output.times_csv</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../output.html#audio-output">Audio output</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="librosa.output.write_wav.html">librosa.output.write_wav</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../output.html#deprecated">Deprecated</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="librosa.output.frames_csv.html">librosa.output.frames_csv</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../segment.html">Temporal segmentation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../segment.html#recurrence-and-self-similarity">Recurrence and self-similarity</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="librosa.segment.recurrence_matrix.html">librosa.segment.recurrence_matrix</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.segment.recurrence_to_lag.html">librosa.segment.recurrence_to_lag</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.segment.lag_to_recurrence.html">librosa.segment.lag_to_recurrence</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.segment.timelag_filter.html">librosa.segment.timelag_filter</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../segment.html#temporal-clustering">Temporal clustering</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="librosa.segment.agglomerative.html">librosa.segment.agglomerative</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.segment.subsegment.html">librosa.segment.subsegment</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../segment.html#deprecated">Deprecated</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="librosa.segment.structure_feature.html">librosa.segment.structure_feature</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../util.html">Utilities</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../util.html#array-operations">Array operations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="librosa.util.frame.html">librosa.util.frame</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.util.pad_center.html">librosa.util.pad_center</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.util.fix_length.html">librosa.util.fix_length</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.util.fix_frames.html">librosa.util.fix_frames</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.util.axis_sort.html">librosa.util.axis_sort</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.util.normalize.html">librosa.util.normalize</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.util.sparsify_rows.html">librosa.util.sparsify_rows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.util.buf_to_float.html">librosa.util.buf_to_float</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../util.html#matching">Matching</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="librosa.util.match_intervals.html">librosa.util.match_intervals</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.util.match_events.html">librosa.util.match_events</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../util.html#miscellaneous">Miscellaneous</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="librosa.util.localmax.html">librosa.util.localmax</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.util.peak_pick.html">librosa.util.peak_pick</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../util.html#input-validation">Input validation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="librosa.util.valid_audio.html">librosa.util.valid_audio</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.util.valid_int.html">librosa.util.valid_int</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.util.valid_intervals.html">librosa.util.valid_intervals</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../util.html#file-operations">File operations</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="librosa.util.example_audio_file.html">librosa.util.example_audio_file</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.util.find_files.html">librosa.util.find_files</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../util.html#sklearn-integration">sklearn integration</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="librosa.util.FeatureExtractor.html">librosa.util.FeatureExtractor</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../util.html#deprecated">Deprecated</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="librosa.util.buf_to_int.html">librosa.util.buf_to_int</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../filters.html">Filters</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../filters.html#filter-bank-construction">Filter bank construction</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="librosa.filters.dct.html">librosa.filters.dct</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.filters.mel.html">librosa.filters.mel</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.filters.chroma.html">librosa.filters.chroma</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.filters.constant_q.html">librosa.filters.constant_q</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../filters.html#miscellaneous">Miscellaneous</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="librosa.filters.constant_q_lengths.html">librosa.filters.constant_q_lengths</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.filters.cq_to_chroma.html">librosa.filters.cq_to_chroma</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.filters.window_bandwidth.html">librosa.filters.window_bandwidth</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../filters.html#deprecated">Deprecated</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="librosa.filters.logfrequency.html">librosa.filters.logfrequency</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../cache.html">Caching</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../cache.html#enabling-the-cache">Enabling the cache</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cache.html#cache-configuration">Cache configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cache.html#example">Example</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#v0-4-0">v0.4.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#v0-3-1">v0.3.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#v0-3-0">v0.3.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#v0-2-1">v0.2.1</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#v0-2-0">v0.2.0</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#v0-1-0">v0.1.0</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">librosa</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+          <li><a href="../core.html">Core IO and DSP</a> &raquo;</li>
+      
+    <li>librosa.core.cqt</li>
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="../_sources/generated/librosa.core.cqt.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="librosa-core-cqt">
+<h1>librosa.core.cqt<a class="headerlink" href="#librosa-core-cqt" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="librosa.core.cqt">
+<tt class="descclassname">librosa.core.</tt><tt class="descname">cqt</tt><big>(</big><em>y</em>, <em>sr=22050</em>, <em>hop_length=512</em>, <em>fmin=None</em>, <em>n_bins=84</em>, <em>bins_per_octave=12</em>, <em>tuning=None</em>, <em>resolution=2</em>, <em>aggregate=None</em>, <em>norm=1</em>, <em>sparsity=0.01</em><big>)</big><a class="headerlink" href="#librosa.core.cqt" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the constant-Q transform of an audio signal.</p>
+<p>This implementation is based on the recursive sub-sampling method
+described by <a class="reference internal" href="#r13" id="id1">[R13]</a>.</p>
+<table class="docutils citation" frame="void" id="r13" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[R13]</a></td><td>Schoerkhuber, Christian, and Anssi Klapuri.
+&#8220;Constant-Q transform toolbox for music processing.&#8221;
+7th Sound and Music Computing Conference, Barcelona, Spain. 2010.</td></tr>
+</tbody>
+</table>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>y</strong> : np.ndarray [shape=(n,)]</p>
+<blockquote>
+<div><p>audio time series</p>
+</div></blockquote>
+<p><strong>sr</strong> : int &gt; 0 [scalar]</p>
+<blockquote>
+<div><p>sampling rate of <em class="xref py py-obj">y</em></p>
+</div></blockquote>
+<p><strong>hop_length</strong> : int &gt; 0 [scalar]</p>
+<blockquote>
+<div><p>number of samples between successive CQT columns.</p>
+</div></blockquote>
+<p><strong>fmin</strong> : float &gt; 0 [scalar]</p>
+<blockquote>
+<div><p>Minimum frequency. Defaults to C1 ~= 32.70 Hz</p>
+</div></blockquote>
+<p><strong>n_bins</strong> : int &gt; 0 [scalar]</p>
+<blockquote>
+<div><p>Number of frequency bins, starting at <em class="xref py py-obj">fmin</em></p>
+</div></blockquote>
+<p><strong>bins_per_octave</strong> : int &gt; 0 [scalar]</p>
+<blockquote>
+<div><p>Number of bins per octave</p>
+</div></blockquote>
+<p><strong>tuning</strong> : None or float in <em class="xref py py-obj">[-0.5, 0.5)</em></p>
+<blockquote>
+<div><p>Tuning offset in fractions of a bin (cents).</p>
+<p>If <em class="xref py py-obj">None</em>, tuning will be automatically estimated.</p>
+</div></blockquote>
+<p><strong>resolution</strong> : float &gt; 0</p>
+<blockquote>
+<div><p>Filter resolution factor. Larger values use longer windows.</p>
+</div></blockquote>
+<p><strong>aggregate</strong> : None or function</p>
+<blockquote>
+<div><p>Aggregation function for time-oversampling energy aggregation.
+By default, <em class="xref py py-obj">np.mean</em>.  See <a class="reference internal" href="librosa.feature.sync.html#librosa.feature.sync" title="librosa.feature.sync"><tt class="xref py py-obj docutils literal"><span class="pre">librosa.feature.sync</span></tt></a>.</p>
+</div></blockquote>
+<p><strong>norm</strong> : {inf, -inf, 0, float &gt; 0}</p>
+<blockquote>
+<div><p>Type of norm to use for basis function normalization.
+See <a class="reference internal" href="librosa.util.normalize.html#librosa.util.normalize" title="librosa.util.normalize"><tt class="xref py py-obj docutils literal"><span class="pre">librosa.util.normalize</span></tt></a>.</p>
+</div></blockquote>
+<p><strong>sparsity</strong> : float in [0, 1)</p>
+<blockquote>
+<div><p>Sparsify the CQT basis by discarding up to <em class="xref py py-obj">sparsity</em>
+fraction of the energy in each basis.</p>
+<p>Set <em class="xref py py-obj">sparsity=0</em> to disable sparsification.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>CQT</strong> : np.ndarray [shape=(n_bins, t), dtype=np.float]</p>
+<blockquote>
+<div><p>Constant-Q energy for each frequency at each time.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><strong>ParameterError</strong></p>
+<blockquote class="last">
+<div><p>If <em class="xref py py-obj">hop_length &lt; 2**(n_bins / bins_per_octave)</em></p>
+</div></blockquote>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="librosa.core.resample.html#librosa.core.resample" title="librosa.core.resample"><tt class="xref py py-obj docutils literal"><span class="pre">librosa.core.resample</span></tt></a>, <a class="reference internal" href="librosa.feature.sync.html#librosa.feature.sync" title="librosa.feature.sync"><tt class="xref py py-obj docutils literal"><span class="pre">librosa.feature.sync</span></tt></a>, <a class="reference internal" href="librosa.util.normalize.html#librosa.util.normalize" title="librosa.util.normalize"><tt class="xref py py-obj docutils literal"><span class="pre">librosa.util.normalize</span></tt></a></p>
+</div>
+<p class="rubric">Examples</p>
+<p>Generate and plot a constant-Q power spectrum</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">y</span><span class="p">,</span> <span class="n">sr</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">librosa</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">example_audio_file</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">cqt</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span><span class="p">(</span><span class="n">librosa</span><span class="o">.</span><span class="n">logamplitude</span><span class="p">(</span><span class="n">C</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">ref_power</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">),</span>
+<span class="gp">... </span>                         <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span> <span class="n">x_axis</span><span class="o">=</span><span class="s">&#39;time&#39;</span><span class="p">,</span> <span class="n">y_axis</span><span class="o">=</span><span class="s">&#39;cqt_note&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">format</span><span class="o">=</span><span class="s">&#39;</span><span class="si">%+2.0f</span><span class="s"> dB&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">&#39;Constant-Q power spectrum&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Limit the frequency range</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">C</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">cqt</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span> <span class="n">fmin</span><span class="o">=</span><span class="n">librosa</span><span class="o">.</span><span class="n">note_to_hz</span><span class="p">(</span><span class="s">&#39;C2&#39;</span><span class="p">),</span>
+<span class="gp">... </span>                <span class="n">n_bins</span><span class="o">=</span><span class="mi">60</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C</span>
+<span class="go">array([[  8.827e-04,   9.293e-04, ...,   3.133e-07,   2.942e-07],</span>
+<span class="go">       [  1.076e-03,   1.068e-03, ...,   1.153e-06,   1.148e-06],</span>
+<span class="go">       ...,</span>
+<span class="go">       [  1.042e-07,   4.087e-07, ...,   1.612e-07,   1.928e-07],</span>
+<span class="go">       [  2.363e-07,   5.329e-07, ...,   1.294e-07,   1.611e-07]])</span>
+</pre></div>
+</div>
+<p>Using a higher resolution</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">C</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">cqt</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span> <span class="n">fmin</span><span class="o">=</span><span class="n">librosa</span><span class="o">.</span><span class="n">note_to_hz</span><span class="p">(</span><span class="s">&#39;C2&#39;</span><span class="p">),</span>
+<span class="gp">... </span>                <span class="n">n_bins</span><span class="o">=</span><span class="mi">60</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="n">bins_per_octave</span><span class="o">=</span><span class="mi">12</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">C</span>
+<span class="go">array([[  1.536e-05,   5.848e-05, ...,   3.241e-07,   2.453e-07],</span>
+<span class="go">       [  1.856e-03,   1.854e-03, ...,   2.397e-08,   3.549e-08],</span>
+<span class="go">       ...,</span>
+<span class="go">       [  2.034e-07,   4.245e-07, ...,   6.213e-08,   1.463e-07],</span>
+<span class="go">       [  4.896e-08,   5.407e-07, ...,   9.176e-08,   1.051e-07]])</span>
+</pre></div>
+</div>
+<p>(<a class="reference external" href="../generated/librosa-core-cqt-1.py">Source code</a>)</p>
+<div class="figure">
+<img alt="../_images/librosa-core-cqt-1.png" src="../_images/librosa-core-cqt-1.png" />
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="librosa.core.hybrid_cqt.html" class="btn btn-neutral float-right" title="librosa.core.hybrid_cqt" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="librosa.core.ifgram.html" class="btn btn-neutral" title="librosa.core.ifgram" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2015, librosa development team.
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'0.4.0',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
