@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>librosa.core.istft &mdash; librosa 0.4.0 documentation</title>
+  <title>librosa.core.istft &mdash; librosa 0.4.1 documentation</title>
   
 
   
@@ -30,7 +30,7 @@
   
 
   
-    <link rel="top" title="librosa 0.4.0 documentation" href="../index.html"/>
+    <link rel="top" title="librosa 0.4.1 documentation" href="../index.html"/>
         <link rel="up" title="Core IO and DSP" href="../core.html"/>
         <link rel="next" title="librosa.core.ifgram" href="librosa.core.ifgram.html"/>
         <link rel="prev" title="librosa.core.stft" href="librosa.core.stft.html"/> 
@@ -94,6 +94,7 @@
 <li class="toctree-l3"><a class="reference internal" href="librosa.core.get_duration.html">librosa.core.get_duration</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.core.autocorrelate.html">librosa.core.autocorrelate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.core.zero_crossings.html">librosa.core.zero_crossings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.core.clicks.html">librosa.core.clicks</a></li>
 </ul>
 </li>
 <li class="toctree-l2 current"><a class="reference internal" href="../core.html#spectral-representations">Spectral representations</a><ul class="current">
@@ -103,6 +104,7 @@
 <li class="toctree-l3"><a class="reference internal" href="librosa.core.cqt.html">librosa.core.cqt</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.core.hybrid_cqt.html">librosa.core.hybrid_cqt</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.core.pseudo_cqt.html">librosa.core.pseudo_cqt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.core.fmt.html">librosa.core.fmt</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.core.phase_vocoder.html">librosa.core.phase_vocoder</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.core.magphase.html">librosa.core.magphase</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.core.logamplitude.html">librosa.core.logamplitude</a></li>
@@ -167,14 +169,18 @@
 <li class="toctree-l3"><a class="reference internal" href="librosa.feature.zero_crossing_rate.html">librosa.feature.zero_crossing_rate</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../feature.html#rhythm-features">Rhythm features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="librosa.feature.tempogram.html">librosa.feature.tempogram</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="../feature.html#feature-manipulation">Feature manipulation</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="librosa.feature.delta.html">librosa.feature.delta</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.feature.stack_memory.html">librosa.feature.stack_memory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="librosa.feature.sync.html">librosa.feature.sync</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../feature.html#deprecated">Deprecated</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="librosa.feature.logfsgram.html">librosa.feature.logfsgram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.feature.sync.html">librosa.feature.sync</a></li>
 </ul>
 </li>
 </ul>
@@ -182,6 +188,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../onset.html">Onset detection</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="librosa.onset.onset_detect.html">librosa.onset.onset_detect</a></li>
 <li class="toctree-l2"><a class="reference internal" href="librosa.onset.onset_strength.html">librosa.onset.onset_strength</a></li>
+<li class="toctree-l2"><a class="reference internal" href="librosa.onset.onset_strength_multi.html">librosa.onset.onset_strength_multi</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../beat.html">Beat and tempo</a><ul>
@@ -253,6 +260,8 @@
 <li class="toctree-l3"><a class="reference internal" href="librosa.util.pad_center.html">librosa.util.pad_center</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.util.fix_length.html">librosa.util.fix_length</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.util.fix_frames.html">librosa.util.fix_frames</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.util.index_to_slice.html">librosa.util.index_to_slice</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.util.sync.html">librosa.util.sync</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.util.axis_sort.html">librosa.util.axis_sort</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.util.normalize.html">librosa.util.normalize</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.util.sparsify_rows.html">librosa.util.sparsify_rows</a></li>
@@ -321,6 +330,7 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#v0-4-1">v0.4.1</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../changelog.html#v0-4-0">v0.4.0</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../changelog.html#v0-3-1">v0.3.1</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../changelog.html#v0-3-0">v0.3.0</a></li>
@@ -374,8 +384,21 @@
 <dl class="function">
 <dt id="librosa.core.istft">
 <tt class="descclassname">librosa.core.</tt><tt class="descname">istft</tt><big>(</big><em>stft_matrix</em>, <em>hop_length=None</em>, <em>win_length=None</em>, <em>window=None</em>, <em>center=True</em>, <em>dtype=&lt;type 'numpy.float32'&gt;</em><big>)</big><a class="headerlink" href="#librosa.core.istft" title="Permalink to this definition">¶</a></dt>
-<dd><p>Inverse short-time Fourier transform.</p>
-<p>Converts a complex-valued spectrogram <em class="xref py py-obj">stft_matrix</em> to time-series <em class="xref py py-obj">y</em>.</p>
+<dd><p>Inverse short-time Fourier transform (ISTFT).</p>
+<p>Converts a complex-valued spectrogram <em class="xref py py-obj">stft_matrix</em> to time-series <em class="xref py py-obj">y</em>
+by minimizing the mean squared error between <em class="xref py py-obj">stft_matrix</em> and STFT of
+<em class="xref py py-obj">y</em> as described in <a class="reference internal" href="#r21" id="id1">[R21]</a>.</p>
+<p>In general, window function, hop length and other parameters should be same
+as in stft, which mostly leads to perfect reconstruction of a signal from
+unmodified <em class="xref py py-obj">stft_matrix</em>.</p>
+<table class="docutils citation" frame="void" id="r21" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[R21]</a></td><td>D. W. Griffin and J. S. Lim,
+&#8220;Signal estimation from modified short-time Fourier transform,&#8221;
+IEEE Trans. ASSP, vol.32, no.2, pp.236–243, Apr. 1984.</td></tr>
+</tbody>
+</table>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -392,13 +415,14 @@ If unspecified, defaults to <em class="xref py py-obj">win_length / 4</em>.</p>
 <p><strong>win_length</strong> : int &lt;= n_fft = 2 * (stft_matrix.shape[0] - 1)</p>
 <blockquote>
 <div><p>When reconstructing the time series, each frame is windowed
+and each sample is normalized by the sum of squared window
 according to the <em class="xref py py-obj">window</em> function (see below).</p>
 <p>If unspecified, defaults to <em class="xref py py-obj">n_fft</em>.</p>
 </div></blockquote>
 <p><strong>window</strong> : None, function, np.ndarray [shape=(n_fft,)]</p>
 <blockquote>
 <div><ul class="simple">
-<li>None (default): use an asymmetric Hann window * 2/3</li>
+<li>None (default): use an asymmetric Hann window</li>
 <li>a window function, such as <tt class="xref py py-obj docutils literal"><span class="pre">scipy.signal.hanning</span></tt></li>
 <li>a user-specified window vector of length <em class="xref py py-obj">n_fft</em></li>
 </ul>
@@ -488,7 +512,7 @@ according to the <em class="xref py py-obj">window</em> function (see below).</p
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.4.0',
+            VERSION:'0.4.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

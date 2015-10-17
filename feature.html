@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Feature extraction &mdash; librosa 0.4.0 documentation</title>
+  <title>Feature extraction &mdash; librosa 0.4.1 documentation</title>
   
 
   
@@ -30,7 +30,7 @@
   
 
   
-    <link rel="top" title="librosa 0.4.0 documentation" href="index.html"/>
+    <link rel="top" title="librosa 0.4.1 documentation" href="index.html"/>
         <link rel="next" title="librosa.feature.chroma_stft" href="generated/librosa.feature.chroma_stft.html"/>
         <link rel="prev" title="librosa.display.cmap" href="generated/librosa.display.cmap.html"/> 
 
@@ -93,6 +93,7 @@
 <li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.get_duration.html">librosa.core.get_duration</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.autocorrelate.html">librosa.core.autocorrelate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.zero_crossings.html">librosa.core.zero_crossings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.clicks.html">librosa.core.clicks</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="core.html#spectral-representations">Spectral representations</a><ul>
@@ -102,6 +103,7 @@
 <li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.cqt.html">librosa.core.cqt</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.hybrid_cqt.html">librosa.core.hybrid_cqt</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.pseudo_cqt.html">librosa.core.pseudo_cqt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.fmt.html">librosa.core.fmt</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.phase_vocoder.html">librosa.core.phase_vocoder</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.magphase.html">librosa.core.magphase</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.logamplitude.html">librosa.core.logamplitude</a></li>
@@ -166,14 +168,18 @@
 <li class="toctree-l3"><a class="reference internal" href="generated/librosa.feature.zero_crossing_rate.html">librosa.feature.zero_crossing_rate</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="#rhythm-features">Rhythm features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/librosa.feature.tempogram.html">librosa.feature.tempogram</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="#feature-manipulation">Feature manipulation</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="generated/librosa.feature.delta.html">librosa.feature.delta</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/librosa.feature.stack_memory.html">librosa.feature.stack_memory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.feature.sync.html">librosa.feature.sync</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#deprecated">Deprecated</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="generated/librosa.feature.logfsgram.html">librosa.feature.logfsgram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/librosa.feature.sync.html">librosa.feature.sync</a></li>
 </ul>
 </li>
 </ul>
@@ -181,6 +187,7 @@
 <li class="toctree-l1"><a class="reference internal" href="onset.html">Onset detection</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="generated/librosa.onset.onset_detect.html">librosa.onset.onset_detect</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/librosa.onset.onset_strength.html">librosa.onset.onset_strength</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/librosa.onset.onset_strength_multi.html">librosa.onset.onset_strength_multi</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="beat.html">Beat and tempo</a><ul>
@@ -252,6 +259,8 @@
 <li class="toctree-l3"><a class="reference internal" href="generated/librosa.util.pad_center.html">librosa.util.pad_center</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/librosa.util.fix_length.html">librosa.util.fix_length</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/librosa.util.fix_frames.html">librosa.util.fix_frames</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/librosa.util.index_to_slice.html">librosa.util.index_to_slice</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/librosa.util.sync.html">librosa.util.sync</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/librosa.util.axis_sort.html">librosa.util.axis_sort</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/librosa.util.normalize.html">librosa.util.normalize</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/librosa.util.sparsify_rows.html">librosa.util.sparsify_rows</a></li>
@@ -320,6 +329,7 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="changelog.html">Changes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="changelog.html#v0-4-1">v0.4.1</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#v0-4-0">v0.4.0</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#v0-3-1">v0.3.1</a></li>
 <li class="toctree-l2"><a class="reference internal" href="changelog.html#v0-3-0">v0.3.0</a></li>
@@ -398,7 +408,7 @@
 <td>Compute p&#8217;th-order spectral bandwidth:</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="generated/librosa.feature.spectral_contrast.html#librosa.feature.spectral_contrast" title="librosa.feature.spectral_contrast"><tt class="xref py py-obj docutils literal"><span class="pre">spectral_contrast</span></tt></a>([y,&nbsp;sr,&nbsp;S,&nbsp;n_fft,&nbsp;...])</td>
-<td>Compute spectral contrast [R8]</td>
+<td>Compute spectral contrast [R11]</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="generated/librosa.feature.spectral_rolloff.html#librosa.feature.spectral_rolloff" title="librosa.feature.spectral_rolloff"><tt class="xref py py-obj docutils literal"><span class="pre">spectral_rolloff</span></tt></a>([y,&nbsp;sr,&nbsp;S,&nbsp;n_fft,&nbsp;...])</td>
 <td>Compute roll-off frequency</td>
@@ -407,10 +417,24 @@
 <td>Get coefficients of fitting an nth-order polynomial to the columns of a spectrogram.</td>
 </tr>
 <tr class="row-odd"><td><a class="reference internal" href="generated/librosa.feature.tonnetz.html#librosa.feature.tonnetz" title="librosa.feature.tonnetz"><tt class="xref py py-obj docutils literal"><span class="pre">tonnetz</span></tt></a>([y,&nbsp;sr,&nbsp;chroma])</td>
-<td>Computes the tonal centroid features (tonnetz), following the method of [R9].</td>
+<td>Computes the tonal centroid features (tonnetz), following the method of [R12].</td>
 </tr>
 <tr class="row-even"><td><a class="reference internal" href="generated/librosa.feature.zero_crossing_rate.html#librosa.feature.zero_crossing_rate" title="librosa.feature.zero_crossing_rate"><tt class="xref py py-obj docutils literal"><span class="pre">zero_crossing_rate</span></tt></a>(y[,&nbsp;frame_length,&nbsp;...])</td>
 <td>Compute the zero-crossing rate of an audio time series.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="rhythm-features">
+<h2>Rhythm features<a class="headerlink" href="#rhythm-features" title="Permalink to this headline">¶</a></h2>
+<table border="1" class="longtable docutils">
+<colgroup>
+<col width="10%" />
+<col width="90%" />
+</colgroup>
+<tbody valign="top">
+<tr class="row-odd"><td><a class="reference internal" href="generated/librosa.feature.tempogram.html#librosa.feature.tempogram" title="librosa.feature.tempogram"><tt class="xref py py-obj docutils literal"><span class="pre">tempogram</span></tt></a>([y,&nbsp;sr,&nbsp;onset_envelope,&nbsp;...])</td>
+<td>Compute the tempogram: local autocorrelation of the onset strength envelope.</td>
 </tr>
 </tbody>
 </table>
@@ -429,9 +453,6 @@
 <tr class="row-even"><td><a class="reference internal" href="generated/librosa.feature.stack_memory.html#librosa.feature.stack_memory" title="librosa.feature.stack_memory"><tt class="xref py py-obj docutils literal"><span class="pre">stack_memory</span></tt></a>(data[,&nbsp;n_steps,&nbsp;delay])</td>
 <td>Short-term history embedding: vertically concatenate a data vector or matrix with delayed copies of itself.</td>
 </tr>
-<tr class="row-odd"><td><a class="reference internal" href="generated/librosa.feature.sync.html#librosa.feature.sync" title="librosa.feature.sync"><tt class="xref py py-obj docutils literal"><span class="pre">sync</span></tt></a>(data,&nbsp;frames[,&nbsp;aggregate,&nbsp;pad])</td>
-<td>Synchronous aggregation of a feature matrix</td>
-</tr>
 </tbody>
 </table>
 </div>
@@ -445,6 +466,9 @@
 <tbody valign="top">
 <tr class="row-odd"><td><a class="reference internal" href="generated/librosa.feature.logfsgram.html#librosa.feature.logfsgram" title="librosa.feature.logfsgram"><tt class="xref py py-obj docutils literal"><span class="pre">logfsgram</span></tt></a>([y,&nbsp;sr,&nbsp;S,&nbsp;n_fft,&nbsp;hop_length])</td>
 <td>Compute a log-frequency spectrogram using a fixed-window STFT.</td>
+</tr>
+<tr class="row-even"><td><a class="reference internal" href="generated/librosa.feature.sync.html#librosa.feature.sync" title="librosa.feature.sync"><tt class="xref py py-obj docutils literal"><span class="pre">sync</span></tt></a>(data,&nbsp;idx[,&nbsp;aggregate,&nbsp;pad,&nbsp;axis])</td>
+<td>Synchronous aggregation of a multi-dimensional array between boundaries</td>
 </tr>
 </tbody>
 </table>
@@ -490,7 +514,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.4.0',
+            VERSION:'0.4.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

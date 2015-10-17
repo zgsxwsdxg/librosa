@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>librosa.core.ifgram &mdash; librosa 0.4.0 documentation</title>
+  <title>librosa.core.ifgram &mdash; librosa 0.4.1 documentation</title>
   
 
   
@@ -30,7 +30,7 @@
   
 
   
-    <link rel="top" title="librosa 0.4.0 documentation" href="../index.html"/>
+    <link rel="top" title="librosa 0.4.1 documentation" href="../index.html"/>
         <link rel="up" title="Core IO and DSP" href="../core.html"/>
         <link rel="next" title="librosa.core.cqt" href="librosa.core.cqt.html"/>
         <link rel="prev" title="librosa.core.istft" href="librosa.core.istft.html"/> 
@@ -94,6 +94,7 @@
 <li class="toctree-l3"><a class="reference internal" href="librosa.core.get_duration.html">librosa.core.get_duration</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.core.autocorrelate.html">librosa.core.autocorrelate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.core.zero_crossings.html">librosa.core.zero_crossings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.core.clicks.html">librosa.core.clicks</a></li>
 </ul>
 </li>
 <li class="toctree-l2 current"><a class="reference internal" href="../core.html#spectral-representations">Spectral representations</a><ul class="current">
@@ -103,6 +104,7 @@
 <li class="toctree-l3"><a class="reference internal" href="librosa.core.cqt.html">librosa.core.cqt</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.core.hybrid_cqt.html">librosa.core.hybrid_cqt</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.core.pseudo_cqt.html">librosa.core.pseudo_cqt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.core.fmt.html">librosa.core.fmt</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.core.phase_vocoder.html">librosa.core.phase_vocoder</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.core.magphase.html">librosa.core.magphase</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.core.logamplitude.html">librosa.core.logamplitude</a></li>
@@ -167,14 +169,18 @@
 <li class="toctree-l3"><a class="reference internal" href="librosa.feature.zero_crossing_rate.html">librosa.feature.zero_crossing_rate</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../feature.html#rhythm-features">Rhythm features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="librosa.feature.tempogram.html">librosa.feature.tempogram</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="../feature.html#feature-manipulation">Feature manipulation</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="librosa.feature.delta.html">librosa.feature.delta</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.feature.stack_memory.html">librosa.feature.stack_memory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="librosa.feature.sync.html">librosa.feature.sync</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../feature.html#deprecated">Deprecated</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="librosa.feature.logfsgram.html">librosa.feature.logfsgram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.feature.sync.html">librosa.feature.sync</a></li>
 </ul>
 </li>
 </ul>
@@ -182,6 +188,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../onset.html">Onset detection</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="librosa.onset.onset_detect.html">librosa.onset.onset_detect</a></li>
 <li class="toctree-l2"><a class="reference internal" href="librosa.onset.onset_strength.html">librosa.onset.onset_strength</a></li>
+<li class="toctree-l2"><a class="reference internal" href="librosa.onset.onset_strength_multi.html">librosa.onset.onset_strength_multi</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../beat.html">Beat and tempo</a><ul>
@@ -253,6 +260,8 @@
 <li class="toctree-l3"><a class="reference internal" href="librosa.util.pad_center.html">librosa.util.pad_center</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.util.fix_length.html">librosa.util.fix_length</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.util.fix_frames.html">librosa.util.fix_frames</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.util.index_to_slice.html">librosa.util.index_to_slice</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.util.sync.html">librosa.util.sync</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.util.axis_sort.html">librosa.util.axis_sort</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.util.normalize.html">librosa.util.normalize</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.util.sparsify_rows.html">librosa.util.sparsify_rows</a></li>
@@ -321,6 +330,7 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#v0-4-1">v0.4.1</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../changelog.html#v0-4-0">v0.4.0</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../changelog.html#v0-3-1">v0.3.1</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../changelog.html#v0-3-0">v0.3.0</a></li>
@@ -376,12 +386,12 @@
 <tt class="descclassname">librosa.core.</tt><tt class="descname">ifgram</tt><big>(</big><em>y</em>, <em>sr=22050</em>, <em>n_fft=2048</em>, <em>hop_length=None</em>, <em>win_length=None</em>, <em>norm=False</em>, <em>center=True</em>, <em>ref_power=1e-06</em>, <em>clip=True</em>, <em>dtype=&lt;type 'numpy.complex64'&gt;</em><big>)</big><a class="headerlink" href="#librosa.core.ifgram" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the instantaneous frequency (as a proportion of the sampling rate)
 obtained as the time-derivative of the phase of the complex spectrum as
-described by <a class="reference internal" href="#r14" id="id1">[R14]</a>.</p>
+described by <a class="reference internal" href="#r20" id="id1">[R20]</a>.</p>
 <p>Calculates regular STFT as a side effect.</p>
-<table class="docutils citation" frame="void" id="r14" rules="none">
+<table class="docutils citation" frame="void" id="r20" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[R14]</a></td><td>Abe, Toshihiko, Takao Kobayashi, and Satoshi Imai.
+<tr><td class="label"><a class="fn-backref" href="#id1">[R20]</a></td><td>Abe, Toshihiko, Takao Kobayashi, and Satoshi Imai.
 &#8220;Harmonics tracking and pitch extraction based on instantaneous
 frequency.&#8221;
 International Conference on Acoustics, Speech, and Signal Processing,
@@ -396,7 +406,7 @@ ICASSP-95., Vol. 1. IEEE, 1995.</td></tr>
 <blockquote>
 <div><p>audio time series</p>
 </div></blockquote>
-<p><strong>sr</strong> : int &gt; 0 [scalar]</p>
+<p><strong>sr</strong> : number &gt; 0 [scalar]</p>
 <blockquote>
 <div><p>sampling rate of <em class="xref py py-obj">y</em></p>
 </div></blockquote>
@@ -478,7 +488,7 @@ default frequency estimate.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">frequencies</span>
 <span class="go">array([[  0.000e+00,   0.000e+00, ...,   0.000e+00,   0.000e+00],</span>
 <span class="go">       [  3.150e+01,   3.070e+01, ...,   1.077e+01,   1.077e+01],</span>
-<span class="go">       ..., </span>
+<span class="go">       ...,</span>
 <span class="go">       [  1.101e+04,   1.101e+04, ...,   1.101e+04,   1.101e+04],</span>
 <span class="go">       [  1.102e+04,   1.102e+04, ...,   1.102e+04,   1.102e+04]])</span>
 </pre></div>
@@ -526,7 +536,7 @@ default frequency estimate.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.4.0',
+            VERSION:'0.4.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

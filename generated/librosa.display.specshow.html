@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>librosa.display.specshow &mdash; librosa 0.4.0 documentation</title>
+  <title>librosa.display.specshow &mdash; librosa 0.4.1 documentation</title>
   
 
   
@@ -30,7 +30,7 @@
   
 
   
-    <link rel="top" title="librosa 0.4.0 documentation" href="../index.html"/>
+    <link rel="top" title="librosa 0.4.1 documentation" href="../index.html"/>
         <link rel="up" title="Display" href="../display.html"/>
         <link rel="next" title="librosa.display.waveplot" href="librosa.display.waveplot.html"/>
         <link rel="prev" title="librosa.display.cmap" href="librosa.display.cmap.html"/> 
@@ -94,6 +94,7 @@
 <li class="toctree-l3"><a class="reference internal" href="librosa.core.get_duration.html">librosa.core.get_duration</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.core.autocorrelate.html">librosa.core.autocorrelate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.core.zero_crossings.html">librosa.core.zero_crossings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.core.clicks.html">librosa.core.clicks</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../core.html#spectral-representations">Spectral representations</a><ul>
@@ -103,6 +104,7 @@
 <li class="toctree-l3"><a class="reference internal" href="librosa.core.cqt.html">librosa.core.cqt</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.core.hybrid_cqt.html">librosa.core.hybrid_cqt</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.core.pseudo_cqt.html">librosa.core.pseudo_cqt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.core.fmt.html">librosa.core.fmt</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.core.phase_vocoder.html">librosa.core.phase_vocoder</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.core.magphase.html">librosa.core.magphase</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.core.logamplitude.html">librosa.core.logamplitude</a></li>
@@ -167,14 +169,18 @@
 <li class="toctree-l3"><a class="reference internal" href="librosa.feature.zero_crossing_rate.html">librosa.feature.zero_crossing_rate</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../feature.html#rhythm-features">Rhythm features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="librosa.feature.tempogram.html">librosa.feature.tempogram</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="../feature.html#feature-manipulation">Feature manipulation</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="librosa.feature.delta.html">librosa.feature.delta</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.feature.stack_memory.html">librosa.feature.stack_memory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="librosa.feature.sync.html">librosa.feature.sync</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../feature.html#deprecated">Deprecated</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="librosa.feature.logfsgram.html">librosa.feature.logfsgram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.feature.sync.html">librosa.feature.sync</a></li>
 </ul>
 </li>
 </ul>
@@ -182,6 +188,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../onset.html">Onset detection</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="librosa.onset.onset_detect.html">librosa.onset.onset_detect</a></li>
 <li class="toctree-l2"><a class="reference internal" href="librosa.onset.onset_strength.html">librosa.onset.onset_strength</a></li>
+<li class="toctree-l2"><a class="reference internal" href="librosa.onset.onset_strength_multi.html">librosa.onset.onset_strength_multi</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../beat.html">Beat and tempo</a><ul>
@@ -253,6 +260,8 @@
 <li class="toctree-l3"><a class="reference internal" href="librosa.util.pad_center.html">librosa.util.pad_center</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.util.fix_length.html">librosa.util.fix_length</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.util.fix_frames.html">librosa.util.fix_frames</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.util.index_to_slice.html">librosa.util.index_to_slice</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.util.sync.html">librosa.util.sync</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.util.axis_sort.html">librosa.util.axis_sort</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.util.normalize.html">librosa.util.normalize</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.util.sparsify_rows.html">librosa.util.sparsify_rows</a></li>
@@ -321,6 +330,7 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#v0-4-1">v0.4.1</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../changelog.html#v0-4-0">v0.4.0</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../changelog.html#v0-3-1">v0.3.1</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../changelog.html#v0-3-0">v0.3.0</a></li>
@@ -373,7 +383,7 @@
 <h1>librosa.display.specshow<a class="headerlink" href="#librosa-display-specshow" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="librosa.display.specshow">
-<tt class="descclassname">librosa.display.</tt><tt class="descname">specshow</tt><big>(</big><em>data</em>, <em>sr=22050</em>, <em>hop_length=512</em>, <em>x_axis=None</em>, <em>y_axis=None</em>, <em>n_xticks=5</em>, <em>n_yticks=5</em>, <em>fmin=None</em>, <em>fmax=None</em>, <em>bins_per_octave=12</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/librosa/display.html#specshow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#librosa.display.specshow" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">librosa.display.</tt><tt class="descname">specshow</tt><big>(</big><em>data</em>, <em>sr=22050</em>, <em>hop_length=512</em>, <em>x_axis=None</em>, <em>y_axis=None</em>, <em>n_xticks=5</em>, <em>n_yticks=5</em>, <em>fmin=None</em>, <em>fmax=None</em>, <em>bins_per_octave=12</em>, <em>tmin=16</em>, <em>tmax=240</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/librosa/display.html#specshow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#librosa.display.specshow" title="Permalink to this definition">¶</a></dt>
 <dd><p>Display a spectrogram/chromagram/cqt/etc.</p>
 <p>Functions as a drop-in replacement for <a class="reference external" href="http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.imshow" title="(in Matplotlib v1.4.3)"><tt class="xref py py-obj docutils literal"><span class="pre">matplotlib.pyplot.imshow</span></tt></a>,
 but with useful defaults.</p>
@@ -385,7 +395,7 @@ but with useful defaults.</p>
 <blockquote>
 <div><p>Matrix to display (e.g., spectrogram)</p>
 </div></blockquote>
-<p><strong>sr</strong> : int &gt; 0 [scalar]</p>
+<p><strong>sr</strong> : number &gt; 0 [scalar]</p>
 <blockquote>
 <div><p>Sample rate used to determine time scale in x-axis.</p>
 </div></blockquote>
@@ -419,6 +429,7 @@ minutes, or hours</li>
 <li>&#8216;lag&#8217; : like time, but past the half-way point counts
 as negative values.</li>
 <li>&#8216;frames&#8217; : markers are shown as frame counts.</li>
+<li>&#8216;tempo&#8217; : markers are shown as beats-per-minute</li>
 </ul>
 </div></blockquote>
 <p><strong>n_xticks</strong> : int &gt; 0 [scalar]</p>
@@ -443,6 +454,12 @@ it is set by default to <em class="xref py py-obj">note_to_hz(&#8216;C1&#8217;)<
 <p><strong>bins_per_octave</strong> : int &gt; 0 [scalar]</p>
 <blockquote>
 <div><p>Number of bins per octave.  Used for CQT frequency scale.</p>
+</div></blockquote>
+<p><strong>tmin</strong> : float &gt; 0 [scalar]</p>
+<p><strong>tmax</strong> : float &gt; 0 [scalar]</p>
+<blockquote>
+<div><p>Minimum and maximum tempi displayed when <em class="xref py py-obj">_axis=&#8217;tempo&#8217;</em>,
+as measured in beats per minute.</p>
 </div></blockquote>
 <p><strong>kwargs</strong> : additional keyword arguments</p>
 <blockquote>
@@ -513,7 +530,7 @@ it is set by default to <em class="xref py py-obj">note_to_hz(&#8216;C1&#8217;)<
 </div>
 <p>Force a grayscale colormap (white -&gt; black)</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s">&#39;gray_r&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s">&#39;gray_r&#39;</span><span class="p">,</span> <span class="n">y_axis</span><span class="o">=</span><span class="s">&#39;linear&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">format</span><span class="o">=</span><span class="s">&#39;</span><span class="si">%+2.0f</span><span class="s"> dB&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">&#39;Linear power spectrogram (grayscale)&#39;</span><span class="p">)</span>
 </pre></div>
@@ -523,6 +540,17 @@ it is set by default to <em class="xref py py-obj">note_to_hz(&#8216;C1&#8217;)<
 <span class="gp">&gt;&gt;&gt; </span><span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">x_axis</span><span class="o">=</span><span class="s">&#39;time&#39;</span><span class="p">,</span> <span class="n">y_axis</span><span class="o">=</span><span class="s">&#39;log&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">format</span><span class="o">=</span><span class="s">&#39;</span><span class="si">%+2.0f</span><span class="s"> dB&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">&#39;Log power spectrogram&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Draw a tempogram with BPM markers</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">oenv</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">onset</span><span class="o">.</span><span class="n">onset_strength</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tempo</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">beat</span><span class="o">.</span><span class="n">estimate_tempo</span><span class="p">(</span><span class="n">oenv</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">Tgram</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">tempogram</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span><span class="p">(</span><span class="n">Tgram</span><span class="p">[:</span><span class="mi">100</span><span class="p">],</span> <span class="n">x_axis</span><span class="o">=</span><span class="s">&#39;time&#39;</span><span class="p">,</span> <span class="n">y_axis</span><span class="o">=</span><span class="s">&#39;tempo&#39;</span><span class="p">,</span>
+<span class="gp">... </span>                         <span class="n">tmin</span><span class="o">=</span><span class="n">tempo</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span> <span class="n">tmax</span><span class="o">=</span><span class="n">tempo</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_yticks</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s">&#39;Tempogram&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -573,7 +601,7 @@ it is set by default to <em class="xref py py-obj">note_to_hz(&#8216;C1&#8217;)<
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.4.0',
+            VERSION:'0.4.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

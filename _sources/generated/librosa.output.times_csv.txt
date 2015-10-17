@@ -1,0 +1,6 @@
+librosa.output.times_csv
+========================
+
+.. currentmodule:: librosa.output
+
+.. autofunction:: times_csv

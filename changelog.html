@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Changes &mdash; librosa 0.4.0 documentation</title>
+  <title>Changes &mdash; librosa 0.4.1 documentation</title>
   
 
   
@@ -30,7 +30,7 @@
   
 
   
-    <link rel="top" title="librosa 0.4.0 documentation" href="index.html"/>
+    <link rel="top" title="librosa 0.4.1 documentation" href="index.html"/>
         <link rel="next" title="Glossary" href="glossary.html"/>
         <link rel="prev" title="Caching" href="cache.html"/> 
 
@@ -93,6 +93,7 @@
 <li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.get_duration.html">librosa.core.get_duration</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.autocorrelate.html">librosa.core.autocorrelate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.zero_crossings.html">librosa.core.zero_crossings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.clicks.html">librosa.core.clicks</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="core.html#spectral-representations">Spectral representations</a><ul>
@@ -102,6 +103,7 @@
 <li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.cqt.html">librosa.core.cqt</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.hybrid_cqt.html">librosa.core.hybrid_cqt</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.pseudo_cqt.html">librosa.core.pseudo_cqt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.fmt.html">librosa.core.fmt</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.phase_vocoder.html">librosa.core.phase_vocoder</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.magphase.html">librosa.core.magphase</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.logamplitude.html">librosa.core.logamplitude</a></li>
@@ -166,14 +168,18 @@
 <li class="toctree-l3"><a class="reference internal" href="generated/librosa.feature.zero_crossing_rate.html">librosa.feature.zero_crossing_rate</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="feature.html#rhythm-features">Rhythm features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/librosa.feature.tempogram.html">librosa.feature.tempogram</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="feature.html#feature-manipulation">Feature manipulation</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="generated/librosa.feature.delta.html">librosa.feature.delta</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/librosa.feature.stack_memory.html">librosa.feature.stack_memory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.feature.sync.html">librosa.feature.sync</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="feature.html#deprecated">Deprecated</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="generated/librosa.feature.logfsgram.html">librosa.feature.logfsgram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/librosa.feature.sync.html">librosa.feature.sync</a></li>
 </ul>
 </li>
 </ul>
@@ -181,6 +187,7 @@
 <li class="toctree-l1"><a class="reference internal" href="onset.html">Onset detection</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="generated/librosa.onset.onset_detect.html">librosa.onset.onset_detect</a></li>
 <li class="toctree-l2"><a class="reference internal" href="generated/librosa.onset.onset_strength.html">librosa.onset.onset_strength</a></li>
+<li class="toctree-l2"><a class="reference internal" href="generated/librosa.onset.onset_strength_multi.html">librosa.onset.onset_strength_multi</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="beat.html">Beat and tempo</a><ul>
@@ -252,6 +259,8 @@
 <li class="toctree-l3"><a class="reference internal" href="generated/librosa.util.pad_center.html">librosa.util.pad_center</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/librosa.util.fix_length.html">librosa.util.fix_length</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/librosa.util.fix_frames.html">librosa.util.fix_frames</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/librosa.util.index_to_slice.html">librosa.util.index_to_slice</a></li>
+<li class="toctree-l3"><a class="reference internal" href="generated/librosa.util.sync.html">librosa.util.sync</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/librosa.util.axis_sort.html">librosa.util.axis_sort</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/librosa.util.normalize.html">librosa.util.normalize</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/librosa.util.sparsify_rows.html">librosa.util.sparsify_rows</a></li>
@@ -320,6 +329,7 @@
 </ul>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="">Changes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#v0-4-1">v0.4.1</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#v0-4-0">v0.4.0</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#v0-3-1">v0.3.1</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#v0-3-0">v0.3.0</a></li>
@@ -368,6 +378,50 @@
             
   <div class="section" id="changes">
 <h1>Changes<a class="headerlink" href="#changes" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="v0-4-1">
+<h2>v0.4.1<a class="headerlink" href="#v0-4-1" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>Bug fixes</dt>
+<dd><ul class="first last simple">
+<li>Improved safety check in CQT for invalid hop lengths</li>
+<li>Fixed division by zero bug in <tt class="docutils literal"><span class="pre">core.pitch.pip_track</span></tt></li>
+<li>Fixed integer-type error in <tt class="docutils literal"><span class="pre">util.pad_center</span></tt> on numpy v1.10</li>
+<li>Fixed a context scoping error in <tt class="docutils literal"><span class="pre">librosa.load</span></tt> with some audioread backends</li>
+<li><tt class="docutils literal"><span class="pre">librosa.autocorrelate</span></tt> now persists type for complex input</li>
+</ul>
+</dd>
+<dt>New features</dt>
+<dd><ul class="first last simple">
+<li><tt class="docutils literal"><span class="pre">librosa.clicks</span></tt> sonifies timed events such as beats or onsets</li>
+<li><tt class="docutils literal"><span class="pre">librosa.onset.onset_strength_multi</span></tt> computes onset strength within multiple sub-bands</li>
+<li><tt class="docutils literal"><span class="pre">librosa.feature.tempogram</span></tt> computes localized onset strength autocorrelation</li>
+<li><tt class="docutils literal"><span class="pre">librosa.display.specshow</span></tt> now supports <tt class="docutils literal"><span class="pre">*_axis='tempo'</span></tt> for annotating tempo-scaled data</li>
+<li><tt class="docutils literal"><span class="pre">librosa.fmt</span></tt> implements the Fast Mellin Transform</li>
+</ul>
+</dd>
+</dl>
+<p>Other changes</p>
+<blockquote>
+<div><ul class="simple">
+<li>Rewrote <tt class="docutils literal"><span class="pre">display.waveplot</span></tt> for improved efficiency</li>
+<li><tt class="docutils literal"><span class="pre">decompose.deompose()</span></tt> now supports pre-trained transformation objects</li>
+<li>Nullified side-effects of optional seaborn dependency</li>
+<li>Moved <tt class="docutils literal"><span class="pre">feature.sync</span></tt> to <tt class="docutils literal"><span class="pre">util.sync</span></tt> and expanded its functionality</li>
+<li><tt class="docutils literal"><span class="pre">librosa.onset.onset_strength</span></tt> and <tt class="docutils literal"><span class="pre">onset_strength_multi</span></tt> support superflux-style lag and max-filtering</li>
+<li><tt class="docutils literal"><span class="pre">librosa.core.autocorrelate</span></tt> can now operate along any axis of multi-dimensional input</li>
+<li>the <tt class="docutils literal"><span class="pre">segment</span></tt> module functions now support arbitrary target axis</li>
+<li>Added proper window normalization to <tt class="docutils literal"><span class="pre">librosa.core.istft</span></tt> for better reconstruction
+(<a class="reference external" href="https://github.com/bmcfee/librosa/pull/235">PR #235</a>).</li>
+<li>Standardized <tt class="docutils literal"><span class="pre">n_fft=2048</span></tt> for <tt class="docutils literal"><span class="pre">piptrack</span></tt>, <tt class="docutils literal"><span class="pre">ifptrack</span></tt> (deprecated), and
+<tt class="docutils literal"><span class="pre">logfsgram</span></tt> (deprecated)</li>
+<li><tt class="docutils literal"><span class="pre">onset_strength</span></tt> parameter <tt class="docutils literal"><span class="pre">'centering'</span></tt> has been deprecated and renamed to
+<tt class="docutils literal"><span class="pre">'center'</span></tt></li>
+<li><tt class="docutils literal"><span class="pre">onset_strength</span></tt> always trims to match the input spectrogram duration</li>
+<li>added tests for <tt class="docutils literal"><span class="pre">piptrack</span></tt></li>
+<li>added test support for Python 3.5</li>
+</ul>
+</div></blockquote>
+</div>
 <div class="section" id="v0-4-0">
 <h2>v0.4.0<a class="headerlink" href="#v0-4-0" title="Permalink to this headline">¶</a></h2>
 <p>Bug fixes</p>
@@ -711,7 +765,7 @@ matches <tt class="docutils literal"><span class="pre">stft</span></tt></li>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.4.0',
+            VERSION:'0.4.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

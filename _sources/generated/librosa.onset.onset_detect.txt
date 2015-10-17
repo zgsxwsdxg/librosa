@@ -1,0 +1,6 @@
+librosa.onset.onset_detect
+==========================
+
+.. currentmodule:: librosa.onset
+
+.. autofunction:: onset_detect

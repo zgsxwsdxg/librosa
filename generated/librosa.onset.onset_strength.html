@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>librosa.onset.onset_strength &mdash; librosa 0.4.0 documentation</title>
+  <title>librosa.onset.onset_strength &mdash; librosa 0.4.1 documentation</title>
   
 
   
@@ -30,9 +30,9 @@
   
 
   
-    <link rel="top" title="librosa 0.4.0 documentation" href="../index.html"/>
+    <link rel="top" title="librosa 0.4.1 documentation" href="../index.html"/>
         <link rel="up" title="Onset detection" href="../onset.html"/>
-        <link rel="next" title="Beat and tempo" href="../beat.html"/>
+        <link rel="next" title="librosa.onset.onset_strength_multi" href="librosa.onset.onset_strength_multi.html"/>
         <link rel="prev" title="librosa.onset.onset_detect" href="librosa.onset.onset_detect.html"/> 
 
   
@@ -94,6 +94,7 @@
 <li class="toctree-l3"><a class="reference internal" href="librosa.core.get_duration.html">librosa.core.get_duration</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.core.autocorrelate.html">librosa.core.autocorrelate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.core.zero_crossings.html">librosa.core.zero_crossings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.core.clicks.html">librosa.core.clicks</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../core.html#spectral-representations">Spectral representations</a><ul>
@@ -103,6 +104,7 @@
 <li class="toctree-l3"><a class="reference internal" href="librosa.core.cqt.html">librosa.core.cqt</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.core.hybrid_cqt.html">librosa.core.hybrid_cqt</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.core.pseudo_cqt.html">librosa.core.pseudo_cqt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.core.fmt.html">librosa.core.fmt</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.core.phase_vocoder.html">librosa.core.phase_vocoder</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.core.magphase.html">librosa.core.magphase</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.core.logamplitude.html">librosa.core.logamplitude</a></li>
@@ -167,14 +169,18 @@
 <li class="toctree-l3"><a class="reference internal" href="librosa.feature.zero_crossing_rate.html">librosa.feature.zero_crossing_rate</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../feature.html#rhythm-features">Rhythm features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="librosa.feature.tempogram.html">librosa.feature.tempogram</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="../feature.html#feature-manipulation">Feature manipulation</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="librosa.feature.delta.html">librosa.feature.delta</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.feature.stack_memory.html">librosa.feature.stack_memory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="librosa.feature.sync.html">librosa.feature.sync</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../feature.html#deprecated">Deprecated</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="librosa.feature.logfsgram.html">librosa.feature.logfsgram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.feature.sync.html">librosa.feature.sync</a></li>
 </ul>
 </li>
 </ul>
@@ -182,6 +188,7 @@
 <li class="toctree-l1 current"><a class="reference internal" href="../onset.html">Onset detection</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="librosa.onset.onset_detect.html">librosa.onset.onset_detect</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="">librosa.onset.onset_strength</a></li>
+<li class="toctree-l2"><a class="reference internal" href="librosa.onset.onset_strength_multi.html">librosa.onset.onset_strength_multi</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../beat.html">Beat and tempo</a><ul>
@@ -253,6 +260,8 @@
 <li class="toctree-l3"><a class="reference internal" href="librosa.util.pad_center.html">librosa.util.pad_center</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.util.fix_length.html">librosa.util.fix_length</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.util.fix_frames.html">librosa.util.fix_frames</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.util.index_to_slice.html">librosa.util.index_to_slice</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.util.sync.html">librosa.util.sync</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.util.axis_sort.html">librosa.util.axis_sort</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.util.normalize.html">librosa.util.normalize</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.util.sparsify_rows.html">librosa.util.sparsify_rows</a></li>
@@ -321,6 +330,7 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#v0-4-1">v0.4.1</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../changelog.html#v0-4-0">v0.4.0</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../changelog.html#v0-3-1">v0.3.1</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../changelog.html#v0-3-0">v0.3.0</a></li>
@@ -373,12 +383,23 @@
 <h1>librosa.onset.onset_strength<a class="headerlink" href="#librosa-onset-onset-strength" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="librosa.onset.onset_strength">
-<tt class="descclassname">librosa.onset.</tt><tt class="descname">onset_strength</tt><big>(</big><em>y=None</em>, <em>sr=22050</em>, <em>S=None</em>, <em>detrend=False</em>, <em>centering=True</em>, <em>feature=None</em>, <em>aggregate=None</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/librosa/onset.html#onset_strength"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#librosa.onset.onset_strength" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">librosa.onset.</tt><tt class="descname">onset_strength</tt><big>(</big><em>y=None</em>, <em>sr=22050</em>, <em>S=None</em>, <em>lag=1</em>, <em>max_size=1</em>, <em>detrend=False</em>, <em>center=True</em>, <em>feature=None</em>, <em>aggregate=None</em>, <em>centering=None</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/librosa/onset.html#onset_strength"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#librosa.onset.onset_strength" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute a spectral flux onset strength envelope.</p>
 <p>Onset strength at time <em class="xref py py-obj">t</em> is determined by:</p>
-<p><em class="xref py py-obj">mean_f max(0, S[f, t+1] - S[f, t])</em></p>
+<p><em class="xref py py-obj">mean_f max(0, S[f, t] - ref_S[f, t - lag])</em></p>
+<p>where <em class="xref py py-obj">ref_S</em> is <em class="xref py py-obj">S</em> after local max filtering along the frequency
+axis <a class="reference internal" href="#r32" id="id1">[R32]</a>.</p>
 <p>By default, if a time series <em class="xref py py-obj">y</em> is provided, S will be the
 log-power Mel spectrogram.</p>
+<table class="docutils citation" frame="void" id="r32" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id1">[R32]</a></td><td>Böck, Sebastian, and Gerhard Widmer.
+&#8220;Maximum filter vibrato suppression for onset detection.&#8221;
+16th International Conference on Digital Audio Effects,
+Maynooth, Ireland. 2013.</td></tr>
+</tbody>
+</table>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -387,7 +408,7 @@ log-power Mel spectrogram.</p>
 <blockquote>
 <div><p>audio time-series</p>
 </div></blockquote>
-<p><strong>sr</strong> : int &gt; 0 [scalar]</p>
+<p><strong>sr</strong> : number &gt; 0 [scalar]</p>
 <blockquote>
 <div><p>sampling rate of <em class="xref py py-obj">y</em></p>
 </div></blockquote>
@@ -395,18 +416,33 @@ log-power Mel spectrogram.</p>
 <blockquote>
 <div><p>pre-computed (log-power) spectrogram</p>
 </div></blockquote>
+<p><strong>lag</strong> : int &gt; 0</p>
+<blockquote>
+<div><p>time lag for computing differences</p>
+</div></blockquote>
+<p><strong>max_size</strong> : int &gt; 0</p>
+<blockquote>
+<div><p>size (in frequency bins) of the local max filter.
+set to <em class="xref py py-obj">1</em> to disable filtering.</p>
+</div></blockquote>
 <p><strong>detrend</strong> : bool [scalar]</p>
 <blockquote>
 <div><p>Filter the onset strength to remove the DC component</p>
 </div></blockquote>
-<p><strong>centering</strong> : bool [scalar]</p>
+<p><strong>center</strong> : bool [scalar]</p>
+<p><strong>centering</strong> : bool [scalar] (deprecated)</p>
 <blockquote>
 <div><p>Shift the onset function by <em class="xref py py-obj">n_fft / (2 * hop_length)</em> frames</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">The <em class="xref py py-obj">centering</em> parameter is deprecated as of 0.4.1,</p>
+</div>
+<p>and has been replaced by the <em class="xref py py-obj">center</em> parameter.</p>
 </div></blockquote>
 <p><strong>feature</strong> : function</p>
 <blockquote>
 <div><p>Function for computing time-series features, eg, scaled spectrograms.
-By default, uses <a class="reference internal" href="librosa.feature.melspectrogram.html#librosa.feature.melspectrogram" title="librosa.feature.melspectrogram"><tt class="xref py py-obj docutils literal"><span class="pre">librosa.feature.melspectrogram</span></tt></a> with <em class="xref py py-obj">fmax=8000.0</em></p>
+By default, uses <a class="reference internal" href="librosa.feature.melspectrogram.html#librosa.feature.melspectrogram" title="librosa.feature.melspectrogram"><tt class="xref py py-obj docutils literal"><span class="pre">librosa.feature.melspectrogram</span></tt></a> with <em class="xref py py-obj">fmax=11025.0</em></p>
 </div></blockquote>
 <p><strong>aggregate</strong> : function</p>
 <blockquote>
@@ -429,11 +465,16 @@ at different frequency bins.</p>
 <tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><strong>ParameterError</strong></p>
 <blockquote class="last">
 <div><p>if neither <em class="xref py py-obj">(y, sr)</em> nor <em class="xref py py-obj">S</em> are provided</p>
+<p>or if <em class="xref py py-obj">lag</em> or <em class="xref py py-obj">max_size</em> are not positive integers</p>
 </div></blockquote>
 </td>
 </tr>
 </tbody>
 </table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference internal" href="librosa.onset.onset_detect.html#librosa.onset.onset_detect" title="librosa.onset.onset_detect"><tt class="xref py py-obj docutils literal"><span class="pre">onset_detect</span></tt></a>, <a class="reference internal" href="librosa.onset.onset_strength_multi.html#librosa.onset.onset_strength_multi" title="librosa.onset.onset_strength_multi"><tt class="xref py py-obj docutils literal"><span class="pre">onset_strength_multi</span></tt></a></p>
+</div>
 <p class="rubric">Examples</p>
 <p>First, load some audio and plot the spectrogram</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
@@ -491,7 +532,7 @@ at different frequency bins.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../beat.html" class="btn btn-neutral float-right" title="Beat and tempo" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="librosa.onset.onset_strength_multi.html" class="btn btn-neutral float-right" title="librosa.onset.onset_strength_multi" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="librosa.onset.onset_detect.html" class="btn btn-neutral" title="librosa.onset.onset_detect" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -524,7 +565,7 @@ at different frequency bins.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.4.0',
+            VERSION:'0.4.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

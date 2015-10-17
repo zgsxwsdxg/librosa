@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>librosa.core.magphase &mdash; librosa 0.4.0 documentation</title>
+  <title>librosa.core.magphase &mdash; librosa 0.4.1 documentation</title>
   
 
   
@@ -30,7 +30,7 @@
   
 
   
-    <link rel="top" title="librosa 0.4.0 documentation" href="../index.html"/>
+    <link rel="top" title="librosa 0.4.1 documentation" href="../index.html"/>
         <link rel="up" title="Core IO and DSP" href="../core.html"/>
         <link rel="next" title="librosa.core.logamplitude" href="librosa.core.logamplitude.html"/>
         <link rel="prev" title="librosa.core.phase_vocoder" href="librosa.core.phase_vocoder.html"/> 
@@ -94,6 +94,7 @@
 <li class="toctree-l3"><a class="reference internal" href="librosa.core.get_duration.html">librosa.core.get_duration</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.core.autocorrelate.html">librosa.core.autocorrelate</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.core.zero_crossings.html">librosa.core.zero_crossings</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.core.clicks.html">librosa.core.clicks</a></li>
 </ul>
 </li>
 <li class="toctree-l2 current"><a class="reference internal" href="../core.html#spectral-representations">Spectral representations</a><ul class="current">
@@ -103,6 +104,7 @@
 <li class="toctree-l3"><a class="reference internal" href="librosa.core.cqt.html">librosa.core.cqt</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.core.hybrid_cqt.html">librosa.core.hybrid_cqt</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.core.pseudo_cqt.html">librosa.core.pseudo_cqt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.core.fmt.html">librosa.core.fmt</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.core.phase_vocoder.html">librosa.core.phase_vocoder</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="">librosa.core.magphase</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.core.logamplitude.html">librosa.core.logamplitude</a></li>
@@ -167,14 +169,18 @@
 <li class="toctree-l3"><a class="reference internal" href="librosa.feature.zero_crossing_rate.html">librosa.feature.zero_crossing_rate</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../feature.html#rhythm-features">Rhythm features</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="librosa.feature.tempogram.html">librosa.feature.tempogram</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="../feature.html#feature-manipulation">Feature manipulation</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="librosa.feature.delta.html">librosa.feature.delta</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.feature.stack_memory.html">librosa.feature.stack_memory</a></li>
-<li class="toctree-l3"><a class="reference internal" href="librosa.feature.sync.html">librosa.feature.sync</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../feature.html#deprecated">Deprecated</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="librosa.feature.logfsgram.html">librosa.feature.logfsgram</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.feature.sync.html">librosa.feature.sync</a></li>
 </ul>
 </li>
 </ul>
@@ -182,6 +188,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../onset.html">Onset detection</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="librosa.onset.onset_detect.html">librosa.onset.onset_detect</a></li>
 <li class="toctree-l2"><a class="reference internal" href="librosa.onset.onset_strength.html">librosa.onset.onset_strength</a></li>
+<li class="toctree-l2"><a class="reference internal" href="librosa.onset.onset_strength_multi.html">librosa.onset.onset_strength_multi</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../beat.html">Beat and tempo</a><ul>
@@ -253,6 +260,8 @@
 <li class="toctree-l3"><a class="reference internal" href="librosa.util.pad_center.html">librosa.util.pad_center</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.util.fix_length.html">librosa.util.fix_length</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.util.fix_frames.html">librosa.util.fix_frames</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.util.index_to_slice.html">librosa.util.index_to_slice</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.util.sync.html">librosa.util.sync</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.util.axis_sort.html">librosa.util.axis_sort</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.util.normalize.html">librosa.util.normalize</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.util.sparsify_rows.html">librosa.util.sparsify_rows</a></li>
@@ -321,6 +330,7 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#v0-4-1">v0.4.1</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../changelog.html#v0-4-0">v0.4.0</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../changelog.html#v0-3-1">v0.3.1</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../changelog.html#v0-3-0">v0.3.0</a></li>
@@ -405,7 +415,7 @@ and phase (P) components, so that <em class="xref py py-obj">D = S * P</em>.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">magnitude</span>
 <span class="go">array([[  2.524e-03,   4.329e-02, ...,   3.217e-04,   3.520e-05],</span>
 <span class="go">       [  2.645e-03,   5.152e-02, ...,   3.283e-04,   3.432e-04],</span>
-<span class="go">       ..., </span>
+<span class="go">       ...,</span>
 <span class="go">       [  1.966e-05,   9.828e-06, ...,   3.164e-07,   9.370e-06],</span>
 <span class="go">       [  1.966e-05,   9.830e-06, ...,   3.161e-07,   9.366e-06]], dtype=float32)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">phase</span>
@@ -413,7 +423,7 @@ and phase (P) components, so that <em class="xref py py-obj">D = S * P</em>.</p>
 <span class="go">         -1.000e+00 +8.742e-08j,  -1.000e+00 +8.742e-08j],</span>
 <span class="go">       [  1.000e+00 +1.615e-16j,   9.950e-01 -1.001e-01j, ...,</span>
 <span class="go">          9.794e-01 +2.017e-01j,   1.492e-02 -9.999e-01j],</span>
-<span class="go">       ..., </span>
+<span class="go">       ...,</span>
 <span class="go">       [  1.000e+00 -5.609e-15j,  -5.081e-04 +1.000e+00j, ...,</span>
 <span class="go">         -9.549e-01 -2.970e-01j,   2.938e-01 -9.559e-01j],</span>
 <span class="go">       [ -1.000e+00 +8.742e-08j,  -1.000e+00 +8.742e-08j, ...,</span>
@@ -424,7 +434,7 @@ and phase (P) components, so that <em class="xref py py-obj">D = S * P</em>.</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">np</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">phase</span><span class="p">)</span>
 <span class="go">array([[  0.000e+00,   0.000e+00, ...,   3.142e+00,   3.142e+00],</span>
 <span class="go">       [  1.615e-16,  -1.003e-01, ...,   2.031e-01,  -1.556e+00],</span>
-<span class="go">       ..., </span>
+<span class="go">       ...,</span>
 <span class="go">       [ -5.609e-15,   1.571e+00, ...,  -2.840e+00,  -1.273e+00],</span>
 <span class="go">       [  3.142e+00,   3.142e+00, ...,   3.142e+00,   3.142e+00]], dtype=float32)</span>
 </pre></div>
@@ -472,7 +482,7 @@ and phase (P) components, so that <em class="xref py py-obj">D = S * P</em>.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.4.0',
+            VERSION:'0.4.1',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

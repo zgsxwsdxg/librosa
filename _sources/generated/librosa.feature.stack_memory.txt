@@ -1,0 +1,6 @@
+librosa.feature.stack_memory
+============================
+
+.. currentmodule:: librosa.feature
+
+.. autofunction:: stack_memory
