@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>librosa.filters &mdash; librosa 0.4.1 documentation</title>
+  <title>librosa.filters &mdash; librosa 0.4.2 documentation</title>
   
 
   
@@ -30,7 +30,7 @@
   
 
   
-    <link rel="top" title="librosa 0.4.1 documentation" href="../../index.html"/>
+    <link rel="top" title="librosa 0.4.2 documentation" href="../../index.html"/>
         <link rel="up" title="Module code" href="../index.html"/> 
 
   
@@ -73,6 +73,9 @@
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation instructions</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../install.html#additional-notes">Additional notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#additional-notes-for-os-x">Additional notes for OS X</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#libsamplerate">libsamplerate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../install.html#ffmpeg">ffmpeg</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Tutorial</a><ul>
@@ -287,11 +290,8 @@
 <li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.util.find_files.html">librosa.util.find_files</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../../util.html#sklearn-integration">sklearn integration</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.util.FeatureExtractor.html">librosa.util.FeatureExtractor</a></li>
-</ul>
-</li>
 <li class="toctree-l2"><a class="reference internal" href="../../util.html#deprecated">Deprecated</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.util.FeatureExtractor.html">librosa.util.FeatureExtractor</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.util.buf_to_int.html">librosa.util.buf_to_int</a></li>
 </ul>
 </li>
@@ -328,6 +328,7 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#v0-4-2">v0.4.2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../changelog.html#v0-4-1">v0.4.1</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../changelog.html#v0-4-0">v0.4.0</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../changelog.html#v0-3-1">v0.3.1</a></li>
@@ -836,7 +837,8 @@
 
 <span class="nd">@cache</span>
 <div class="viewcode-block" id="constant_q"><a class="viewcode-back" href="../../generated/librosa.filters.constant_q.html#librosa.filters.constant_q">[docs]</a><span class="k">def</span> <span class="nf">constant_q</span><span class="p">(</span><span class="n">sr</span><span class="p">,</span> <span class="n">fmin</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="mi">84</span><span class="p">,</span> <span class="n">bins_per_octave</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">tuning</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
-               <span class="n">window</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">pad_fft</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+               <span class="n">window</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">filter_scale</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">pad_fft</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+               <span class="n">resolution</span><span class="o">=</span><span class="n">util</span><span class="o">.</span><span class="n">Deprecated</span><span class="p">(),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="sd">r&#39;&#39;&#39;Construct a constant-Q basis.</span>
 
 <span class="sd">    This uses the filter bank described by [1]_.</span>
@@ -867,8 +869,9 @@
 <span class="sd">        Windowing function to apply to filters.</span>
 <span class="sd">        Default: `scipy.signal.hann`</span>
 
-<span class="sd">    resolution : float &gt; 0 [scalar]</span>
-<span class="sd">        Resolution of filter windows. Larger values use longer windows.</span>
+<span class="sd">    filter_scale : float &gt; 0 [scalar]</span>
+<span class="sd">        Scale of filter windows.</span>
+<span class="sd">        Small values (&lt;1) use shorter windows for higher temporal resolution.</span>
 
 <span class="sd">    pad_fft : boolean</span>
 <span class="sd">        Center-pad all filters up to the nearest integral power of 2.</span>
@@ -883,6 +886,10 @@
 <span class="sd">    kwargs : additional keyword arguments</span>
 <span class="sd">        Arguments to `np.pad()` when `pad==True`.</span>
 
+<span class="sd">    resolution : float</span>
+<span class="sd">        .. warning:: This parameter name was in librosa 0.4.2</span>
+<span class="sd">            Use the `filter_scale` parameter instead.</span>
+<span class="sd">            The `resolution` parameter will be removed in librosa 0.5.0.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -901,9 +908,9 @@
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
-<span class="sd">    Use a longer window for each filter</span>
+<span class="sd">    Use a shorter window for each filter</span>
 
-<span class="sd">    &gt;&gt;&gt; basis, lengths = librosa.filters.constant_q(22050, resolution=3)</span>
+<span class="sd">    &gt;&gt;&gt; basis, lengths = librosa.filters.constant_q(22050, filter_scale=0.5)</span>
 
 <span class="sd">    Plot one octave of filters in time and frequency</span>
 
@@ -939,13 +946,17 @@
     <span class="k">if</span> <span class="n">window</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
         <span class="n">window</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">signal</span><span class="o">.</span><span class="n">hann</span>
 
+    <span class="n">filter_scale</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">rename_kw</span><span class="p">(</span><span class="s">&#39;resolution&#39;</span><span class="p">,</span> <span class="n">resolution</span><span class="p">,</span>
+                                  <span class="s">&#39;filter_scale&#39;</span><span class="p">,</span> <span class="n">filter_scale</span><span class="p">,</span>
+                                  <span class="s">&#39;0.4.2&#39;</span><span class="p">,</span> <span class="s">&#39;0.5.0&#39;</span><span class="p">)</span>
+
     <span class="c"># Pass-through parameters to get the filter lengths</span>
     <span class="n">lengths</span> <span class="o">=</span> <span class="n">constant_q_lengths</span><span class="p">(</span><span class="n">sr</span><span class="p">,</span> <span class="n">fmin</span><span class="p">,</span>
                                  <span class="n">n_bins</span><span class="o">=</span><span class="n">n_bins</span><span class="p">,</span>
                                  <span class="n">bins_per_octave</span><span class="o">=</span><span class="n">bins_per_octave</span><span class="p">,</span>
                                  <span class="n">tuning</span><span class="o">=</span><span class="n">tuning</span><span class="p">,</span>
                                  <span class="n">window</span><span class="o">=</span><span class="n">window</span><span class="p">,</span>
-                                 <span class="n">resolution</span><span class="o">=</span><span class="n">resolution</span><span class="p">)</span>
+                                 <span class="n">filter_scale</span><span class="o">=</span><span class="n">filter_scale</span><span class="p">)</span>
 
     <span class="c"># Apply tuning correction</span>
     <span class="n">correction</span> <span class="o">=</span> <span class="mf">2.0</span><span class="o">**</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">tuning</span><span class="p">)</span> <span class="o">/</span> <span class="n">bins_per_octave</span><span class="p">)</span>
@@ -953,7 +964,7 @@
 
     <span class="c"># Q should be capitalized here, so we suppress the name warning</span>
     <span class="c"># pylint: disable=invalid-name</span>
-    <span class="n">Q</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">resolution</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.0</span><span class="o">**</span><span class="p">(</span><span class="mf">1.</span> <span class="o">/</span> <span class="n">bins_per_octave</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">Q</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">filter_scale</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.0</span><span class="o">**</span><span class="p">(</span><span class="mf">1.</span> <span class="o">/</span> <span class="n">bins_per_octave</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
 
     <span class="c"># Convert lengths back to frequencies</span>
     <span class="n">freqs</span> <span class="o">=</span> <span class="n">Q</span> <span class="o">*</span> <span class="n">sr</span> <span class="o">/</span> <span class="n">lengths</span>
@@ -987,7 +998,8 @@
 </div>
 <span class="nd">@cache</span>
 <div class="viewcode-block" id="constant_q_lengths"><a class="viewcode-back" href="../../generated/librosa.filters.constant_q_lengths.html#librosa.filters.constant_q_lengths">[docs]</a><span class="k">def</span> <span class="nf">constant_q_lengths</span><span class="p">(</span><span class="n">sr</span><span class="p">,</span> <span class="n">fmin</span><span class="p">,</span> <span class="n">n_bins</span><span class="o">=</span><span class="mi">84</span><span class="p">,</span> <span class="n">bins_per_octave</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
-                       <span class="n">tuning</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="s">&#39;hann&#39;</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+                       <span class="n">tuning</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="s">&#39;hann&#39;</span><span class="p">,</span> <span class="n">filter_scale</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                       <span class="n">resolution</span><span class="o">=</span><span class="n">util</span><span class="o">.</span><span class="n">Deprecated</span><span class="p">()):</span>
     <span class="sd">r&#39;&#39;&#39;Return length of each filter in a constant-Q basis.</span>
 
 <span class="sd">    Parameters</span>
@@ -1010,8 +1022,13 @@
 <span class="sd">    window : str or callable</span>
 <span class="sd">        Window function to use on filters</span>
 
-<span class="sd">    resolution : float &gt; 0 [scalar]</span>
+<span class="sd">    filter_scale : float &gt; 0 [scalar]</span>
 <span class="sd">        Resolution of filter windows. Larger values use longer windows.</span>
+
+<span class="sd">    resolution : float</span>
+<span class="sd">        .. warning:: This parameter name was in librosa 0.4.2</span>
+<span class="sd">            Use the `filter_scale` parameter instead.</span>
+<span class="sd">            The `resolution` parameter will be removed in librosa 0.5.0.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -1024,14 +1041,18 @@
 <span class="sd">    librosa.core.cqt</span>
 <span class="sd">    &#39;&#39;&#39;</span>
 
+    <span class="n">filter_scale</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">rename_kw</span><span class="p">(</span><span class="s">&#39;resolution&#39;</span><span class="p">,</span> <span class="n">resolution</span><span class="p">,</span>
+                                  <span class="s">&#39;filter_scale&#39;</span><span class="p">,</span> <span class="n">filter_scale</span><span class="p">,</span>
+                                  <span class="s">&#39;0.4.2&#39;</span><span class="p">,</span> <span class="s">&#39;0.5.0&#39;</span><span class="p">)</span>
+
     <span class="k">if</span> <span class="n">fmin</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s">&#39;fmin must be positive&#39;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">bins_per_octave</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s">&#39;bins_per_octave must be positive&#39;</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">resolution</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s">&#39;resolution must be positive&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">filter_scale</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s">&#39;filter_scale must be positive&#39;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">n_bins</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">n_bins</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
         <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s">&#39;n_bins must be a positive integer&#39;</span><span class="p">)</span>
@@ -1042,7 +1063,7 @@
 
     <span class="c"># Q should be capitalized here, so we suppress the name warning</span>
     <span class="c"># pylint: disable=invalid-name</span>
-    <span class="n">Q</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">resolution</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.0</span><span class="o">**</span><span class="p">(</span><span class="mf">1.</span> <span class="o">/</span> <span class="n">bins_per_octave</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">Q</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">filter_scale</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mf">2.0</span><span class="o">**</span><span class="p">(</span><span class="mf">1.</span> <span class="o">/</span> <span class="n">bins_per_octave</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
 
     <span class="c"># Compute the frequencies</span>
     <span class="n">freq</span> <span class="o">=</span> <span class="n">fmin</span> <span class="o">*</span> <span class="p">(</span><span class="mf">2.0</span> <span class="o">**</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">n_bins</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span> <span class="o">/</span> <span class="n">bins_per_octave</span><span class="p">))</span>
@@ -1198,7 +1219,7 @@
 
 <span class="sd">    See Also</span>
 <span class="sd">    --------</span>
-<span class="sd">    scipy.signal.windows</span>
+<span class="sd">    scipy.signal.get_window</span>
 <span class="sd">    &#39;&#39;&#39;</span>
 
     <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">window</span><span class="p">,</span> <span class="s">&#39;__name__&#39;</span><span class="p">):</span>
@@ -1220,7 +1241,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2015, librosa development team.
+        &copy; Copyright 2016, librosa development team.
     </p>
   </div>
   Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
@@ -1241,7 +1262,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'0.4.1',
+            VERSION:'0.4.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

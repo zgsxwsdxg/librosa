@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>librosa.display.waveplot &mdash; librosa 0.4.1 documentation</title>
+  <title>librosa.display.waveplot &mdash; librosa 0.4.2 documentation</title>
   
 
   
@@ -30,7 +30,7 @@
   
 
   
-    <link rel="top" title="librosa 0.4.1 documentation" href="../index.html"/>
+    <link rel="top" title="librosa 0.4.2 documentation" href="../index.html"/>
         <link rel="up" title="Display" href="../display.html"/>
         <link rel="next" title="librosa.display.time_ticks" href="librosa.display.time_ticks.html"/>
         <link rel="prev" title="librosa.display.specshow" href="librosa.display.specshow.html"/> 
@@ -75,6 +75,9 @@
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../install.html">Installation instructions</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../install.html#additional-notes">Additional notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#additional-notes-for-os-x">Additional notes for OS X</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#libsamplerate">libsamplerate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#ffmpeg">ffmpeg</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a><ul>
@@ -289,11 +292,8 @@
 <li class="toctree-l3"><a class="reference internal" href="librosa.util.find_files.html">librosa.util.find_files</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../util.html#sklearn-integration">sklearn integration</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="librosa.util.FeatureExtractor.html">librosa.util.FeatureExtractor</a></li>
-</ul>
-</li>
 <li class="toctree-l2"><a class="reference internal" href="../util.html#deprecated">Deprecated</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="librosa.util.FeatureExtractor.html">librosa.util.FeatureExtractor</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.util.buf_to_int.html">librosa.util.buf_to_int</a></li>
 </ul>
 </li>
@@ -330,6 +330,7 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#v0-4-2">v0.4.2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../changelog.html#v0-4-1">v0.4.1</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../changelog.html#v0-4-0">v0.4.0</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../changelog.html#v0-3-1">v0.3.1</a></li>
@@ -383,7 +384,7 @@
 <h1>librosa.display.waveplot<a class="headerlink" href="#librosa-display-waveplot" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="librosa.display.waveplot">
-<tt class="descclassname">librosa.display.</tt><tt class="descname">waveplot</tt><big>(</big><em>y</em>, <em>sr=22050</em>, <em>max_points=50000.0</em>, <em>x_axis='time'</em>, <em>offset=0.0</em>, <em>max_sr=1000</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/librosa/display.html#waveplot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#librosa.display.waveplot" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">librosa.display.</tt><tt class="descname">waveplot</tt><big>(</big><em>y</em>, <em>sr=22050</em>, <em>max_points=50000.0</em>, <em>x_axis='time'</em>, <em>offset=0.0</em>, <em>max_sr=1000</em>, <em>time_fmt=None</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/librosa/display.html#waveplot"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#librosa.display.waveplot" title="Permalink to this definition">¶</a></dt>
 <dd><p>Plot the amplitude envelope of a waveform.</p>
 <p>If <em class="xref py py-obj">y</em> is monophonic, a filled curve is drawn between <em class="xref py py-obj">[-abs(y), abs(y)]</em>.</p>
 <p>If <em class="xref py py-obj">y</em> is stereo, the curve is drawn between <em class="xref py py-obj">[-abs(y[1]), abs(y[0])]</em>,
@@ -422,9 +423,14 @@ the duration of <em class="xref py py-obj">y</em>, then <em class="xref py py-ob
 <blockquote>
 <div><p>Maximum sampling rate for the visualization</p>
 </div></blockquote>
+<p><strong>time_fmt</strong> : None or str</p>
+<blockquote>
+<div><p>Formatting for time axis.  None (automatic) by default.</p>
+<p>See <a class="reference internal" href="librosa.display.time_ticks.html#librosa.display.time_ticks" title="librosa.display.time_ticks"><tt class="xref py py-obj docutils literal"><span class="pre">time_ticks</span></tt></a>.</p>
+</div></blockquote>
 <p><strong>kwargs</strong></p>
 <blockquote>
-<div><p>Additional keyword arguments to <a class="reference external" href="http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.fill_between" title="(in Matplotlib v1.4.3)"><tt class="xref py py-obj docutils literal"><span class="pre">matplotlib.pyplot.fill_between</span></tt></a></p>
+<div><p>Additional keyword arguments to <a class="reference external" href="http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.fill_between" title="(in Matplotlib v1.5.1)"><tt class="xref py py-obj docutils literal"><span class="pre">matplotlib.pyplot.fill_between</span></tt></a></p>
 </div></blockquote>
 </td>
 </tr>
@@ -438,7 +444,7 @@ the duration of <em class="xref py py-obj">y</em>, then <em class="xref py py-ob
 </table>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><a class="reference internal" href="librosa.display.time_ticks.html#librosa.display.time_ticks" title="librosa.display.time_ticks"><tt class="xref py py-obj docutils literal"><span class="pre">time_ticks</span></tt></a>, <a class="reference internal" href="librosa.core.resample.html#librosa.core.resample" title="librosa.core.resample"><tt class="xref py py-obj docutils literal"><span class="pre">librosa.core.resample</span></tt></a>, <a class="reference external" href="http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.fill_between" title="(in Matplotlib v1.4.3)"><tt class="xref py py-obj docutils literal"><span class="pre">matplotlib.pyplot.fill_between</span></tt></a></p>
+<p class="last"><a class="reference internal" href="librosa.display.time_ticks.html#librosa.display.time_ticks" title="librosa.display.time_ticks"><tt class="xref py py-obj docutils literal"><span class="pre">time_ticks</span></tt></a>, <a class="reference internal" href="librosa.core.resample.html#librosa.core.resample" title="librosa.core.resample"><tt class="xref py py-obj docutils literal"><span class="pre">librosa.core.resample</span></tt></a>, <a class="reference external" href="http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.fill_between" title="(in Matplotlib v1.5.1)"><tt class="xref py py-obj docutils literal"><span class="pre">matplotlib.pyplot.fill_between</span></tt></a></p>
 </div>
 <p class="rubric">Examples</p>
 <p>Plot a monophonic waveform</p>
@@ -494,7 +500,7 @@ the duration of <em class="xref py py-obj">y</em>, then <em class="xref py py-ob
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2015, librosa development team.
+        &copy; Copyright 2016, librosa development team.
     </p>
   </div>
   Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
@@ -515,7 +521,7 @@ the duration of <em class="xref py py-obj">y</em>, then <em class="xref py py-ob
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.4.1',
+            VERSION:'0.4.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

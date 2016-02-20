@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>librosa.filters.constant_q_lengths &mdash; librosa 0.4.1 documentation</title>
+  <title>librosa.filters.constant_q_lengths &mdash; librosa 0.4.2 documentation</title>
   
 
   
@@ -30,7 +30,7 @@
   
 
   
-    <link rel="top" title="librosa 0.4.1 documentation" href="../index.html"/>
+    <link rel="top" title="librosa 0.4.2 documentation" href="../index.html"/>
         <link rel="up" title="Filters" href="../filters.html"/>
         <link rel="next" title="librosa.filters.cq_to_chroma" href="librosa.filters.cq_to_chroma.html"/>
         <link rel="prev" title="librosa.filters.constant_q" href="librosa.filters.constant_q.html"/> 
@@ -75,6 +75,9 @@
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../install.html">Installation instructions</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../install.html#additional-notes">Additional notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#additional-notes-for-os-x">Additional notes for OS X</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#libsamplerate">libsamplerate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#ffmpeg">ffmpeg</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a><ul>
@@ -289,11 +292,8 @@
 <li class="toctree-l3"><a class="reference internal" href="librosa.util.find_files.html">librosa.util.find_files</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../util.html#sklearn-integration">sklearn integration</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="librosa.util.FeatureExtractor.html">librosa.util.FeatureExtractor</a></li>
-</ul>
-</li>
 <li class="toctree-l2"><a class="reference internal" href="../util.html#deprecated">Deprecated</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="librosa.util.FeatureExtractor.html">librosa.util.FeatureExtractor</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.util.buf_to_int.html">librosa.util.buf_to_int</a></li>
 </ul>
 </li>
@@ -330,6 +330,7 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#v0-4-2">v0.4.2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../changelog.html#v0-4-1">v0.4.1</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../changelog.html#v0-4-0">v0.4.0</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../changelog.html#v0-3-1">v0.3.1</a></li>
@@ -383,7 +384,7 @@
 <h1>librosa.filters.constant_q_lengths<a class="headerlink" href="#librosa-filters-constant-q-lengths" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="librosa.filters.constant_q_lengths">
-<tt class="descclassname">librosa.filters.</tt><tt class="descname">constant_q_lengths</tt><big>(</big><em>sr</em>, <em>fmin</em>, <em>n_bins=84</em>, <em>bins_per_octave=12</em>, <em>tuning=0.0</em>, <em>window='hann'</em>, <em>resolution=2</em><big>)</big><a class="reference internal" href="../_modules/librosa/filters.html#constant_q_lengths"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#librosa.filters.constant_q_lengths" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">librosa.filters.</tt><tt class="descname">constant_q_lengths</tt><big>(</big><em>sr</em>, <em>fmin</em>, <em>n_bins=84</em>, <em>bins_per_octave=12</em>, <em>tuning=0.0</em>, <em>window='hann'</em>, <em>filter_scale=1</em>, <em>resolution=&lt;DEPRECATED parameter&gt;</em><big>)</big><a class="reference internal" href="../_modules/librosa/filters.html#constant_q_lengths"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#librosa.filters.constant_q_lengths" title="Permalink to this definition">¶</a></dt>
 <dd><p>Return length of each filter in a constant-Q basis.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -413,9 +414,18 @@
 <blockquote>
 <div><p>Window function to use on filters</p>
 </div></blockquote>
-<p><strong>resolution</strong> : float &gt; 0 [scalar]</p>
+<p><strong>filter_scale</strong> : float &gt; 0 [scalar]</p>
 <blockquote>
 <div><p>Resolution of filter windows. Larger values use longer windows.</p>
+</div></blockquote>
+<p><strong>resolution</strong> : float</p>
+<blockquote>
+<div><div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This parameter name was in librosa 0.4.2
+Use the <em class="xref py py-obj">filter_scale</em> parameter instead.
+The <em class="xref py py-obj">resolution</em> parameter will be removed in librosa 0.5.0.</p>
+</div>
 </div></blockquote>
 </td>
 </tr>
@@ -453,7 +463,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2015, librosa development team.
+        &copy; Copyright 2016, librosa development team.
     </p>
   </div>
   Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
@@ -474,7 +484,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.4.1',
+            VERSION:'0.4.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

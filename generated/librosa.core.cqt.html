@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>librosa.core.cqt &mdash; librosa 0.4.1 documentation</title>
+  <title>librosa.core.cqt &mdash; librosa 0.4.2 documentation</title>
   
 
   
@@ -30,7 +30,7 @@
   
 
   
-    <link rel="top" title="librosa 0.4.1 documentation" href="../index.html"/>
+    <link rel="top" title="librosa 0.4.2 documentation" href="../index.html"/>
         <link rel="up" title="Core IO and DSP" href="../core.html"/>
         <link rel="next" title="librosa.core.hybrid_cqt" href="librosa.core.hybrid_cqt.html"/>
         <link rel="prev" title="librosa.core.ifgram" href="librosa.core.ifgram.html"/> 
@@ -75,6 +75,9 @@
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../install.html">Installation instructions</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../install.html#additional-notes">Additional notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#additional-notes-for-os-x">Additional notes for OS X</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#libsamplerate">libsamplerate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#ffmpeg">ffmpeg</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a><ul>
@@ -289,11 +292,8 @@
 <li class="toctree-l3"><a class="reference internal" href="librosa.util.find_files.html">librosa.util.find_files</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../util.html#sklearn-integration">sklearn integration</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="librosa.util.FeatureExtractor.html">librosa.util.FeatureExtractor</a></li>
-</ul>
-</li>
 <li class="toctree-l2"><a class="reference internal" href="../util.html#deprecated">Deprecated</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="librosa.util.FeatureExtractor.html">librosa.util.FeatureExtractor</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.util.buf_to_int.html">librosa.util.buf_to_int</a></li>
 </ul>
 </li>
@@ -330,6 +330,7 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#v0-4-2">v0.4.2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../changelog.html#v0-4-1">v0.4.1</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../changelog.html#v0-4-0">v0.4.0</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../changelog.html#v0-3-1">v0.3.1</a></li>
@@ -383,7 +384,7 @@
 <h1>librosa.core.cqt<a class="headerlink" href="#librosa-core-cqt" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="librosa.core.cqt">
-<tt class="descclassname">librosa.core.</tt><tt class="descname">cqt</tt><big>(</big><em>y</em>, <em>sr=22050</em>, <em>hop_length=512</em>, <em>fmin=None</em>, <em>n_bins=84</em>, <em>bins_per_octave=12</em>, <em>tuning=None</em>, <em>resolution=2</em>, <em>aggregate=None</em>, <em>norm=1</em>, <em>sparsity=0.01</em><big>)</big><a class="headerlink" href="#librosa.core.cqt" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">librosa.core.</tt><tt class="descname">cqt</tt><big>(</big><em>y</em>, <em>sr=22050</em>, <em>hop_length=512</em>, <em>fmin=None</em>, <em>n_bins=84</em>, <em>bins_per_octave=12</em>, <em>tuning=None</em>, <em>filter_scale=1</em>, <em>aggregate=None</em>, <em>norm=1</em>, <em>sparsity=0.01</em>, <em>real=True</em>, <em>resolution=&lt;DEPRECATED parameter&gt;</em><big>)</big><a class="headerlink" href="#librosa.core.cqt" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the constant-Q transform of an audio signal.</p>
 <p>This implementation is based on the recursive sub-sampling method
 described by <a class="reference internal" href="#r17" id="id1">[R17]</a>.</p>
@@ -428,9 +429,10 @@ described by <a class="reference internal" href="#r17" id="id1">[R17]</a>.</p>
 <div><p>Tuning offset in fractions of a bin (cents).</p>
 <p>If <em class="xref py py-obj">None</em>, tuning will be automatically estimated.</p>
 </div></blockquote>
-<p><strong>resolution</strong> : float &gt; 0</p>
+<p><strong>filter_scale</strong> : float &gt; 0</p>
 <blockquote>
-<div><p>Filter resolution factor. Larger values use longer windows.</p>
+<div><p>Filter scale factor. Small values (&lt;1) use shorter windows
+for improved time resolution.</p>
 </div></blockquote>
 <p><strong>aggregate</strong> : None or function</p>
 <blockquote>
@@ -448,17 +450,31 @@ See <a class="reference internal" href="librosa.util.normalize.html#librosa.util
 fraction of the energy in each basis.</p>
 <p>Set <em class="xref py py-obj">sparsity=0</em> to disable sparsification.</p>
 </div></blockquote>
+<p><strong>real</strong> : bool</p>
+<blockquote>
+<div><p>If true, return only the magnitude of the CQT.</p>
+</div></blockquote>
+<p><strong>resolution</strong> : float</p>
+<blockquote>
+<div><div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">This parameter name was in librosa 0.4.2
+Use the <em class="xref py py-obj">filter_scale</em> parameter instead.
+The <em class="xref py py-obj">resolution</em> parameter will be removed in librosa 0.5.0.</p>
+</div>
+</div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>CQT</strong> : np.ndarray [shape=(n_bins, t), dtype=np.float]</p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>CQT</strong> : np.ndarray [shape=(n_bins, t), dtype=np.complex or np.float]</p>
 <blockquote>
-<div><p>Constant-Q energy for each frequency at each time.</p>
+<div><p>Constant-Q value each frequency at each time.</p>
 </div></blockquote>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><strong>ParameterError</strong></p>
 <blockquote class="last">
-<div><p>If <em class="xref py py-obj">hop_length</em> is not an integer multiple of <em class="xref py py-obj">2**(n_bins / bins_per_octave)</em></p>
+<div><p>If <em class="xref py py-obj">hop_length</em> is not an integer multiple of
+<em class="xref py py-obj">2**(n_bins / bins_per_octave)</em></p>
 </div></blockquote>
 </td>
 </tr>
@@ -491,7 +507,7 @@ fraction of the energy in each basis.</p>
 <span class="go">       [  2.363e-07,   5.329e-07, ...,   1.294e-07,   1.611e-07]])</span>
 </pre></div>
 </div>
-<p>Using a higher resolution</p>
+<p>Using a higher frequency resolution</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">C</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">cqt</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span> <span class="n">fmin</span><span class="o">=</span><span class="n">librosa</span><span class="o">.</span><span class="n">note_to_hz</span><span class="p">(</span><span class="s">&#39;C2&#39;</span><span class="p">),</span>
 <span class="gp">... </span>                <span class="n">n_bins</span><span class="o">=</span><span class="mi">60</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="n">bins_per_octave</span><span class="o">=</span><span class="mi">12</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">C</span>
@@ -528,7 +544,7 @@ fraction of the energy in each basis.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2015, librosa development team.
+        &copy; Copyright 2016, librosa development team.
     </p>
   </div>
   Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
@@ -549,7 +565,7 @@ fraction of the energy in each basis.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.4.1',
+            VERSION:'0.4.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Changes &mdash; librosa 0.4.1 documentation</title>
+  <title>Changes &mdash; librosa 0.4.2 documentation</title>
   
 
   
@@ -30,7 +30,7 @@
   
 
   
-    <link rel="top" title="librosa 0.4.1 documentation" href="index.html"/>
+    <link rel="top" title="librosa 0.4.2 documentation" href="index.html"/>
         <link rel="next" title="Glossary" href="glossary.html"/>
         <link rel="prev" title="Caching" href="cache.html"/> 
 
@@ -74,6 +74,9 @@
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="install.html">Installation instructions</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="install.html#additional-notes">Additional notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#additional-notes-for-os-x">Additional notes for OS X</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#libsamplerate">libsamplerate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#ffmpeg">ffmpeg</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="tutorial.html">Tutorial</a><ul>
@@ -288,11 +291,8 @@
 <li class="toctree-l3"><a class="reference internal" href="generated/librosa.util.find_files.html">librosa.util.find_files</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="util.html#sklearn-integration">sklearn integration</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.util.FeatureExtractor.html">librosa.util.FeatureExtractor</a></li>
-</ul>
-</li>
 <li class="toctree-l2"><a class="reference internal" href="util.html#deprecated">Deprecated</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="generated/librosa.util.FeatureExtractor.html">librosa.util.FeatureExtractor</a></li>
 <li class="toctree-l3"><a class="reference internal" href="generated/librosa.util.buf_to_int.html">librosa.util.buf_to_int</a></li>
 </ul>
 </li>
@@ -329,6 +329,7 @@
 </ul>
 <ul class="current">
 <li class="toctree-l1 current"><a class="current reference internal" href="">Changes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#v0-4-2">v0.4.2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#v0-4-1">v0.4.1</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#v0-4-0">v0.4.0</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#v0-3-1">v0.3.1</a></li>
@@ -378,6 +379,48 @@
             
   <div class="section" id="changes">
 <h1>Changes<a class="headerlink" href="#changes" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="v0-4-2">
+<h2>v0.4.2<a class="headerlink" href="#v0-4-2" title="Permalink to this headline">¶</a></h2>
+<dl class="docutils">
+<dt>Bug fixes</dt>
+<dd><ul class="first last simple">
+<li>Support for matplotlib 1.5 color properties in the <tt class="docutils literal"><span class="pre">display</span></tt> module</li>
+<li><a class="reference external" href="https://github.com/bmcfee/librosa/pull/308">#308</a> Fixed a per-octave scaling error in <tt class="docutils literal"><span class="pre">librosa.cqt</span></tt></li>
+</ul>
+</dd>
+<dt>New features</dt>
+<dd><ul class="first last simple">
+<li><a class="reference external" href="https://github.com/bmcfee/librosa/pull/279">#279</a> <tt class="docutils literal"><span class="pre">librosa.cqt</span></tt> now provides complex-valued output with argument <em class="xref py py-obj">real=False</em>.
+This will become the default behavior in subsequent releases.</li>
+<li><a class="reference external" href="https://github.com/bmcfee/librosa/pull/288">#288</a> <tt class="docutils literal"><span class="pre">core.resample</span></tt> now supports multi-channel inputs</li>
+<li><a class="reference external" href="https://github.com/bmcfee/librosa/pull/295">#295</a> <tt class="docutils literal"><span class="pre">librosa.display.frequency_ticks</span></tt>: like <tt class="docutils literal"><span class="pre">time_ticks</span></tt>. Ticks can now dynamically
+adapt to scale (mHz, Hz, KHz, MHz, GHz) and use automatic precision formatting (<tt class="docutils literal"><span class="pre">%g</span></tt>)</li>
+</ul>
+</dd>
+<dt>Other changes</dt>
+<dd><ul class="first last">
+<li><p class="first"><a class="reference external" href="https://github.com/bmcfee/librosa/pull/277">#277</a> improved documentation</p>
+</li>
+<li><p class="first"><a class="reference external" href="https://github.com/bmcfee/librosa/pull/294">#294</a> deprecated the <tt class="docutils literal"><span class="pre">FeatureExtractor</span></tt> object</p>
+</li>
+<li><p class="first"><a class="reference external" href="https://github.com/bmcfee/librosa/pull/300">#300</a> added dependency version requirements to install script</p>
+</li>
+<li><dl class="first docutils">
+<dt><a class="reference external" href="https://github.com/bmcfee/librosa/pull/302">#302</a>, <a class="reference external" href="https://github.com/bmcfee/librosa/pull/279">#279</a> renamed the following parameters</dt>
+<dd><ul class="first last simple">
+<li><tt class="docutils literal"><span class="pre">librosa.display.time_ticks</span></tt>: <em class="xref py py-obj">fmt</em> is now <em class="xref py py-obj">time_fmt</em></li>
+<li><tt class="docutils literal"><span class="pre">librosa.feature.chroma_cqt</span></tt>: <em class="xref py py-obj">mode</em> is now <em class="xref py py-obj">cqt_mode</em></li>
+<li><tt class="docutils literal"><span class="pre">librosa.cqt</span></tt>, <tt class="docutils literal"><span class="pre">hybrid_cqt</span></tt>, <tt class="docutils literal"><span class="pre">pseudo_cqt</span></tt>, <tt class="docutils literal"><span class="pre">librosa.filters.constant_q</span></tt>: <em class="xref py py-obj">resolution</em> is now <em class="xref py py-obj">filter_scale</em></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p class="first"><a class="reference external" href="https://github.com/bmcfee/librosa/pull/308">#308</a> <tt class="docutils literal"><span class="pre">librosa.cqt</span></tt> default <em class="xref py py-obj">filter_scale</em> parameter is now 1 instead of 2.</p>
+</li>
+</ul>
+</dd>
+</dl>
+</div>
 <div class="section" id="v0-4-1">
 <h2>v0.4.1<a class="headerlink" href="#v0-4-1" title="Permalink to this headline">¶</a></h2>
 <dl class="docutils">
@@ -744,7 +787,7 @@ matches <tt class="docutils literal"><span class="pre">stft</span></tt></li>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2015, librosa development team.
+        &copy; Copyright 2016, librosa development team.
     </p>
   </div>
   Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
@@ -765,7 +808,7 @@ matches <tt class="docutils literal"><span class="pre">stft</span></tt></li>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.4.1',
+            VERSION:'0.4.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

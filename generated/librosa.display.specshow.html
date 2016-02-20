@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>librosa.display.specshow &mdash; librosa 0.4.1 documentation</title>
+  <title>librosa.display.specshow &mdash; librosa 0.4.2 documentation</title>
   
 
   
@@ -30,7 +30,7 @@
   
 
   
-    <link rel="top" title="librosa 0.4.1 documentation" href="../index.html"/>
+    <link rel="top" title="librosa 0.4.2 documentation" href="../index.html"/>
         <link rel="up" title="Display" href="../display.html"/>
         <link rel="next" title="librosa.display.waveplot" href="librosa.display.waveplot.html"/>
         <link rel="prev" title="librosa.display.cmap" href="librosa.display.cmap.html"/> 
@@ -75,6 +75,9 @@
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../install.html">Installation instructions</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../install.html#additional-notes">Additional notes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#additional-notes-for-os-x">Additional notes for OS X</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#libsamplerate">libsamplerate</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../install.html#ffmpeg">ffmpeg</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial.html">Tutorial</a><ul>
@@ -289,11 +292,8 @@
 <li class="toctree-l3"><a class="reference internal" href="librosa.util.find_files.html">librosa.util.find_files</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../util.html#sklearn-integration">sklearn integration</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="librosa.util.FeatureExtractor.html">librosa.util.FeatureExtractor</a></li>
-</ul>
-</li>
 <li class="toctree-l2"><a class="reference internal" href="../util.html#deprecated">Deprecated</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="librosa.util.FeatureExtractor.html">librosa.util.FeatureExtractor</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.util.buf_to_int.html">librosa.util.buf_to_int</a></li>
 </ul>
 </li>
@@ -330,6 +330,7 @@
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../changelog.html#v0-4-2">v0.4.2</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../changelog.html#v0-4-1">v0.4.1</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../changelog.html#v0-4-0">v0.4.0</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../changelog.html#v0-3-1">v0.3.1</a></li>
@@ -383,9 +384,9 @@
 <h1>librosa.display.specshow<a class="headerlink" href="#librosa-display-specshow" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="librosa.display.specshow">
-<tt class="descclassname">librosa.display.</tt><tt class="descname">specshow</tt><big>(</big><em>data</em>, <em>sr=22050</em>, <em>hop_length=512</em>, <em>x_axis=None</em>, <em>y_axis=None</em>, <em>n_xticks=5</em>, <em>n_yticks=5</em>, <em>fmin=None</em>, <em>fmax=None</em>, <em>bins_per_octave=12</em>, <em>tmin=16</em>, <em>tmax=240</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/librosa/display.html#specshow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#librosa.display.specshow" title="Permalink to this definition">¶</a></dt>
+<tt class="descclassname">librosa.display.</tt><tt class="descname">specshow</tt><big>(</big><em>data</em>, <em>sr=22050</em>, <em>hop_length=512</em>, <em>x_axis=None</em>, <em>y_axis=None</em>, <em>n_xticks=5</em>, <em>n_yticks=5</em>, <em>fmin=None</em>, <em>fmax=None</em>, <em>bins_per_octave=12</em>, <em>tmin=16</em>, <em>tmax=240</em>, <em>freq_fmt='Hz'</em>, <em>time_fmt=None</em>, <em>**kwargs</em><big>)</big><a class="reference internal" href="../_modules/librosa/display.html#specshow"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#librosa.display.specshow" title="Permalink to this definition">¶</a></dt>
 <dd><p>Display a spectrogram/chromagram/cqt/etc.</p>
-<p>Functions as a drop-in replacement for <a class="reference external" href="http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.imshow" title="(in Matplotlib v1.4.3)"><tt class="xref py py-obj docutils literal"><span class="pre">matplotlib.pyplot.imshow</span></tt></a>,
+<p>Functions as a drop-in replacement for <a class="reference external" href="http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.imshow" title="(in Matplotlib v1.5.1)"><tt class="xref py py-obj docutils literal"><span class="pre">matplotlib.pyplot.imshow</span></tt></a>,
 but with useful defaults.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
@@ -461,15 +462,25 @@ it is set by default to <em class="xref py py-obj">note_to_hz(&#8216;C1&#8217;)<
 <div><p>Minimum and maximum tempi displayed when <em class="xref py py-obj">_axis=&#8217;tempo&#8217;</em>,
 as measured in beats per minute.</p>
 </div></blockquote>
+<p><strong>freq_fmt</strong> : None or str</p>
+<blockquote>
+<div><p>Formatting for frequency axes.  &#8216;Hz&#8217;, by default.</p>
+<p>See <tt class="xref py py-obj docutils literal"><span class="pre">frequency_ticks</span></tt>.</p>
+</div></blockquote>
+<p><strong>time_fmt</strong> : None or str</p>
+<blockquote>
+<div><p>Formatting for time axes.  None (automatic) by default.</p>
+<p>See <a class="reference internal" href="librosa.display.time_ticks.html#librosa.display.time_ticks" title="librosa.display.time_ticks"><tt class="xref py py-obj docutils literal"><span class="pre">time_ticks</span></tt></a>.</p>
+</div></blockquote>
 <p><strong>kwargs</strong> : additional keyword arguments</p>
 <blockquote>
-<div><p>Arguments passed through to <a class="reference external" href="http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.imshow" title="(in Matplotlib v1.4.3)"><tt class="xref py py-obj docutils literal"><span class="pre">matplotlib.pyplot.imshow</span></tt></a>.</p>
+<div><p>Arguments passed through to <a class="reference external" href="http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.imshow" title="(in Matplotlib v1.5.1)"><tt class="xref py py-obj docutils literal"><span class="pre">matplotlib.pyplot.imshow</span></tt></a>.</p>
 </div></blockquote>
 </td>
 </tr>
-<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>image</strong> : <a class="reference external" href="http://matplotlib.sourceforge.net/api/image_api.html#matplotlib.image.AxesImage" title="(in Matplotlib v1.4.3)"><tt class="xref py py-obj docutils literal"><span class="pre">matplotlib.image.AxesImage</span></tt></a></p>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>image</strong> : <a class="reference external" href="http://matplotlib.sourceforge.net/api/image_api.html#matplotlib.image.AxesImage" title="(in Matplotlib v1.5.1)"><tt class="xref py py-obj docutils literal"><span class="pre">matplotlib.image.AxesImage</span></tt></a></p>
 <blockquote class="last">
-<div><p>As returned from <a class="reference external" href="http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.imshow" title="(in Matplotlib v1.4.3)"><tt class="xref py py-obj docutils literal"><span class="pre">matplotlib.pyplot.imshow</span></tt></a>.</p>
+<div><p>As returned from <a class="reference external" href="http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.imshow" title="(in Matplotlib v1.5.1)"><tt class="xref py py-obj docutils literal"><span class="pre">matplotlib.pyplot.imshow</span></tt></a>.</p>
 </div></blockquote>
 </td>
 </tr>
@@ -482,8 +493,10 @@ as measured in beats per minute.</p>
 <dd>Automatic colormap detection</dd>
 <dt><a class="reference internal" href="librosa.display.time_ticks.html#librosa.display.time_ticks" title="librosa.display.time_ticks"><tt class="xref py py-obj docutils literal"><span class="pre">time_ticks</span></tt></a></dt>
 <dd>time-formatted tick marks</dd>
+<dt><tt class="xref py py-obj docutils literal"><span class="pre">frequency_ticks</span></tt></dt>
+<dd>frequency-formatted tick marks</dd>
 </dl>
-<p class="last"><a class="reference external" href="http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.imshow" title="(in Matplotlib v1.4.3)"><tt class="xref py py-obj docutils literal"><span class="pre">matplotlib.pyplot.imshow</span></tt></a></p>
+<p class="last"><a class="reference external" href="http://matplotlib.sourceforge.net/api/pyplot_api.html#matplotlib.pyplot.imshow" title="(in Matplotlib v1.5.1)"><tt class="xref py py-obj docutils literal"><span class="pre">matplotlib.pyplot.imshow</span></tt></a></p>
 </div>
 <p class="rubric">Examples</p>
 <p>Visualize an STFT power spectrum</p>
@@ -580,7 +593,7 @@ as measured in beats per minute.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2015, librosa development team.
+        &copy; Copyright 2016, librosa development team.
     </p>
   </div>
   Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
@@ -601,7 +614,7 @@ as measured in beats per minute.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.4.1',
+            VERSION:'0.4.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

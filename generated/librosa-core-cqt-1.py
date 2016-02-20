@@ -20,7 +20,7 @@ C
 # [  1.042e-07,   4.087e-07, ...,   1.612e-07,   1.928e-07],
 # [  2.363e-07,   5.329e-07, ...,   1.294e-07,   1.611e-07]])
 
-# Using a higher resolution
+# Using a higher frequency resolution
 
 C = librosa.cqt(y, sr=sr, fmin=librosa.note_to_hz('C2'),
                 n_bins=60 * 2, bins_per_octave=12 * 2)

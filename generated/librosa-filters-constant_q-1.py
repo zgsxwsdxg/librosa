@@ -1,6 +1,6 @@
-# Use a longer window for each filter
+# Use a shorter window for each filter
 
-basis, lengths = librosa.filters.constant_q(22050, resolution=3)
+basis, lengths = librosa.filters.constant_q(22050, filter_scale=0.5)
 
 # Plot one octave of filters in time and frequency
 
