@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Tutorial &mdash; librosa 0.4.2 documentation</title>
+  <title>Tutorial &mdash; librosa 0.4.3 documentation</title>
   
 
   
@@ -30,7 +30,7 @@
   
 
   
-    <link rel="top" title="librosa 0.4.2 documentation" href="index.html"/>
+    <link rel="top" title="librosa 0.4.3 documentation" href="index.html"/>
         <link rel="next" title="Core IO and DSP" href="core.html"/>
         <link rel="prev" title="Installation instructions" href="install.html"/> 
 
@@ -45,17 +45,27 @@
 
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-nav-search">
-        
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
 
-        
-          <a href="index.html" class="icon icon-home"> librosa
-        
+          
+            <a href="index.html" class="icon icon-home"> librosa
+          
 
-        
-        </a>
+          
+          </a>
 
-        
+          
+            
+            
+              <div class="version">
+                0.4
+              </div>
+            
+          
+
+          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -64,22 +74,16 @@
   </form>
 </div>
 
-        
-      </div>
+          
+        </div>
 
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
-          
-              <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="install.html">Installation instructions</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="install.html#additional-notes">Additional notes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="install.html#additional-notes-for-os-x">Additional notes for OS X</a></li>
-<li class="toctree-l2"><a class="reference internal" href="install.html#libsamplerate">libsamplerate</a></li>
-<li class="toctree-l2"><a class="reference internal" href="install.html#ffmpeg">ffmpeg</a></li>
-</ul>
-</li>
-<li class="toctree-l1 current"><a class="current reference internal" href="">Tutorial</a><ul>
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation instructions</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Tutorial</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#overview">Overview</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#quickstart">Quickstart</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#advanced-usage">Advanced usage</a></li>
@@ -88,264 +92,30 @@
 </li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="core.html">Core IO and DSP</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="core.html#audio-processing">Audio processing</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.load.html">librosa.core.load</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.to_mono.html">librosa.core.to_mono</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.resample.html">librosa.core.resample</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.get_duration.html">librosa.core.get_duration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.autocorrelate.html">librosa.core.autocorrelate</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.zero_crossings.html">librosa.core.zero_crossings</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.clicks.html">librosa.core.clicks</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="core.html#spectral-representations">Spectral representations</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.stft.html">librosa.core.stft</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.istft.html">librosa.core.istft</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.ifgram.html">librosa.core.ifgram</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.cqt.html">librosa.core.cqt</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.hybrid_cqt.html">librosa.core.hybrid_cqt</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.pseudo_cqt.html">librosa.core.pseudo_cqt</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.fmt.html">librosa.core.fmt</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.phase_vocoder.html">librosa.core.phase_vocoder</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.magphase.html">librosa.core.magphase</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.logamplitude.html">librosa.core.logamplitude</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.perceptual_weighting.html">librosa.core.perceptual_weighting</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.A_weighting.html">librosa.core.A_weighting</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="core.html#time-and-frequency-conversion">Time and frequency conversion</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.frames_to_samples.html">librosa.core.frames_to_samples</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.frames_to_time.html">librosa.core.frames_to_time</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.samples_to_frames.html">librosa.core.samples_to_frames</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.samples_to_time.html">librosa.core.samples_to_time</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.time_to_frames.html">librosa.core.time_to_frames</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.time_to_samples.html">librosa.core.time_to_samples</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.hz_to_note.html">librosa.core.hz_to_note</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.hz_to_midi.html">librosa.core.hz_to_midi</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.midi_to_hz.html">librosa.core.midi_to_hz</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.midi_to_note.html">librosa.core.midi_to_note</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.note_to_hz.html">librosa.core.note_to_hz</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.note_to_midi.html">librosa.core.note_to_midi</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.hz_to_mel.html">librosa.core.hz_to_mel</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.hz_to_octs.html">librosa.core.hz_to_octs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.mel_to_hz.html">librosa.core.mel_to_hz</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.octs_to_hz.html">librosa.core.octs_to_hz</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.fft_frequencies.html">librosa.core.fft_frequencies</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.cqt_frequencies.html">librosa.core.cqt_frequencies</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.mel_frequencies.html">librosa.core.mel_frequencies</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="core.html#pitch-and-tuning">Pitch and tuning</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.estimate_tuning.html">librosa.core.estimate_tuning</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.pitch_tuning.html">librosa.core.pitch_tuning</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.piptrack.html">librosa.core.piptrack</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="core.html#deprecated">Deprecated</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.core.ifptrack.html">librosa.core.ifptrack</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="display.html">Display</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="generated/librosa.display.specshow.html">librosa.display.specshow</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/librosa.display.waveplot.html">librosa.display.waveplot</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/librosa.display.time_ticks.html">librosa.display.time_ticks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/librosa.display.cmap.html">librosa.display.cmap</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="feature.html">Feature extraction</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="feature.html#spectral-features">Spectral features</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.feature.chroma_stft.html">librosa.feature.chroma_stft</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.feature.chroma_cqt.html">librosa.feature.chroma_cqt</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.feature.melspectrogram.html">librosa.feature.melspectrogram</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.feature.mfcc.html">librosa.feature.mfcc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.feature.rmse.html">librosa.feature.rmse</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.feature.spectral_centroid.html">librosa.feature.spectral_centroid</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.feature.spectral_bandwidth.html">librosa.feature.spectral_bandwidth</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.feature.spectral_contrast.html">librosa.feature.spectral_contrast</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.feature.spectral_rolloff.html">librosa.feature.spectral_rolloff</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.feature.poly_features.html">librosa.feature.poly_features</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.feature.tonnetz.html">librosa.feature.tonnetz</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.feature.zero_crossing_rate.html">librosa.feature.zero_crossing_rate</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="feature.html#rhythm-features">Rhythm features</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.feature.tempogram.html">librosa.feature.tempogram</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="feature.html#feature-manipulation">Feature manipulation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.feature.delta.html">librosa.feature.delta</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.feature.stack_memory.html">librosa.feature.stack_memory</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="feature.html#deprecated">Deprecated</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.feature.logfsgram.html">librosa.feature.logfsgram</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.feature.sync.html">librosa.feature.sync</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="onset.html">Onset detection</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="generated/librosa.onset.onset_detect.html">librosa.onset.onset_detect</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/librosa.onset.onset_strength.html">librosa.onset.onset_strength</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/librosa.onset.onset_strength_multi.html">librosa.onset.onset_strength_multi</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="beat.html">Beat and tempo</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="generated/librosa.beat.beat_track.html">librosa.beat.beat_track</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/librosa.beat.estimate_tempo.html">librosa.beat.estimate_tempo</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="decompose.html">Spectrogram decomposition</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="generated/librosa.decompose.decompose.html">librosa.decompose.decompose</a></li>
-<li class="toctree-l2"><a class="reference internal" href="generated/librosa.decompose.hpss.html">librosa.decompose.hpss</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="effects.html">Effects</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="effects.html#harmonic-percussive-source-separation">Harmonic-percussive source separation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.effects.hpss.html">librosa.effects.hpss</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.effects.harmonic.html">librosa.effects.harmonic</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.effects.percussive.html">librosa.effects.percussive</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="effects.html#time-and-frequency">Time and frequency</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.effects.time_stretch.html">librosa.effects.time_stretch</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.effects.pitch_shift.html">librosa.effects.pitch_shift</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="effects.html#miscellaneous">Miscellaneous</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.effects.remix.html">librosa.effects.remix</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="output.html">Output</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="output.html#text-output">Text output</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.output.annotation.html">librosa.output.annotation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.output.times_csv.html">librosa.output.times_csv</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="output.html#audio-output">Audio output</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.output.write_wav.html">librosa.output.write_wav</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="output.html#deprecated">Deprecated</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.output.frames_csv.html">librosa.output.frames_csv</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="segment.html">Temporal segmentation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="segment.html#recurrence-and-self-similarity">Recurrence and self-similarity</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.segment.recurrence_matrix.html">librosa.segment.recurrence_matrix</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.segment.recurrence_to_lag.html">librosa.segment.recurrence_to_lag</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.segment.lag_to_recurrence.html">librosa.segment.lag_to_recurrence</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.segment.timelag_filter.html">librosa.segment.timelag_filter</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="segment.html#temporal-clustering">Temporal clustering</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.segment.agglomerative.html">librosa.segment.agglomerative</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.segment.subsegment.html">librosa.segment.subsegment</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="segment.html#deprecated">Deprecated</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.segment.structure_feature.html">librosa.segment.structure_feature</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="util.html">Utilities</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="util.html#array-operations">Array operations</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.util.frame.html">librosa.util.frame</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.util.pad_center.html">librosa.util.pad_center</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.util.fix_length.html">librosa.util.fix_length</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.util.fix_frames.html">librosa.util.fix_frames</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.util.index_to_slice.html">librosa.util.index_to_slice</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.util.sync.html">librosa.util.sync</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.util.axis_sort.html">librosa.util.axis_sort</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.util.normalize.html">librosa.util.normalize</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.util.sparsify_rows.html">librosa.util.sparsify_rows</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.util.buf_to_float.html">librosa.util.buf_to_float</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="util.html#matching">Matching</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.util.match_intervals.html">librosa.util.match_intervals</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.util.match_events.html">librosa.util.match_events</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="util.html#miscellaneous">Miscellaneous</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.util.localmax.html">librosa.util.localmax</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.util.peak_pick.html">librosa.util.peak_pick</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="util.html#input-validation">Input validation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.util.valid_audio.html">librosa.util.valid_audio</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.util.valid_int.html">librosa.util.valid_int</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.util.valid_intervals.html">librosa.util.valid_intervals</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="util.html#file-operations">File operations</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.util.example_audio_file.html">librosa.util.example_audio_file</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.util.find_files.html">librosa.util.find_files</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="util.html#deprecated">Deprecated</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.util.FeatureExtractor.html">librosa.util.FeatureExtractor</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.util.buf_to_int.html">librosa.util.buf_to_int</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="core.html">Core IO and DSP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="display.html">Display</a></li>
+<li class="toctree-l1"><a class="reference internal" href="feature.html">Feature extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="onset.html">Onset detection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="beat.html">Beat and tempo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="decompose.html">Spectrogram decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="effects.html">Effects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="output.html">Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="segment.html">Temporal segmentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="util.html">Utilities</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="filters.html">Filters</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="filters.html#filter-bank-construction">Filter bank construction</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.filters.dct.html">librosa.filters.dct</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.filters.mel.html">librosa.filters.mel</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.filters.chroma.html">librosa.filters.chroma</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.filters.constant_q.html">librosa.filters.constant_q</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="filters.html#miscellaneous">Miscellaneous</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.filters.constant_q_lengths.html">librosa.filters.constant_q_lengths</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.filters.cq_to_chroma.html">librosa.filters.cq_to_chroma</a></li>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.filters.window_bandwidth.html">librosa.filters.window_bandwidth</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="filters.html#deprecated">Deprecated</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="generated/librosa.filters.logfrequency.html">librosa.filters.logfrequency</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="cache.html">Caching</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="cache.html#enabling-the-cache">Enabling the cache</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cache.html#cache-configuration">Cache configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="cache.html#example">Example</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="filters.html">Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="cache.html">Caching</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changes</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#v0-4-2">v0.4.2</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#v0-4-1">v0.4.1</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#v0-4-0">v0.4.0</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#v0-3-1">v0.3.1</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#v0-3-0">v0.3.0</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#v0-2-1">v0.2.1</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#v0-2-0">v0.2.0</a></li>
-<li class="toctree-l2"><a class="reference internal" href="changelog.html#v0-1-0">v0.1.0</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="glossary.html">Glossary</a></li>
 </ul>
 
+            
           
-        
+        </div>
       </div>
-      &nbsp;
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
@@ -360,7 +130,13 @@
       
       <div class="wy-nav-content">
         <div class="rst-content">
-          <div role="navigation" aria-label="breadcrumbs navigation">
+          
+
+ 
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="index.html">Docs</a> &raquo;</li>
       
@@ -375,7 +151,8 @@
   </ul>
   <hr/>
 </div>
-          <div role="main" class="document">
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
             
   <div class="section" id="tutorial">
 <h1>Tutorial<a class="headerlink" href="#tutorial" title="Permalink to this headline">¶</a></h1>
@@ -390,22 +167,22 @@ package.  We will assume basic familiarity with Python and NumPy/SciPy.</p>
 <li><p class="first">librosa</p>
 <ul>
 <li><dl class="first docutils">
-<dt><a class="reference internal" href="beat.html#beat"><em>librosa.beat</em></a></dt>
+<dt><a class="reference internal" href="beat.html#beat"><span class="std std-ref">librosa.beat</span></a></dt>
 <dd><p class="first last">Functions for estimating tempo and detecting beat events.</p>
 </dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt><a class="reference internal" href="core.html#core"><em>librosa.core</em></a></dt>
+<dt><a class="reference internal" href="core.html#core"><span class="std std-ref">librosa.core</span></a></dt>
 <dd><p class="first last">Core functionality includes functions to load audio from disk, compute various
 spectrogram representations, and a variety of commonly used tools for
 music analysis.  For convenience, all functionality in this submodule is
-directly accessible from the top-level <tt class="docutils literal"><span class="pre">librosa.*</span></tt> namespace.</p>
+directly accessible from the top-level <code class="docutils literal"><span class="pre">librosa.*</span></code> namespace.</p>
 </dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt><a class="reference internal" href="decompose.html#decompose"><em>librosa.decompose</em></a></dt>
+<dt><a class="reference internal" href="decompose.html#decompose"><span class="std std-ref">librosa.decompose</span></a></dt>
 <dd><p class="first last">Functions for harmonic-percussive source separation (HPSS) and generic
 spectrogram decomposition using matrix decomposition methods implemented in
 <em>scikit-learn</em>.</p>
@@ -413,13 +190,13 @@ spectrogram decomposition using matrix decomposition methods implemented in
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt><a class="reference internal" href="display.html#display"><em>librosa.display</em></a></dt>
-<dd><p class="first last">Visualization and display routines using <tt class="xref py py-obj docutils literal"><span class="pre">matplotlib</span></tt>.</p>
+<dt><a class="reference internal" href="display.html#display"><span class="std std-ref">librosa.display</span></a></dt>
+<dd><p class="first last">Visualization and display routines using <code class="xref py py-obj docutils literal"><span class="pre">matplotlib</span></code>.</p>
 </dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt><a class="reference internal" href="effects.html#effects"><em>librosa.effects</em></a></dt>
+<dt><a class="reference internal" href="effects.html#effects"><span class="std std-ref">librosa.effects</span></a></dt>
 <dd><p class="first last">Time-domain audio processing, such as pitch shifting and time stretching.
 This submodule also provides time-domain wrappers for the <em class="xref py py-obj">decompose</em>
 submodule.</p>
@@ -427,7 +204,7 @@ submodule.</p>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt><a class="reference internal" href="feature.html#feature"><em>librosa.feature</em></a></dt>
+<dt><a class="reference internal" href="feature.html#feature"><span class="std std-ref">librosa.feature</span></a></dt>
 <dd><p class="first last">Feature extraction and manipulation.  This includes low-level feature
 extraction, such as chromagrams, pseudo-constant-Q (log-frequency) transforms,
 Mel spectrogram, MFCC, and tuning estimation.  Also provided are feature
@@ -437,26 +214,26 @@ event-synchronous feature alignment.</p>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt><a class="reference internal" href="filters.html#filters"><em>librosa.filters</em></a></dt>
+<dt><a class="reference internal" href="filters.html#filters"><span class="std std-ref">librosa.filters</span></a></dt>
 <dd><p class="first last">Filter-bank generation (chroma, pseudo-CQT, CQT, etc.).  These are primarily
 internal functions used by other parts of <em>librosa</em>.</p>
 </dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt><a class="reference internal" href="onset.html#onset"><em>librosa.onset</em></a></dt>
+<dt><a class="reference internal" href="onset.html#onset"><span class="std std-ref">librosa.onset</span></a></dt>
 <dd><p class="first last">Onset detection and onset strength computation.</p>
 </dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt><a class="reference internal" href="output.html#output"><em>librosa.output</em></a></dt>
+<dt><a class="reference internal" href="output.html#output"><span class="std std-ref">librosa.output</span></a></dt>
 <dd><p class="first last">Text- and wav-file output.</p>
 </dd>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt><a class="reference internal" href="segment.html#segment"><em>librosa.segment</em></a></dt>
+<dt><a class="reference internal" href="segment.html#segment"><span class="std std-ref">librosa.segment</span></a></dt>
 <dd><p class="first last">Functions useful for structural segmentation, such as recurrence matrix
 construction, time-lag representation, and sequentially constrained
 clustering.</p>
@@ -464,7 +241,7 @@ clustering.</p>
 </dl>
 </li>
 <li><dl class="first docutils">
-<dt><a class="reference internal" href="util.html#util"><em>librosa.util</em></a></dt>
+<dt><a class="reference internal" href="util.html#util"><span class="std std-ref">librosa.util</span></a></dt>
 <dd><p class="first last">Helper utilities (normalization, padding, centering, etc.)</p>
 </dd>
 </dl>
@@ -497,68 +274,68 @@ clustering.</p>
 18
 19
 20
-21</pre></div></td><td class="code"><div class="highlight"><pre><span class="c"># Beat tracking example</span>
+21</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># Beat tracking example</span>
 <span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
 <span class="kn">import</span> <span class="nn">librosa</span>
 
-<span class="c"># 1. Get the file path to the included audio example</span>
+<span class="c1"># 1. Get the file path to the included audio example</span>
 <span class="n">filename</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">example_audio_file</span><span class="p">()</span>
 
-<span class="c"># 2. Load the audio as a waveform `y`</span>
-<span class="c">#    Store the sampling rate as `sr`</span>
+<span class="c1"># 2. Load the audio as a waveform `y`</span>
+<span class="c1">#    Store the sampling rate as `sr`</span>
 <span class="n">y</span><span class="p">,</span> <span class="n">sr</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
 
-<span class="c"># 3. Run the default beat tracker</span>
+<span class="c1"># 3. Run the default beat tracker</span>
 <span class="n">tempo</span><span class="p">,</span> <span class="n">beat_frames</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">beat</span><span class="o">.</span><span class="n">beat_track</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">)</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s">&#39;Estimated tempo: {:.2f} beats per minute&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tempo</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Estimated tempo: {:.2f} beats per minute&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tempo</span><span class="p">))</span>
 
-<span class="c"># 4. Convert the frame indices of beat events into timestamps</span>
+<span class="c1"># 4. Convert the frame indices of beat events into timestamps</span>
 <span class="n">beat_times</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">frames_to_time</span><span class="p">(</span><span class="n">beat_frames</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">)</span>
 
-<span class="k">print</span><span class="p">(</span><span class="s">&#39;Saving output to beat_times.csv&#39;</span><span class="p">)</span>
-<span class="n">librosa</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">times_csv</span><span class="p">(</span><span class="s">&#39;beat_times.csv&#39;</span><span class="p">,</span> <span class="n">beat_times</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="s1">&#39;Saving output to beat_times.csv&#39;</span><span class="p">)</span>
+<span class="n">librosa</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">times_csv</span><span class="p">(</span><span class="s1">&#39;beat_times.csv&#39;</span><span class="p">,</span> <span class="n">beat_times</span><span class="p">)</span>
 </pre></div>
 </td></tr></table></div>
 <p>The first step of the program:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">filename</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">example_audio_file</span><span class="p">()</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">filename</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">example_audio_file</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>gets the path to the audio example file included with <em>librosa</em>.  After this step,
-<tt class="docutils literal"><span class="pre">filename</span></tt> will be a string variable containing the path to the example audio file.
+<code class="docutils literal"><span class="pre">filename</span></code> will be a string variable containing the path to the example audio file.
 The example is encoded in OGG Vorbis format, so you will need the appropriate codec
 installed for <a class="reference external" href="https://github.com/sampsyo/audioread">audioread</a>.</p>
 <p>The second step:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">y</span><span class="p">,</span> <span class="n">sr</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">y</span><span class="p">,</span> <span class="n">sr</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>loads and decodes the audio as a <a class="reference internal" href="glossary.html#term-time-series"><em class="xref std std-term">time series</em></a> <tt class="docutils literal"><span class="pre">y</span></tt>, represented as a one-dimensional
-NumPy floating point array.  The variable <tt class="docutils literal"><span class="pre">sr</span></tt> contains the <a class="reference internal" href="glossary.html#term-sampling-rate"><em class="xref std std-term">sampling rate</em></a> of
-<tt class="docutils literal"><span class="pre">y</span></tt>, that is, the number of samples per second of audio.  By default, all audio is
+<p>loads and decodes the audio as a <a class="reference internal" href="glossary.html#term-time-series"><span class="xref std std-term">time series</span></a> <code class="docutils literal"><span class="pre">y</span></code>, represented as a one-dimensional
+NumPy floating point array.  The variable <code class="docutils literal"><span class="pre">sr</span></code> contains the <a class="reference internal" href="glossary.html#term-sampling-rate"><span class="xref std std-term">sampling rate</span></a> of
+<code class="docutils literal"><span class="pre">y</span></code>, that is, the number of samples per second of audio.  By default, all audio is
 mixed to mono and resampled to 22050 Hz at load time.  This behavior can be overridden
-by supplying additional arguments to <tt class="docutils literal"><span class="pre">librosa.load()</span></tt>.</p>
+by supplying additional arguments to <code class="docutils literal"><span class="pre">librosa.load()</span></code>.</p>
 <p>Next, we run the beat tracker:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">tempo</span><span class="p">,</span> <span class="n">beat_frames</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">beat</span><span class="o">.</span><span class="n">beat_track</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">tempo</span><span class="p">,</span> <span class="n">beat_frames</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">beat</span><span class="o">.</span><span class="n">beat_track</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>The output of the beat tracker is an estimate of the tempo (in beats per minute),
 and an array of frame numbers corresponding to detected beat events.</p>
-<p><a class="reference internal" href="glossary.html#term-frame"><em class="xref std std-term">Frames</em></a> here correspond to short windows of the signal (<tt class="docutils literal"><span class="pre">y</span></tt>), each
-separated by <tt class="docutils literal"><span class="pre">hop_length</span> <span class="pre">=</span> <span class="pre">512</span></tt> samples.  Since v0.3, <em>librosa</em> uses centered frames, so
-that the <em>k</em>th frame is centered around sample <tt class="docutils literal"><span class="pre">k</span> <span class="pre">*</span> <span class="pre">hop_length</span></tt>.</p>
-<p>The next operation converts the frame numbers <tt class="docutils literal"><span class="pre">beat_frames</span></tt> into timings:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">beat_times</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">frames_to_time</span><span class="p">(</span><span class="n">beat_frames</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">)</span>
+<p><a class="reference internal" href="glossary.html#term-frame"><span class="xref std std-term">Frames</span></a> here correspond to short windows of the signal (<code class="docutils literal"><span class="pre">y</span></code>), each
+separated by <code class="docutils literal"><span class="pre">hop_length</span> <span class="pre">=</span> <span class="pre">512</span></code> samples.  Since v0.3, <em>librosa</em> uses centered frames, so
+that the <em>k</em>th frame is centered around sample <code class="docutils literal"><span class="pre">k</span> <span class="pre">*</span> <span class="pre">hop_length</span></code>.</p>
+<p>The next operation converts the frame numbers <code class="docutils literal"><span class="pre">beat_frames</span></code> into timings:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">beat_times</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">frames_to_time</span><span class="p">(</span><span class="n">beat_frames</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Now, <tt class="docutils literal"><span class="pre">beat_times</span></tt> will be an array of timestamps (in seconds) corresponding to
+<p>Now, <code class="docutils literal"><span class="pre">beat_times</span></code> will be an array of timestamps (in seconds) corresponding to
 detected beat events.</p>
 <p>Finally, we can store the detected beat timestamps as a comma-separated values (CSV)
 file:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">librosa</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">times_csv</span><span class="p">(</span><span class="s">&#39;beat_times.csv&#39;</span><span class="p">,</span> <span class="n">beat_times</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">librosa</span><span class="o">.</span><span class="n">output</span><span class="o">.</span><span class="n">times_csv</span><span class="p">(</span><span class="s1">&#39;beat_times.csv&#39;</span><span class="p">,</span> <span class="n">beat_times</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The contents of <tt class="docutils literal"><span class="pre">beat_times.csv</span></tt> should look something like this:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="mf">7.43</span>
+<p>The contents of <code class="docutils literal"><span class="pre">beat_times.csv</span></code> should look something like this:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="mf">7.43</span>
 <span class="mf">8.29</span>
 <span class="mf">9.218</span>
 <span class="mf">10.124</span>
@@ -609,99 +386,99 @@ multiple spectral features, and beat-synchronous feature aggregation.</p>
 34
 35
 36
-37</pre></div></td><td class="code"><div class="highlight"><pre><span class="c"># Feature extraction example</span>
+37</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="c1"># Feature extraction example</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">librosa</span>
 
-<span class="c"># Load the example clip</span>
+<span class="c1"># Load the example clip</span>
 <span class="n">y</span><span class="p">,</span> <span class="n">sr</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">librosa</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">example_audio_file</span><span class="p">())</span>
 
-<span class="c"># Separate harmonics and percussives into two waveforms</span>
+<span class="c1"># Separate harmonics and percussives into two waveforms</span>
 <span class="n">y_harmonic</span><span class="p">,</span> <span class="n">y_percussive</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">hpss</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 
-<span class="c"># Beat track on the percussive signal</span>
+<span class="c1"># Beat track on the percussive signal</span>
 <span class="n">tempo</span><span class="p">,</span> <span class="n">beat_frames</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">beat</span><span class="o">.</span><span class="n">beat_track</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y_percussive</span><span class="p">,</span>
                                              <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">)</span>
 
-<span class="c"># Compute MFCC features from the raw signal</span>
+<span class="c1"># Compute MFCC features from the raw signal</span>
 <span class="n">mfcc</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">mfcc</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="n">hop_length</span><span class="p">,</span> <span class="n">n_mfcc</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
 
-<span class="c"># And the first-order differences (delta features)</span>
+<span class="c1"># And the first-order differences (delta features)</span>
 <span class="n">mfcc_delta</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">delta</span><span class="p">(</span><span class="n">mfcc</span><span class="p">)</span>
 
-<span class="c"># Stack and synchronize between beat events</span>
-<span class="c"># This time, we&#39;ll use the mean value (default) instead of median</span>
+<span class="c1"># Stack and synchronize between beat events</span>
+<span class="c1"># This time, we&#39;ll use the mean value (default) instead of median</span>
 <span class="n">beat_mfcc_delta</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">mfcc</span><span class="p">,</span> <span class="n">mfcc_delta</span><span class="p">]),</span>
                                        <span class="n">beat_frames</span><span class="p">)</span>
 
-<span class="c"># Compute chroma features from the harmonic signal</span>
+<span class="c1"># Compute chroma features from the harmonic signal</span>
 <span class="n">chromagram</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">chroma_cqt</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y_harmonic</span><span class="p">,</span>
                                         <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">)</span>
 
-<span class="c"># Aggregate chroma features between beat events</span>
-<span class="c"># We&#39;ll use the median value of each feature between beat frames</span>
+<span class="c1"># Aggregate chroma features between beat events</span>
+<span class="c1"># We&#39;ll use the median value of each feature between beat frames</span>
 <span class="n">beat_chroma</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span><span class="n">chromagram</span><span class="p">,</span>
                                    <span class="n">beat_frames</span><span class="p">,</span>
                                    <span class="n">aggregate</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">)</span>
 
-<span class="c"># Finally, stack all beat-synchronous features together</span>
+<span class="c1"># Finally, stack all beat-synchronous features together</span>
 <span class="n">beat_features</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">beat_chroma</span><span class="p">,</span> <span class="n">beat_mfcc_delta</span><span class="p">])</span>
 </pre></div>
 </td></tr></table></div>
-<p>This example builds on tools we&#8217;ve already covered in the <a class="reference internal" href="#quickstart"><em>quickstart example</em></a>, so here we&#8217;ll focus just on the new parts.</p>
-<p>The first difference is the use of the <a class="reference internal" href="effects.html#effects"><em>effects module</em></a> for time-series
+<p>This example builds on tools we&#8217;ve already covered in the <a class="reference internal" href="#quickstart"><span class="std std-ref">quickstart example</span></a>, so here we&#8217;ll focus just on the new parts.</p>
+<p>The first difference is the use of the <a class="reference internal" href="effects.html#effects"><span class="std std-ref">effects module</span></a> for time-series
 harmonic-percussive separation:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">y_harmonic</span><span class="p">,</span> <span class="n">y_percussive</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">hpss</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">y_harmonic</span><span class="p">,</span> <span class="n">y_percussive</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">effects</span><span class="o">.</span><span class="n">hpss</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The result of this line is that the time series <tt class="docutils literal"><span class="pre">y</span></tt> has been separated into two time
+<p>The result of this line is that the time series <code class="docutils literal"><span class="pre">y</span></code> has been separated into two time
 series, containing the harmonic (tonal) and percussive (transient) portions of the
-signal.  Each of <tt class="docutils literal"><span class="pre">y_harmonic</span></tt> and <tt class="docutils literal"><span class="pre">y_percussive</span></tt> have the same shape and duration
-as <tt class="docutils literal"><span class="pre">y</span></tt>.</p>
+signal.  Each of <code class="docutils literal"><span class="pre">y_harmonic</span></code> and <code class="docutils literal"><span class="pre">y_percussive</span></code> have the same shape and duration
+as <code class="docutils literal"><span class="pre">y</span></code>.</p>
 <p>The motivation for this kind of operation is two-fold: first, percussive elements
 tend to be stronger indicators of rhythmic content, and can help provide more stable
 beat tracking results; second, percussive elements can pollute tonal feature
 representations (such as chroma) by contributing energy across all frequency bands, so
 we&#8217;d be better off without them.</p>
-<p>Next, we introduce the <a class="reference internal" href="feature.html#feature"><em>feature module</em></a> and extract the Mel-frequency
-cepstral coefficients from the raw signal <tt class="docutils literal"><span class="pre">y</span></tt>:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">mfcc</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">mfcc</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="n">hop_length</span><span class="p">,</span> <span class="n">n_mfcc</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
+<p>Next, we introduce the <a class="reference internal" href="feature.html#feature"><span class="std std-ref">feature module</span></a> and extract the Mel-frequency
+cepstral coefficients from the raw signal <code class="docutils literal"><span class="pre">y</span></code>:</p>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">mfcc</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">mfcc</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="n">hop_length</span><span class="p">,</span> <span class="n">n_mfcc</span><span class="o">=</span><span class="mi">13</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The output of this function is the matrix <tt class="docutils literal"><span class="pre">mfcc</span></tt>, which is an <em>numpy.ndarray</em> of
-size <tt class="docutils literal"><span class="pre">(n_mfcc,</span> <span class="pre">T)</span></tt> (where <tt class="docutils literal"><span class="pre">T</span></tt> denotes the track duration in frames).  Note that we
-use the same <tt class="docutils literal"><span class="pre">hop_length</span></tt> here as in the beat tracker, so the detected <tt class="docutils literal"><span class="pre">beat_frames</span></tt>
-values correspond to columns of <tt class="docutils literal"><span class="pre">mfcc</span></tt>.</p>
-<p>The first type of feature manipulation we introduce is <tt class="docutils literal"><span class="pre">delta</span></tt>, which computes
+<p>The output of this function is the matrix <code class="docutils literal"><span class="pre">mfcc</span></code>, which is an <em>numpy.ndarray</em> of
+size <code class="docutils literal"><span class="pre">(n_mfcc,</span> <span class="pre">T)</span></code> (where <code class="docutils literal"><span class="pre">T</span></code> denotes the track duration in frames).  Note that we
+use the same <code class="docutils literal"><span class="pre">hop_length</span></code> here as in the beat tracker, so the detected <code class="docutils literal"><span class="pre">beat_frames</span></code>
+values correspond to columns of <code class="docutils literal"><span class="pre">mfcc</span></code>.</p>
+<p>The first type of feature manipulation we introduce is <code class="docutils literal"><span class="pre">delta</span></code>, which computes
 (smoothed) first-order differences among columns of its input:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">mfcc_delta</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">delta</span><span class="p">(</span><span class="n">mfcc</span><span class="p">)</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">mfcc_delta</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">delta</span><span class="p">(</span><span class="n">mfcc</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>The resulting matrix <tt class="docutils literal"><span class="pre">mfcc_delta</span></tt> has the same shape as the input <tt class="docutils literal"><span class="pre">mfcc</span></tt>.</p>
-<p>The second type of feature manipulation is <tt class="docutils literal"><span class="pre">sync</span></tt>, which aggregates columns of its
+<p>The resulting matrix <code class="docutils literal"><span class="pre">mfcc_delta</span></code> has the same shape as the input <code class="docutils literal"><span class="pre">mfcc</span></code>.</p>
+<p>The second type of feature manipulation is <code class="docutils literal"><span class="pre">sync</span></code>, which aggregates columns of its
 input between sample indices (e.g., beat frames):</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">beat_mfcc_delta</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">mfcc</span><span class="p">,</span> <span class="n">mfcc_delta</span><span class="p">]),</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">beat_mfcc_delta</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">mfcc</span><span class="p">,</span> <span class="n">mfcc_delta</span><span class="p">]),</span>
                                        <span class="n">beat_frames</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>Here, we&#8217;ve vertically stacked the <tt class="docutils literal"><span class="pre">mfcc</span></tt> and <tt class="docutils literal"><span class="pre">mfcc_delta</span></tt> matrices together.  The
-result of this operation is a matrix <tt class="docutils literal"><span class="pre">beat_mfcc_delta</span></tt> with the same number of rows
-as its input, but the number of columns depends on <tt class="docutils literal"><span class="pre">beat_frames</span></tt>.  Each column
-<tt class="docutils literal"><span class="pre">beat_mfcc_delta[:,</span> <span class="pre">k]</span></tt> will be the <em>average</em> of input columns between
-<tt class="docutils literal"><span class="pre">beat_frames[k]</span></tt> and <tt class="docutils literal"><span class="pre">beat_frames[k+1]</span></tt>.  (<tt class="docutils literal"><span class="pre">beat_frames</span></tt> will be expanded to
-span the full range <tt class="docutils literal"><span class="pre">[0,</span> <span class="pre">T]</span></tt> so that all data is accounted for.)</p>
+<p>Here, we&#8217;ve vertically stacked the <code class="docutils literal"><span class="pre">mfcc</span></code> and <code class="docutils literal"><span class="pre">mfcc_delta</span></code> matrices together.  The
+result of this operation is a matrix <code class="docutils literal"><span class="pre">beat_mfcc_delta</span></code> with the same number of rows
+as its input, but the number of columns depends on <code class="docutils literal"><span class="pre">beat_frames</span></code>.  Each column
+<code class="docutils literal"><span class="pre">beat_mfcc_delta[:,</span> <span class="pre">k]</span></code> will be the <em>average</em> of input columns between
+<code class="docutils literal"><span class="pre">beat_frames[k]</span></code> and <code class="docutils literal"><span class="pre">beat_frames[k+1]</span></code>.  (<code class="docutils literal"><span class="pre">beat_frames</span></code> will be expanded to
+span the full range <code class="docutils literal"><span class="pre">[0,</span> <span class="pre">T]</span></code> so that all data is accounted for.)</p>
 <p>Next, we compute a chromagram using just the harmonic component:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">chromagram</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">chroma_cqt</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y_harmonic</span><span class="p">,</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">chromagram</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">chroma_cqt</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y_harmonic</span><span class="p">,</span>
                                         <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">)</span>
 </pre></div>
 </div>
-<p>After this line, <tt class="docutils literal"><span class="pre">chromagram</span></tt> will be a <em>numpy.ndarray</em> of size <tt class="docutils literal"><span class="pre">(12,</span> <span class="pre">T)</span></tt>, and
+<p>After this line, <code class="docutils literal"><span class="pre">chromagram</span></code> will be a <em>numpy.ndarray</em> of size <code class="docutils literal"><span class="pre">(12,</span> <span class="pre">T)</span></code>, and
 each row corresponds to a pitch class (e.g., <em>C</em>, <em>C#</em>, etc.).  Each column of
-<tt class="docutils literal"><span class="pre">chromagram</span></tt> is normalized by its peak value, though this behavior can be overridden
-by setting the <tt class="docutils literal"><span class="pre">norm</span></tt> parameter.</p>
+<code class="docutils literal"><span class="pre">chromagram</span></code> is normalized by its peak value, though this behavior can be overridden
+by setting the <code class="docutils literal"><span class="pre">norm</span></code> parameter.</p>
 <p>Once we have the chromagram and list of beat frames, we again synchronize the chroma
 between beat events:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">beat_chroma</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span><span class="n">chromagram</span><span class="p">,</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">beat_chroma</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">sync</span><span class="p">(</span><span class="n">chromagram</span><span class="p">,</span>
                                    <span class="n">beat_frames</span><span class="p">,</span>
                                    <span class="n">aggregate</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">)</span>
 </pre></div>
@@ -710,19 +487,20 @@ between beat events:</p>
 for MFCCs) with the <em>median</em>.  In general, any statistical summarization function can
 be supplied here, including <em class="xref py py-obj">np.max()</em>, <em class="xref py py-obj">np.min()</em>, <em class="xref py py-obj">np.std()</em>, etc.</p>
 <p>Finally, the all features are vertically stacked again:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="n">beat_features</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">beat_chroma</span><span class="p">,</span> <span class="n">beat_mfcc_delta</span><span class="p">])</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="n">beat_features</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">beat_chroma</span><span class="p">,</span> <span class="n">beat_mfcc_delta</span><span class="p">])</span>
 </pre></div>
 </div>
-<p>resulting in a feature matrix <tt class="docutils literal"><span class="pre">beat_features</span></tt> of dimension
-<tt class="docutils literal"><span class="pre">(12</span> <span class="pre">+</span> <span class="pre">13</span> <span class="pre">+</span> <span class="pre">13,</span> <span class="pre">#</span> <span class="pre">beat</span> <span class="pre">intervals)</span></tt>.</p>
+<p>resulting in a feature matrix <code class="docutils literal"><span class="pre">beat_features</span></code> of dimension
+<code class="docutils literal"><span class="pre">(12</span> <span class="pre">+</span> <span class="pre">13</span> <span class="pre">+</span> <span class="pre">13,</span> <span class="pre">#</span> <span class="pre">beat</span> <span class="pre">intervals)</span></code>.</p>
 </div>
 <div class="section" id="more-examples">
 <h2>More examples<a class="headerlink" href="#more-examples" title="Permalink to this headline">¶</a></h2>
-<p>More example scripts are provided in the <a class="reference external" href="https://github.com/bmcfee/librosa/tree/master/examples">examples</a> folder.</p>
+<p>More example scripts are provided in the <a class="reference external" href="https://github.com/librosa/librosa/tree/master/examples">examples</a> folder.</p>
 </div>
 </div>
 
 
+           </div>
           </div>
           <footer>
   
@@ -741,9 +519,10 @@ be supplied here, including <em class="xref py py-obj">np.max()</em>, <em class=
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016, librosa development team.
+
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -761,7 +540,7 @@ be supplied here, including <em class="xref py py-obj">np.max()</em>, <em class=
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'./',
-            VERSION:'0.4.2',
+            VERSION:'0.4.3',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

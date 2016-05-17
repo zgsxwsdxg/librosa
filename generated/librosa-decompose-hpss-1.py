@@ -45,3 +45,15 @@ mask_P
 # ...,
 # [ 1.,  1., ...,  1.,  1.],
 # [ 1.,  1., ...,  1.,  1.]])
+
+# Separate into harmonic/percussive/residual components by using a margin > 1.0
+
+H, P = librosa.decompose.hpss(D, margin=3.0)
+R = D - (H+P)
+y_harm = librosa.core.istft(H)
+y_perc = librosa.core.istft(P)
+y_resi = librosa.core.istft(R)
+
+# Get a more isolated percussive component by widening its margin
+
+H, P = librosa.decompose.hpss(D, margin=(1.0,5.0))

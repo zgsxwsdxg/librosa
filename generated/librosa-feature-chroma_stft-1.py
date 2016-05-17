@@ -6,9 +6,20 @@ librosa.feature.chroma_stft(y=y, sr=sr)
 # [ 0.658,  0.985, ...,  0.878,  0.764],
 # [ 0.969,  0.92 , ...,  0.974,  0.915]])
 
-# Use a pre-computed spectrogram with a larger frame
+# Use an energy (magnitude) spectrum instead of power spectrogram
 
-S = np.abs(librosa.stft(y, n_fft=4096))
+S = np.abs(librosa.stft(y))
+chroma = librosa.feature.chroma_stft(S=S, sr=sr)
+chroma
+# array([[ 0.884,  0.91 , ...,  0.861,  0.858],
+# [ 0.963,  0.785, ...,  0.968,  0.896],
+# ...,
+# [ 0.871,  1.   , ...,  0.928,  0.829],
+# [ 1.   ,  0.982, ...,  0.93 ,  0.878]])
+
+# Use a pre-computed power spectrogram with a larger frame
+
+S = np.abs(librosa.stft(y, n_fft=4096))**2
 chroma = librosa.feature.chroma_stft(S=S, sr=sr)
 chroma
 # array([[ 0.685,  0.477, ...,  0.961,  0.986],

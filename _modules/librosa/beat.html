@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>librosa.beat &mdash; librosa 0.4.2 documentation</title>
+  <title>librosa.beat &mdash; librosa 0.4.3 documentation</title>
   
 
   
@@ -30,11 +30,11 @@
   
 
   
-    <link rel="top" title="librosa 0.4.2 documentation" href="../../index.html"/>
+    <link rel="top" title="librosa 0.4.3 documentation" href="../../index.html"/>
         <link rel="up" title="Module code" href="../index.html"/> 
 
   
-  <script src="_static/js/modernizr.min.js"></script>
+  <script src="../../_static/js/modernizr.min.js"></script>
 
 </head>
 
@@ -44,17 +44,27 @@
 
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-nav-search">
-        
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
 
-        
-          <a href="../../index.html" class="icon icon-home"> librosa
-        
+          
+            <a href="../../index.html" class="icon icon-home"> librosa
+          
 
-        
-        </a>
+          
+          </a>
 
-        
+          
+            
+            
+              <div class="version">
+                0.4
+              </div>
+            
+          
+
+          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -63,288 +73,42 @@
   </form>
 </div>
 
-        
-      </div>
+          
+        </div>
 
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
-          
-              <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation instructions</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../install.html#additional-notes">Additional notes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../install.html#additional-notes-for-os-x">Additional notes for OS X</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../install.html#libsamplerate">libsamplerate</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../install.html#ffmpeg">ffmpeg</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Tutorial</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../tutorial.html#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../tutorial.html#quickstart">Quickstart</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../tutorial.html#advanced-usage">Advanced usage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../tutorial.html#more-examples">More examples</a></li>
-</ul>
-</li>
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Tutorial</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../core.html">Core IO and DSP</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../core.html#audio-processing">Audio processing</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.load.html">librosa.core.load</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.to_mono.html">librosa.core.to_mono</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.resample.html">librosa.core.resample</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.get_duration.html">librosa.core.get_duration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.autocorrelate.html">librosa.core.autocorrelate</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.zero_crossings.html">librosa.core.zero_crossings</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.clicks.html">librosa.core.clicks</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../core.html#spectral-representations">Spectral representations</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.stft.html">librosa.core.stft</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.istft.html">librosa.core.istft</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.ifgram.html">librosa.core.ifgram</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.cqt.html">librosa.core.cqt</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.hybrid_cqt.html">librosa.core.hybrid_cqt</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.pseudo_cqt.html">librosa.core.pseudo_cqt</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.fmt.html">librosa.core.fmt</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.phase_vocoder.html">librosa.core.phase_vocoder</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.magphase.html">librosa.core.magphase</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.logamplitude.html">librosa.core.logamplitude</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.perceptual_weighting.html">librosa.core.perceptual_weighting</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.A_weighting.html">librosa.core.A_weighting</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../core.html#time-and-frequency-conversion">Time and frequency conversion</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.frames_to_samples.html">librosa.core.frames_to_samples</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.frames_to_time.html">librosa.core.frames_to_time</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.samples_to_frames.html">librosa.core.samples_to_frames</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.samples_to_time.html">librosa.core.samples_to_time</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.time_to_frames.html">librosa.core.time_to_frames</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.time_to_samples.html">librosa.core.time_to_samples</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.hz_to_note.html">librosa.core.hz_to_note</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.hz_to_midi.html">librosa.core.hz_to_midi</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.midi_to_hz.html">librosa.core.midi_to_hz</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.midi_to_note.html">librosa.core.midi_to_note</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.note_to_hz.html">librosa.core.note_to_hz</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.note_to_midi.html">librosa.core.note_to_midi</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.hz_to_mel.html">librosa.core.hz_to_mel</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.hz_to_octs.html">librosa.core.hz_to_octs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.mel_to_hz.html">librosa.core.mel_to_hz</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.octs_to_hz.html">librosa.core.octs_to_hz</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.fft_frequencies.html">librosa.core.fft_frequencies</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.cqt_frequencies.html">librosa.core.cqt_frequencies</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.mel_frequencies.html">librosa.core.mel_frequencies</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../core.html#pitch-and-tuning">Pitch and tuning</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.estimate_tuning.html">librosa.core.estimate_tuning</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.pitch_tuning.html">librosa.core.pitch_tuning</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.piptrack.html">librosa.core.piptrack</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../core.html#deprecated">Deprecated</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.ifptrack.html">librosa.core.ifptrack</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../display.html">Display</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../generated/librosa.display.specshow.html">librosa.display.specshow</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../generated/librosa.display.waveplot.html">librosa.display.waveplot</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../generated/librosa.display.time_ticks.html">librosa.display.time_ticks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../generated/librosa.display.cmap.html">librosa.display.cmap</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../feature.html">Feature extraction</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../feature.html#spectral-features">Spectral features</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.feature.chroma_stft.html">librosa.feature.chroma_stft</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.feature.chroma_cqt.html">librosa.feature.chroma_cqt</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.feature.melspectrogram.html">librosa.feature.melspectrogram</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.feature.mfcc.html">librosa.feature.mfcc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.feature.rmse.html">librosa.feature.rmse</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.feature.spectral_centroid.html">librosa.feature.spectral_centroid</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.feature.spectral_bandwidth.html">librosa.feature.spectral_bandwidth</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.feature.spectral_contrast.html">librosa.feature.spectral_contrast</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.feature.spectral_rolloff.html">librosa.feature.spectral_rolloff</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.feature.poly_features.html">librosa.feature.poly_features</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.feature.tonnetz.html">librosa.feature.tonnetz</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.feature.zero_crossing_rate.html">librosa.feature.zero_crossing_rate</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../feature.html#rhythm-features">Rhythm features</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.feature.tempogram.html">librosa.feature.tempogram</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../feature.html#feature-manipulation">Feature manipulation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.feature.delta.html">librosa.feature.delta</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.feature.stack_memory.html">librosa.feature.stack_memory</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../feature.html#deprecated">Deprecated</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.feature.logfsgram.html">librosa.feature.logfsgram</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.feature.sync.html">librosa.feature.sync</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../onset.html">Onset detection</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../generated/librosa.onset.onset_detect.html">librosa.onset.onset_detect</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../generated/librosa.onset.onset_strength.html">librosa.onset.onset_strength</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../generated/librosa.onset.onset_strength_multi.html">librosa.onset.onset_strength_multi</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../beat.html">Beat and tempo</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../generated/librosa.beat.beat_track.html">librosa.beat.beat_track</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../generated/librosa.beat.estimate_tempo.html">librosa.beat.estimate_tempo</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../decompose.html">Spectrogram decomposition</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../generated/librosa.decompose.decompose.html">librosa.decompose.decompose</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../generated/librosa.decompose.hpss.html">librosa.decompose.hpss</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../effects.html">Effects</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../effects.html#harmonic-percussive-source-separation">Harmonic-percussive source separation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.effects.hpss.html">librosa.effects.hpss</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.effects.harmonic.html">librosa.effects.harmonic</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.effects.percussive.html">librosa.effects.percussive</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../effects.html#time-and-frequency">Time and frequency</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.effects.time_stretch.html">librosa.effects.time_stretch</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.effects.pitch_shift.html">librosa.effects.pitch_shift</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../effects.html#miscellaneous">Miscellaneous</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.effects.remix.html">librosa.effects.remix</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../output.html">Output</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../output.html#text-output">Text output</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.output.annotation.html">librosa.output.annotation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.output.times_csv.html">librosa.output.times_csv</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../output.html#audio-output">Audio output</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.output.write_wav.html">librosa.output.write_wav</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../output.html#deprecated">Deprecated</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.output.frames_csv.html">librosa.output.frames_csv</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../segment.html">Temporal segmentation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../segment.html#recurrence-and-self-similarity">Recurrence and self-similarity</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.segment.recurrence_matrix.html">librosa.segment.recurrence_matrix</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.segment.recurrence_to_lag.html">librosa.segment.recurrence_to_lag</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.segment.lag_to_recurrence.html">librosa.segment.lag_to_recurrence</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.segment.timelag_filter.html">librosa.segment.timelag_filter</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../segment.html#temporal-clustering">Temporal clustering</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.segment.agglomerative.html">librosa.segment.agglomerative</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.segment.subsegment.html">librosa.segment.subsegment</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../segment.html#deprecated">Deprecated</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.segment.structure_feature.html">librosa.segment.structure_feature</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../util.html">Utilities</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../util.html#array-operations">Array operations</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.util.frame.html">librosa.util.frame</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.util.pad_center.html">librosa.util.pad_center</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.util.fix_length.html">librosa.util.fix_length</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.util.fix_frames.html">librosa.util.fix_frames</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.util.index_to_slice.html">librosa.util.index_to_slice</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.util.sync.html">librosa.util.sync</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.util.axis_sort.html">librosa.util.axis_sort</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.util.normalize.html">librosa.util.normalize</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.util.sparsify_rows.html">librosa.util.sparsify_rows</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.util.buf_to_float.html">librosa.util.buf_to_float</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../util.html#matching">Matching</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.util.match_intervals.html">librosa.util.match_intervals</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.util.match_events.html">librosa.util.match_events</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../util.html#miscellaneous">Miscellaneous</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.util.localmax.html">librosa.util.localmax</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.util.peak_pick.html">librosa.util.peak_pick</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../util.html#input-validation">Input validation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.util.valid_audio.html">librosa.util.valid_audio</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.util.valid_int.html">librosa.util.valid_int</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.util.valid_intervals.html">librosa.util.valid_intervals</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../util.html#file-operations">File operations</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.util.example_audio_file.html">librosa.util.example_audio_file</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.util.find_files.html">librosa.util.find_files</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../util.html#deprecated">Deprecated</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.util.FeatureExtractor.html">librosa.util.FeatureExtractor</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.util.buf_to_int.html">librosa.util.buf_to_int</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../../core.html">Core IO and DSP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../display.html">Display</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../feature.html">Feature extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../onset.html">Onset detection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../beat.html">Beat and tempo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../decompose.html">Spectrogram decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../effects.html">Effects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../output.html">Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../segment.html">Temporal segmentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../util.html">Utilities</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../filters.html">Filters</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../filters.html#filter-bank-construction">Filter bank construction</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.filters.dct.html">librosa.filters.dct</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.filters.mel.html">librosa.filters.mel</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.filters.chroma.html">librosa.filters.chroma</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.filters.constant_q.html">librosa.filters.constant_q</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../filters.html#miscellaneous">Miscellaneous</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.filters.constant_q_lengths.html">librosa.filters.constant_q_lengths</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.filters.cq_to_chroma.html">librosa.filters.cq_to_chroma</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.filters.window_bandwidth.html">librosa.filters.window_bandwidth</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../filters.html#deprecated">Deprecated</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.filters.logfrequency.html">librosa.filters.logfrequency</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../cache.html">Caching</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../cache.html#enabling-the-cache">Enabling the cache</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../cache.html#cache-configuration">Cache configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../cache.html#example">Example</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../../filters.html">Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cache.html">Caching</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changes</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#v0-4-2">v0.4.2</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#v0-4-1">v0.4.1</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#v0-4-0">v0.4.0</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#v0-3-1">v0.3.1</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#v0-3-0">v0.3.0</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#v0-2-1">v0.2.1</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#v0-2-0">v0.2.0</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#v0-1-0">v0.1.0</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
 </ul>
 
+            
           
-        
+        </div>
       </div>
-      &nbsp;
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
@@ -359,7 +123,13 @@
       
       <div class="wy-nav-content">
         <div class="rst-content">
-          <div role="navigation" aria-label="breadcrumbs navigation">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../../index.html">Docs</a> &raquo;</li>
       
@@ -374,11 +144,12 @@
   </ul>
   <hr/>
 </div>
-          <div role="main" class="document">
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
             
   <h1>Source code for librosa.beat</h1><div class="highlight"><pre>
-<span class="c">#!/usr/bin/env python</span>
-<span class="c"># -*- coding: utf-8 -*-</span>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Beat and tempo</span>
 <span class="sd">==============</span>
@@ -398,7 +169,7 @@
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">util</span>
 <span class="kn">from</span> <span class="nn">.util.exceptions</span> <span class="kn">import</span> <span class="n">ParameterError</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;beat_track&#39;</span><span class="p">,</span> <span class="s">&#39;estimate_tempo&#39;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;beat_track&#39;</span><span class="p">,</span> <span class="s1">&#39;estimate_tempo&#39;</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="beat_track"><a class="viewcode-back" href="../../generated/librosa.beat.beat_track.html#librosa.beat.beat_track">[docs]</a><span class="k">def</span> <span class="nf">beat_track</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="mi">22050</span><span class="p">,</span> <span class="n">onset_envelope</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span>
@@ -478,23 +249,24 @@
 
 <span class="sd">    &gt;&gt;&gt; tempo, beats = librosa.beat.beat_track(y=y, sr=sr)</span>
 <span class="sd">    &gt;&gt;&gt; tempo</span>
-<span class="sd">    129.19921875</span>
+<span class="sd">    64.599609375</span>
 
 
 <span class="sd">    Print the first 20 beat frames</span>
 
 <span class="sd">    &gt;&gt;&gt; beats[:20]</span>
-<span class="sd">    array([ 461,  500,  540,  580,  619,  658,  698,  737,  777,</span>
-<span class="sd">            817,  857,  896,  936,  976, 1016, 1055, 1095, 1135,</span>
-<span class="sd">           1175, 1214])</span>
+<span class="sd">    array([ 320,  357,  397,  436,  480,  525,  569,  609,  658,</span>
+<span class="sd">            698,  737,  777,  817,  857,  896,  936,  976, 1016,</span>
+<span class="sd">           1055, 1095])</span>
 
 
 <span class="sd">    Or print them as timestamps</span>
 
 <span class="sd">    &gt;&gt;&gt; librosa.frames_to_time(beats[:20], sr=sr)</span>
-<span class="sd">    array([ 0.093,  0.534,  0.998,  1.463,  1.927,  2.368,  2.833,</span>
-<span class="sd">            3.297,  3.762,  4.203,  4.667,  5.132,  5.596,  6.06 ,</span>
-<span class="sd">            6.525,  6.989,  7.454,  7.918,  8.382,  8.847])</span>
+<span class="sd">    array([  7.43 ,   8.29 ,   9.218,  10.124,  11.146,  12.19 ,</span>
+<span class="sd">            13.212,  14.141,  15.279,  16.208,  17.113,  18.042,</span>
+<span class="sd">            18.971,  19.9  ,  20.805,  21.734,  22.663,  23.591,</span>
+<span class="sd">            24.497,  25.426])</span>
 
 
 <span class="sd">    Track beats using a pre-computed onset envelope</span>
@@ -506,16 +278,16 @@
 <span class="sd">    &gt;&gt;&gt; tempo</span>
 <span class="sd">    64.599609375</span>
 <span class="sd">    &gt;&gt;&gt; beats[:20]</span>
-<span class="sd">    array([ 461,  500,  540,  580,  619,  658,  698,  737,  777,</span>
-<span class="sd">            817,  857,  896,  936,  976, 1016, 1055, 1095, 1135,</span>
-<span class="sd">           1175, 1214])</span>
+<span class="sd">    array([ 320,  357,  397,  436,  480,  525,  569,  609,  658,</span>
+<span class="sd">            698,  737,  777,  817,  857,  896,  936,  976, 1016,</span>
+<span class="sd">           1055, 1095])</span>
 
 
 <span class="sd">    Plot the beat events against the onset strength envelope</span>
 
 <span class="sd">    &gt;&gt;&gt; import matplotlib.pyplot as plt</span>
 <span class="sd">    &gt;&gt;&gt; hop_length = 512</span>
-<span class="sd">    &gt;&gt;&gt; plt.figure()</span>
+<span class="sd">    &gt;&gt;&gt; plt.figure(figsize=(8, 4))</span>
 <span class="sd">    &gt;&gt;&gt; plt.plot(librosa.util.normalize(onset_env), label=&#39;Onset strength&#39;)</span>
 <span class="sd">    &gt;&gt;&gt; plt.vlines(beats, 0, 1, alpha=0.5, color=&#39;r&#39;,</span>
 <span class="sd">    ...            linestyle=&#39;--&#39;, label=&#39;Beats&#39;)</span>
@@ -528,37 +300,37 @@
 <span class="sd">    &gt;&gt;&gt; plt.tight_layout()</span>
 <span class="sd">    &#39;&#39;&#39;</span>
 
-    <span class="c"># First, get the frame-&gt;beat strength profile if we don&#39;t already have one</span>
+    <span class="c1"># First, get the frame-&gt;beat strength profile if we don&#39;t already have one</span>
     <span class="k">if</span> <span class="n">onset_envelope</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">y</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s">&#39;y or onset_envelope must be provided&#39;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s1">&#39;y or onset_envelope must be provided&#39;</span><span class="p">)</span>
 
         <span class="n">onset_envelope</span> <span class="o">=</span> <span class="n">onset</span><span class="o">.</span><span class="n">onset_strength</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span>
                                               <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span>
                                               <span class="n">hop_length</span><span class="o">=</span><span class="n">hop_length</span><span class="p">,</span>
                                               <span class="n">aggregate</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">)</span>
 
-    <span class="c"># Do we have any onsets to grab?</span>
+    <span class="c1"># Do we have any onsets to grab?</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">onset_envelope</span><span class="o">.</span><span class="n">any</span><span class="p">():</span>
         <span class="k">return</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">))</span>
 
-    <span class="c"># Estimate BPM if one was not provided</span>
+    <span class="c1"># Estimate BPM if one was not provided</span>
     <span class="k">if</span> <span class="n">bpm</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
         <span class="n">bpm</span> <span class="o">=</span> <span class="n">estimate_tempo</span><span class="p">(</span><span class="n">onset_envelope</span><span class="p">,</span>
                              <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span>
                              <span class="n">hop_length</span><span class="o">=</span><span class="n">hop_length</span><span class="p">,</span>
                              <span class="n">start_bpm</span><span class="o">=</span><span class="n">start_bpm</span><span class="p">)</span>
 
-    <span class="c"># Then, run the tracker</span>
+    <span class="c1"># Then, run the tracker</span>
     <span class="n">beats</span> <span class="o">=</span> <span class="n">__beat_tracker</span><span class="p">(</span><span class="n">onset_envelope</span><span class="p">,</span>
                            <span class="n">bpm</span><span class="p">,</span>
                            <span class="nb">float</span><span class="p">(</span><span class="n">sr</span><span class="p">)</span> <span class="o">/</span> <span class="n">hop_length</span><span class="p">,</span>
                            <span class="n">tightness</span><span class="p">,</span>
                            <span class="n">trim</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="p">(</span><span class="n">bpm</span><span class="p">,</span> <span class="n">beats</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">bpm</span><span class="p">,</span> <span class="n">beats</span><span class="p">)</span></div>
 
-</div>
+
 <span class="nd">@cache</span>
 <div class="viewcode-block" id="estimate_tempo"><a class="viewcode-back" href="../../generated/librosa.beat.estimate_tempo.html#librosa.beat.estimate_tempo">[docs]</a><span class="k">def</span> <span class="nf">estimate_tempo</span><span class="p">(</span><span class="n">onset_envelope</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="mi">22050</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">start_bpm</span><span class="o">=</span><span class="mi">120</span><span class="p">,</span>
                    <span class="n">std_bpm</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">ac_size</span><span class="o">=</span><span class="mf">4.0</span><span class="p">,</span> <span class="n">duration</span><span class="o">=</span><span class="mf">90.0</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
@@ -609,7 +381,7 @@
 <span class="sd">    &gt;&gt;&gt; onset_env = librosa.onset.onset_strength(y, sr=sr)</span>
 <span class="sd">    &gt;&gt;&gt; tempo = librosa.beat.estimate_tempo(onset_env, sr=sr)</span>
 <span class="sd">    &gt;&gt;&gt; tempo</span>
-<span class="sd">    129.19921875</span>
+<span class="sd">    103.359375</span>
 
 <span class="sd">    Plot the estimated tempo against the onset autocorrelation</span>
 
@@ -617,51 +389,51 @@
 <span class="sd">    &gt;&gt;&gt; # Compute 2-second windowed autocorrelation</span>
 <span class="sd">    &gt;&gt;&gt; hop_length = 512</span>
 <span class="sd">    &gt;&gt;&gt; ac = librosa.autocorrelate(onset_env, 2 * sr // hop_length)</span>
-<span class="sd">    &gt;&gt;&gt; # Convert tempo estimate from bpm to frames</span>
-<span class="sd">    &gt;&gt;&gt; tempo_frames = (60 * sr / hop_length) / tempo</span>
-<span class="sd">    &gt;&gt;&gt; plt.plot(librosa.util.normalize(ac),</span>
-<span class="sd">    ...          label=&#39;Onset autocorrelation&#39;)</span>
-<span class="sd">    &gt;&gt;&gt; plt.vlines([tempo_frames], 0, 1,</span>
-<span class="sd">    ...            color=&#39;r&#39;, alpha=0.75, linestyle=&#39;--&#39;,</span>
+<span class="sd">    &gt;&gt;&gt; freqs = librosa.tempo_frequencies(len(ac), sr=sr,</span>
+<span class="sd">    ...                                   hop_length=hop_length)</span>
+<span class="sd">    &gt;&gt;&gt; # Plot on a BPM axis.  We skip the first (0-lag) bin.</span>
+<span class="sd">    &gt;&gt;&gt; plt.figure(figsize=(8,4))</span>
+<span class="sd">    &gt;&gt;&gt; plt.semilogx(freqs[1:], librosa.util.normalize(ac)[1:],</span>
+<span class="sd">    ...              label=&#39;Onset autocorrelation&#39;, basex=2)</span>
+<span class="sd">    &gt;&gt;&gt; plt.axvline(tempo, 0, 1, color=&#39;r&#39;, alpha=0.75, linestyle=&#39;--&#39;,</span>
 <span class="sd">    ...            label=&#39;Tempo: {:.2f} BPM&#39;.format(tempo))</span>
-<span class="sd">    &gt;&gt;&gt; librosa.display.time_ticks(librosa.frames_to_time(np.arange(len(ac)),</span>
-<span class="sd">    ...                                                   sr=sr))</span>
-<span class="sd">    &gt;&gt;&gt; plt.xlabel(&#39;Lag&#39;)</span>
-<span class="sd">    &gt;&gt;&gt; plt.legend()</span>
+<span class="sd">    &gt;&gt;&gt; plt.xlabel(&#39;Tempo (BPM)&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; plt.grid()</span>
+<span class="sd">    &gt;&gt;&gt; plt.legend(frameon=True)</span>
 <span class="sd">    &gt;&gt;&gt; plt.axis(&#39;tight&#39;)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="n">start_bpm</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s">&#39;start_bpm must be strictly positive&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s1">&#39;start_bpm must be strictly positive&#39;</span><span class="p">)</span>
 
     <span class="n">fft_res</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">sr</span><span class="p">)</span> <span class="o">/</span> <span class="n">hop_length</span>
 
-    <span class="c"># Chop onsets to X[(upper_limit - duration):upper_limit]</span>
-    <span class="c"># or as much as will fit</span>
+    <span class="c1"># Chop onsets to X[(upper_limit - duration):upper_limit]</span>
+    <span class="c1"># or as much as will fit</span>
     <span class="n">maxcol</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">onset_envelope</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span>
                      <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">((</span><span class="n">offset</span> <span class="o">+</span> <span class="n">duration</span><span class="p">)</span> <span class="o">*</span> <span class="n">fft_res</span><span class="p">)))</span>
 
     <span class="n">mincol</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">maxcol</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">duration</span> <span class="o">*</span> <span class="n">fft_res</span><span class="p">)))</span>
 
-    <span class="c"># Use auto-correlation out of 4 seconds (empirically set??)</span>
+    <span class="c1"># Use auto-correlation out of 4 seconds (empirically set??)</span>
     <span class="n">ac_window</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">maxcol</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">ac_size</span> <span class="o">*</span> <span class="n">fft_res</span><span class="p">))</span>
 
-    <span class="c"># Compute the autocorrelation</span>
-    <span class="n">x_corr</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">autocorrelate</span><span class="p">(</span><span class="n">onset_envelope</span><span class="p">[</span><span class="n">mincol</span><span class="p">:</span><span class="n">maxcol</span><span class="p">],</span> <span class="n">ac_window</span><span class="p">)</span>
+    <span class="c1"># Compute the autocorrelation</span>
+    <span class="n">x_corr</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">autocorrelate</span><span class="p">(</span><span class="n">onset_envelope</span><span class="p">[</span><span class="n">mincol</span><span class="p">:</span><span class="n">maxcol</span><span class="p">],</span> <span class="n">ac_window</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]</span>
 
-    <span class="c"># re-weight the autocorrelation by log-normal prior</span>
-    <span class="n">bpms</span> <span class="o">=</span> <span class="mf">60.0</span> <span class="o">*</span> <span class="n">fft_res</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">ac_window</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+    <span class="c1"># Get the BPM values for each bin, skipping the 0-lag bin</span>
+    <span class="n">bpms</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">tempo_frequencies</span><span class="p">(</span><span class="n">ac_window</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="n">hop_length</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">)[</span><span class="mi">1</span><span class="p">:]</span>
 
-    <span class="c"># Smooth the autocorrelation by a log-normal distribution</span>
-    <span class="n">x_corr</span> <span class="o">=</span> <span class="n">x_corr</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">bpms</span> <span class="o">/</span> <span class="n">start_bpm</span><span class="p">))</span> <span class="o">/</span> <span class="n">std_bpm</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="c1"># Weight the autocorrelation by a log-normal distribution centered start_bpm</span>
+    <span class="n">x_corr</span> <span class="o">*=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">bpms</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">start_bpm</span><span class="p">))</span> <span class="o">/</span> <span class="n">std_bpm</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 
-    <span class="c"># Get the local maximum of weighted correlation</span>
+    <span class="c1"># Get the local maximum of weighted correlation</span>
     <span class="n">x_peaks</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">localmax</span><span class="p">(</span><span class="n">x_corr</span><span class="p">)</span>
 
-    <span class="c"># Zero out all peaks before the first negative</span>
+    <span class="c1"># Zero out all peaks before the first negative</span>
     <span class="n">x_peaks</span><span class="p">[:</span><span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">x_corr</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)]</span> <span class="o">=</span> <span class="bp">False</span>
 
-    <span class="c"># Choose the best peak out of .33, .5, 2, 3 * start_period</span>
+    <span class="c1"># Choose the best peak out of .33, .5, 2, 3 * start_period</span>
     <span class="n">candidates</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">x_peaks</span> <span class="o">*</span> <span class="n">x_corr</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="mf">1.</span><span class="o">/</span><span class="mi">3</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
 
     <span class="n">candidates</span> <span class="o">=</span> <span class="n">candidates</span><span class="p">[</span><span class="n">candidates</span> <span class="o">&lt;</span> <span class="n">ac_window</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
@@ -669,11 +441,11 @@
     <span class="n">best_period</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">x_corr</span><span class="p">[</span><span class="n">candidates</span><span class="p">])</span>
 
     <span class="k">if</span> <span class="n">candidates</span><span class="p">[</span><span class="n">best_period</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">return</span> <span class="mf">60.0</span> <span class="o">*</span> <span class="n">fft_res</span> <span class="o">/</span> <span class="n">candidates</span><span class="p">[</span><span class="n">best_period</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">bpms</span><span class="p">[</span><span class="n">candidates</span><span class="p">[</span><span class="n">best_period</span><span class="p">]]</span>
 
-    <span class="k">return</span> <span class="n">start_bpm</span>
+    <span class="k">return</span> <span class="n">start_bpm</span></div>
 
-</div>
+
 <span class="nd">@cache</span>
 <span class="k">def</span> <span class="nf">__beat_tracker</span><span class="p">(</span><span class="n">onset_envelope</span><span class="p">,</span> <span class="n">bpm</span><span class="p">,</span> <span class="n">fft_res</span><span class="p">,</span> <span class="n">tightness</span><span class="p">,</span> <span class="n">trim</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Internal function that tracks beats in an onset strength envelope.</span>
@@ -702,35 +474,35 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="n">bpm</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s">&#39;bpm must be strictly positive&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s1">&#39;bpm must be strictly positive&#39;</span><span class="p">)</span>
 
-    <span class="c"># convert bpm to a sample period for searching</span>
+    <span class="c1"># convert bpm to a sample period for searching</span>
     <span class="n">period</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="mf">60.0</span> <span class="o">*</span> <span class="n">fft_res</span> <span class="o">/</span> <span class="n">bpm</span><span class="p">)</span>
 
-    <span class="c"># localscore is a smoothed version of AGC&#39;d onset envelope</span>
+    <span class="c1"># localscore is a smoothed version of AGC&#39;d onset envelope</span>
     <span class="n">localscore</span> <span class="o">=</span> <span class="n">__beat_local_score</span><span class="p">(</span><span class="n">onset_envelope</span><span class="p">,</span> <span class="n">period</span><span class="p">)</span>
 
-    <span class="c"># run the DP</span>
+    <span class="c1"># run the DP</span>
     <span class="n">backlink</span><span class="p">,</span> <span class="n">cumscore</span> <span class="o">=</span> <span class="n">__beat_track_dp</span><span class="p">(</span><span class="n">localscore</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">tightness</span><span class="p">)</span>
 
-    <span class="c"># get the position of the last beat</span>
+    <span class="c1"># get the position of the last beat</span>
     <span class="n">beats</span> <span class="o">=</span> <span class="p">[</span><span class="n">__last_beat</span><span class="p">(</span><span class="n">cumscore</span><span class="p">)]</span>
 
-    <span class="c"># Reconstruct the beat path from backlinks</span>
+    <span class="c1"># Reconstruct the beat path from backlinks</span>
     <span class="k">while</span> <span class="n">backlink</span><span class="p">[</span><span class="n">beats</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">beats</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">backlink</span><span class="p">[</span><span class="n">beats</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
 
-    <span class="c"># Put the beats in ascending order</span>
-    <span class="c"># Convert into an array of frame numbers</span>
+    <span class="c1"># Put the beats in ascending order</span>
+    <span class="c1"># Convert into an array of frame numbers</span>
     <span class="n">beats</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">beats</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
 
-    <span class="c"># Discard spurious trailing beats</span>
+    <span class="c1"># Discard spurious trailing beats</span>
     <span class="n">beats</span> <span class="o">=</span> <span class="n">__trim_beats</span><span class="p">(</span><span class="n">localscore</span><span class="p">,</span> <span class="n">beats</span><span class="p">,</span> <span class="n">trim</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">beats</span>
 
 
-<span class="c"># -- Helper functions for beat tracking</span>
+<span class="c1"># -- Helper functions for beat tracking</span>
 <span class="k">def</span> <span class="nf">__normalize_onsets</span><span class="p">(</span><span class="n">onsets</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Maps onset strength function into the range [0, 1]&#39;&#39;&#39;</span>
 
@@ -746,7 +518,7 @@
     <span class="n">window</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="n">period</span><span class="p">,</span> <span class="n">period</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mf">32.0</span><span class="o">/</span><span class="n">period</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">scipy</span><span class="o">.</span><span class="n">signal</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">__normalize_onsets</span><span class="p">(</span><span class="n">onset_envelope</span><span class="p">),</span>
                                  <span class="n">window</span><span class="p">,</span>
-                                 <span class="s">&#39;same&#39;</span><span class="p">)</span>
+                                 <span class="s1">&#39;same&#39;</span><span class="p">)</span>
 
 
 <span class="k">def</span> <span class="nf">__beat_track_dp</span><span class="p">(</span><span class="n">localscore</span><span class="p">,</span> <span class="n">period</span><span class="p">,</span> <span class="n">tightness</span><span class="p">):</span>
@@ -755,40 +527,40 @@
     <span class="n">backlink</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">localscore</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
     <span class="n">cumscore</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">localscore</span><span class="p">)</span>
 
-    <span class="c"># Search range for previous beat</span>
+    <span class="c1"># Search range for previous beat</span>
     <span class="n">window</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span> <span class="o">*</span> <span class="n">period</span><span class="p">,</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">period</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
 
-    <span class="c"># Make a score window, which begins biased toward start_bpm and skewed</span>
+    <span class="c1"># Make a score window, which begins biased toward start_bpm and skewed</span>
     <span class="k">if</span> <span class="n">tightness</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s">&#39;tightness must be strictly positive&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s1">&#39;tightness must be strictly positive&#39;</span><span class="p">)</span>
 
     <span class="n">txwt</span> <span class="o">=</span> <span class="o">-</span><span class="n">tightness</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="o">-</span><span class="n">window</span> <span class="o">/</span> <span class="n">period</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span>
 
-    <span class="c"># Are we on the first beat?</span>
+    <span class="c1"># Are we on the first beat?</span>
     <span class="n">first_beat</span> <span class="o">=</span> <span class="bp">True</span>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">score_i</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">localscore</span><span class="p">):</span>
 
-        <span class="c"># Are we reaching back before time 0?</span>
+        <span class="c1"># Are we reaching back before time 0?</span>
         <span class="n">z_pad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="o">-</span> <span class="n">window</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">len</span><span class="p">(</span><span class="n">window</span><span class="p">)))</span>
 
-        <span class="c"># Search over all possible predecessors</span>
+        <span class="c1"># Search over all possible predecessors</span>
         <span class="n">candidates</span> <span class="o">=</span> <span class="n">txwt</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
         <span class="n">candidates</span><span class="p">[</span><span class="n">z_pad</span><span class="p">:]</span> <span class="o">=</span> <span class="n">candidates</span><span class="p">[</span><span class="n">z_pad</span><span class="p">:]</span> <span class="o">+</span> <span class="n">cumscore</span><span class="p">[</span><span class="n">window</span><span class="p">[</span><span class="n">z_pad</span><span class="p">:]]</span>
 
-        <span class="c"># Find the best preceding beat</span>
+        <span class="c1"># Find the best preceding beat</span>
         <span class="n">beat_location</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">candidates</span><span class="p">)</span>
 
-        <span class="c"># Add the local score</span>
+        <span class="c1"># Add the local score</span>
         <span class="n">cumscore</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">score_i</span> <span class="o">+</span> <span class="n">candidates</span><span class="p">[</span><span class="n">beat_location</span><span class="p">]</span>
 
-        <span class="c"># Special case the first onset.  Stop if the localscore is small</span>
+        <span class="c1"># Special case the first onset.  Stop if the localscore is small</span>
         <span class="k">if</span> <span class="n">first_beat</span> <span class="ow">and</span> <span class="n">score_i</span> <span class="o">&lt;</span> <span class="mf">0.01</span> <span class="o">*</span> <span class="n">localscore</span><span class="o">.</span><span class="n">max</span><span class="p">():</span>
             <span class="n">backlink</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">backlink</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">window</span><span class="p">[</span><span class="n">beat_location</span><span class="p">]</span>
             <span class="n">first_beat</span> <span class="o">=</span> <span class="bp">False</span>
 
-        <span class="c"># Update the time range</span>
+        <span class="c1"># Update the time range</span>
         <span class="n">window</span> <span class="o">=</span> <span class="n">window</span> <span class="o">+</span> <span class="mi">1</span>
 
     <span class="k">return</span> <span class="n">backlink</span><span class="p">,</span> <span class="n">cumscore</span>
@@ -800,7 +572,7 @@
     <span class="n">maxes</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">localmax</span><span class="p">(</span><span class="n">cumscore</span><span class="p">)</span>
     <span class="n">med_score</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">cumscore</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argwhere</span><span class="p">(</span><span class="n">maxes</span><span class="p">)])</span>
 
-    <span class="c"># The last of these is the last beat (since score generally increases)</span>
+    <span class="c1"># The last of these is the last beat (since score generally increases)</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">argwhere</span><span class="p">((</span><span class="n">cumscore</span> <span class="o">*</span> <span class="n">maxes</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">&gt;</span> <span class="n">med_score</span><span class="p">))</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
 
 
@@ -809,7 +581,7 @@
 
     <span class="n">smooth_boe</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">signal</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">localscore</span><span class="p">[</span><span class="n">beats</span><span class="p">],</span>
                                        <span class="n">scipy</span><span class="o">.</span><span class="n">signal</span><span class="o">.</span><span class="n">hann</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span>
-                                       <span class="s">&#39;same&#39;</span><span class="p">)</span>
+                                       <span class="s1">&#39;same&#39;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">trim</span><span class="p">:</span>
         <span class="n">threshold</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="p">((</span><span class="n">smooth_boe</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">**</span><span class="mf">0.5</span><span class="p">)</span>
@@ -821,6 +593,7 @@
     <span class="k">return</span> <span class="n">beats</span><span class="p">[</span><span class="n">valid</span><span class="o">.</span><span class="n">min</span><span class="p">():</span><span class="n">valid</span><span class="o">.</span><span class="n">max</span><span class="p">()]</span>
 </pre></div>
 
+           </div>
           </div>
           <footer>
   
@@ -830,9 +603,10 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016, librosa development team.
+
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -850,7 +624,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'0.4.2',
+            VERSION:'0.4.3',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

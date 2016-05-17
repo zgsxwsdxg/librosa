@@ -20,15 +20,20 @@ R = librosa.segment.recurrence_matrix(mfcc, metric='cosine')
 
 R = librosa.segment.recurrence_matrix(mfcc, sym=True)
 
+# Use an affinity matrix instead of binary connectivity
+
+R_aff = librosa.segment.recurrence_matrix(mfcc, mode='affinity')
+
 # Plot the feature and recurrence matrices
 
 import matplotlib.pyplot as plt
-plt.figure(figsize=(10, 6))
+plt.figure(figsize=(8, 4))
 plt.subplot(1, 2, 1)
-librosa.display.specshow(mfcc, x_axis='time')
-plt.title('MFCC')
-plt.subplot(1, 2, 2)
 librosa.display.specshow(R, x_axis='time', y_axis='time',
                          aspect='equal')
-plt.title('MFCC recurrence (symmetric)')
+plt.title('Binary recurrence (symmetric)')
+plt.subplot(1, 2, 2)
+librosa.display.specshow(R_aff, x_axis='time', y_axis='time',
+                         aspect='equal')
+plt.title('Affinity recurrence')
 plt.tight_layout()

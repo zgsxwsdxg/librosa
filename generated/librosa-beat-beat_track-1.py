@@ -4,21 +4,22 @@ y, sr = librosa.load(librosa.util.example_audio_file())
 
 tempo, beats = librosa.beat.beat_track(y=y, sr=sr)
 tempo
-# 129.19921875
+# 64.599609375
 
 # Print the first 20 beat frames
 
 beats[:20]
-# array([ 461,  500,  540,  580,  619,  658,  698,  737,  777,
-# 817,  857,  896,  936,  976, 1016, 1055, 1095, 1135,
-# 1175, 1214])
+# array([ 320,  357,  397,  436,  480,  525,  569,  609,  658,
+# 698,  737,  777,  817,  857,  896,  936,  976, 1016,
+# 1055, 1095])
 
 # Or print them as timestamps
 
 librosa.frames_to_time(beats[:20], sr=sr)
-# array([ 0.093,  0.534,  0.998,  1.463,  1.927,  2.368,  2.833,
-# 3.297,  3.762,  4.203,  4.667,  5.132,  5.596,  6.06 ,
-# 6.525,  6.989,  7.454,  7.918,  8.382,  8.847])
+# array([  7.43 ,   8.29 ,   9.218,  10.124,  11.146,  12.19 ,
+# 13.212,  14.141,  15.279,  16.208,  17.113,  18.042,
+# 18.971,  19.9  ,  20.805,  21.734,  22.663,  23.591,
+# 24.497,  25.426])
 
 # Track beats using a pre-computed onset envelope
 
@@ -29,15 +30,15 @@ tempo, beats = librosa.beat.beat_track(onset_envelope=onset_env,
 tempo
 # 64.599609375
 beats[:20]
-# array([ 461,  500,  540,  580,  619,  658,  698,  737,  777,
-# 817,  857,  896,  936,  976, 1016, 1055, 1095, 1135,
-# 1175, 1214])
+# array([ 320,  357,  397,  436,  480,  525,  569,  609,  658,
+# 698,  737,  777,  817,  857,  896,  936,  976, 1016,
+# 1055, 1095])
 
 # Plot the beat events against the onset strength envelope
 
 import matplotlib.pyplot as plt
 hop_length = 512
-plt.figure()
+plt.figure(figsize=(8, 4))
 plt.plot(librosa.util.normalize(onset_env), label='Onset strength')
 plt.vlines(beats, 0, 1, alpha=0.5, color='r',
            linestyle='--', label='Beats')

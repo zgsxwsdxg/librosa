@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>librosa.segment &mdash; librosa 0.4.2 documentation</title>
+  <title>librosa.segment &mdash; librosa 0.4.3 documentation</title>
   
 
   
@@ -30,11 +30,11 @@
   
 
   
-    <link rel="top" title="librosa 0.4.2 documentation" href="../../index.html"/>
+    <link rel="top" title="librosa 0.4.3 documentation" href="../../index.html"/>
         <link rel="up" title="Module code" href="../index.html"/> 
 
   
-  <script src="_static/js/modernizr.min.js"></script>
+  <script src="../../_static/js/modernizr.min.js"></script>
 
 </head>
 
@@ -44,17 +44,27 @@
 
     
     <nav data-toggle="wy-nav-shift" class="wy-nav-side">
-      <div class="wy-side-nav-search">
-        
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
 
-        
-          <a href="../../index.html" class="icon icon-home"> librosa
-        
+          
+            <a href="../../index.html" class="icon icon-home"> librosa
+          
 
-        
-        </a>
+          
+          </a>
 
-        
+          
+            
+            
+              <div class="version">
+                0.4
+              </div>
+            
+          
+
+          
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" />
@@ -63,288 +73,42 @@
   </form>
 </div>
 
-        
-      </div>
+          
+        </div>
 
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
           
-          
-              <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation instructions</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../install.html#additional-notes">Additional notes</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../install.html#additional-notes-for-os-x">Additional notes for OS X</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../install.html#libsamplerate">libsamplerate</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../install.html#ffmpeg">ffmpeg</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Tutorial</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../tutorial.html#overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../tutorial.html#quickstart">Quickstart</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../tutorial.html#advanced-usage">Advanced usage</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../tutorial.html#more-examples">More examples</a></li>
-</ul>
-</li>
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="../../install.html">Installation instructions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Tutorial</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../core.html">Core IO and DSP</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../core.html#audio-processing">Audio processing</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.load.html">librosa.core.load</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.to_mono.html">librosa.core.to_mono</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.resample.html">librosa.core.resample</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.get_duration.html">librosa.core.get_duration</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.autocorrelate.html">librosa.core.autocorrelate</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.zero_crossings.html">librosa.core.zero_crossings</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.clicks.html">librosa.core.clicks</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../core.html#spectral-representations">Spectral representations</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.stft.html">librosa.core.stft</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.istft.html">librosa.core.istft</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.ifgram.html">librosa.core.ifgram</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.cqt.html">librosa.core.cqt</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.hybrid_cqt.html">librosa.core.hybrid_cqt</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.pseudo_cqt.html">librosa.core.pseudo_cqt</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.fmt.html">librosa.core.fmt</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.phase_vocoder.html">librosa.core.phase_vocoder</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.magphase.html">librosa.core.magphase</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.logamplitude.html">librosa.core.logamplitude</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.perceptual_weighting.html">librosa.core.perceptual_weighting</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.A_weighting.html">librosa.core.A_weighting</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../core.html#time-and-frequency-conversion">Time and frequency conversion</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.frames_to_samples.html">librosa.core.frames_to_samples</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.frames_to_time.html">librosa.core.frames_to_time</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.samples_to_frames.html">librosa.core.samples_to_frames</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.samples_to_time.html">librosa.core.samples_to_time</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.time_to_frames.html">librosa.core.time_to_frames</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.time_to_samples.html">librosa.core.time_to_samples</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.hz_to_note.html">librosa.core.hz_to_note</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.hz_to_midi.html">librosa.core.hz_to_midi</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.midi_to_hz.html">librosa.core.midi_to_hz</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.midi_to_note.html">librosa.core.midi_to_note</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.note_to_hz.html">librosa.core.note_to_hz</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.note_to_midi.html">librosa.core.note_to_midi</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.hz_to_mel.html">librosa.core.hz_to_mel</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.hz_to_octs.html">librosa.core.hz_to_octs</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.mel_to_hz.html">librosa.core.mel_to_hz</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.octs_to_hz.html">librosa.core.octs_to_hz</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.fft_frequencies.html">librosa.core.fft_frequencies</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.cqt_frequencies.html">librosa.core.cqt_frequencies</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.mel_frequencies.html">librosa.core.mel_frequencies</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../core.html#pitch-and-tuning">Pitch and tuning</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.estimate_tuning.html">librosa.core.estimate_tuning</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.pitch_tuning.html">librosa.core.pitch_tuning</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.piptrack.html">librosa.core.piptrack</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../core.html#deprecated">Deprecated</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.core.ifptrack.html">librosa.core.ifptrack</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../display.html">Display</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../generated/librosa.display.specshow.html">librosa.display.specshow</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../generated/librosa.display.waveplot.html">librosa.display.waveplot</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../generated/librosa.display.time_ticks.html">librosa.display.time_ticks</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../generated/librosa.display.cmap.html">librosa.display.cmap</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../feature.html">Feature extraction</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../feature.html#spectral-features">Spectral features</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.feature.chroma_stft.html">librosa.feature.chroma_stft</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.feature.chroma_cqt.html">librosa.feature.chroma_cqt</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.feature.melspectrogram.html">librosa.feature.melspectrogram</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.feature.mfcc.html">librosa.feature.mfcc</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.feature.rmse.html">librosa.feature.rmse</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.feature.spectral_centroid.html">librosa.feature.spectral_centroid</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.feature.spectral_bandwidth.html">librosa.feature.spectral_bandwidth</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.feature.spectral_contrast.html">librosa.feature.spectral_contrast</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.feature.spectral_rolloff.html">librosa.feature.spectral_rolloff</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.feature.poly_features.html">librosa.feature.poly_features</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.feature.tonnetz.html">librosa.feature.tonnetz</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.feature.zero_crossing_rate.html">librosa.feature.zero_crossing_rate</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../feature.html#rhythm-features">Rhythm features</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.feature.tempogram.html">librosa.feature.tempogram</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../feature.html#feature-manipulation">Feature manipulation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.feature.delta.html">librosa.feature.delta</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.feature.stack_memory.html">librosa.feature.stack_memory</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../feature.html#deprecated">Deprecated</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.feature.logfsgram.html">librosa.feature.logfsgram</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.feature.sync.html">librosa.feature.sync</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../onset.html">Onset detection</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../generated/librosa.onset.onset_detect.html">librosa.onset.onset_detect</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../generated/librosa.onset.onset_strength.html">librosa.onset.onset_strength</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../generated/librosa.onset.onset_strength_multi.html">librosa.onset.onset_strength_multi</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../beat.html">Beat and tempo</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../generated/librosa.beat.beat_track.html">librosa.beat.beat_track</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../generated/librosa.beat.estimate_tempo.html">librosa.beat.estimate_tempo</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../decompose.html">Spectrogram decomposition</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../generated/librosa.decompose.decompose.html">librosa.decompose.decompose</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../generated/librosa.decompose.hpss.html">librosa.decompose.hpss</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../effects.html">Effects</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../effects.html#harmonic-percussive-source-separation">Harmonic-percussive source separation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.effects.hpss.html">librosa.effects.hpss</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.effects.harmonic.html">librosa.effects.harmonic</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.effects.percussive.html">librosa.effects.percussive</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../effects.html#time-and-frequency">Time and frequency</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.effects.time_stretch.html">librosa.effects.time_stretch</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.effects.pitch_shift.html">librosa.effects.pitch_shift</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../effects.html#miscellaneous">Miscellaneous</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.effects.remix.html">librosa.effects.remix</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../output.html">Output</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../output.html#text-output">Text output</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.output.annotation.html">librosa.output.annotation</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.output.times_csv.html">librosa.output.times_csv</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../output.html#audio-output">Audio output</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.output.write_wav.html">librosa.output.write_wav</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../output.html#deprecated">Deprecated</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.output.frames_csv.html">librosa.output.frames_csv</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../segment.html">Temporal segmentation</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../segment.html#recurrence-and-self-similarity">Recurrence and self-similarity</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.segment.recurrence_matrix.html">librosa.segment.recurrence_matrix</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.segment.recurrence_to_lag.html">librosa.segment.recurrence_to_lag</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.segment.lag_to_recurrence.html">librosa.segment.lag_to_recurrence</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.segment.timelag_filter.html">librosa.segment.timelag_filter</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../segment.html#temporal-clustering">Temporal clustering</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.segment.agglomerative.html">librosa.segment.agglomerative</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.segment.subsegment.html">librosa.segment.subsegment</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../segment.html#deprecated">Deprecated</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.segment.structure_feature.html">librosa.segment.structure_feature</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../util.html">Utilities</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../util.html#array-operations">Array operations</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.util.frame.html">librosa.util.frame</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.util.pad_center.html">librosa.util.pad_center</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.util.fix_length.html">librosa.util.fix_length</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.util.fix_frames.html">librosa.util.fix_frames</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.util.index_to_slice.html">librosa.util.index_to_slice</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.util.sync.html">librosa.util.sync</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.util.axis_sort.html">librosa.util.axis_sort</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.util.normalize.html">librosa.util.normalize</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.util.sparsify_rows.html">librosa.util.sparsify_rows</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.util.buf_to_float.html">librosa.util.buf_to_float</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../util.html#matching">Matching</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.util.match_intervals.html">librosa.util.match_intervals</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.util.match_events.html">librosa.util.match_events</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../util.html#miscellaneous">Miscellaneous</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.util.localmax.html">librosa.util.localmax</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.util.peak_pick.html">librosa.util.peak_pick</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../util.html#input-validation">Input validation</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.util.valid_audio.html">librosa.util.valid_audio</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.util.valid_int.html">librosa.util.valid_int</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.util.valid_intervals.html">librosa.util.valid_intervals</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../util.html#file-operations">File operations</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.util.example_audio_file.html">librosa.util.example_audio_file</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.util.find_files.html">librosa.util.find_files</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../util.html#deprecated">Deprecated</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.util.FeatureExtractor.html">librosa.util.FeatureExtractor</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.util.buf_to_int.html">librosa.util.buf_to_int</a></li>
-</ul>
-</li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../../core.html">Core IO and DSP</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../display.html">Display</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../feature.html">Feature extraction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../onset.html">Onset detection</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../beat.html">Beat and tempo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../decompose.html">Spectrogram decomposition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../effects.html">Effects</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../output.html">Output</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../segment.html">Temporal segmentation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../util.html">Utilities</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../filters.html">Filters</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../filters.html#filter-bank-construction">Filter bank construction</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.filters.dct.html">librosa.filters.dct</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.filters.mel.html">librosa.filters.mel</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.filters.chroma.html">librosa.filters.chroma</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.filters.constant_q.html">librosa.filters.constant_q</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../filters.html#miscellaneous">Miscellaneous</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.filters.constant_q_lengths.html">librosa.filters.constant_q_lengths</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.filters.cq_to_chroma.html">librosa.filters.cq_to_chroma</a></li>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.filters.window_bandwidth.html">librosa.filters.window_bandwidth</a></li>
-</ul>
-</li>
-<li class="toctree-l2"><a class="reference internal" href="../../filters.html#deprecated">Deprecated</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="../../generated/librosa.filters.logfrequency.html">librosa.filters.logfrequency</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="../../cache.html">Caching</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../cache.html#enabling-the-cache">Enabling the cache</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../cache.html#cache-configuration">Cache configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../cache.html#example">Example</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../../filters.html">Filters</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../cache.html">Caching</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changes</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#v0-4-2">v0.4.2</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#v0-4-1">v0.4.1</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#v0-4-0">v0.4.0</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#v0-3-1">v0.3.1</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#v0-3-0">v0.3.0</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#v0-2-1">v0.2.1</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#v0-2-0">v0.2.0</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#v0-1-0">v0.1.0</a></li>
-</ul>
-</li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../glossary.html">Glossary</a></li>
 </ul>
 
+            
           
-        
+        </div>
       </div>
-      &nbsp;
     </nav>
 
     <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
@@ -359,7 +123,13 @@
       
       <div class="wy-nav-content">
         <div class="rst-content">
-          <div role="navigation" aria-label="breadcrumbs navigation">
+          
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href="../../index.html">Docs</a> &raquo;</li>
       
@@ -374,11 +144,12 @@
   </ul>
   <hr/>
 </div>
-          <div role="main" class="document">
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
             
   <h1>Source code for librosa.segment</h1><div class="highlight"><pre>
-<span class="c">#!/usr/bin/env python</span>
-<span class="c"># -*- coding: utf-8 -*-</span>
+<span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Temporal segmentation</span>
 <span class="sd">=====================</span>
@@ -418,53 +189,31 @@
 <span class="kn">import</span> <span class="nn">sklearn</span>
 <span class="kn">import</span> <span class="nn">sklearn.cluster</span>
 <span class="kn">import</span> <span class="nn">sklearn.feature_extraction</span>
+<span class="kn">import</span> <span class="nn">sklearn.neighbors</span>
 
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">cache</span>
 <span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">util</span>
 <span class="kn">from</span> <span class="nn">.util.exceptions</span> <span class="kn">import</span> <span class="n">ParameterError</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s">&#39;recurrence_matrix&#39;</span><span class="p">,</span>
-           <span class="s">&#39;recurrence_to_lag&#39;</span><span class="p">,</span>
-           <span class="s">&#39;lag_to_recurrence&#39;</span><span class="p">,</span>
-           <span class="s">&#39;timelag_filter&#39;</span><span class="p">,</span>
-           <span class="s">&#39;agglomerative&#39;</span><span class="p">,</span>
-           <span class="s">&#39;subsegment&#39;</span><span class="p">,</span>
-           <span class="c"># Deprecated functions</span>
-           <span class="s">&#39;structure_feature&#39;</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;recurrence_matrix&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;recurrence_to_lag&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;lag_to_recurrence&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;timelag_filter&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;agglomerative&#39;</span><span class="p">,</span>
+           <span class="s1">&#39;subsegment&#39;</span><span class="p">,</span>
+           <span class="c1"># Deprecated functions</span>
+           <span class="s1">&#39;structure_feature&#39;</span><span class="p">]</span>
 
 
 <span class="nd">@cache</span>
-<span class="k">def</span> <span class="nf">__band_infinite</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="n">v_in</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">v_out</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;Construct a square, banded matrix `X` where</span>
-<span class="sd">    `X[i, j] == v_in` if `|i - j| &lt;= width`</span>
-<span class="sd">    `X[i, j] == v_out` if `|i - j| &gt; width`</span>
-
-<span class="sd">    This is used to suppress nearby links in `recurrence_matrix`.</span>
-<span class="sd">    &#39;&#39;&#39;</span>
-
-    <span class="k">if</span> <span class="n">width</span> <span class="o">&gt;</span> <span class="n">n</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s">&#39;width cannot exceed n&#39;</span><span class="p">)</span>
-
-    <span class="c"># Instantiate the matrix</span>
-    <span class="n">band</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="n">n</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">dtype</span><span class="p">)</span>
-
-    <span class="c"># Fill the out-of-band values</span>
-    <span class="n">band</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">v_out</span><span class="p">)</span>
-
-    <span class="c"># Fill the in-band values</span>
-    <span class="n">band</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">triu_indices_from</span><span class="p">(</span><span class="n">band</span><span class="p">,</span> <span class="n">width</span><span class="p">)]</span> <span class="o">=</span> <span class="n">v_in</span>
-    <span class="n">band</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">tril_indices_from</span><span class="p">(</span><span class="n">band</span><span class="p">,</span> <span class="o">-</span><span class="n">width</span><span class="p">)]</span> <span class="o">=</span> <span class="n">v_in</span>
-
-    <span class="k">return</span> <span class="n">band</span>
+<div class="viewcode-block" id="recurrence_matrix"><a class="viewcode-back" href="../../generated/librosa.segment.recurrence_matrix.html#librosa.segment.recurrence_matrix">[docs]</a><span class="k">def</span> <span class="nf">recurrence_matrix</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s1">&#39;euclidean&#39;</span><span class="p">,</span>
+                      <span class="n">sym</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">sparse</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;connectivity&#39;</span><span class="p">,</span>
+                      <span class="n">bandwidth</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Compute a recurrence matrix from a data matrix.</span>
 
 
-<span class="nd">@cache</span>
-<div class="viewcode-block" id="recurrence_matrix"><a class="viewcode-back" href="../../generated/librosa.segment.recurrence_matrix.html#librosa.segment.recurrence_matrix">[docs]</a><span class="k">def</span> <span class="nf">recurrence_matrix</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s">&#39;sqeuclidean&#39;</span><span class="p">,</span>
-                      <span class="n">sym</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;Compute the binary recurrence matrix from a time-series.</span>
-
-<span class="sd">    `rec[i,j] == True` if (and only if) (`data[:,i]`, `data[:,j]`) are</span>
-<span class="sd">    k-nearest-neighbors and `|i-j| &gt;= width`</span>
+<span class="sd">    `rec[i, j]` is non-zero if (`data[:, i]`, `data[:, j]`) are</span>
+<span class="sd">    k-nearest-neighbors and `|i - j| &gt;= width`</span>
 
 
 <span class="sd">    Parameters</span>
@@ -480,15 +229,36 @@
 
 <span class="sd">    width : int &gt;= 1 [scalar]</span>
 <span class="sd">        only link neighbors `(data[:, i], data[:, j])`</span>
-<span class="sd">        if `|i-j| &gt;= width`</span>
+<span class="sd">        if `|i - j| &gt;= width`</span>
 
 <span class="sd">    metric : str</span>
 <span class="sd">        Distance metric to use for nearest-neighbor calculation.</span>
 
-<span class="sd">        See `scipy.spatial.distance.cdist` for details.</span>
+<span class="sd">        See `sklearn.neighbors.NearestNeighbors` for details.</span>
 
 <span class="sd">    sym : bool [scalar]</span>
 <span class="sd">        set `sym=True` to only link mutual nearest-neighbors</span>
+
+<span class="sd">    sparse : bool [scalar]</span>
+<span class="sd">        if False, returns a dense type (ndarray)</span>
+<span class="sd">        if True, returns a sparse type (scipy.sparse.csr_matrix)</span>
+
+<span class="sd">    mode : str, {&#39;connectivity&#39;, &#39;distance&#39;, &#39;affinity&#39;}</span>
+<span class="sd">        If &#39;connectivity&#39;, a binary connectivity matrix is produced.</span>
+
+<span class="sd">        If &#39;distance&#39;, then a non-zero entry contains the distance between</span>
+<span class="sd">        points.</span>
+
+<span class="sd">        If &#39;adjacency&#39;, then non-zero entries are mapped to</span>
+<span class="sd">        `exp( - distance(i, j) / bandwidth)` where `bandwidth` is</span>
+<span class="sd">        as specified below.</span>
+
+<span class="sd">    bandwidth : None or float &gt; 0</span>
+<span class="sd">        If using ``mode=&#39;affinity&#39;``, this can be used to set the</span>
+<span class="sd">        bandwidth on the affinity kernel.</span>
+
+<span class="sd">        If no value is provided, it is set automatically to the median</span>
+<span class="sd">        distance between furthest nearest neighbors.</span>
 
 <span class="sd">    axis : int</span>
 <span class="sd">        The axis along which to compute recurrence.</span>
@@ -496,14 +266,15 @@
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    rec : np.ndarray [shape=(t,t), dtype=bool]</span>
-<span class="sd">        Binary recurrence matrix</span>
+<span class="sd">    rec : np.ndarray or scipy.sparse.csr_matrix, [shape=(t, t)]</span>
+<span class="sd">        Recurrence matrix</span>
 
 <span class="sd">    See Also</span>
 <span class="sd">    --------</span>
+<span class="sd">    sklearn.neighbors.NearestNeighbors</span>
 <span class="sd">    scipy.spatial.distance.cdist</span>
 <span class="sd">    librosa.feature.stack_memory</span>
-<span class="sd">    structure_feature</span>
+<span class="sd">    recurrence_to_lag</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
@@ -529,60 +300,108 @@
 
 <span class="sd">    &gt;&gt;&gt; R = librosa.segment.recurrence_matrix(mfcc, sym=True)</span>
 
+<span class="sd">    Use an affinity matrix instead of binary connectivity</span>
+
+<span class="sd">    &gt;&gt;&gt; R_aff = librosa.segment.recurrence_matrix(mfcc, mode=&#39;affinity&#39;)</span>
+
 <span class="sd">    Plot the feature and recurrence matrices</span>
 
 <span class="sd">    &gt;&gt;&gt; import matplotlib.pyplot as plt</span>
-<span class="sd">    &gt;&gt;&gt; plt.figure(figsize=(10, 6))</span>
+<span class="sd">    &gt;&gt;&gt; plt.figure(figsize=(8, 4))</span>
 <span class="sd">    &gt;&gt;&gt; plt.subplot(1, 2, 1)</span>
-<span class="sd">    &gt;&gt;&gt; librosa.display.specshow(mfcc, x_axis=&#39;time&#39;)</span>
-<span class="sd">    &gt;&gt;&gt; plt.title(&#39;MFCC&#39;)</span>
-<span class="sd">    &gt;&gt;&gt; plt.subplot(1, 2, 2)</span>
 <span class="sd">    &gt;&gt;&gt; librosa.display.specshow(R, x_axis=&#39;time&#39;, y_axis=&#39;time&#39;,</span>
 <span class="sd">    ...                          aspect=&#39;equal&#39;)</span>
-<span class="sd">    &gt;&gt;&gt; plt.title(&#39;MFCC recurrence (symmetric)&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; plt.title(&#39;Binary recurrence (symmetric)&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; plt.subplot(1, 2, 2)</span>
+<span class="sd">    &gt;&gt;&gt; librosa.display.specshow(R_aff, x_axis=&#39;time&#39;, y_axis=&#39;time&#39;,</span>
+<span class="sd">    ...                          aspect=&#39;equal&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; plt.title(&#39;Affinity recurrence&#39;)</span>
 <span class="sd">    &gt;&gt;&gt; plt.tight_layout()</span>
 
 <span class="sd">    &#39;&#39;&#39;</span>
 
     <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 
-    <span class="c"># Swap observations to the first dimension and flatten the rest</span>
+    <span class="c1"># Swap observations to the first dimension and flatten the rest</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">swapaxes</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">t</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
 
     <span class="k">if</span> <span class="n">width</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s">&#39;width must be at least 1&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s1">&#39;width must be at least 1&#39;</span><span class="p">)</span>
 
+    <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;connectivity&#39;</span><span class="p">,</span> <span class="s1">&#39;distance&#39;</span><span class="p">,</span> <span class="s1">&#39;affinity&#39;</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">((</span><span class="s2">&quot;Invalid mode=&#39;{}&#39;. Must be one of &quot;</span>
+                              <span class="s2">&quot;[&#39;connectivity&#39;, &#39;distance&#39;, &quot;</span>
+                              <span class="s2">&quot;&#39;affinity&#39;]&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mode</span><span class="p">))</span>
     <span class="k">if</span> <span class="n">k</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">t</span> <span class="o">&gt;</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">width</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">k</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">width</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">k</span> <span class="o">=</span> <span class="mi">2</span>
 
+    <span class="k">if</span> <span class="n">bandwidth</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">bandwidth</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s1">&#39;Invalid bandwidth={}. &#39;</span>
+                                 <span class="s1">&#39;Must be strictly positive.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">bandwidth</span><span class="p">))</span>
+
     <span class="n">k</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
 
-    <span class="c"># Build the distance matrix</span>
-    <span class="n">D</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">spatial</span><span class="o">.</span><span class="n">distance</span><span class="o">.</span><span class="n">cdist</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="n">metric</span><span class="p">)</span>
+    <span class="c1"># Build the neighbor search object</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">knn</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">neighbors</span><span class="o">.</span><span class="n">NearestNeighbors</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="nb">min</span><span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">width</span><span class="p">),</span>
+                                                 <span class="n">metric</span><span class="o">=</span><span class="n">metric</span><span class="p">,</span>
+                                                 <span class="n">algorithm</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="n">knn</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">neighbors</span><span class="o">.</span><span class="n">NearestNeighbors</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="nb">min</span><span class="p">(</span><span class="n">t</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="n">k</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">width</span><span class="p">),</span>
+                                                 <span class="n">metric</span><span class="o">=</span><span class="n">metric</span><span class="p">,</span>
+                                                 <span class="n">algorithm</span><span class="o">=</span><span class="s1">&#39;brute&#39;</span><span class="p">)</span>
 
-    <span class="c"># Max out the diagonal band</span>
-    <span class="n">D</span> <span class="o">=</span> <span class="n">D</span> <span class="o">+</span> <span class="n">__band_infinite</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">width</span><span class="p">)</span>
+    <span class="n">knn</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 
-    <span class="c"># build the recurrence plot</span>
-    <span class="n">rec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">t</span><span class="p">,</span> <span class="n">t</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">bool</span><span class="p">)</span>
+    <span class="c1"># Get the knn graph</span>
+    <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;affinity&#39;</span><span class="p">:</span>
+        <span class="n">kng_mode</span> <span class="o">=</span> <span class="s1">&#39;distance&#39;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">kng_mode</span> <span class="o">=</span> <span class="n">mode</span>
 
-    <span class="c"># get the k nearest neighbors for each point</span>
+    <span class="n">rec</span> <span class="o">=</span> <span class="n">knn</span><span class="o">.</span><span class="n">kneighbors_graph</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="n">kng_mode</span><span class="p">)</span><span class="o">.</span><span class="n">tolil</span><span class="p">()</span>
+
+    <span class="c1"># Remove connections within width</span>
+    <span class="k">for</span> <span class="n">diag</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="n">width</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">width</span><span class="p">):</span>
+        <span class="n">rec</span><span class="o">.</span><span class="n">setdiag</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">diag</span><span class="p">)</span>
+
+    <span class="c1"># Retain only the top-k links per point</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">D</span><span class="p">[</span><span class="n">i</span><span class="p">])[:</span><span class="n">k</span><span class="p">]:</span>
-            <span class="n">rec</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+        <span class="c1"># Get the links from point i</span>
+        <span class="n">links</span> <span class="o">=</span> <span class="n">rec</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">nonzero</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span>
 
-    <span class="c"># symmetrize</span>
+        <span class="c1"># Order them ascending</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="n">links</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">rec</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">links</span><span class="p">]</span><span class="o">.</span><span class="n">toarray</span><span class="p">())][</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="c1"># Everything past the kth closest gets squashed</span>
+        <span class="n">rec</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">idx</span><span class="p">[</span><span class="n">k</span><span class="p">:]]</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="c1"># symmetrize</span>
     <span class="k">if</span> <span class="n">sym</span><span class="p">:</span>
-        <span class="n">rec</span> <span class="o">=</span> <span class="n">rec</span> <span class="o">*</span> <span class="n">rec</span><span class="o">.</span><span class="n">T</span>
+        <span class="n">rec</span> <span class="o">=</span> <span class="n">rec</span><span class="o">.</span><span class="n">minimum</span><span class="p">(</span><span class="n">rec</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">rec</span>
+    <span class="n">rec</span> <span class="o">=</span> <span class="n">rec</span><span class="o">.</span><span class="n">tocsr</span><span class="p">()</span>
+    <span class="n">rec</span><span class="o">.</span><span class="n">eliminate_zeros</span><span class="p">()</span>
 
-</div>
+    <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;connectivity&#39;</span><span class="p">:</span>
+        <span class="n">rec</span> <span class="o">=</span> <span class="n">rec</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">bool</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">mode</span> <span class="o">==</span> <span class="s1">&#39;affinity&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">bandwidth</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+            <span class="n">bandwidth</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">rec</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+        <span class="n">rec</span><span class="o">.</span><span class="n">data</span><span class="p">[:]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span> <span class="n">rec</span><span class="o">.</span><span class="n">data</span> <span class="o">/</span> <span class="n">bandwidth</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">sparse</span><span class="p">:</span>
+        <span class="n">rec</span> <span class="o">=</span> <span class="n">rec</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">rec</span></div>
+
+
 <div class="viewcode-block" id="recurrence_to_lag"><a class="viewcode-back" href="../../generated/librosa.segment.recurrence_to_lag.html#librosa.segment.recurrence_to_lag">[docs]</a><span class="k">def</span> <span class="nf">recurrence_to_lag</span><span class="p">(</span><span class="n">rec</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Convert a recurrence matrix into a lag matrix.</span>
 
@@ -590,7 +409,7 @@
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    rec : np.ndarray, [shape=(n, n)]</span>
+<span class="sd">    rec : np.ndarray, or scipy.sparse.spmatrix [shape=(n, n)]</span>
 <span class="sd">        A (binary) recurrence matrix, as returned by `recurrence_matrix`</span>
 
 <span class="sd">    pad : bool</span>
@@ -601,12 +420,14 @@
 <span class="sd">        the assumption of repetition.</span>
 
 <span class="sd">    axis : int</span>
-<span class="sd">        The axis along which to apply the recurrence-to-lag conversion</span>
+<span class="sd">        The axis to keep as the `time` axis.</span>
+<span class="sd">        The alternate axis will be converted to lag coordinates.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    lag : np.ndarray [shape=(2*n, n) or (n, n)]</span>
-<span class="sd">        The recurrence matrix in (lag, time) coordinates</span>
+<span class="sd">    lag : np.ndarray</span>
+<span class="sd">        The recurrence matrix in (lag, time) (if `axis=1`)</span>
+<span class="sd">        or (time, lag) (if `axis=0`) coordinates</span>
 
 <span class="sd">    Raises</span>
 <span class="sd">    ------</span>
@@ -639,41 +460,65 @@
     <span class="n">axis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">axis</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">rec</span><span class="o">.</span><span class="n">ndim</span> <span class="o">!=</span> <span class="mi">2</span> <span class="ow">or</span> <span class="n">rec</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">rec</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
-        <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s">&#39;non-square recurrence matrix shape: &#39;</span>
-                             <span class="s">&#39;{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">rec</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+        <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s1">&#39;non-square recurrence matrix shape: &#39;</span>
+                             <span class="s1">&#39;{}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">rec</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+
+    <span class="n">sparse</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">issparse</span><span class="p">(</span><span class="n">rec</span><span class="p">)</span>
+
+    <span class="n">roll_ax</span> <span class="o">=</span> <span class="bp">None</span>
+    <span class="k">if</span> <span class="n">sparse</span><span class="p">:</span>
+        <span class="n">roll_ax</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">axis</span>
+        <span class="n">lag_format</span> <span class="o">=</span> <span class="n">rec</span><span class="o">.</span><span class="n">format</span>
+        <span class="k">if</span> <span class="n">axis</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">rec</span> <span class="o">=</span> <span class="n">rec</span><span class="o">.</span><span class="n">tocsc</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">axis</span> <span class="ow">in</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="n">rec</span> <span class="o">=</span> <span class="n">rec</span><span class="o">.</span><span class="n">tocsr</span><span class="p">()</span>
 
     <span class="n">t</span> <span class="o">=</span> <span class="n">rec</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="n">axis</span><span class="p">]</span>
 
-    <span class="k">if</span> <span class="n">pad</span><span class="p">:</span>
-        <span class="n">padding</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]</span>
-        <span class="n">padding</span><span class="p">[(</span><span class="mi">1</span><span class="o">-</span><span class="n">axis</span><span class="p">)]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
-        <span class="n">lag</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">rec</span><span class="p">,</span> <span class="n">padding</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s">&#39;constant&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">sparse</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">pad</span><span class="p">:</span>
+            <span class="n">kron</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]])</span><span class="o">.</span><span class="n">swapaxes</span><span class="p">(</span><span class="n">axis</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="n">lag</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">kron</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">rec</span><span class="o">.</span><span class="n">dtype</span><span class="p">),</span> <span class="n">rec</span><span class="p">,</span> <span class="n">format</span><span class="o">=</span><span class="s1">&#39;lil&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">lag</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">lil_matrix</span><span class="p">(</span><span class="n">rec</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">lag</span> <span class="o">=</span> <span class="n">rec</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">pad</span><span class="p">:</span>
+            <span class="n">padding</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)]</span>
+            <span class="n">padding</span><span class="p">[(</span><span class="mi">1</span><span class="o">-</span><span class="n">axis</span><span class="p">)]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+            <span class="n">lag</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">rec</span><span class="p">,</span> <span class="n">padding</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;constant&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">lag</span> <span class="o">=</span> <span class="n">rec</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
-    <span class="n">idx_slice</span> <span class="o">=</span> <span class="p">[</span><span class="bp">Ellipsis</span><span class="p">]</span> <span class="o">*</span> <span class="n">lag</span><span class="o">.</span><span class="n">ndim</span>
+    <span class="n">idx_slice</span> <span class="o">=</span> <span class="p">[</span><span class="nb">slice</span><span class="p">(</span><span class="bp">None</span><span class="p">)]</span> <span class="o">*</span> <span class="n">lag</span><span class="o">.</span><span class="n">ndim</span>
+
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
         <span class="n">idx_slice</span><span class="p">[</span><span class="n">axis</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
-        <span class="n">lag</span><span class="p">[</span><span class="n">idx_slice</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">lag</span><span class="p">[</span><span class="n">idx_slice</span><span class="p">],</span> <span class="o">-</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">lag</span><span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="n">idx_slice</span><span class="p">)]</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">roll_sparse</span><span class="p">(</span><span class="n">lag</span><span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="n">idx_slice</span><span class="p">)],</span> <span class="o">-</span><span class="n">i</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">roll_ax</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">lag</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+    <span class="k">if</span> <span class="n">sparse</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">lag</span><span class="o">.</span><span class="n">asformat</span><span class="p">(</span><span class="n">lag_format</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">lag</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">T</span></div>
 
-</div>
+
 <div class="viewcode-block" id="lag_to_recurrence"><a class="viewcode-back" href="../../generated/librosa.segment.lag_to_recurrence.html#librosa.segment.lag_to_recurrence">[docs]</a><span class="k">def</span> <span class="nf">lag_to_recurrence</span><span class="p">(</span><span class="n">lag</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Convert a lag matrix into a recurrence matrix.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    lag : np.ndarray [shape=(2*n, n) or (n, n)]</span>
+<span class="sd">    lag : np.ndarray or scipy.sparse.spmatrix</span>
 <span class="sd">        A lag matrix, as produced by `recurrence_to_lag`</span>
 
 <span class="sd">    axis : int</span>
-<span class="sd">        The axis along which to apply the recurrence-to-lag conversion</span>
+<span class="sd">        The axis corresponding to the time dimension.</span>
+<span class="sd">        The alternate axis will be interpreted in lag coordinates.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    rec : np.ndarray [shape=(n, n)]</span>
+<span class="sd">    rec : np.ndarray or scipy.sparse.spmatrix [shape=(n, n)]</span>
 <span class="sd">        A recurrence matrix in (time, time) coordinates</span>
+<span class="sd">        For sparse matrices, format will match that of `lag`.</span>
 
 <span class="sd">    Raises</span>
 <span class="sd">    ------</span>
@@ -711,26 +556,41 @@
 
 <span class="sd">    &#39;&#39;&#39;</span>
 
+    <span class="k">if</span> <span class="n">axis</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s1">&#39;Invalid target axis: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">axis</span><span class="p">))</span>
+
     <span class="n">axis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">axis</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">lag</span><span class="o">.</span><span class="n">ndim</span> <span class="o">!=</span> <span class="mi">2</span> <span class="ow">or</span> <span class="p">(</span><span class="n">lag</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">lag</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="ow">and</span>
                          <span class="n">lag</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span> <span class="o">-</span> <span class="n">axis</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">lag</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="n">axis</span><span class="p">]):</span>
-        <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s">&#39;Invalid lag matrix shape: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">lag</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+        <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s1">&#39;Invalid lag matrix shape: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">lag</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
 
-    <span class="c"># Since lag must be 2-dimensional, abs(axis) = axis</span>
+    <span class="c1"># Since lag must be 2-dimensional, abs(axis) = axis</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">lag</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="n">axis</span><span class="p">]</span>
-    <span class="n">lag</span> <span class="o">=</span> <span class="n">lag</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
-    <span class="n">idx_slice</span> <span class="o">=</span> <span class="p">[</span><span class="bp">Ellipsis</span><span class="p">]</span> <span class="o">*</span> <span class="n">lag</span><span class="o">.</span><span class="n">ndim</span>
+    <span class="n">sparse</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">issparse</span><span class="p">(</span><span class="n">lag</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">sparse</span><span class="p">:</span>
+        <span class="n">rec</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">lil_matrix</span><span class="p">(</span><span class="n">lag</span><span class="p">)</span>
+        <span class="n">roll_ax</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">axis</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">rec</span> <span class="o">=</span> <span class="n">lag</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+        <span class="n">roll_ax</span> <span class="o">=</span> <span class="bp">None</span>
+
+    <span class="n">idx_slice</span> <span class="o">=</span> <span class="p">[</span><span class="nb">slice</span><span class="p">(</span><span class="bp">None</span><span class="p">)]</span> <span class="o">*</span> <span class="n">lag</span><span class="o">.</span><span class="n">ndim</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">t</span><span class="p">):</span>
         <span class="n">idx_slice</span><span class="p">[</span><span class="n">axis</span><span class="p">]</span> <span class="o">=</span> <span class="n">i</span>
-        <span class="n">lag</span><span class="p">[</span><span class="n">idx_slice</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">roll</span><span class="p">(</span><span class="n">lag</span><span class="p">[</span><span class="n">idx_slice</span><span class="p">],</span> <span class="n">i</span><span class="p">)</span>
+        <span class="n">rec</span><span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="n">idx_slice</span><span class="p">)]</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">roll_sparse</span><span class="p">(</span><span class="n">lag</span><span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="n">idx_slice</span><span class="p">)],</span> <span class="n">i</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">roll_ax</span><span class="p">)</span>
 
-    <span class="n">sub_slice</span> <span class="o">=</span> <span class="p">[</span><span class="bp">Ellipsis</span><span class="p">]</span> <span class="o">*</span> <span class="n">lag</span><span class="o">.</span><span class="n">ndim</span>
+    <span class="n">sub_slice</span> <span class="o">=</span> <span class="p">[</span><span class="nb">slice</span><span class="p">(</span><span class="bp">None</span><span class="p">)]</span> <span class="o">*</span> <span class="n">rec</span><span class="o">.</span><span class="n">ndim</span>
     <span class="n">sub_slice</span><span class="p">[</span><span class="mi">1</span> <span class="o">-</span> <span class="n">axis</span><span class="p">]</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">lag</span><span class="p">[</span><span class="n">sub_slice</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">rec</span> <span class="o">=</span> <span class="n">rec</span><span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="n">sub_slice</span><span class="p">)]</span>
 
-</div>
+    <span class="k">if</span> <span class="n">sparse</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">rec</span><span class="o">.</span><span class="n">asformat</span><span class="p">(</span><span class="n">lag</span><span class="o">.</span><span class="n">format</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">rec</span><span class="o">.</span><span class="n">T</span><span class="p">)</span><span class="o">.</span><span class="n">T</span></div>
+
+
 <div class="viewcode-block" id="timelag_filter"><a class="viewcode-back" href="../../generated/librosa.segment.timelag_filter.html#librosa.segment.timelag_filter">[docs]</a><span class="k">def</span> <span class="nf">timelag_filter</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Filtering in the time-lag domain.</span>
 
@@ -797,20 +657,20 @@
     <span class="nd">@cache</span>
     <span class="k">def</span> <span class="nf">__my_filter</span><span class="p">(</span><span class="n">wrapped_f</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&#39;&#39;&#39;Decorator to wrap the filter&#39;&#39;&#39;</span>
-        <span class="c"># Map the input data into time-lag space</span>
+        <span class="c1"># Map the input data into time-lag space</span>
         <span class="n">args</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
 
         <span class="n">args</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">recurrence_to_lag</span><span class="p">(</span><span class="n">args</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="n">pad</span><span class="o">=</span><span class="n">pad</span><span class="p">)</span>
 
-        <span class="c"># Apply the filtering function</span>
+        <span class="c1"># Apply the filtering function</span>
         <span class="n">result</span> <span class="o">=</span> <span class="n">wrapped_f</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-        <span class="c"># Map back into time-time and return</span>
+        <span class="c1"># Map back into time-time and return</span>
         <span class="k">return</span> <span class="n">lag_to_recurrence</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">decorator</span><span class="p">(</span><span class="n">__my_filter</span><span class="p">,</span> <span class="n">function</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">decorator</span><span class="p">(</span><span class="n">__my_filter</span><span class="p">,</span> <span class="n">function</span><span class="p">)</span></div>
 
-</div>
+
 <span class="nd">@cache</span>
 <div class="viewcode-block" id="subsegment"><a class="viewcode-back" href="../../generated/librosa.segment.subsegment.html#librosa.segment.subsegment">[docs]</a><span class="k">def</span> <span class="nf">subsegment</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">frames</span><span class="p">,</span> <span class="n">n_segments</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Sub-divide a segmentation by feature clustering.</span>
@@ -886,10 +746,10 @@
     <span class="n">frames</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">fix_frames</span><span class="p">(</span><span class="n">frames</span><span class="p">,</span> <span class="n">x_min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">x_max</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="n">axis</span><span class="p">],</span> <span class="n">pad</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">n_segments</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s">&#39;n_segments must be a positive integer&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s1">&#39;n_segments must be a positive integer&#39;</span><span class="p">)</span>
 
     <span class="n">boundaries</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">idx_slices</span> <span class="o">=</span> <span class="p">[</span><span class="bp">Ellipsis</span><span class="p">]</span> <span class="o">*</span> <span class="n">data</span><span class="o">.</span><span class="n">ndim</span>
+    <span class="n">idx_slices</span> <span class="o">=</span> <span class="p">[</span><span class="nb">slice</span><span class="p">(</span><span class="bp">None</span><span class="p">)]</span> <span class="o">*</span> <span class="n">data</span><span class="o">.</span><span class="n">ndim</span>
 
     <span class="k">for</span> <span class="n">seg_start</span><span class="p">,</span> <span class="n">seg_end</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">frames</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">frames</span><span class="p">[</span><span class="mi">1</span><span class="p">:]):</span>
         <span class="n">idx_slices</span><span class="p">[</span><span class="n">axis</span><span class="p">]</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="n">seg_start</span><span class="p">,</span> <span class="n">seg_end</span><span class="p">)</span>
@@ -897,9 +757,9 @@
                                                     <span class="nb">min</span><span class="p">(</span><span class="n">seg_end</span> <span class="o">-</span> <span class="n">seg_start</span><span class="p">,</span> <span class="n">n_segments</span><span class="p">),</span>
                                                     <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">))</span>
 
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">boundaries</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">boundaries</span><span class="p">)</span></div>
 
-</div>
+
 <div class="viewcode-block" id="agglomerative"><a class="viewcode-back" href="../../generated/librosa.segment.agglomerative.html#librosa.segment.agglomerative">[docs]</a><span class="k">def</span> <span class="nf">agglomerative</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">clusterer</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Bottom-up temporal segmentation.</span>
 
@@ -960,39 +820,39 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="c"># Make sure we have at least two dimensions</span>
+    <span class="c1"># Make sure we have at least two dimensions</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 
-    <span class="c"># Swap data index to position 0</span>
+    <span class="c1"># Swap data index to position 0</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">swapaxes</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
 
-    <span class="c"># Flatten the features</span>
+    <span class="c1"># Flatten the features</span>
     <span class="n">n</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="n">n</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">))</span>
 
     <span class="k">if</span> <span class="n">clusterer</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="c"># Connect the temporal connectivity graph</span>
+        <span class="c1"># Connect the temporal connectivity graph</span>
         <span class="n">grid</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">feature_extraction</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">grid_to_graph</span><span class="p">(</span><span class="n">n_x</span><span class="o">=</span><span class="n">n</span><span class="p">,</span>
                                                               <span class="n">n_y</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_z</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-        <span class="c"># Instantiate the clustering object</span>
+        <span class="c1"># Instantiate the clustering object</span>
         <span class="n">clusterer</span> <span class="o">=</span> <span class="n">sklearn</span><span class="o">.</span><span class="n">cluster</span><span class="o">.</span><span class="n">AgglomerativeClustering</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="n">k</span><span class="p">,</span>
                                                             <span class="n">connectivity</span><span class="o">=</span><span class="n">grid</span><span class="p">,</span>
                                                             <span class="n">memory</span><span class="o">=</span><span class="n">cache</span><span class="p">)</span>
 
-    <span class="c"># Fit the model</span>
+    <span class="c1"># Fit the model</span>
     <span class="n">clusterer</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 
-    <span class="c"># Find the change points from the labels</span>
+    <span class="c1"># Find the change points from the labels</span>
     <span class="n">boundaries</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">boundaries</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span>
         <span class="nb">list</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">clusterer</span><span class="o">.</span><span class="n">labels_</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)))</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">boundaries</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">boundaries</span><span class="p">)</span></div>
 
 
-<span class="c"># Deprecated functions</span>
-</div>
-<span class="nd">@util.decorators.deprecated</span><span class="p">(</span><span class="s">&#39;0.4&#39;</span><span class="p">,</span> <span class="s">&#39;0.5&#39;</span><span class="p">)</span>
+<span class="c1"># Deprecated functions</span>
+
+<span class="nd">@util.decorators.deprecated</span><span class="p">(</span><span class="s1">&#39;0.4&#39;</span><span class="p">,</span> <span class="s1">&#39;0.5&#39;</span><span class="p">)</span>
 <span class="nd">@cache</span>
 <div class="viewcode-block" id="structure_feature"><a class="viewcode-back" href="../../generated/librosa.segment.structure_feature.html#librosa.segment.structure_feature">[docs]</a><span class="k">def</span> <span class="nf">structure_feature</span><span class="p">(</span><span class="n">rec</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">inverse</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Compute the structure feature from a recurrence matrix.</span>
@@ -1070,6 +930,7 @@
         <span class="k">return</span> <span class="n">recurrence_to_lag</span><span class="p">(</span><span class="n">rec</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="n">pad</span><span class="p">)</span></div>
 </pre></div>
 
+           </div>
           </div>
           <footer>
   
@@ -1079,9 +940,10 @@
   <div role="contentinfo">
     <p>
         &copy; Copyright 2016, librosa development team.
+
     </p>
   </div>
-  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
 
@@ -1099,7 +961,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../',
-            VERSION:'0.4.2',
+            VERSION:'0.4.3',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true
