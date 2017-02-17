@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>librosa.util.utils &mdash; librosa 0.4.3 documentation</title>
+  <title>librosa.util.utils &mdash; librosa 0.5.0 documentation</title>
   
 
   
@@ -28,9 +28,14 @@
   
 
   
+    <link rel="stylesheet" href="../../../_static/banner.css" type="text/css" />
+  
 
   
-    <link rel="top" title="librosa 0.4.3 documentation" href="../../../index.html"/>
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="librosa 0.5.0 documentation" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -59,7 +64,7 @@
             
             
               <div class="version">
-                0.4
+                0.5
               </div>
             
           
@@ -99,9 +104,10 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../filters.html">Filters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../cache.html">Caching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ioformats.html">Advanced I/O Use Cases</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Release notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
 </ul>
 
@@ -147,7 +153,13 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <h1>Source code for librosa.util.utils</h1><div class="highlight"><pre>
+  
+
+
+
+
+
+<h1>Source code for librosa.util.utils</h1><div class="highlight"><pre>
 <span></span><span class="ch">#!/usr/bin/env python</span>
 <span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="sd">&quot;&quot;&quot;Utility functions&quot;&quot;&quot;</span>
@@ -156,19 +168,16 @@
 <span class="kn">import</span> <span class="nn">scipy.sparse</span>
 <span class="kn">import</span> <span class="nn">six</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">numpy.lib.stride_tricks</span> <span class="kn">import</span> <span class="n">as_strided</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">numpy.lib.stride_tricks</span> <span class="k">import</span> <span class="n">as_strided</span>
 
-<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">cache</span>
-<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">decorators</span>
-<span class="kn">from</span> <span class="nn">.exceptions</span> <span class="kn">import</span> <span class="n">ParameterError</span>
+<span class="kn">from</span> <span class="nn">..</span> <span class="k">import</span> <span class="n">cache</span>
+<span class="kn">from</span> <span class="nn">.exceptions</span> <span class="k">import</span> <span class="n">ParameterError</span>
 
 <span class="c1"># Constrain STFT block sizes to 256 KB</span>
 <span class="n">MAX_MEM_BLOCK</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="mi">8</span> <span class="o">*</span> <span class="mi">2</span><span class="o">**</span><span class="mi">10</span>
 
-<span class="n">SMALL_FLOAT</span> <span class="o">=</span> <span class="mf">1e-20</span>
-
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;MAX_MEM_BLOCK&#39;</span><span class="p">,</span> <span class="s1">&#39;SMALL_FLOAT&#39;</span><span class="p">,</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;MAX_MEM_BLOCK&#39;</span><span class="p">,</span>
            <span class="s1">&#39;frame&#39;</span><span class="p">,</span> <span class="s1">&#39;pad_center&#39;</span><span class="p">,</span> <span class="s1">&#39;fix_length&#39;</span><span class="p">,</span>
            <span class="s1">&#39;valid_audio&#39;</span><span class="p">,</span> <span class="s1">&#39;valid_int&#39;</span><span class="p">,</span> <span class="s1">&#39;valid_intervals&#39;</span><span class="p">,</span>
            <span class="s1">&#39;fix_frames&#39;</span><span class="p">,</span>
@@ -181,11 +190,10 @@
            <span class="s1">&#39;sync&#39;</span><span class="p">,</span>
            <span class="s1">&#39;softmask&#39;</span><span class="p">,</span>
            <span class="s1">&#39;buf_to_float&#39;</span><span class="p">,</span>
-           <span class="c1"># Deprecated functions</span>
-           <span class="s1">&#39;buf_to_int&#39;</span><span class="p">]</span>
+           <span class="s1">&#39;tiny&#39;</span><span class="p">]</span>
 
 
-<div class="viewcode-block" id="frame"><a class="viewcode-back" href="../../../generated/librosa.util.frame.html#librosa.feature.frame">[docs]</a><span class="k">def</span> <span class="nf">frame</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">frame_length</span><span class="o">=</span><span class="mi">2048</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="mi">512</span><span class="p">):</span>
+<div class="viewcode-block" id="frame"><a class="viewcode-back" href="../../../generated/librosa.util.frame.html#librosa.util.frame">[docs]</a><span class="k">def</span> <span class="nf">frame</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">frame_length</span><span class="o">=</span><span class="mi">2048</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="mi">512</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Slice a time series into overlapping frames.</span>
 
 <span class="sd">    This implementation uses low-level stride manipulation to avoid</span>
@@ -231,8 +239,12 @@
 
 <span class="sd">    &#39;&#39;&#39;</span>
 
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">frame_length</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s1">&#39;Buffer is too short (n=</span><span class="si">{:d}</span><span class="s1">)&#39;</span>
+                             <span class="s1">&#39; for frame_length=</span><span class="si">{:d}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">frame_length</span><span class="p">))</span>
+
     <span class="k">if</span> <span class="n">hop_length</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s1">&#39;Invalid hop_length: {:d}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">hop_length</span><span class="p">))</span>
+        <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s1">&#39;Invalid hop_length: </span><span class="si">{:d}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">hop_length</span><span class="p">))</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">y</span><span class="o">.</span><span class="n">flags</span><span class="p">[</span><span class="s1">&#39;C_CONTIGUOUS&#39;</span><span class="p">]:</span>
         <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s1">&#39;Input buffer must be contiguous.&#39;</span><span class="p">)</span>
@@ -242,10 +254,6 @@
     <span class="c1"># Compute the number of frames that will fit. The end may get truncated.</span>
     <span class="n">n_frames</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="nb">int</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">)</span> <span class="o">-</span> <span class="n">frame_length</span><span class="p">)</span> <span class="o">/</span> <span class="n">hop_length</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">n_frames</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s1">&#39;Buffer is too short (n={:d})&#39;</span>
-                             <span class="s1">&#39; for frame_length={:d}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">frame_length</span><span class="p">))</span>
-
     <span class="c1"># Vertical stride is one sample</span>
     <span class="c1"># Horizontal stride is `hop_length` samples</span>
     <span class="n">y_frames</span> <span class="o">=</span> <span class="n">as_strided</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">frame_length</span><span class="p">,</span> <span class="n">n_frames</span><span class="p">),</span>
@@ -253,8 +261,8 @@
     <span class="k">return</span> <span class="n">y_frames</span></div>
 
 
-<span class="nd">@cache</span>
-<div class="viewcode-block" id="valid_audio"><a class="viewcode-back" href="../../../generated/librosa.util.valid_audio.html#librosa.feature.valid_audio">[docs]</a><span class="k">def</span> <span class="nf">valid_audio</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">mono</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+<span class="nd">@cache</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+<div class="viewcode-block" id="valid_audio"><a class="viewcode-back" href="../../../generated/librosa.util.valid_audio.html#librosa.util.valid_audio">[docs]</a><span class="k">def</span> <span class="nf">valid_audio</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">mono</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Validate whether a variable contains valid, mono audio data.</span>
 
 
@@ -280,6 +288,10 @@
 <span class="sd">            - `mono == False` and `y.ndim` is not 1 or 2</span>
 <span class="sd">            - `np.isfinite(y).all()` is not True</span>
 
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    This function caches at level 20.</span>
+
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; # Only allow monophonic signals</span>
@@ -298,18 +310,18 @@
 
     <span class="k">if</span> <span class="n">mono</span> <span class="ow">and</span> <span class="n">y</span><span class="o">.</span><span class="n">ndim</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s1">&#39;Invalid shape for monophonic audio: &#39;</span>
-                             <span class="s1">&#39;ndim={:d}, shape={}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">ndim</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+                             <span class="s1">&#39;ndim=</span><span class="si">{:d}</span><span class="s1">, shape=</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">ndim</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
     <span class="k">elif</span> <span class="n">y</span><span class="o">.</span><span class="n">ndim</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s1">&#39;Invalid shape for audio: &#39;</span>
-                             <span class="s1">&#39;ndim={:d}, shape={}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">ndim</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+                             <span class="s1">&#39;ndim=</span><span class="si">{:d}</span><span class="s1">, shape=</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">ndim</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">():</span>
         <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s1">&#39;Audio buffer is not finite everywhere&#39;</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="bp">True</span></div>
+    <span class="k">return</span> <span class="kc">True</span></div>
 
 
-<div class="viewcode-block" id="valid_int"><a class="viewcode-back" href="../../../generated/librosa.util.valid_int.html#librosa.feature.valid_int">[docs]</a><span class="k">def</span> <span class="nf">valid_int</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">cast</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="valid_int"><a class="viewcode-back" href="../../../generated/librosa.util.valid_int.html#librosa.util.valid_int">[docs]</a><span class="k">def</span> <span class="nf">valid_int</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">cast</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Ensure that an input value is integer-typed.</span>
 <span class="sd">    This is primarily useful for ensuring integrable-valued</span>
 <span class="sd">    array indices.</span>
@@ -334,7 +346,7 @@
 <span class="sd">        If `cast` is provided and is not callable.</span>
 <span class="sd">    &#39;&#39;&#39;</span>
 
-    <span class="k">if</span> <span class="n">cast</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">cast</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">cast</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">six</span><span class="o">.</span><span class="n">callable</span><span class="p">(</span><span class="n">cast</span><span class="p">):</span>
@@ -343,7 +355,7 @@
     <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">cast</span><span class="p">(</span><span class="n">x</span><span class="p">))</span></div>
 
 
-<div class="viewcode-block" id="valid_intervals"><a class="viewcode-back" href="../../../generated/librosa.util.valid_intervals.html#librosa.feature.valid_intervals">[docs]</a><span class="k">def</span> <span class="nf">valid_intervals</span><span class="p">(</span><span class="n">intervals</span><span class="p">):</span>
+<div class="viewcode-block" id="valid_intervals"><a class="viewcode-back" href="../../../generated/librosa.util.valid_intervals.html#librosa.util.valid_intervals">[docs]</a><span class="k">def</span> <span class="nf">valid_intervals</span><span class="p">(</span><span class="n">intervals</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Ensure that an array is a valid representation of time intervals:</span>
 
 <span class="sd">        - intervals.ndim == 2</span>
@@ -363,11 +375,10 @@
     <span class="k">if</span> <span class="n">intervals</span><span class="o">.</span><span class="n">ndim</span> <span class="o">!=</span> <span class="mi">2</span> <span class="ow">or</span> <span class="n">intervals</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s1">&#39;intervals must have shape (n, 2)&#39;</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="bp">True</span></div>
+    <span class="k">return</span> <span class="kc">True</span></div>
 
 
-<span class="nd">@cache</span>
-<div class="viewcode-block" id="pad_center"><a class="viewcode-back" href="../../../generated/librosa.util.pad_center.html#librosa.feature.pad_center">[docs]</a><span class="k">def</span> <span class="nf">pad_center</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="pad_center"><a class="viewcode-back" href="../../../generated/librosa.util.pad_center.html#librosa.util.pad_center">[docs]</a><span class="k">def</span> <span class="nf">pad_center</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Wrapper for np.pad to automatically center an array prior to padding.</span>
 <span class="sd">    This is analogous to `str.center()`</span>
 
@@ -434,14 +445,13 @@
     <span class="n">lengths</span><span class="p">[</span><span class="n">axis</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">lpad</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">size</span> <span class="o">-</span> <span class="n">n</span> <span class="o">-</span> <span class="n">lpad</span><span class="p">))</span>
 
     <span class="k">if</span> <span class="n">lpad</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">((</span><span class="s1">&#39;Target size ({:d}) must be &#39;</span>
-                              <span class="s1">&#39;at least input size ({:d})&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+        <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">((</span><span class="s1">&#39;Target size (</span><span class="si">{:d}</span><span class="s1">) must be &#39;</span>
+                              <span class="s1">&#39;at least input size (</span><span class="si">{:d}</span><span class="s1">)&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
 
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">lengths</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 
-<span class="nd">@cache</span>
-<div class="viewcode-block" id="fix_length"><a class="viewcode-back" href="../../../generated/librosa.util.fix_length.html#librosa.feature.fix_length">[docs]</a><span class="k">def</span> <span class="nf">fix_length</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="fix_length"><a class="viewcode-back" href="../../../generated/librosa.util.fix_length.html#librosa.util.fix_length">[docs]</a><span class="k">def</span> <span class="nf">fix_length</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">size</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Fix the length an array `data` to exactly `size`.</span>
 
 <span class="sd">    If `data.shape[axis] &lt; n`, pad according to the provided kwargs.</span>
@@ -490,7 +500,7 @@
     <span class="n">n</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="n">axis</span><span class="p">]</span>
 
     <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="n">size</span><span class="p">:</span>
-        <span class="n">slices</span> <span class="o">=</span> <span class="p">[</span><span class="nb">slice</span><span class="p">(</span><span class="bp">None</span><span class="p">)]</span> <span class="o">*</span> <span class="n">data</span><span class="o">.</span><span class="n">ndim</span>
+        <span class="n">slices</span> <span class="o">=</span> <span class="p">[</span><span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">)]</span> <span class="o">*</span> <span class="n">data</span><span class="o">.</span><span class="n">ndim</span>
         <span class="n">slices</span><span class="p">[</span><span class="n">axis</span><span class="p">]</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">data</span><span class="p">[</span><span class="n">slices</span><span class="p">]</span>
 
@@ -502,7 +512,7 @@
     <span class="k">return</span> <span class="n">data</span></div>
 
 
-<div class="viewcode-block" id="fix_frames"><a class="viewcode-back" href="../../../generated/librosa.util.fix_frames.html#librosa.feature.fix_frames">[docs]</a><span class="k">def</span> <span class="nf">fix_frames</span><span class="p">(</span><span class="n">frames</span><span class="p">,</span> <span class="n">x_min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">x_max</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+<div class="viewcode-block" id="fix_frames"><a class="viewcode-back" href="../../../generated/librosa.util.fix_frames.html#librosa.util.fix_frames">[docs]</a><span class="k">def</span> <span class="nf">fix_frames</span><span class="p">(</span><span class="n">frames</span><span class="p">,</span> <span class="n">x_min</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">x_max</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Fix a list of frames to lie within [x_min, x_max]</span>
 
 <span class="sd">    Examples</span>
@@ -567,28 +577,27 @@
     <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">frames</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">):</span>
         <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s1">&#39;Negative frame index detected&#39;</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">pad</span> <span class="ow">and</span> <span class="p">(</span><span class="n">x_min</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span> <span class="ow">or</span> <span class="n">x_max</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">pad</span> <span class="ow">and</span> <span class="p">(</span><span class="n">x_min</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">x_max</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">):</span>
         <span class="n">frames</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">frames</span><span class="p">,</span> <span class="n">x_min</span><span class="p">,</span> <span class="n">x_max</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">pad</span><span class="p">:</span>
         <span class="n">pad_data</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="k">if</span> <span class="n">x_min</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">x_min</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">pad_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x_min</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">x_max</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">x_max</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">pad_data</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x_max</span><span class="p">)</span>
         <span class="n">frames</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">((</span><span class="n">pad_data</span><span class="p">,</span> <span class="n">frames</span><span class="p">))</span>
 
-    <span class="k">if</span> <span class="n">x_min</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">x_min</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">frames</span> <span class="o">=</span> <span class="n">frames</span><span class="p">[</span><span class="n">frames</span> <span class="o">&gt;=</span> <span class="n">x_min</span><span class="p">]</span>
 
-    <span class="k">if</span> <span class="n">x_max</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">x_max</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">frames</span> <span class="o">=</span> <span class="n">frames</span><span class="p">[</span><span class="n">frames</span> <span class="o">&lt;=</span> <span class="n">x_max</span><span class="p">]</span>
 
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">frames</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span></div>
 
 
-<span class="nd">@cache</span>
-<div class="viewcode-block" id="axis_sort"><a class="viewcode-back" href="../../../generated/librosa.util.axis_sort.html#librosa.feature.axis_sort">[docs]</a><span class="k">def</span> <span class="nf">axis_sort</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="axis_sort"><a class="viewcode-back" href="../../../generated/librosa.util.axis_sort.html#librosa.util.axis_sort">[docs]</a><span class="k">def</span> <span class="nf">axis_sort</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Sort an array along its rows or columns.</span>
 
 <span class="sd">    Examples</span>
@@ -617,15 +626,15 @@
 <span class="sd">    &gt;&gt;&gt; import matplotlib.pyplot as plt</span>
 <span class="sd">    &gt;&gt;&gt; plt.figure()</span>
 <span class="sd">    &gt;&gt;&gt; plt.subplot(2, 2, 1)</span>
-<span class="sd">    &gt;&gt;&gt; librosa.display.specshow(librosa.logamplitude(W**2, ref_power=np.max),</span>
+<span class="sd">    &gt;&gt;&gt; librosa.display.specshow(librosa.amplitude_to_db(W, ref=np.max),</span>
 <span class="sd">    ...                          y_axis=&#39;log&#39;)</span>
 <span class="sd">    &gt;&gt;&gt; plt.title(&#39;W&#39;)</span>
 <span class="sd">    &gt;&gt;&gt; plt.subplot(2, 2, 2)</span>
 <span class="sd">    &gt;&gt;&gt; librosa.display.specshow(H, x_axis=&#39;time&#39;)</span>
 <span class="sd">    &gt;&gt;&gt; plt.title(&#39;H&#39;)</span>
 <span class="sd">    &gt;&gt;&gt; plt.subplot(2, 2, 3)</span>
-<span class="sd">    &gt;&gt;&gt; librosa.display.specshow(librosa.logamplitude(W_sort**2,</span>
-<span class="sd">    ...                                               ref_power=np.max),</span>
+<span class="sd">    &gt;&gt;&gt; librosa.display.specshow(librosa.amplitude_to_db(W_sort,</span>
+<span class="sd">    ...                                                  ref=np.max),</span>
 <span class="sd">    ...                          y_axis=&#39;log&#39;)</span>
 <span class="sd">    &gt;&gt;&gt; plt.title(&#39;W sorted&#39;)</span>
 <span class="sd">    &gt;&gt;&gt; plt.subplot(2, 2, 4)</span>
@@ -667,7 +676,7 @@
 <span class="sd">        If `S` does not have exactly 2 dimensions (`S.ndim != 2`)</span>
 <span class="sd">    &#39;&#39;&#39;</span>
 
-    <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span>
 
     <span class="k">if</span> <span class="n">S</span><span class="o">.</span><span class="n">ndim</span> <span class="o">!=</span> <span class="mi">2</span><span class="p">:</span>
@@ -676,7 +685,7 @@
     <span class="n">bin_idx</span> <span class="o">=</span> <span class="n">value</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">mod</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">axis</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">ndim</span><span class="p">))</span>
     <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">bin_idx</span><span class="p">)</span>
 
-    <span class="n">sort_slice</span> <span class="o">=</span> <span class="p">[</span><span class="nb">slice</span><span class="p">(</span><span class="bp">None</span><span class="p">)]</span> <span class="o">*</span> <span class="n">S</span><span class="o">.</span><span class="n">ndim</span>
+    <span class="n">sort_slice</span> <span class="o">=</span> <span class="p">[</span><span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">)]</span> <span class="o">*</span> <span class="n">S</span><span class="o">.</span><span class="n">ndim</span>
     <span class="n">sort_slice</span><span class="p">[</span><span class="n">axis</span><span class="p">]</span> <span class="o">=</span> <span class="n">idx</span>
 
     <span class="k">if</span> <span class="n">index</span><span class="p">:</span>
@@ -685,12 +694,86 @@
         <span class="k">return</span> <span class="n">S</span><span class="p">[</span><span class="n">sort_slice</span><span class="p">]</span></div>
 
 
-<span class="nd">@cache</span>
-<div class="viewcode-block" id="normalize"><a class="viewcode-back" href="../../../generated/librosa.util.normalize.html#librosa.feature.normalize">[docs]</a><span class="k">def</span> <span class="nf">normalize</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;Normalize the columns or rows of a matrix</span>
+<span class="nd">@cache</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
+<div class="viewcode-block" id="normalize"><a class="viewcode-back" href="../../../generated/librosa.util.normalize.html#librosa.util.normalize">[docs]</a><span class="k">def</span> <span class="nf">normalize</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Normalize an array along a chosen axis.</span>
 
-<span class="sd">    .. note::</span>
-<span class="sd">         Columns/rows with length 0 will be left as zeros.</span>
+<span class="sd">    Given a norm (described below) and a target axis, the input</span>
+<span class="sd">    array is scaled so that</span>
+
+<span class="sd">        `norm(S, axis=axis) == 1`</span>
+
+<span class="sd">    For example, `axis=0` normalizes each column of a 2-d array</span>
+<span class="sd">    by aggregating over the rows (0-axis).</span>
+<span class="sd">    Similarly, `axis=1` normalizes each row of a 2-d array.</span>
+
+<span class="sd">    This function also supports thresholding small-norm slices:</span>
+<span class="sd">    any slice (i.e., row or column) with norm below a specified</span>
+<span class="sd">    `threshold` can be left un-normalized, set to all-zeros, or</span>
+<span class="sd">    filled with uniform non-zero values that normalize to 1.</span>
+
+<span class="sd">    Note: the semantics of this function differ from</span>
+<span class="sd">    `scipy.linalg.norm` in two ways: multi-dimensional arrays</span>
+<span class="sd">    are supported, but matrix-norms are not.</span>
+
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    S : np.ndarray</span>
+<span class="sd">        The matrix to normalize</span>
+
+<span class="sd">    norm : {np.inf, -np.inf, 0, float &gt; 0, None}</span>
+<span class="sd">        - `np.inf`  : maximum absolute value</span>
+<span class="sd">        - `-np.inf` : mininum absolute value</span>
+<span class="sd">        - `0`    : number of non-zeros (the support)</span>
+<span class="sd">        - float  : corresponding l_p norm</span>
+<span class="sd">            See `scipy.linalg.norm` for details.</span>
+<span class="sd">        - None : no normalization is performed</span>
+
+<span class="sd">    axis : int [scalar]</span>
+<span class="sd">        Axis along which to compute the norm.</span>
+
+<span class="sd">    threshold : number &gt; 0 [optional]</span>
+<span class="sd">        Only the columns (or rows) with norm at least `threshold` are</span>
+<span class="sd">        normalized.</span>
+
+<span class="sd">        By default, the threshold is determined from</span>
+<span class="sd">        the numerical precision of `S.dtype`.</span>
+
+<span class="sd">    fill : None or bool</span>
+<span class="sd">        If None, then columns (or rows) with norm below `threshold`</span>
+<span class="sd">        are left as is.</span>
+
+<span class="sd">        If False, then columns (rows) with norm below `threshold`</span>
+<span class="sd">        are set to 0.</span>
+
+<span class="sd">        If True, then columns (rows) with norm below `threshold`</span>
+<span class="sd">        are filled uniformly such that the corresponding norm is 1.</span>
+
+<span class="sd">        .. note:: `fill=True` is incompatible with `norm=0` because</span>
+<span class="sd">            no uniform vector exists with l0 &quot;norm&quot; equal to 1.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    S_norm : np.ndarray [shape=S.shape]</span>
+<span class="sd">        Normalized array</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    ParameterError</span>
+<span class="sd">        If `norm` is not among the valid types defined above</span>
+
+<span class="sd">        If `S` is not finite</span>
+
+<span class="sd">        If `fill=True` and `norm=0`</span>
+
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    scipy.linalg.norm</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    This function caches at level 40.</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
@@ -726,64 +809,119 @@
 <span class="sd">           [ 0.   ,  0.   ,  0.   ,  0.5  ],</span>
 <span class="sd">           [ 0.123,  0.236,  0.408,  0.5  ]])</span>
 
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    S : np.ndarray [shape=(d, n)]</span>
-<span class="sd">        The matrix to normalize</span>
+<span class="sd">    &gt;&gt;&gt; # Thresholding and filling</span>
+<span class="sd">    &gt;&gt;&gt; S[:, -1] = 1e-308</span>
+<span class="sd">    &gt;&gt;&gt; S</span>
+<span class="sd">    array([[ -8.000e+000,   4.000e+000,  -2.000e+000,</span>
+<span class="sd">              1.000e-308],</span>
+<span class="sd">           [ -1.000e+000,   1.000e+000,  -1.000e+000,</span>
+<span class="sd">              1.000e-308],</span>
+<span class="sd">           [  0.000e+000,   0.000e+000,   0.000e+000,</span>
+<span class="sd">              1.000e-308],</span>
+<span class="sd">           [  1.000e+000,   1.000e+000,   1.000e+000,</span>
+<span class="sd">              1.000e-308]])</span>
 
-<span class="sd">    norm : {np.inf, -np.inf, 0, float &gt; 0, None}</span>
-<span class="sd">        - `np.inf`  : maximum absolute value</span>
-<span class="sd">        - `-np.inf` : mininum absolute value</span>
-<span class="sd">        - `0`    : number of non-zeros</span>
-<span class="sd">        - float  : corresponding l_p norm.</span>
-<span class="sd">            See `scipy.linalg.norm` for details.</span>
-<span class="sd">        - None : no normalization is performed</span>
-
-<span class="sd">    axis : int [scalar]</span>
-<span class="sd">        Axis along which to compute the norm.</span>
-<span class="sd">        `axis=0` will normalize columns, `axis=1` will normalize rows.</span>
-<span class="sd">        `axis=None` will normalize according to the entire matrix.</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    S_norm : np.ndarray [shape=S.shape]</span>
-<span class="sd">        Normalized matrix</span>
-
-<span class="sd">    Raises</span>
-<span class="sd">    ------</span>
-<span class="sd">    ParameterError</span>
-<span class="sd">        If `norm` is not among the valid types defined above</span>
+<span class="sd">    &gt;&gt;&gt; # By default, small-norm columns are left untouched</span>
+<span class="sd">    &gt;&gt;&gt; librosa.util.normalize(S)</span>
+<span class="sd">    array([[ -1.000e+000,   1.000e+000,  -1.000e+000,</span>
+<span class="sd">              1.000e-308],</span>
+<span class="sd">           [ -1.250e-001,   2.500e-001,  -5.000e-001,</span>
+<span class="sd">              1.000e-308],</span>
+<span class="sd">           [  0.000e+000,   0.000e+000,   0.000e+000,</span>
+<span class="sd">              1.000e-308],</span>
+<span class="sd">           [  1.250e-001,   2.500e-001,   5.000e-001,</span>
+<span class="sd">              1.000e-308]])</span>
+<span class="sd">    &gt;&gt;&gt; # Small-norm columns can be zeroed out</span>
+<span class="sd">    &gt;&gt;&gt; librosa.util.normalize(S, fill=False)</span>
+<span class="sd">    array([[-1.   ,  1.   , -1.   ,  0.   ],</span>
+<span class="sd">           [-0.125,  0.25 , -0.5  ,  0.   ],</span>
+<span class="sd">           [ 0.   ,  0.   ,  0.   ,  0.   ],</span>
+<span class="sd">           [ 0.125,  0.25 ,  0.5  ,  0.   ]])</span>
+<span class="sd">    &gt;&gt;&gt; # Or set to constant with unit-norm</span>
+<span class="sd">    &gt;&gt;&gt; librosa.util.normalize(S, fill=True)</span>
+<span class="sd">    array([[-1.   ,  1.   , -1.   ,  1.   ],</span>
+<span class="sd">           [-0.125,  0.25 , -0.5  ,  1.   ],</span>
+<span class="sd">           [ 0.   ,  0.   ,  0.   ,  1.   ],</span>
+<span class="sd">           [ 0.125,  0.25 ,  0.5  ,  1.   ]])</span>
+<span class="sd">    &gt;&gt;&gt; # With an l1 norm instead of max-norm</span>
+<span class="sd">    &gt;&gt;&gt; librosa.util.normalize(S, norm=1, fill=True)</span>
+<span class="sd">    array([[-0.8  ,  0.667, -0.5  ,  0.25 ],</span>
+<span class="sd">           [-0.1  ,  0.167, -0.25 ,  0.25 ],</span>
+<span class="sd">           [ 0.   ,  0.   ,  0.   ,  0.25 ],</span>
+<span class="sd">           [ 0.1  ,  0.167,  0.25 ,  0.25 ]])</span>
 <span class="sd">    &#39;&#39;&#39;</span>
 
+    <span class="c1"># Avoid div-by-zero</span>
+    <span class="k">if</span> <span class="n">threshold</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">threshold</span> <span class="o">=</span> <span class="n">tiny</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="n">threshold</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s1">&#39;threshold=</span><span class="si">{}</span><span class="s1"> must be strictly &#39;</span>
+                             <span class="s1">&#39;positive&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">threshold</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="n">fill</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">]:</span>
+        <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s1">&#39;fill=</span><span class="si">{}</span><span class="s1"> must be None or boolean&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">fill</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">S</span><span class="p">)):</span>
+        <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s1">&#39;Input must be finite&#39;</span><span class="p">)</span>
+
     <span class="c1"># All norms only depend on magnitude, let&#39;s do that first</span>
-    <span class="n">mag</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
+    <span class="n">mag</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
+
+    <span class="c1"># For max/min norms, filling with 1 works</span>
+    <span class="n">fill_norm</span> <span class="o">=</span> <span class="mi">1</span>
 
     <span class="k">if</span> <span class="n">norm</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">:</span>
-        <span class="n">length</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">mag</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">length</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">mag</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
     <span class="k">elif</span> <span class="n">norm</span> <span class="o">==</span> <span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">:</span>
-        <span class="n">length</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">mag</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="n">length</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">mag</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
     <span class="k">elif</span> <span class="n">norm</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">length</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">mag</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">fill</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s1">&#39;Cannot normalize with norm=0 and fill=True&#39;</span><span class="p">)</span>
+
+        <span class="n">length</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">mag</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">mag</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
 
     <span class="k">elif</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">norm</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">number</span><span class="p">)</span> <span class="ow">and</span> <span class="n">norm</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="n">length</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">mag</span> <span class="o">**</span> <span class="n">norm</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mf">1.</span><span class="o">/</span><span class="n">norm</span><span class="p">)</span>
+        <span class="n">length</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">mag</span><span class="o">**</span><span class="n">norm</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="n">axis</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mf">1.</span><span class="o">/</span><span class="n">norm</span><span class="p">)</span>
 
-    <span class="k">elif</span> <span class="n">norm</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">axis</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">fill_norm</span> <span class="o">=</span> <span class="n">mag</span><span class="o">.</span><span class="n">size</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mf">1.</span><span class="o">/</span><span class="n">norm</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">fill_norm</span> <span class="o">=</span> <span class="n">mag</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="n">axis</span><span class="p">]</span><span class="o">**</span><span class="p">(</span><span class="o">-</span><span class="mf">1.</span><span class="o">/</span><span class="n">norm</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="n">norm</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">S</span>
 
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s1">&#39;Unsupported norm: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">norm</span><span class="p">)))</span>
+        <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s1">&#39;Unsupported norm: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">norm</span><span class="p">)))</span>
 
-    <span class="c1"># Avoid div-by-zero</span>
-    <span class="n">length</span><span class="p">[</span><span class="n">length</span> <span class="o">&lt;</span> <span class="n">SMALL_FLOAT</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+    <span class="c1"># indices where norm is below the threshold</span>
+    <span class="n">small_idx</span> <span class="o">=</span> <span class="n">length</span> <span class="o">&lt;</span> <span class="n">threshold</span>
 
-    <span class="k">return</span> <span class="n">S</span> <span class="o">/</span> <span class="n">length</span></div>
+    <span class="k">if</span> <span class="n">fill</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># Leave small indices un-normalized</span>
+        <span class="n">length</span><span class="p">[</span><span class="n">small_idx</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span>
+        <span class="n">Snorm</span> <span class="o">=</span> <span class="n">S</span> <span class="o">/</span> <span class="n">length</span>
+
+    <span class="k">elif</span> <span class="n">fill</span><span class="p">:</span>
+        <span class="c1"># If we have a non-zero fill value, we locate those entries by</span>
+        <span class="c1"># doing a nan-divide.</span>
+        <span class="c1"># If S was finite, then length is finite (except for small positions)</span>
+        <span class="n">length</span><span class="p">[</span><span class="n">small_idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+        <span class="n">Snorm</span> <span class="o">=</span> <span class="n">S</span> <span class="o">/</span> <span class="n">length</span>
+        <span class="n">Snorm</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">Snorm</span><span class="p">)]</span> <span class="o">=</span> <span class="n">fill_norm</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Set small values to zero by doing an inf-divide.</span>
+        <span class="c1"># This is safe (by IEEE-754) as long as S is finite.</span>
+        <span class="n">length</span><span class="p">[</span><span class="n">small_idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">inf</span>
+        <span class="n">Snorm</span> <span class="o">=</span> <span class="n">S</span> <span class="o">/</span> <span class="n">length</span>
+
+    <span class="k">return</span> <span class="n">Snorm</span></div>
 
 
-<span class="nd">@cache</span>
-<div class="viewcode-block" id="match_intervals"><a class="viewcode-back" href="../../../generated/librosa.util.match_intervals.html#librosa.feature.match_intervals">[docs]</a><span class="k">def</span> <span class="nf">match_intervals</span><span class="p">(</span><span class="n">intervals_from</span><span class="p">,</span> <span class="n">intervals_to</span><span class="p">):</span>
+<div class="viewcode-block" id="match_intervals"><a class="viewcode-back" href="../../../generated/librosa.util.match_intervals.html#librosa.util.match_intervals">[docs]</a><span class="k">def</span> <span class="nf">match_intervals</span><span class="p">(</span><span class="n">intervals_from</span><span class="p">,</span> <span class="n">intervals_to</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Match one set of time intervals to another.</span>
 
 <span class="sd">    This can be useful for tasks such as mapping beat timings</span>
@@ -847,8 +985,7 @@
     <span class="k">return</span> <span class="n">output</span></div>
 
 
-<span class="nd">@cache</span>
-<div class="viewcode-block" id="match_events"><a class="viewcode-back" href="../../../generated/librosa.util.match_events.html#librosa.feature.match_events">[docs]</a><span class="k">def</span> <span class="nf">match_events</span><span class="p">(</span><span class="n">events_from</span><span class="p">,</span> <span class="n">events_to</span><span class="p">):</span>
+<div class="viewcode-block" id="match_events"><a class="viewcode-back" href="../../../generated/librosa.util.match_events.html#librosa.util.match_events">[docs]</a><span class="k">def</span> <span class="nf">match_events</span><span class="p">(</span><span class="n">events_from</span><span class="p">,</span> <span class="n">events_to</span><span class="p">,</span> <span class="n">left</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">right</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Match one set of events to another.</span>
 
 <span class="sd">    This is useful for tasks such as matching beats to the nearest</span>
@@ -886,6 +1023,11 @@
 <span class="sd">      Array of events (eg, times, sample or frame indices) to</span>
 <span class="sd">      match against.</span>
 
+<span class="sd">    left : bool</span>
+<span class="sd">    right : bool</span>
+<span class="sd">        If `False`, then matched events cannot be to the left (or right)</span>
+<span class="sd">        of source events.</span>
+
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    event_mapping : np.ndarray [shape=(n,)]</span>
@@ -907,8 +1049,29 @@
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">events_from</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">events_to</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s1">&#39;Attempting to match empty event list&#39;</span><span class="p">)</span>
 
+    <span class="c1"># If we can&#39;t match left or right, then only strict equivalence</span>
+    <span class="c1"># counts as a match.</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">left</span> <span class="ow">or</span> <span class="n">right</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">in1d</span><span class="p">(</span><span class="n">events_from</span><span class="p">,</span> <span class="n">events_to</span><span class="p">)):</span>
+            <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s1">&#39;Cannot match events with left=right=False &#39;</span>
+                                 <span class="s1">&#39;and events_from is not contained &#39;</span>
+                                 <span class="s1">&#39;in events_to&#39;</span><span class="p">)</span>
+
+    <span class="c1"># If we can&#39;t match to the left, then there should be at least one</span>
+    <span class="c1"># target event greater-equal to every source event</span>
+    <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">left</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">max</span><span class="p">(</span><span class="n">events_to</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">max</span><span class="p">(</span><span class="n">events_from</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s1">&#39;Cannot match events with left=False &#39;</span>
+                             <span class="s1">&#39;and max(events_to) &lt; max(events_from)&#39;</span><span class="p">)</span>
+
+    <span class="c1"># If we can&#39;t match to the right, then there should be at least one</span>
+    <span class="c1"># target event less-equal to every source event</span>
+    <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">right</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">min</span><span class="p">(</span><span class="n">events_to</span><span class="p">)</span> <span class="o">&gt;</span> <span class="nb">min</span><span class="p">(</span><span class="n">events_from</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s1">&#39;Cannot match events with right=False &#39;</span>
+                             <span class="s1">&#39;and min(events_to) &gt; min(events_from)&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Pre-allocate the output array</span>
     <span class="n">output</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty_like</span><span class="p">(</span><span class="n">events_from</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int</span><span class="p">)</span>
 
+    <span class="c1"># Compute how many rows we can process at once within the memory block</span>
     <span class="n">n_rows</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">MAX_MEM_BLOCK</span> <span class="o">/</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">prod</span><span class="p">(</span><span class="n">output</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">events_to</span><span class="p">)</span>
                                   <span class="o">*</span> <span class="n">events_from</span><span class="o">.</span><span class="n">itemsize</span><span class="p">))</span>
 
@@ -920,15 +1083,28 @@
         <span class="n">bl_t</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">bl_s</span> <span class="o">+</span> <span class="n">n_rows</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">events_from</span><span class="p">))</span>
 
         <span class="n">event_block</span> <span class="o">=</span> <span class="n">events_from</span><span class="p">[</span><span class="n">bl_s</span><span class="p">:</span><span class="n">bl_t</span><span class="p">]</span>
-        <span class="n">output</span><span class="p">[</span><span class="n">bl_s</span><span class="p">:</span><span class="n">bl_t</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">subtract</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">event_block</span><span class="p">,</span>
-                                                               <span class="n">events_to</span><span class="p">)),</span>
-                                      <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># distance[i, j] = |events_from - events_to[j]|</span>
+        <span class="n">distance</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">subtract</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">event_block</span><span class="p">,</span>
+                                            <span class="n">events_to</span><span class="p">))</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
+
+        <span class="c1"># If we can&#39;t match to the right, squash all comparisons where</span>
+        <span class="c1"># events_to[j] &gt; events_from[i]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">right</span><span class="p">:</span>
+            <span class="n">distance</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">less</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">event_block</span><span class="p">,</span> <span class="n">events_to</span><span class="p">)]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+        <span class="c1"># If we can&#39;t match to the left, squash all comparisons where</span>
+        <span class="c1"># events_to[j] &lt; events_from[i]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">left</span><span class="p">:</span>
+            <span class="n">distance</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">greater</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">event_block</span><span class="p">,</span> <span class="n">events_to</span><span class="p">)]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+
+        <span class="c1"># Find the minimum distance point from whatever&#39;s left after squashing</span>
+        <span class="n">output</span><span class="p">[</span><span class="n">bl_s</span><span class="p">:</span><span class="n">bl_t</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nanargmin</span><span class="p">(</span><span class="n">distance</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">output</span></div>
 
 
-<span class="nd">@cache</span>
-<div class="viewcode-block" id="localmax"><a class="viewcode-back" href="../../../generated/librosa.util.localmax.html#librosa.feature.localmax">[docs]</a><span class="k">def</span> <span class="nf">localmax</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<div class="viewcode-block" id="localmax"><a class="viewcode-back" href="../../../generated/librosa.util.localmax.html#librosa.util.localmax">[docs]</a><span class="k">def</span> <span class="nf">localmax</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Find local maxima in an array `x`.</span>
 
 <span class="sd">    Examples</span>
@@ -968,17 +1144,16 @@
 
     <span class="n">x_pad</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">pad</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">paddings</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;edge&#39;</span><span class="p">)</span>
 
-    <span class="n">inds1</span> <span class="o">=</span> <span class="p">[</span><span class="nb">slice</span><span class="p">(</span><span class="bp">None</span><span class="p">)]</span> <span class="o">*</span> <span class="n">x</span><span class="o">.</span><span class="n">ndim</span>
+    <span class="n">inds1</span> <span class="o">=</span> <span class="p">[</span><span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">)]</span> <span class="o">*</span> <span class="n">x</span><span class="o">.</span><span class="n">ndim</span>
     <span class="n">inds1</span><span class="p">[</span><span class="n">axis</span><span class="p">]</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">)</span>
 
-    <span class="n">inds2</span> <span class="o">=</span> <span class="p">[</span><span class="nb">slice</span><span class="p">(</span><span class="bp">None</span><span class="p">)]</span> <span class="o">*</span> <span class="n">x</span><span class="o">.</span><span class="n">ndim</span>
+    <span class="n">inds2</span> <span class="o">=</span> <span class="p">[</span><span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">)]</span> <span class="o">*</span> <span class="n">x</span><span class="o">.</span><span class="n">ndim</span>
     <span class="n">inds2</span><span class="p">[</span><span class="n">axis</span><span class="p">]</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">x_pad</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="n">axis</span><span class="p">])</span>
 
     <span class="k">return</span> <span class="p">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="n">x_pad</span><span class="p">[</span><span class="n">inds1</span><span class="p">])</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">x</span> <span class="o">&gt;=</span> <span class="n">x_pad</span><span class="p">[</span><span class="n">inds2</span><span class="p">])</span></div>
 
 
-<span class="nd">@cache</span>
-<div class="viewcode-block" id="peak_pick"><a class="viewcode-back" href="../../../generated/librosa.util.peak_pick.html#librosa.feature.peak_pick">[docs]</a><span class="k">def</span> <span class="nf">peak_pick</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pre_max</span><span class="p">,</span> <span class="n">post_max</span><span class="p">,</span> <span class="n">pre_avg</span><span class="p">,</span> <span class="n">post_avg</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">wait</span><span class="p">):</span>
+<div class="viewcode-block" id="peak_pick"><a class="viewcode-back" href="../../../generated/librosa.util.peak_pick.html#librosa.util.peak_pick">[docs]</a><span class="k">def</span> <span class="nf">peak_pick</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">pre_max</span><span class="p">,</span> <span class="n">post_max</span><span class="p">,</span> <span class="n">pre_avg</span><span class="p">,</span> <span class="n">post_avg</span><span class="p">,</span> <span class="n">delta</span><span class="p">,</span> <span class="n">wait</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Uses a flexible heuristic to pick peaks in a signal.</span>
 
 <span class="sd">    A sample n is selected as an peak if the corresponding x[n]</span>
@@ -1045,19 +1220,20 @@
 <span class="sd">           510, 525, 536, 555, 570, 590, 609, 625, 639])</span>
 
 <span class="sd">    &gt;&gt;&gt; import matplotlib.pyplot as plt</span>
+<span class="sd">    &gt;&gt;&gt; times = librosa.frames_to_time(np.arange(len(onset_env)),</span>
+<span class="sd">    ...                                sr=sr, hop_length=512)</span>
 <span class="sd">    &gt;&gt;&gt; plt.figure()</span>
-<span class="sd">    &gt;&gt;&gt; plt.subplot(2, 1, 1)</span>
-<span class="sd">    &gt;&gt;&gt; plt.plot(onset_env[:30 * sr // 512], alpha=0.8, label=&#39;Onset strength&#39;)</span>
-<span class="sd">    &gt;&gt;&gt; plt.vlines(peaks[peaks &lt; 30 * sr // 512], 0,</span>
+<span class="sd">    &gt;&gt;&gt; ax = plt.subplot(2, 1, 2)</span>
+<span class="sd">    &gt;&gt;&gt; D = librosa.stft(y)</span>
+<span class="sd">    &gt;&gt;&gt; librosa.display.specshow(librosa.amplitude_to_db(D, ref=np.max),</span>
+<span class="sd">    ...                          y_axis=&#39;log&#39;, x_axis=&#39;time&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; plt.subplot(2, 1, 1, sharex=ax)</span>
+<span class="sd">    &gt;&gt;&gt; plt.plot(times, onset_env, alpha=0.8, label=&#39;Onset strength&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; plt.vlines(times[peaks], 0,</span>
 <span class="sd">    ...            onset_env.max(), color=&#39;r&#39;, alpha=0.8,</span>
 <span class="sd">    ...            label=&#39;Selected peaks&#39;)</span>
 <span class="sd">    &gt;&gt;&gt; plt.legend(frameon=True, framealpha=0.8)</span>
 <span class="sd">    &gt;&gt;&gt; plt.axis(&#39;tight&#39;)</span>
-<span class="sd">    &gt;&gt;&gt; plt.axis(&#39;off&#39;)</span>
-<span class="sd">    &gt;&gt;&gt; plt.subplot(2, 1, 2)</span>
-<span class="sd">    &gt;&gt;&gt; D = np.abs(librosa.stft(y))**2</span>
-<span class="sd">    &gt;&gt;&gt; librosa.display.specshow(librosa.logamplitude(D, ref_power=np.max),</span>
-<span class="sd">    ...                          y_axis=&#39;log&#39;, x_axis=&#39;time&#39;)</span>
 <span class="sd">    &gt;&gt;&gt; plt.tight_layout()</span>
 <span class="sd">    &#39;&#39;&#39;</span>
 
@@ -1147,10 +1323,37 @@
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">peaks</span><span class="p">)</span></div>
 
 
-<span class="nd">@cache</span>
-<div class="viewcode-block" id="sparsify_rows"><a class="viewcode-back" href="../../../generated/librosa.util.sparsify_rows.html#librosa.feature.sparsify_rows">[docs]</a><span class="k">def</span> <span class="nf">sparsify_rows</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">quantile</span><span class="o">=</span><span class="mf">0.01</span><span class="p">):</span>
+<span class="nd">@cache</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
+<div class="viewcode-block" id="sparsify_rows"><a class="viewcode-back" href="../../../generated/librosa.util.sparsify_rows.html#librosa.util.sparsify_rows">[docs]</a><span class="k">def</span> <span class="nf">sparsify_rows</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">quantile</span><span class="o">=</span><span class="mf">0.01</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;</span>
 <span class="sd">    Return a row-sparse matrix approximating the input `x`.</span>
+
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    x : np.ndarray [ndim &lt;= 2]</span>
+<span class="sd">        The input matrix to sparsify.</span>
+
+<span class="sd">    quantile : float in [0, 1.0)</span>
+<span class="sd">        Percentage of magnitude to discard in each row of `x`</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    x_sparse : `scipy.sparse.csr_matrix` [shape=x.shape]</span>
+<span class="sd">        Row-sparsified approximation of `x`</span>
+
+<span class="sd">        If `x.ndim == 1`, then `x` is interpreted as a row vector,</span>
+<span class="sd">        and `x_sparse.shape == (1, len(x))`.</span>
+
+<span class="sd">    Raises</span>
+<span class="sd">    ------</span>
+<span class="sd">    ParameterError</span>
+<span class="sd">        If `x.ndim &gt; 2`</span>
+
+<span class="sd">        If `quantile` lies outside `[0, 1.0)`</span>
+
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    This function caches at level 40.</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
@@ -1184,29 +1387,6 @@
 <span class="sd">              0.977,  0.997,  0.997,  0.977,  0.937,  0.879,  0.806,</span>
 <span class="sd">              0.72 ,  0.625,  0.525,  0.424,  0.326,  0.   ,  0.   ,</span>
 <span class="sd">              0.   ,  0.   ,  0.   ,  0.   ]])</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    x : np.ndarray [ndim &lt;= 2]</span>
-<span class="sd">        The input matrix to sparsify.</span>
-
-<span class="sd">    quantile : float in [0, 1.0)</span>
-<span class="sd">        Percentage of magnitude to discard in each row of `x`</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    x_sparse : `scipy.sparse.csr_matrix` [shape=x.shape]</span>
-<span class="sd">        Row-sparsified approximation of `x`</span>
-
-<span class="sd">        If `x.ndim == 1`, then `x` is interpreted as a row vector,</span>
-<span class="sd">        and `x_sparse.shape == (1, len(x))`.</span>
-
-<span class="sd">    Raises</span>
-<span class="sd">    ------</span>
-<span class="sd">    ParameterError</span>
-<span class="sd">        If `x.ndim &gt; 2`</span>
-
-<span class="sd">        If `quantile` lies outside `[0, 1.0)`</span>
 <span class="sd">    &#39;&#39;&#39;</span>
 
     <span class="k">if</span> <span class="n">x</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
@@ -1214,15 +1394,15 @@
 
     <span class="k">elif</span> <span class="n">x</span><span class="o">.</span><span class="n">ndim</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s1">&#39;Input must have 2 or fewer dimensions. &#39;</span>
-                             <span class="s1">&#39;Provided x.shape={}.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+                             <span class="s1">&#39;Provided x.shape=</span><span class="si">{}</span><span class="s1">.&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="mf">0.0</span> <span class="o">&lt;=</span> <span class="n">quantile</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s1">&#39;Invalid quantile {:.2f}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">quantile</span><span class="p">))</span>
+        <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s1">&#39;Invalid quantile </span><span class="si">{:.2f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">quantile</span><span class="p">))</span>
 
     <span class="n">x_sparse</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">lil_matrix</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
 
     <span class="n">mags</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-    <span class="n">norms</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">mags</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">norms</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">mags</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
     <span class="n">mag_sort</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">mags</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">cumulative_mag</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">mag_sort</span> <span class="o">/</span> <span class="n">norms</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -1236,8 +1416,7 @@
     <span class="k">return</span> <span class="n">x_sparse</span><span class="o">.</span><span class="n">tocsr</span><span class="p">()</span></div>
 
 
-<span class="nd">@cache</span>
-<div class="viewcode-block" id="roll_sparse"><a class="viewcode-back" href="../../../generated/librosa.util.roll_sparse.html#librosa.feature.roll_sparse">[docs]</a><span class="k">def</span> <span class="nf">roll_sparse</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">shift</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<div class="viewcode-block" id="roll_sparse"><a class="viewcode-back" href="../../../generated/librosa.util.roll_sparse.html#librosa.util.roll_sparse">[docs]</a><span class="k">def</span> <span class="nf">roll_sparse</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">shift</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Sparse matrix roll</span>
 
 <span class="sd">    This operation is equivalent to ``numpy.roll``, but operates on sparse matrices.</span>
@@ -1289,25 +1468,24 @@
     <span class="k">elif</span> <span class="n">axis</span> <span class="ow">in</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">):</span>
         <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">tocsr</span><span class="p">()</span>
 
-
     <span class="c1"># lil matrix to start</span>
     <span class="n">x_r</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">sparse</span><span class="o">.</span><span class="n">lil_matrix</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">x</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
 
-    <span class="n">idx_in</span> <span class="o">=</span> <span class="p">[</span><span class="nb">slice</span><span class="p">(</span><span class="bp">None</span><span class="p">)]</span> <span class="o">*</span> <span class="n">x</span><span class="o">.</span><span class="n">ndim</span>
-    <span class="n">idx_out</span> <span class="o">=</span> <span class="p">[</span><span class="nb">slice</span><span class="p">(</span><span class="bp">None</span><span class="p">)]</span> <span class="o">*</span> <span class="n">x_r</span><span class="o">.</span><span class="n">ndim</span>
+    <span class="n">idx_in</span> <span class="o">=</span> <span class="p">[</span><span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">)]</span> <span class="o">*</span> <span class="n">x</span><span class="o">.</span><span class="n">ndim</span>
+    <span class="n">idx_out</span> <span class="o">=</span> <span class="p">[</span><span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">)]</span> <span class="o">*</span> <span class="n">x_r</span><span class="o">.</span><span class="n">ndim</span>
 
     <span class="n">idx_in</span><span class="p">[</span><span class="n">axis</span><span class="p">]</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">shift</span><span class="p">)</span>
-    <span class="n">idx_out</span><span class="p">[</span><span class="n">axis</span><span class="p">]</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="n">shift</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+    <span class="n">idx_out</span><span class="p">[</span><span class="n">axis</span><span class="p">]</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="n">shift</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
     <span class="n">x_r</span><span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="n">idx_out</span><span class="p">)]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="n">idx_in</span><span class="p">)]</span>
 
     <span class="n">idx_out</span><span class="p">[</span><span class="n">axis</span><span class="p">]</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">shift</span><span class="p">)</span>
-    <span class="n">idx_in</span><span class="p">[</span><span class="n">axis</span><span class="p">]</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="o">-</span><span class="n">shift</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span>
+    <span class="n">idx_in</span><span class="p">[</span><span class="n">axis</span><span class="p">]</span> <span class="o">=</span> <span class="nb">slice</span><span class="p">(</span><span class="o">-</span><span class="n">shift</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
     <span class="n">x_r</span><span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="n">idx_out</span><span class="p">)]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="n">idx_in</span><span class="p">)]</span>
 
     <span class="k">return</span> <span class="n">x_r</span><span class="o">.</span><span class="n">asformat</span><span class="p">(</span><span class="n">fmt</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="buf_to_float"><a class="viewcode-back" href="../../../generated/librosa.util.buf_to_float.html#librosa.feature.buf_to_float">[docs]</a><span class="k">def</span> <span class="nf">buf_to_float</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n_bytes</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">):</span>
+<div class="viewcode-block" id="buf_to_float"><a class="viewcode-back" href="../../../generated/librosa.util.buf_to_float.html#librosa.util.buf_to_float">[docs]</a><span class="k">def</span> <span class="nf">buf_to_float</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n_bytes</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">float32</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Convert an integer buffer to floating point values.</span>
 <span class="sd">    This is primarily useful when loading integer-valued wav data</span>
 <span class="sd">    into numpy arrays.</span>
@@ -1337,13 +1515,13 @@
     <span class="n">scale</span> <span class="o">=</span> <span class="mf">1.</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="p">((</span><span class="mi">8</span> <span class="o">*</span> <span class="n">n_bytes</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
 
     <span class="c1"># Construct the format string</span>
-    <span class="n">fmt</span> <span class="o">=</span> <span class="s1">&#39;&lt;i{:d}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n_bytes</span><span class="p">)</span>
+    <span class="n">fmt</span> <span class="o">=</span> <span class="s1">&#39;&lt;i</span><span class="si">{:d}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n_bytes</span><span class="p">)</span>
 
     <span class="c1"># Rescale and format the data buffer</span>
     <span class="k">return</span> <span class="n">scale</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">frombuffer</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">fmt</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">dtype</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="index_to_slice"><a class="viewcode-back" href="../../../generated/librosa.util.index_to_slice.html#librosa.feature.index_to_slice">[docs]</a><span class="k">def</span> <span class="nf">index_to_slice</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">idx_min</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">idx_max</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+<div class="viewcode-block" id="index_to_slice"><a class="viewcode-back" href="../../../generated/librosa.util.index_to_slice.html#librosa.util.index_to_slice">[docs]</a><span class="k">def</span> <span class="nf">index_to_slice</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">idx_min</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">idx_max</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">step</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Generate a slice array from an index array.</span>
 
 <span class="sd">    Parameters</span>
@@ -1399,8 +1577,8 @@
     <span class="k">return</span> <span class="p">[</span><span class="nb">slice</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span> <span class="k">for</span> <span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">idx_fixed</span><span class="p">,</span> <span class="n">idx_fixed</span><span class="p">[</span><span class="mi">1</span><span class="p">:])]</span></div>
 
 
-<span class="nd">@cache</span>
-<div class="viewcode-block" id="sync"><a class="viewcode-back" href="../../../generated/librosa.util.sync.html#librosa.feature.sync">[docs]</a><span class="k">def</span> <span class="nf">sync</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">aggregate</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
+<span class="nd">@cache</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="mi">40</span><span class="p">)</span>
+<div class="viewcode-block" id="sync"><a class="viewcode-back" href="../../../generated/librosa.util.sync.html#librosa.util.sync">[docs]</a><span class="k">def</span> <span class="nf">sync</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">idx</span><span class="p">,</span> <span class="n">aggregate</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Synchronous aggregation of a multi-dimensional array between boundaries</span>
 
 <span class="sd">    .. note::</span>
@@ -1444,13 +1622,18 @@
 <span class="sd">    ParameterError</span>
 <span class="sd">        If the index set is not of consistent type (all slices or all integers)</span>
 
+<span class="sd">    Notes</span>
+<span class="sd">    -----</span>
+<span class="sd">    This function caches at level 40.</span>
+
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
 <span class="sd">    Beat-synchronous CQT spectra</span>
 
 <span class="sd">    &gt;&gt;&gt; y, sr = librosa.load(librosa.util.example_audio_file())</span>
-<span class="sd">    &gt;&gt;&gt; tempo, beats = librosa.beat.beat_track(y=y, sr=sr)</span>
+<span class="sd">    &gt;&gt;&gt; tempo, beats = librosa.beat.beat_track(y=y, sr=sr, trim=False)</span>
 <span class="sd">    &gt;&gt;&gt; cqt = librosa.cqt(y=y, sr=sr)</span>
+<span class="sd">    &gt;&gt;&gt; beats = librosa.util.fix_frames(beats, x_max=cqt.shape[1])</span>
 
 <span class="sd">    By default, use mean aggregation</span>
 
@@ -1459,41 +1642,43 @@
 <span class="sd">    Use median-aggregation instead of mean</span>
 
 <span class="sd">    &gt;&gt;&gt; cqt_med = librosa.util.sync(cqt, beats,</span>
-<span class="sd">    ...                                aggregate=np.median)</span>
+<span class="sd">    ...                             aggregate=np.median)</span>
 
 <span class="sd">    Or sub-beat synchronization</span>
 
 <span class="sd">    &gt;&gt;&gt; sub_beats = librosa.segment.subsegment(cqt, beats)</span>
+<span class="sd">    &gt;&gt;&gt; sub_beats = librosa.util.fix_frames(sub_beats, x_max=cqt.shape[1])</span>
 <span class="sd">    &gt;&gt;&gt; cqt_med_sub = librosa.util.sync(cqt, sub_beats, aggregate=np.median)</span>
 
 
 <span class="sd">    Plot the results</span>
 
 <span class="sd">    &gt;&gt;&gt; import matplotlib.pyplot as plt</span>
+<span class="sd">    &gt;&gt;&gt; beat_t = librosa.frames_to_time(beats, sr=sr)</span>
+<span class="sd">    &gt;&gt;&gt; subbeat_t = librosa.frames_to_time(sub_beats, sr=sr)</span>
 <span class="sd">    &gt;&gt;&gt; plt.figure()</span>
 <span class="sd">    &gt;&gt;&gt; plt.subplot(3, 1, 1)</span>
-<span class="sd">    &gt;&gt;&gt; librosa.display.specshow(librosa.logamplitude(cqt**2,</span>
-<span class="sd">    ...                                               ref_power=np.max),</span>
+<span class="sd">    &gt;&gt;&gt; librosa.display.specshow(librosa.amplitude_to_db(cqt,</span>
+<span class="sd">    ...                                                  ref=np.max),</span>
 <span class="sd">    ...                          x_axis=&#39;time&#39;)</span>
-<span class="sd">    &gt;&gt;&gt; plt.colorbar(format=&#39;%+2.0f dB&#39;)</span>
 <span class="sd">    &gt;&gt;&gt; plt.title(&#39;CQT power, shape={}&#39;.format(cqt.shape))</span>
 <span class="sd">    &gt;&gt;&gt; plt.subplot(3, 1, 2)</span>
-<span class="sd">    &gt;&gt;&gt; librosa.display.specshow(librosa.logamplitude(cqt_med**2,</span>
-<span class="sd">    ...                                               ref_power=np.max))</span>
-<span class="sd">    &gt;&gt;&gt; plt.colorbar(format=&#39;%+2.0f dB&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; librosa.display.specshow(librosa.amplitude_to_db(cqt_med,</span>
+<span class="sd">    ...                                                  ref=np.max),</span>
+<span class="sd">    ...                          x_coords=beat_t, x_axis=&#39;time&#39;)</span>
 <span class="sd">    &gt;&gt;&gt; plt.title(&#39;Beat synchronous CQT power, &#39;</span>
 <span class="sd">    ...           &#39;shape={}&#39;.format(cqt_med.shape))</span>
 <span class="sd">    &gt;&gt;&gt; plt.subplot(3, 1, 3)</span>
-<span class="sd">    &gt;&gt;&gt; librosa.display.specshow(librosa.logamplitude(cqt_med_sub**2,</span>
-<span class="sd">    ...                                               ref_power=np.max))</span>
-<span class="sd">    &gt;&gt;&gt; plt.colorbar(format=&#39;%+2.0f dB&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; librosa.display.specshow(librosa.amplitude_to_db(cqt_med_sub,</span>
+<span class="sd">    ...                                                  ref=np.max),</span>
+<span class="sd">    ...                          x_coords=subbeat_t, x_axis=&#39;time&#39;)</span>
 <span class="sd">    &gt;&gt;&gt; plt.title(&#39;Sub-beat synchronous CQT power, &#39;</span>
 <span class="sd">    ...           &#39;shape={}&#39;.format(cqt_med_sub.shape))</span>
 <span class="sd">    &gt;&gt;&gt; plt.tight_layout()</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">if</span> <span class="n">aggregate</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">aggregate</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">aggregate</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span>
 
     <span class="n">shape</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
@@ -1503,15 +1688,15 @@
     <span class="k">elif</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">_</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">int</span><span class="p">)</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">idx</span><span class="p">]):</span>
         <span class="n">slices</span> <span class="o">=</span> <span class="n">index_to_slice</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">idx</span><span class="p">),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">shape</span><span class="p">[</span><span class="n">axis</span><span class="p">],</span> <span class="n">pad</span><span class="o">=</span><span class="n">pad</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s1">&#39;Invalid index set: {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">idx</span><span class="p">))</span>
+        <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s1">&#39;Invalid index set: </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">idx</span><span class="p">))</span>
 
     <span class="n">agg_shape</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">shape</span><span class="p">)</span>
     <span class="n">agg_shape</span><span class="p">[</span><span class="n">axis</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">slices</span><span class="p">)</span>
 
     <span class="n">data_agg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">(</span><span class="n">agg_shape</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s1">&#39;F&#39;</span> <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isfortran</span><span class="p">(</span><span class="n">data</span><span class="p">)</span> <span class="k">else</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">dtype</span><span class="p">)</span>
 
-    <span class="n">idx_in</span> <span class="o">=</span> <span class="p">[</span><span class="nb">slice</span><span class="p">(</span><span class="bp">None</span><span class="p">)]</span> <span class="o">*</span> <span class="n">data</span><span class="o">.</span><span class="n">ndim</span>
-    <span class="n">idx_agg</span> <span class="o">=</span> <span class="p">[</span><span class="nb">slice</span><span class="p">(</span><span class="bp">None</span><span class="p">)]</span> <span class="o">*</span> <span class="n">data_agg</span><span class="o">.</span><span class="n">ndim</span>
+    <span class="n">idx_in</span> <span class="o">=</span> <span class="p">[</span><span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">)]</span> <span class="o">*</span> <span class="n">data</span><span class="o">.</span><span class="n">ndim</span>
+    <span class="n">idx_agg</span> <span class="o">=</span> <span class="p">[</span><span class="nb">slice</span><span class="p">(</span><span class="kc">None</span><span class="p">)]</span> <span class="o">*</span> <span class="n">data_agg</span><span class="o">.</span><span class="n">ndim</span>
 
     <span class="k">for</span> <span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">segment</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">slices</span><span class="p">):</span>
         <span class="n">idx_in</span><span class="p">[</span><span class="n">axis</span><span class="p">]</span> <span class="o">=</span> <span class="n">segment</span>
@@ -1521,8 +1706,7 @@
     <span class="k">return</span> <span class="n">data_agg</span></div>
 
 
-<span class="nd">@cache</span>
-<div class="viewcode-block" id="softmask"><a class="viewcode-back" href="../../../generated/librosa.util.softmask.html#librosa.feature.softmask">[docs]</a><span class="k">def</span> <span class="nf">softmask</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">X_ref</span><span class="p">,</span> <span class="n">power</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">split_zeros</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<div class="viewcode-block" id="softmask"><a class="viewcode-back" href="../../../generated/librosa.util.softmask.html#librosa.util.softmask">[docs]</a><span class="k">def</span> <span class="nf">softmask</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">X_ref</span><span class="p">,</span> <span class="n">power</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">split_zeros</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Robustly compute a softmask operation.</span>
 
 <span class="sd">        `M = X**power / (X**power + X_ref**power)`</span>
@@ -1604,7 +1788,8 @@
 <span class="sd">           [False, False,  True]], dtype=bool)</span>
 <span class="sd">    &#39;&#39;&#39;</span>
     <span class="k">if</span> <span class="n">X</span><span class="o">.</span><span class="n">shape</span> <span class="o">!=</span> <span class="n">X_ref</span><span class="o">.</span><span class="n">shape</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s1">&#39;Shape mismatch: {}!={}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">X_ref</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+        <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s1">&#39;Shape mismatch: </span><span class="si">{}</span><span class="s1">!=</span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span>
+                                                             <span class="n">X_ref</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
 
     <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">X</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">any</span><span class="p">(</span><span class="n">X_ref</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">):</span>
         <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s1">&#39;X and X_ref must be non-negative&#39;</span><span class="p">)</span>
@@ -1625,7 +1810,9 @@
     <span class="c1"># For finite power, compute the softmask</span>
     <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">power</span><span class="p">):</span>
         <span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span> <span class="o">/</span> <span class="n">Z</span><span class="p">)</span><span class="o">**</span><span class="n">power</span>
-        <span class="n">mask</span> <span class="o">/=</span> <span class="n">mask</span> <span class="o">+</span> <span class="p">(</span><span class="n">X_ref</span> <span class="o">/</span> <span class="n">Z</span><span class="p">)</span><span class="o">**</span><span class="n">power</span>
+        <span class="n">ref_mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">X_ref</span> <span class="o">/</span> <span class="n">Z</span><span class="p">)</span><span class="o">**</span><span class="n">power</span>
+        <span class="n">good_idx</span> <span class="o">=</span> <span class="o">~</span><span class="n">bad_idx</span>
+        <span class="n">mask</span><span class="p">[</span><span class="n">good_idx</span><span class="p">]</span> <span class="o">/=</span> <span class="n">mask</span><span class="p">[</span><span class="n">good_idx</span><span class="p">]</span> <span class="o">+</span> <span class="n">ref_mask</span><span class="p">[</span><span class="n">good_idx</span><span class="p">]</span>
         <span class="c1"># Wherever energy is below energy in both inputs, split the mask</span>
         <span class="k">if</span> <span class="n">split_zeros</span><span class="p">:</span>
             <span class="n">mask</span><span class="p">[</span><span class="n">bad_idx</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span>
@@ -1638,42 +1825,71 @@
     <span class="k">return</span> <span class="n">mask</span></div>
 
 
-<span class="c1"># Deprecated functions</span>
+<div class="viewcode-block" id="tiny"><a class="viewcode-back" href="../../../generated/librosa.util.tiny.html#librosa.util.tiny">[docs]</a><span class="k">def</span> <span class="nf">tiny</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39;Compute the tiny-value corresponding to an input&#39;s data type.</span>
 
-<span class="nd">@decorators.deprecated</span><span class="p">(</span><span class="s1">&#39;0.4&#39;</span><span class="p">,</span> <span class="s1">&#39;0.5&#39;</span><span class="p">)</span>
-<div class="viewcode-block" id="buf_to_int"><a class="viewcode-back" href="../../../generated/librosa.util.buf_to_int.html#librosa.feature.buf_to_int">[docs]</a><span class="k">def</span> <span class="nf">buf_to_int</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">n_bytes</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>  <span class="c1"># pragma: no cover</span>
-    <span class="sd">&quot;&quot;&quot;Convert a floating point buffer into integer values.</span>
-<span class="sd">    This is primarily useful as an intermediate step in wav output.</span>
+<span class="sd">    This is the smallest &quot;usable&quot; number representable in `x`&#39;s</span>
+<span class="sd">    data type (e.g., float32).</span>
 
-<span class="sd">    See Also</span>
-<span class="sd">    --------</span>
-<span class="sd">    buf_to_float</span>
+<span class="sd">    This is primarily useful for determining a threshold for</span>
+<span class="sd">    numerical underflow in division or multiplication operations.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
-<span class="sd">    x : np.ndarray [dtype=float]</span>
-<span class="sd">        Floating point data buffer</span>
-
-<span class="sd">    n_bytes : int [1, 2, 4]</span>
-<span class="sd">        Number of bytes per output sample</span>
+<span class="sd">    x : number or np.ndarray</span>
+<span class="sd">        The array to compute the tiny-value for.</span>
+<span class="sd">        All that matters here is `x.dtype`.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
-<span class="sd">    x_int : np.ndarray [dtype=int]</span>
-<span class="sd">        The original buffer cast to integer type.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    tiny_value : float</span>
+<span class="sd">        The smallest positive usable number for the type of `x`.</span>
+<span class="sd">        If `x` is integer-typed, then the tiny value for `np.float32`</span>
+<span class="sd">        is returned instead.</span>
 
-    <span class="k">if</span> <span class="n">n_bytes</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">]:</span>
-        <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s1">&#39;n_bytes must be one of {1, 2, 4}&#39;</span><span class="p">)</span>
+<span class="sd">    See Also</span>
+<span class="sd">    --------</span>
+<span class="sd">    numpy.finfo</span>
 
-    <span class="c1"># What is the scale of the input data?</span>
-    <span class="n">scale</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="p">((</span><span class="mi">8</span> <span class="o">*</span> <span class="n">n_bytes</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span>
+<span class="sd">    Examples</span>
+<span class="sd">    --------</span>
 
-    <span class="c1"># Construct a format string</span>
-    <span class="n">fmt</span> <span class="o">=</span> <span class="s1">&#39;&lt;i{:d}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">n_bytes</span><span class="p">)</span>
+<span class="sd">    For a standard double-precision floating point number:</span>
 
-    <span class="c1"># Rescale and cast the data</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">x</span> <span class="o">*</span> <span class="n">scale</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="n">fmt</span><span class="p">)</span></div>
+<span class="sd">    &gt;&gt;&gt; librosa.util.tiny(1.0)</span>
+<span class="sd">    2.2250738585072014e-308</span>
+
+<span class="sd">    Or explicitly as double-precision</span>
+
+<span class="sd">    &gt;&gt;&gt; librosa.util.tiny(np.asarray(1e-5, dtype=np.float64))</span>
+<span class="sd">    2.2250738585072014e-308</span>
+
+<span class="sd">    Or complex numbers</span>
+
+<span class="sd">    &gt;&gt;&gt; librosa.util.tiny(1j)</span>
+<span class="sd">    2.2250738585072014e-308</span>
+
+<span class="sd">    Single-precision floating point:</span>
+
+<span class="sd">    &gt;&gt;&gt; librosa.util.tiny(np.asarray(1e-5, dtype=np.float32))</span>
+<span class="sd">    1.1754944e-38</span>
+
+<span class="sd">    Integer</span>
+
+<span class="sd">    &gt;&gt;&gt; librosa.util.tiny(5)</span>
+<span class="sd">    1.1754944e-38</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="c1"># Make sure we have an array view</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+    <span class="c1"># Only floating types generate a tiny</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span> <span class="ow">or</span> <span class="n">np</span><span class="o">.</span><span class="n">issubdtype</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">dtype</span><span class="p">,</span> <span class="nb">complex</span><span class="p">):</span>
+        <span class="n">dtype</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">dtype</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">dtype</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">float32</span>
+
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">finfo</span><span class="p">(</span><span class="n">dtype</span><span class="p">)</span><span class="o">.</span><span class="n">tiny</span></div>
 </pre></div>
 
            </div>
@@ -1685,7 +1901,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2016, librosa development team.
+        &copy; Copyright 2013--2017, librosa development team.
 
     </p>
   </div>
@@ -1700,6 +1916,28 @@
 
   </div>
   
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: 0.5.0
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Tags</dt>
+            <dd><a href="../../../0.4.0rc1/index.html">0.4.0rc1</a></dd>
+            <dd><a href="../../../0.4.2/index.html">0.4.2</a></dd>
+            <dd><a href="../../../0.4.3/index.html">0.4.3</a></dd>
+            <dd><a href="../../../0.4.3rc0/index.html">0.4.3rc0</a></dd>
+            <dd><a href="../../../0.5.0/_modules/librosa/util/utils.html">0.5.0</a></dd>
+            <dd><a href="../../../0.5.0rc0/index.html">0.5.0rc0</a></dd>
+        </dl>
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="../../../master/index.html">master</a></dd>
+        </dl>
+    </div>
+</div>
 
 
   
@@ -1707,7 +1945,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'0.4.3',
+            VERSION:'0.5.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

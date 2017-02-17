@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>librosa.beat.beat_track &mdash; librosa 0.4.3 documentation</title>
+  <title>librosa.beat.beat_track &mdash; librosa 0.5.0 documentation</title>
   
 
   
@@ -28,11 +28,16 @@
   
 
   
+    <link rel="stylesheet" href="../_static/banner.css" type="text/css" />
+  
 
   
-    <link rel="top" title="librosa 0.4.3 documentation" href="../index.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="librosa 0.5.0 documentation" href="../index.html"/>
         <link rel="up" title="Beat and tempo" href="../beat.html"/>
-        <link rel="next" title="librosa.beat.estimate_tempo" href="librosa.beat.estimate_tempo.html"/>
+        <link rel="next" title="librosa.beat.tempo" href="librosa.beat.tempo.html"/>
         <link rel="prev" title="Beat and tempo" href="../beat.html"/> 
 
   
@@ -61,7 +66,7 @@
             
             
               <div class="version">
-                0.4
+                0.5
               </div>
             
           
@@ -93,7 +98,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../onset.html">Onset detection</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../beat.html">Beat and tempo</a><ul class="current">
 <li class="toctree-l2 current"><a class="current reference internal" href="#">librosa.beat.beat_track</a></li>
-<li class="toctree-l2"><a class="reference internal" href="librosa.beat.estimate_tempo.html">librosa.beat.estimate_tempo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="librosa.beat.tempo.html">librosa.beat.tempo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../beat.html#deprecated">Deprecated</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../decompose.html">Spectrogram decomposition</a></li>
@@ -105,9 +111,10 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../filters.html">Filters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cache.html">Caching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ioformats.html">Advanced I/O Use Cases</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Release notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
 </ul>
 
@@ -145,7 +152,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/generated/librosa.beat.beat_track.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/generated/librosa.beat.beat_track.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -155,14 +162,20 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="librosa-beat-beat-track">
+  
+
+
+
+
+
+<div class="section" id="librosa-beat-beat-track">
 <h1>librosa.beat.beat_track<a class="headerlink" href="#librosa-beat-beat-track" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="librosa.beat.beat_track">
-<code class="descclassname">librosa.beat.</code><code class="descname">beat_track</code><span class="sig-paren">(</span><em>y=None</em>, <em>sr=22050</em>, <em>onset_envelope=None</em>, <em>hop_length=512</em>, <em>start_bpm=120.0</em>, <em>tightness=100</em>, <em>trim=True</em>, <em>bpm=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/librosa/beat.html#beat_track"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#librosa.beat.beat_track" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">librosa.beat.</code><code class="descname">beat_track</code><span class="sig-paren">(</span><em>y=None</em>, <em>sr=22050</em>, <em>onset_envelope=None</em>, <em>hop_length=512</em>, <em>start_bpm=120.0</em>, <em>tightness=100</em>, <em>trim=True</em>, <em>bpm=None</em>, <em>units='frames'</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/librosa/beat.html#beat_track"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#librosa.beat.beat_track" title="Permalink to this definition">¶</a></dt>
 <dd><p>Dynamic programming beat tracker.</p>
 <dl class="docutils">
-<dt>Beats are detected in three stages, following the method of <a class="reference internal" href="#r20" id="id1">[R20]</a>:</dt>
+<dt>Beats are detected in three stages, following the method of <a class="reference internal" href="#r21" id="id1">[R21]</a>:</dt>
 <dd><ol class="first last arabic simple">
 <li>Measure onset strength</li>
 <li>Estimate tempo from onset correlation</li>
@@ -171,10 +184,10 @@ tempo</li>
 </ol>
 </dd>
 </dl>
-<table class="docutils citation" frame="void" id="r20" rules="none">
+<table class="docutils citation" frame="void" id="r21" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[R20]</a></td><td>Ellis, Daniel PW. &#8220;Beat tracking by dynamic programming.&#8221;
+<tr><td class="label"><a class="fn-backref" href="#id1">[R21]</a></td><td>Ellis, Daniel PW. &#8220;Beat tracking by dynamic programming.&#8221;
 Journal of New Music Research 36.1 (2007): 51-60.
 <a class="reference external" href="http://labrosa.ee.columbia.edu/projects/beattrack/">http://labrosa.ee.columbia.edu/projects/beattrack/</a></td></tr>
 </tbody>
@@ -216,6 +229,11 @@ Journal of New Music Research 36.1 (2007): 51-60.
 <div><p>(optional) If provided, use <em class="xref py py-obj">bpm</em> as the tempo instead of
 estimating it from <em class="xref py py-obj">onsets</em>.</p>
 </div></blockquote>
+<p><strong>units</strong> : {&#8216;frames&#8217;, &#8216;samples&#8217;, &#8216;time&#8217;}</p>
+<blockquote>
+<div><p>The units to encode detected beat events in.
+By default, &#8216;frames&#8217; are used.</p>
+</div></blockquote>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>tempo</strong> : float [scalar, non-negative]</p>
@@ -224,7 +242,8 @@ estimating it from <em class="xref py py-obj">onsets</em>.</p>
 </div></blockquote>
 <p><strong>beats</strong> : np.ndarray [shape=(m,)]</p>
 <blockquote>
-<div><p>frame numbers of estimated beat events</p>
+<div><p>estimated beat event locations in the specified units
+(default is frame indices)</p>
 </div></blockquote>
 <div class="admonition note">
 <p class="first admonition-title">Note</p>
@@ -236,6 +255,7 @@ and returns an empty list.</p>
 <tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><strong>ParameterError</strong></p>
 <blockquote class="last">
 <div><p>if neither <em class="xref py py-obj">y</em> nor <em class="xref py py-obj">onset_envelope</em> are provided</p>
+<p>or if <em class="xref py py-obj">units</em> is not one of &#8216;frames&#8217;, &#8216;samples&#8217;, or &#8216;time&#8217;</p>
 </div></blockquote>
 </td>
 </tr>
@@ -287,15 +307,16 @@ and returns an empty list.</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">hop_length</span> <span class="o">=</span> <span class="mi">512</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">librosa</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="n">onset_env</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Onset strength&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">beats</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">times</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">frames_to_time</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">onset_env</span><span class="p">)),</span>
+<span class="gp">... </span>                               <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="n">hop_length</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">librosa</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="n">onset_env</span><span class="p">),</span>
+<span class="gp">... </span>         <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Onset strength&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">times</span><span class="p">[</span><span class="n">beats</span><span class="p">],</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span>
 <span class="gp">... </span>           <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Beats&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">frameon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">framealpha</span><span class="o">=</span><span class="mf">0.75</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Limit the plot to a 15-second window</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">10</span> <span class="o">*</span> <span class="n">sr</span> <span class="o">/</span> <span class="n">hop_length</span><span class="p">,</span> <span class="mi">25</span> <span class="o">*</span> <span class="n">sr</span> <span class="o">/</span> <span class="n">hop_length</span><span class="p">])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="o">*</span> <span class="n">sr</span> <span class="o">/</span> <span class="n">hop_length</span><span class="p">,</span>
-<span class="gp">... </span>           <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time (s)&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">xaxis</span><span class="o">.</span><span class="n">set_major_formatter</span><span class="p">(</span><span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">TimeFormatter</span><span class="p">())</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -314,7 +335,7 @@ and returns an empty list.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="librosa.beat.estimate_tempo.html" class="btn btn-neutral float-right" title="librosa.beat.estimate_tempo" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="librosa.beat.tempo.html" class="btn btn-neutral float-right" title="librosa.beat.tempo" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="../beat.html" class="btn btn-neutral" title="Beat and tempo" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -326,7 +347,7 @@ and returns an empty list.</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2016, librosa development team.
+        &copy; Copyright 2013--2017, librosa development team.
 
     </p>
   </div>
@@ -341,6 +362,28 @@ and returns an empty list.</p>
 
   </div>
   
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: 0.5.0
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Tags</dt>
+            <dd><a href="../0.4.0rc1/generated/librosa.beat.beat_track.html">0.4.0rc1</a></dd>
+            <dd><a href="../0.4.2/generated/librosa.beat.beat_track.html">0.4.2</a></dd>
+            <dd><a href="../0.4.3/generated/librosa.beat.beat_track.html">0.4.3</a></dd>
+            <dd><a href="../0.4.3rc0/generated/librosa.beat.beat_track.html">0.4.3rc0</a></dd>
+            <dd><a href="../0.5.0/generated/librosa.beat.beat_track.html">0.5.0</a></dd>
+            <dd><a href="../0.5.0rc0/generated/librosa.beat.beat_track.html">0.5.0rc0</a></dd>
+        </dl>
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="../master/generated/librosa.beat.beat_track.html">master</a></dd>
+        </dl>
+    </div>
+</div>
 
 
   
@@ -348,7 +391,7 @@ and returns an empty list.</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.4.3',
+            VERSION:'0.5.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

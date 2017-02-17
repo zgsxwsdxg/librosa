@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>librosa.core.pseudo_cqt &mdash; librosa 0.4.3 documentation</title>
+  <title>librosa.core.pseudo_cqt &mdash; librosa 0.5.0 documentation</title>
   
 
   
@@ -28,9 +28,14 @@
   
 
   
+    <link rel="stylesheet" href="../_static/banner.css" type="text/css" />
+  
 
   
-    <link rel="top" title="librosa 0.4.3 documentation" href="../index.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="librosa 0.5.0 documentation" href="../index.html"/>
         <link rel="up" title="Core IO and DSP" href="../core.html"/>
         <link rel="next" title="librosa.core.fmt" href="librosa.core.fmt.html"/>
         <link rel="prev" title="librosa.core.hybrid_cqt" href="librosa.core.hybrid_cqt.html"/> 
@@ -61,7 +66,7 @@
             
             
               <div class="version">
-                0.4
+                0.5
               </div>
             
           
@@ -97,15 +102,16 @@
 <li class="toctree-l3"><a class="reference internal" href="librosa.core.hybrid_cqt.html">librosa.core.hybrid_cqt</a></li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">librosa.core.pseudo_cqt</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.core.fmt.html">librosa.core.fmt</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.core.interp_harmonics.html">librosa.core.interp_harmonics</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.core.salience.html">librosa.core.salience</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.core.phase_vocoder.html">librosa.core.phase_vocoder</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.core.magphase.html">librosa.core.magphase</a></li>
-<li class="toctree-l3"><a class="reference internal" href="librosa.core.logamplitude.html">librosa.core.logamplitude</a></li>
-<li class="toctree-l3"><a class="reference internal" href="librosa.core.perceptual_weighting.html">librosa.core.perceptual_weighting</a></li>
-<li class="toctree-l3"><a class="reference internal" href="librosa.core.A_weighting.html">librosa.core.A_weighting</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../core.html#magnitude-scaling">Magnitude scaling</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../core.html#time-and-frequency-conversion">Time and frequency conversion</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../core.html#pitch-and-tuning">Pitch and tuning</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core.html#dynamic-time-warping">Dynamic Time Warping</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../core.html#deprecated">Deprecated</a></li>
 </ul>
 </li>
@@ -122,9 +128,10 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../filters.html">Filters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cache.html">Caching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ioformats.html">Advanced I/O Use Cases</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Release notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
 </ul>
 
@@ -162,7 +169,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/generated/librosa.core.pseudo_cqt.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/generated/librosa.core.pseudo_cqt.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -172,11 +179,17 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="librosa-core-pseudo-cqt">
+  
+
+
+
+
+
+<div class="section" id="librosa-core-pseudo-cqt">
 <h1>librosa.core.pseudo_cqt<a class="headerlink" href="#librosa-core-pseudo-cqt" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="librosa.core.pseudo_cqt">
-<code class="descclassname">librosa.core.</code><code class="descname">pseudo_cqt</code><span class="sig-paren">(</span><em>y</em>, <em>sr=22050</em>, <em>hop_length=512</em>, <em>fmin=None</em>, <em>n_bins=84</em>, <em>bins_per_octave=12</em>, <em>tuning=None</em>, <em>filter_scale=1</em>, <em>norm=1</em>, <em>sparsity=0.01</em>, <em>resolution=&lt;DEPRECATED parameter&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/librosa/core/constantq.html#pseudo_cqt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#librosa.core.pseudo_cqt" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">librosa.core.</code><code class="descname">pseudo_cqt</code><span class="sig-paren">(</span><em>y</em>, <em>sr=22050</em>, <em>hop_length=512</em>, <em>fmin=None</em>, <em>n_bins=84</em>, <em>bins_per_octave=12</em>, <em>tuning=0.0</em>, <em>filter_scale=1</em>, <em>norm=1</em>, <em>sparsity=0.01</em>, <em>window='hann'</em>, <em>scale=True</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/librosa/core/constantq.html#pseudo_cqt"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#librosa.core.pseudo_cqt" title="Permalink to this definition">¶</a></dt>
 <dd><p>Compute the pseudo constant-Q transform of an audio signal.</p>
 <p>This uses a single fft size that is the smallest power of 2 that is greater
 than or equal to the max of:</p>
@@ -217,7 +230,7 @@ than or equal to the max of:</p>
 <p><strong>tuning</strong> : None or float in <em class="xref py py-obj">[-0.5, 0.5)</em></p>
 <blockquote>
 <div><p>Tuning offset in fractions of a bin (cents).</p>
-<p>If <em class="xref py py-obj">None</em>, tuning will be automatically estimated.</p>
+<p>If <em class="xref py py-obj">None</em>, tuning will be automatically estimated from the signal.</p>
 </div></blockquote>
 <p><strong>filter_scale</strong> : float &gt; 0</p>
 <blockquote>
@@ -229,14 +242,10 @@ than or equal to the max of:</p>
 fraction of the energy in each basis.</p>
 <p>Set <em class="xref py py-obj">sparsity=0</em> to disable sparsification.</p>
 </div></blockquote>
-<p><strong>resolution</strong> : float</p>
+<p><strong>window</strong> : str, tuple, number, or function</p>
 <blockquote>
-<div><div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">This parameter name was deprecated in librosa 0.4.2
-Use the <em class="xref py py-obj">filter_scale</em> parameter instead.
-The <em class="xref py py-obj">resolution</em> parameter will be removed in librosa 0.5.0.</p>
-</div>
+<div><p>Window specification for the basis filters.
+See <em class="xref py py-obj">filters.get_window</em> for details.</p>
 </div></blockquote>
 </td>
 </tr>
@@ -256,6 +265,8 @@ The <em class="xref py py-obj">resolution</em> parameter will be removed in libr
 </tr>
 </tbody>
 </table>
+<p class="rubric">Notes</p>
+<p>This function caches at level 20.</p>
 </dd></dl>
 
 </div>
@@ -279,7 +290,7 @@ The <em class="xref py py-obj">resolution</em> parameter will be removed in libr
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2016, librosa development team.
+        &copy; Copyright 2013--2017, librosa development team.
 
     </p>
   </div>
@@ -294,6 +305,28 @@ The <em class="xref py py-obj">resolution</em> parameter will be removed in libr
 
   </div>
   
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: 0.5.0
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Tags</dt>
+            <dd><a href="../0.4.0rc1/generated/librosa.core.pseudo_cqt.html">0.4.0rc1</a></dd>
+            <dd><a href="../0.4.2/generated/librosa.core.pseudo_cqt.html">0.4.2</a></dd>
+            <dd><a href="../0.4.3/generated/librosa.core.pseudo_cqt.html">0.4.3</a></dd>
+            <dd><a href="../0.4.3rc0/generated/librosa.core.pseudo_cqt.html">0.4.3rc0</a></dd>
+            <dd><a href="../0.5.0/generated/librosa.core.pseudo_cqt.html">0.5.0</a></dd>
+            <dd><a href="../0.5.0rc0/generated/librosa.core.pseudo_cqt.html">0.5.0rc0</a></dd>
+        </dl>
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="../master/generated/librosa.core.pseudo_cqt.html">master</a></dd>
+        </dl>
+    </div>
+</div>
 
 
   
@@ -301,7 +334,7 @@ The <em class="xref py py-obj">resolution</em> parameter will be removed in libr
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.4.3',
+            VERSION:'0.5.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

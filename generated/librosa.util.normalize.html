@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>librosa.util.normalize &mdash; librosa 0.4.3 documentation</title>
+  <title>librosa.util.normalize &mdash; librosa 0.5.0 documentation</title>
   
 
   
@@ -28,9 +28,14 @@
   
 
   
+    <link rel="stylesheet" href="../_static/banner.css" type="text/css" />
+  
 
   
-    <link rel="top" title="librosa 0.4.3 documentation" href="../index.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="librosa 0.5.0 documentation" href="../index.html"/>
         <link rel="up" title="Utilities" href="../util.html"/>
         <link rel="next" title="librosa.util.roll_sparse" href="librosa.util.roll_sparse.html"/>
         <link rel="prev" title="librosa.util.axis_sort" href="librosa.util.axis_sort.html"/> 
@@ -61,7 +66,7 @@
             
             
               <div class="version">
-                0.4
+                0.5
               </div>
             
           
@@ -111,22 +116,23 @@
 <li class="toctree-l3"><a class="reference internal" href="librosa.util.roll_sparse.html">librosa.util.roll_sparse</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.util.sparsify_rows.html">librosa.util.sparsify_rows</a></li>
 <li class="toctree-l3"><a class="reference internal" href="librosa.util.buf_to_float.html">librosa.util.buf_to_float</a></li>
+<li class="toctree-l3"><a class="reference internal" href="librosa.util.tiny.html">librosa.util.tiny</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../util.html#matching">Matching</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../util.html#miscellaneous">Miscellaneous</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../util.html#input-validation">Input validation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../util.html#file-operations">File operations</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../util.html#deprecated">Deprecated</a></li>
 </ul>
 </li>
 </ul>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../filters.html">Filters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cache.html">Caching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ioformats.html">Advanced I/O Use Cases</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Release notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
 </ul>
 
@@ -164,7 +170,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/generated/librosa.util.normalize.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/generated/librosa.util.normalize.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -174,21 +180,37 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="librosa-util-normalize">
+  
+
+
+
+
+
+<div class="section" id="librosa-util-normalize">
 <h1>librosa.util.normalize<a class="headerlink" href="#librosa-util-normalize" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="librosa.util.normalize">
-<code class="descclassname">librosa.util.</code><code class="descname">normalize</code><span class="sig-paren">(</span><em>S</em>, <em>norm=inf</em>, <em>axis=0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/librosa/util/utils.html#normalize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#librosa.util.normalize" title="Permalink to this definition">¶</a></dt>
-<dd><p>Normalize the columns or rows of a matrix</p>
-<div class="admonition note">
-<p class="first admonition-title">Note</p>
-<p class="last">Columns/rows with length 0 will be left as zeros.</p>
-</div>
+<code class="descclassname">librosa.util.</code><code class="descname">normalize</code><span class="sig-paren">(</span><em>S</em>, <em>norm=inf</em>, <em>axis=0</em>, <em>threshold=None</em>, <em>fill=None</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/librosa/util/utils.html#normalize"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#librosa.util.normalize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Normalize an array along a chosen axis.</p>
+<p>Given a norm (described below) and a target axis, the input
+array is scaled so that</p>
+<blockquote>
+<div><em class="xref py py-obj">norm(S, axis=axis) == 1</em></div></blockquote>
+<p>For example, <em class="xref py py-obj">axis=0</em> normalizes each column of a 2-d array
+by aggregating over the rows (0-axis).
+Similarly, <em class="xref py py-obj">axis=1</em> normalizes each row of a 2-d array.</p>
+<p>This function also supports thresholding small-norm slices:
+any slice (i.e., row or column) with norm below a specified
+<em class="xref py py-obj">threshold</em> can be left un-normalized, set to all-zeros, or
+filled with uniform non-zero values that normalize to 1.</p>
+<p>Note: the semantics of this function differ from
+<a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.norm.html#scipy.linalg.norm" title="(in SciPy v0.18.1)"><code class="xref py py-obj docutils literal"><span class="pre">scipy.linalg.norm</span></code></a> in two ways: multi-dimensional arrays
+are supported, but matrix-norms are not.</p>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
 <tbody valign="top">
-<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>S</strong> : np.ndarray [shape=(d, n)]</p>
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><p class="first"><strong>S</strong> : np.ndarray</p>
 <blockquote>
 <div><p>The matrix to normalize</p>
 </div></blockquote>
@@ -199,11 +221,11 @@
 </li>
 <li><p class="first"><em class="xref py py-obj">-np.inf</em> : mininum absolute value</p>
 </li>
-<li><p class="first"><em class="xref py py-obj">0</em>    : number of non-zeros</p>
+<li><p class="first"><em class="xref py py-obj">0</em>    : number of non-zeros (the support)</p>
 </li>
 <li><dl class="first docutils">
-<dt>float</dt>
- <span class="classifier-delimiter">:</span> <span class="classifier">corresponding l_p norm.</span><dd><p class="first last">See <a class="reference external" href="http://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.norm.html#scipy.linalg.norm" title="(in SciPy v0.17.1)"><code class="xref py py-obj docutils literal"><span class="pre">scipy.linalg.norm</span></code></a> for details.</p>
+<dt>float <span class="classifier-delimiter">:</span> <span class="classifier">corresponding l_p norm</span></dt>
+<dd><p class="first last">See <a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.norm.html#scipy.linalg.norm" title="(in SciPy v0.18.1)"><code class="xref py py-obj docutils literal"><span class="pre">scipy.linalg.norm</span></code></a> for details.</p>
 </dd>
 </dl>
 </li>
@@ -213,26 +235,53 @@
 </div></blockquote>
 <p><strong>axis</strong> : int [scalar]</p>
 <blockquote>
-<div><p>Axis along which to compute the norm.
-<em class="xref py py-obj">axis=0</em> will normalize columns, <em class="xref py py-obj">axis=1</em> will normalize rows.
-<em class="xref py py-obj">axis=None</em> will normalize according to the entire matrix.</p>
+<div><p>Axis along which to compute the norm.</p>
+</div></blockquote>
+<p><strong>threshold</strong> : number &gt; 0 [optional]</p>
+<blockquote>
+<div><p>Only the columns (or rows) with norm at least <em class="xref py py-obj">threshold</em> are
+normalized.</p>
+<p>By default, the threshold is determined from
+the numerical precision of <em class="xref py py-obj">S.dtype</em>.</p>
+</div></blockquote>
+<p><strong>fill</strong> : None or bool</p>
+<blockquote>
+<div><p>If None, then columns (or rows) with norm below <em class="xref py py-obj">threshold</em>
+are left as is.</p>
+<p>If False, then columns (rows) with norm below <em class="xref py py-obj">threshold</em>
+are set to 0.</p>
+<p>If True, then columns (rows) with norm below <em class="xref py py-obj">threshold</em>
+are filled uniformly such that the corresponding norm is 1.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last"><em class="xref py py-obj">fill=True</em> is incompatible with <em class="xref py py-obj">norm=0</em> because
+no uniform vector exists with l0 &#8220;norm&#8221; equal to 1.</p>
+</div>
 </div></blockquote>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>S_norm</strong> : np.ndarray [shape=S.shape]</p>
 <blockquote>
-<div><p>Normalized matrix</p>
+<div><p>Normalized array</p>
 </div></blockquote>
 </td>
 </tr>
 <tr class="field-odd field"><th class="field-name">Raises:</th><td class="field-body"><p class="first"><strong>ParameterError</strong></p>
 <blockquote class="last">
 <div><p>If <em class="xref py py-obj">norm</em> is not among the valid types defined above</p>
+<p>If <em class="xref py py-obj">S</em> is not finite</p>
+<p>If <em class="xref py py-obj">fill=True</em> and <em class="xref py py-obj">norm=0</em></p>
 </div></blockquote>
 </td>
 </tr>
 </tbody>
 </table>
+<div class="admonition seealso">
+<p class="first admonition-title">See also</p>
+<p class="last"><a class="reference external" href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.linalg.norm.html#scipy.linalg.norm" title="(in SciPy v0.18.1)"><code class="xref py py-obj docutils literal"><span class="pre">scipy.linalg.norm</span></code></a></p>
+</div>
+<p class="rubric">Notes</p>
+<p>This function caches at level 40.</p>
 <p class="rubric">Examples</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Construct an example matrix</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">S</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vander</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">))</span>
@@ -267,6 +316,49 @@
 <span class="go">       [ 0.123,  0.236,  0.408,  0.5  ]])</span>
 </pre></div>
 </div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Thresholding and filling</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">S</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1e-308</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">S</span>
+<span class="go">array([[ -8.000e+000,   4.000e+000,  -2.000e+000,</span>
+<span class="go">          1.000e-308],</span>
+<span class="go">       [ -1.000e+000,   1.000e+000,  -1.000e+000,</span>
+<span class="go">          1.000e-308],</span>
+<span class="go">       [  0.000e+000,   0.000e+000,   0.000e+000,</span>
+<span class="go">          1.000e-308],</span>
+<span class="go">       [  1.000e+000,   1.000e+000,   1.000e+000,</span>
+<span class="go">          1.000e-308]])</span>
+</pre></div>
+</div>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># By default, small-norm columns are left untouched</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">librosa</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="n">S</span><span class="p">)</span>
+<span class="go">array([[ -1.000e+000,   1.000e+000,  -1.000e+000,</span>
+<span class="go">          1.000e-308],</span>
+<span class="go">       [ -1.250e-001,   2.500e-001,  -5.000e-001,</span>
+<span class="go">          1.000e-308],</span>
+<span class="go">       [  0.000e+000,   0.000e+000,   0.000e+000,</span>
+<span class="go">          1.000e-308],</span>
+<span class="go">       [  1.250e-001,   2.500e-001,   5.000e-001,</span>
+<span class="go">          1.000e-308]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Small-norm columns can be zeroed out</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">librosa</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="go">array([[-1.   ,  1.   , -1.   ,  0.   ],</span>
+<span class="go">       [-0.125,  0.25 , -0.5  ,  0.   ],</span>
+<span class="go">       [ 0.   ,  0.   ,  0.   ,  0.   ],</span>
+<span class="go">       [ 0.125,  0.25 ,  0.5  ,  0.   ]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Or set to constant with unit-norm</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">librosa</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">array([[-1.   ,  1.   , -1.   ,  1.   ],</span>
+<span class="go">       [-0.125,  0.25 , -0.5  ,  1.   ],</span>
+<span class="go">       [ 0.   ,  0.   ,  0.   ,  1.   ],</span>
+<span class="go">       [ 0.125,  0.25 ,  0.5  ,  1.   ]])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># With an l1 norm instead of max-norm</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">librosa</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">array([[-0.8  ,  0.667, -0.5  ,  0.25 ],</span>
+<span class="go">       [-0.1  ,  0.167, -0.25 ,  0.25 ],</span>
+<span class="go">       [ 0.   ,  0.   ,  0.   ,  0.25 ],</span>
+<span class="go">       [ 0.1  ,  0.167,  0.25 ,  0.25 ]])</span>
+</pre></div>
+</div>
 </dd></dl>
 
 </div>
@@ -290,7 +382,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2016, librosa development team.
+        &copy; Copyright 2013--2017, librosa development team.
 
     </p>
   </div>
@@ -305,6 +397,28 @@
 
   </div>
   
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: 0.5.0
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Tags</dt>
+            <dd><a href="../0.4.0rc1/generated/librosa.util.normalize.html">0.4.0rc1</a></dd>
+            <dd><a href="../0.4.2/generated/librosa.util.normalize.html">0.4.2</a></dd>
+            <dd><a href="../0.4.3/generated/librosa.util.normalize.html">0.4.3</a></dd>
+            <dd><a href="../0.4.3rc0/generated/librosa.util.normalize.html">0.4.3rc0</a></dd>
+            <dd><a href="../0.5.0/generated/librosa.util.normalize.html">0.5.0</a></dd>
+            <dd><a href="../0.5.0rc0/generated/librosa.util.normalize.html">0.5.0rc0</a></dd>
+        </dl>
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="../master/generated/librosa.util.normalize.html">master</a></dd>
+        </dl>
+    </div>
+</div>
 
 
   
@@ -312,7 +426,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.4.3',
+            VERSION:'0.5.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

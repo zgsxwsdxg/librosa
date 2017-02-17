@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>librosa.beat.estimate_tempo &mdash; librosa 0.4.3 documentation</title>
+  <title>librosa.beat.estimate_tempo &mdash; librosa 0.5.0 documentation</title>
   
 
   
@@ -28,12 +28,17 @@
   
 
   
+    <link rel="stylesheet" href="../_static/banner.css" type="text/css" />
+  
 
   
-    <link rel="top" title="librosa 0.4.3 documentation" href="../index.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="librosa 0.5.0 documentation" href="../index.html"/>
         <link rel="up" title="Beat and tempo" href="../beat.html"/>
         <link rel="next" title="Spectrogram decomposition" href="../decompose.html"/>
-        <link rel="prev" title="librosa.beat.beat_track" href="librosa.beat.beat_track.html"/> 
+        <link rel="prev" title="librosa.beat.tempo" href="librosa.beat.tempo.html"/> 
 
   
   <script src="../_static/js/modernizr.min.js"></script>
@@ -61,7 +66,7 @@
             
             
               <div class="version">
-                0.4
+                0.5
               </div>
             
           
@@ -93,7 +98,11 @@
 <li class="toctree-l1"><a class="reference internal" href="../onset.html">Onset detection</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../beat.html">Beat and tempo</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="librosa.beat.beat_track.html">librosa.beat.beat_track</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">librosa.beat.estimate_tempo</a></li>
+<li class="toctree-l2"><a class="reference internal" href="librosa.beat.tempo.html">librosa.beat.tempo</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../beat.html#deprecated">Deprecated</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">librosa.beat.estimate_tempo</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../decompose.html">Spectrogram decomposition</a></li>
@@ -105,9 +114,10 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../filters.html">Filters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cache.html">Caching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ioformats.html">Advanced I/O Use Cases</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Release notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
 </ul>
 
@@ -145,7 +155,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/generated/librosa.beat.estimate_tempo.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/generated/librosa.beat.estimate_tempo.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -155,12 +165,24 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="librosa-beat-estimate-tempo">
+  
+
+
+
+
+
+<div class="section" id="librosa-beat-estimate-tempo">
 <h1>librosa.beat.estimate_tempo<a class="headerlink" href="#librosa-beat-estimate-tempo" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="librosa.beat.estimate_tempo">
 <code class="descclassname">librosa.beat.</code><code class="descname">estimate_tempo</code><span class="sig-paren">(</span><em>onset_envelope</em>, <em>sr=22050</em>, <em>hop_length=512</em>, <em>start_bpm=120</em>, <em>std_bpm=1.0</em>, <em>ac_size=4.0</em>, <em>duration=90.0</em>, <em>offset=0.0</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/librosa/beat.html#estimate_tempo"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#librosa.beat.estimate_tempo" title="Permalink to this definition">¶</a></dt>
 <dd><p>Estimate the tempo (beats per minute) from an onset envelope</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Deprecated in librosa 0.5
+Functionality is superseded by
+<a class="reference internal" href="librosa.beat.tempo.html#librosa.beat.tempo" title="librosa.beat.tempo"><code class="xref py py-obj docutils literal"><span class="pre">librosa.beat.tempo</span></code></a>.</p>
+</div>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -211,6 +233,8 @@
 <p class="first admonition-title">See also</p>
 <p class="last"><a class="reference internal" href="librosa.onset.onset_strength.html#librosa.onset.onset_strength" title="librosa.onset.onset_strength"><code class="xref py py-obj docutils literal"><span class="pre">librosa.onset.onset_strength</span></code></a></p>
 </div>
+<p class="rubric">Notes</p>
+<p>This function caches at level 30.</p>
 <p class="rubric">Examples</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">y</span><span class="p">,</span> <span class="n">sr</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">librosa</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">example_audio_file</span><span class="p">())</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">onset_env</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">onset</span><span class="o">.</span><span class="n">onset_strength</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">)</span>
@@ -256,7 +280,7 @@
         <a href="../decompose.html" class="btn btn-neutral float-right" title="Spectrogram decomposition" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="librosa.beat.beat_track.html" class="btn btn-neutral" title="librosa.beat.beat_track" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="librosa.beat.tempo.html" class="btn btn-neutral" title="librosa.beat.tempo" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -265,7 +289,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2016, librosa development team.
+        &copy; Copyright 2013--2017, librosa development team.
 
     </p>
   </div>
@@ -280,6 +304,28 @@
 
   </div>
   
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: 0.5.0
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Tags</dt>
+            <dd><a href="../0.4.0rc1/generated/librosa.beat.estimate_tempo.html">0.4.0rc1</a></dd>
+            <dd><a href="../0.4.2/generated/librosa.beat.estimate_tempo.html">0.4.2</a></dd>
+            <dd><a href="../0.4.3/generated/librosa.beat.estimate_tempo.html">0.4.3</a></dd>
+            <dd><a href="../0.4.3rc0/generated/librosa.beat.estimate_tempo.html">0.4.3rc0</a></dd>
+            <dd><a href="../0.5.0/generated/librosa.beat.estimate_tempo.html">0.5.0</a></dd>
+            <dd><a href="../0.5.0rc0/generated/librosa.beat.estimate_tempo.html">0.5.0rc0</a></dd>
+        </dl>
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="../master/generated/librosa.beat.estimate_tempo.html">master</a></dd>
+        </dl>
+    </div>
+</div>
 
 
   
@@ -287,7 +333,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.4.3',
+            VERSION:'0.5.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

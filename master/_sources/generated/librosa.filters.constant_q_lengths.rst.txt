@@ -1,0 +1,6 @@
+librosa.filters.constant_q_lengths
+==================================
+
+.. currentmodule:: librosa.filters
+
+.. autofunction:: constant_q_lengths

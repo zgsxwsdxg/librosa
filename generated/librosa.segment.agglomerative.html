@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>librosa.segment.agglomerative &mdash; librosa 0.4.3 documentation</title>
+  <title>librosa.segment.agglomerative &mdash; librosa 0.5.0 documentation</title>
   
 
   
@@ -28,9 +28,14 @@
   
 
   
+    <link rel="stylesheet" href="../_static/banner.css" type="text/css" />
+  
 
   
-    <link rel="top" title="librosa 0.4.3 documentation" href="../index.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="librosa 0.5.0 documentation" href="../index.html"/>
         <link rel="up" title="Temporal segmentation" href="../segment.html"/>
         <link rel="next" title="librosa.segment.subsegment" href="librosa.segment.subsegment.html"/>
         <link rel="prev" title="librosa.segment.timelag_filter" href="librosa.segment.timelag_filter.html"/> 
@@ -61,7 +66,7 @@
             
             
               <div class="version">
-                0.4
+                0.5
               </div>
             
           
@@ -102,7 +107,6 @@
 <li class="toctree-l3"><a class="reference internal" href="librosa.segment.subsegment.html">librosa.segment.subsegment</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="../segment.html#deprecated">Deprecated</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../util.html">Utilities</a></li>
@@ -110,9 +114,10 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../filters.html">Filters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cache.html">Caching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ioformats.html">Advanced I/O Use Cases</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Release notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
 </ul>
 
@@ -150,7 +155,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/generated/librosa.segment.agglomerative.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/generated/librosa.segment.agglomerative.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -160,7 +165,13 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="librosa-segment-agglomerative">
+  
+
+
+
+
+
+<div class="section" id="librosa-segment-agglomerative">
 <h1>librosa.segment.agglomerative<a class="headerlink" href="#librosa-segment-agglomerative" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="librosa.segment.agglomerative">
@@ -203,28 +214,28 @@ will always include <em class="xref py py-obj">0</em> as the first left-boundary
 </table>
 <div class="admonition seealso">
 <p class="first admonition-title">See also</p>
-<p class="last"><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.cluster.AgglomerativeClustering.html#sklearn.cluster.AgglomerativeClustering" title="(in scikit-learn v0.17.1)"><code class="xref py py-obj docutils literal"><span class="pre">sklearn.cluster.AgglomerativeClustering</span></code></a></p>
+<p class="last"><a class="reference external" href="http://scikit-learn.org/stable/modules/generated/sklearn.cluster.AgglomerativeClustering.html#sklearn.cluster.AgglomerativeClustering" title="(in scikit-learn v0.18.1)"><code class="xref py py-obj docutils literal"><span class="pre">sklearn.cluster.AgglomerativeClustering</span></code></a></p>
 </div>
 <p class="rubric">Examples</p>
 <p>Cluster by chroma similarity, break into 20 segments</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">y</span><span class="p">,</span> <span class="n">sr</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">librosa</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">example_audio_file</span><span class="p">(),</span> <span class="n">duration</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">chroma</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">feature</span><span class="o">.</span><span class="n">chroma_cqt</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">boundary_frames</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">segment</span><span class="o">.</span><span class="n">agglomerative</span><span class="p">(</span><span class="n">chroma</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">librosa</span><span class="o">.</span><span class="n">frames_to_time</span><span class="p">(</span><span class="n">boundary_frames</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bounds</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">segment</span><span class="o">.</span><span class="n">agglomerative</span><span class="p">(</span><span class="n">chroma</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bound_times</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">frames_to_time</span><span class="p">(</span><span class="n">bounds</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bound_times</span>
 <span class="go">array([  0.   ,   1.672,   2.322,   2.624,   3.251,   3.506,</span>
 <span class="go">         4.18 ,   5.387,   6.014,   6.293,   6.943,   7.198,</span>
 <span class="go">         7.848,   9.033,   9.706,   9.961,  10.635,  10.89 ,</span>
 <span class="go">        11.54 ,  12.539])</span>
 </pre></div>
 </div>
-<p>Plot the segmentation against the spectrogram</p>
+<p>Plot the segmentation over the chromagram</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">S</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">librosa</span><span class="o">.</span><span class="n">stft</span><span class="p">(</span><span class="n">y</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span><span class="p">(</span><span class="n">librosa</span><span class="o">.</span><span class="n">logamplitude</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">ref_power</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">),</span>
-<span class="gp">... </span>                         <span class="n">y_axis</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">,</span> <span class="n">x_axis</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">boundary_frames</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span>
-<span class="gp">... </span>           <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Segment boundaries&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span><span class="p">(</span><span class="n">chroma</span><span class="p">,</span> <span class="n">y_axis</span><span class="o">=</span><span class="s1">&#39;chroma&#39;</span><span class="p">,</span> <span class="n">x_axis</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="n">bound_times</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">chroma</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;linen&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span>
+<span class="gp">... </span>           <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Segment boundaries&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">frameon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">shadow</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Power spectrogram&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
@@ -257,7 +268,7 @@ will always include <em class="xref py py-obj">0</em> as the first left-boundary
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2016, librosa development team.
+        &copy; Copyright 2013--2017, librosa development team.
 
     </p>
   </div>
@@ -272,6 +283,28 @@ will always include <em class="xref py py-obj">0</em> as the first left-boundary
 
   </div>
   
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: 0.5.0
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Tags</dt>
+            <dd><a href="../0.4.0rc1/generated/librosa.segment.agglomerative.html">0.4.0rc1</a></dd>
+            <dd><a href="../0.4.2/generated/librosa.segment.agglomerative.html">0.4.2</a></dd>
+            <dd><a href="../0.4.3/generated/librosa.segment.agglomerative.html">0.4.3</a></dd>
+            <dd><a href="../0.4.3rc0/generated/librosa.segment.agglomerative.html">0.4.3rc0</a></dd>
+            <dd><a href="../0.5.0/generated/librosa.segment.agglomerative.html">0.5.0</a></dd>
+            <dd><a href="../0.5.0rc0/generated/librosa.segment.agglomerative.html">0.5.0rc0</a></dd>
+        </dl>
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="../master/generated/librosa.segment.agglomerative.html">master</a></dd>
+        </dl>
+    </div>
+</div>
 
 
   
@@ -279,7 +312,7 @@ will always include <em class="xref py py-obj">0</em> as the first left-boundary
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.4.3',
+            VERSION:'0.5.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

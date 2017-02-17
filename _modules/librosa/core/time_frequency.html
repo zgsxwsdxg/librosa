@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>librosa.core.time_frequency &mdash; librosa 0.4.3 documentation</title>
+  <title>librosa.core.time_frequency &mdash; librosa 0.5.0 documentation</title>
   
 
   
@@ -28,9 +28,14 @@
   
 
   
+    <link rel="stylesheet" href="../../../_static/banner.css" type="text/css" />
+  
 
   
-    <link rel="top" title="librosa 0.4.3 documentation" href="../../../index.html"/>
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="librosa 0.5.0 documentation" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -59,7 +64,7 @@
             
             
               <div class="version">
-                0.4
+                0.5
               </div>
             
           
@@ -99,9 +104,10 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../filters.html">Filters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../cache.html">Caching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ioformats.html">Advanced I/O Use Cases</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Release notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
 </ul>
 
@@ -147,17 +153,23 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <h1>Source code for librosa.core.time_frequency</h1><div class="highlight"><pre>
+  
+
+
+
+
+
+<h1>Source code for librosa.core.time_frequency</h1><div class="highlight"><pre>
 <span></span><span class="ch">#!/usr/bin/env python</span>
 <span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="sd">&#39;&#39;&#39;Time and frequency utilities&#39;&#39;&#39;</span>
 
 <span class="kn">import</span> <span class="nn">re</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">six</span>
 
-<span class="kn">from</span> <span class="nn">..util.exceptions</span> <span class="kn">import</span> <span class="n">ParameterError</span>
+<span class="kn">from</span> <span class="nn">..util.exceptions</span> <span class="k">import</span> <span class="n">ParameterError</span>
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;frames_to_samples&#39;</span><span class="p">,</span> <span class="s1">&#39;frames_to_time&#39;</span><span class="p">,</span>
            <span class="s1">&#39;samples_to_frames&#39;</span><span class="p">,</span> <span class="s1">&#39;samples_to_time&#39;</span><span class="p">,</span>
@@ -175,7 +187,7 @@
            <span class="s1">&#39;A_weighting&#39;</span><span class="p">]</span>
 
 
-<div class="viewcode-block" id="frames_to_samples"><a class="viewcode-back" href="../../../generated/librosa.core.frames_to_samples.html#librosa.core.frames_to_samples">[docs]</a><span class="k">def</span> <span class="nf">frames_to_samples</span><span class="p">(</span><span class="n">frames</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">n_fft</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="frames_to_samples"><a class="viewcode-back" href="../../../generated/librosa.core.frames_to_samples.html#librosa.core.frames_to_samples">[docs]</a><span class="k">def</span> <span class="nf">frames_to_samples</span><span class="p">(</span><span class="n">frames</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">n_fft</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Converts frame indices to audio sample indices</span>
 
 <span class="sd">    Parameters</span>
@@ -194,7 +206,7 @@
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    times : np.ndarray [shape=(n,)]</span>
-<span class="sd">        time (in seconds) of each given frame number:</span>
+<span class="sd">        time (in samples) of each given frame number:</span>
 <span class="sd">        `times[i] = frames[i] * hop_length`</span>
 
 <span class="sd">    See Also</span>
@@ -210,13 +222,13 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">offset</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">if</span> <span class="n">n_fft</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">n_fft</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">offset</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n_fft</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">frames</span><span class="p">)</span> <span class="o">*</span> <span class="n">hop_length</span> <span class="o">+</span> <span class="n">offset</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="samples_to_frames"><a class="viewcode-back" href="../../../generated/librosa.core.samples_to_frames.html#librosa.core.samples_to_frames">[docs]</a><span class="k">def</span> <span class="nf">samples_to_frames</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">n_fft</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="samples_to_frames"><a class="viewcode-back" href="../../../generated/librosa.core.samples_to_frames.html#librosa.core.samples_to_frames">[docs]</a><span class="k">def</span> <span class="nf">samples_to_frames</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">n_fft</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Converts sample indices into STFT frames.</span>
 
 <span class="sd">    Examples</span>
@@ -259,14 +271,14 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">offset</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">if</span> <span class="n">n_fft</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">n_fft</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">offset</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n_fft</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)</span>
 
     <span class="n">samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">((</span><span class="n">samples</span> <span class="o">-</span> <span class="n">offset</span><span class="p">)</span> <span class="o">//</span> <span class="n">hop_length</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="frames_to_time"><a class="viewcode-back" href="../../../generated/librosa.core.frames_to_time.html#librosa.core.frames_to_time">[docs]</a><span class="k">def</span> <span class="nf">frames_to_time</span><span class="p">(</span><span class="n">frames</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="mi">22050</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">n_fft</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="frames_to_time"><a class="viewcode-back" href="../../../generated/librosa.core.frames_to_time.html#librosa.core.frames_to_time">[docs]</a><span class="k">def</span> <span class="nf">frames_to_time</span><span class="p">(</span><span class="n">frames</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="mi">22050</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">n_fft</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Converts frame counts to time (seconds)</span>
 
 <span class="sd">    Parameters</span>
@@ -310,7 +322,7 @@
     <span class="k">return</span> <span class="n">samples_to_time</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="time_to_frames"><a class="viewcode-back" href="../../../generated/librosa.core.time_to_frames.html#librosa.core.time_to_frames">[docs]</a><span class="k">def</span> <span class="nf">time_to_frames</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="mi">22050</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">n_fft</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="time_to_frames"><a class="viewcode-back" href="../../../generated/librosa.core.time_to_frames.html#librosa.core.time_to_frames">[docs]</a><span class="k">def</span> <span class="nf">time_to_frames</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="mi">22050</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">n_fft</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Converts time stamps into STFT frames.</span>
 
 <span class="sd">    Parameters</span>
@@ -464,7 +476,7 @@
     <span class="k">return</span> <span class="n">midi_to_hz</span><span class="p">(</span><span class="n">note_to_midi</span><span class="p">(</span><span class="n">note</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span></div>
 
 
-<div class="viewcode-block" id="note_to_midi"><a class="viewcode-back" href="../../../generated/librosa.core.note_to_midi.html#librosa.core.note_to_midi">[docs]</a><span class="k">def</span> <span class="nf">note_to_midi</span><span class="p">(</span><span class="n">note</span><span class="p">,</span> <span class="n">round_midi</span><span class="o">=</span><span class="bp">True</span><span class="p">):</span>
+<div class="viewcode-block" id="note_to_midi"><a class="viewcode-back" href="../../../generated/librosa.core.note_to_midi.html#librosa.core.note_to_midi">[docs]</a><span class="k">def</span> <span class="nf">note_to_midi</span><span class="p">(</span><span class="n">note</span><span class="p">,</span> <span class="n">round_midi</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Convert one or more spelled notes to MIDI number(s).</span>
 
 <span class="sd">    Notes may be spelled out with optional accidentals or octave numbers.</span>
@@ -521,13 +533,13 @@
     <span class="n">pitch_map</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;C&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="mi">11</span><span class="p">}</span>
     <span class="n">acc_map</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;#&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;!&#39;</span><span class="p">:</span> <span class="o">-</span><span class="mi">1</span><span class="p">}</span>
 
-    <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">r&#39;^(?P&lt;note&gt;[A-Ga-g])&#39;</span>
-                     <span class="s1">r&#39;(?P&lt;accidental&gt;[#b!]*)&#39;</span>
-                     <span class="s1">r&#39;(?P&lt;octave&gt;[+-]?\d+)?&#39;</span>
-                     <span class="s1">r&#39;(?P&lt;cents&gt;[+-]\d+)?$&#39;</span><span class="p">,</span>
+    <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;^(?P&lt;note&gt;[A-Ga-g])&#39;</span>
+                     <span class="sa">r</span><span class="s1">&#39;(?P&lt;accidental&gt;[#b!]*)&#39;</span>
+                     <span class="sa">r</span><span class="s1">&#39;(?P&lt;octave&gt;[+-]?\d+)?&#39;</span>
+                     <span class="sa">r</span><span class="s1">&#39;(?P&lt;cents&gt;[+-]\d+)?$&#39;</span><span class="p">,</span>
                      <span class="n">note</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">match</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s1">&#39;Improper note format: {:s}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">note</span><span class="p">))</span>
+        <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s1">&#39;Improper note format: </span><span class="si">{:s}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">note</span><span class="p">))</span>
 
     <span class="n">pitch</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;note&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
     <span class="n">offset</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">([</span><span class="n">acc_map</span><span class="p">[</span><span class="n">o</span><span class="p">]</span> <span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="n">match</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="s1">&#39;accidental&#39;</span><span class="p">)])</span>
@@ -552,7 +564,7 @@
     <span class="k">return</span> <span class="n">note_value</span></div>
 
 
-<div class="viewcode-block" id="midi_to_note"><a class="viewcode-back" href="../../../generated/librosa.core.midi_to_note.html#librosa.core.midi_to_note">[docs]</a><span class="k">def</span> <span class="nf">midi_to_note</span><span class="p">(</span><span class="n">midi</span><span class="p">,</span> <span class="n">octave</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">cents</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<div class="viewcode-block" id="midi_to_note"><a class="viewcode-back" href="../../../generated/librosa.core.midi_to_note.html#librosa.core.midi_to_note">[docs]</a><span class="k">def</span> <span class="nf">midi_to_note</span><span class="p">(</span><span class="n">midi</span><span class="p">,</span> <span class="n">octave</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cents</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Convert one or more MIDI numbers to note strings.</span>
 
 <span class="sd">    MIDI numbers will be rounded to the nearest integer.</span>
@@ -619,9 +631,9 @@
     <span class="n">note</span> <span class="o">=</span> <span class="n">note_map</span><span class="p">[</span><span class="n">note_num</span> <span class="o">%</span> <span class="mi">12</span><span class="p">]</span>
 
     <span class="k">if</span> <span class="n">octave</span><span class="p">:</span>
-        <span class="n">note</span> <span class="o">=</span> <span class="s1">&#39;{:s}{:0d}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">note</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">note_num</span> <span class="o">/</span> <span class="mi">12</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">note</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:s}{:0d}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">note</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">note_num</span> <span class="o">/</span> <span class="mi">12</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">cents</span><span class="p">:</span>
-        <span class="n">note</span> <span class="o">=</span> <span class="s1">&#39;{:s}{:+02d}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">note</span><span class="p">,</span> <span class="n">note_cents</span><span class="p">)</span>
+        <span class="n">note</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">{:s}{:+02d}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">note</span><span class="p">,</span> <span class="n">note_cents</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">note</span></div>
 
@@ -736,7 +748,7 @@
     <span class="k">return</span> <span class="n">midi_to_note</span><span class="p">(</span><span class="n">hz_to_midi</span><span class="p">(</span><span class="n">frequencies</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="hz_to_mel"><a class="viewcode-back" href="../../../generated/librosa.core.hz_to_mel.html#librosa.core.hz_to_mel">[docs]</a><span class="k">def</span> <span class="nf">hz_to_mel</span><span class="p">(</span><span class="n">frequencies</span><span class="p">,</span> <span class="n">htk</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<div class="viewcode-block" id="hz_to_mel"><a class="viewcode-back" href="../../../generated/librosa.core.hz_to_mel.html#librosa.core.hz_to_mel">[docs]</a><span class="k">def</span> <span class="nf">hz_to_mel</span><span class="p">(</span><span class="n">frequencies</span><span class="p">,</span> <span class="n">htk</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Convert Hz to Mels</span>
 
 <span class="sd">    Examples</span>
@@ -786,7 +798,7 @@
     <span class="k">return</span> <span class="n">mels</span></div>
 
 
-<div class="viewcode-block" id="mel_to_hz"><a class="viewcode-back" href="../../../generated/librosa.core.mel_to_hz.html#librosa.core.mel_to_hz">[docs]</a><span class="k">def</span> <span class="nf">mel_to_hz</span><span class="p">(</span><span class="n">mels</span><span class="p">,</span> <span class="n">htk</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<div class="viewcode-block" id="mel_to_hz"><a class="viewcode-back" href="../../../generated/librosa.core.mel_to_hz.html#librosa.core.mel_to_hz">[docs]</a><span class="k">def</span> <span class="nf">mel_to_hz</span><span class="p">(</span><span class="n">mels</span><span class="p">,</span> <span class="n">htk</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Convert mel bin numbers to frequencies</span>
 
 <span class="sd">    Examples</span>
@@ -924,7 +936,7 @@
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span>
                        <span class="nb">float</span><span class="p">(</span><span class="n">sr</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
                        <span class="nb">int</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">n_fft</span><span class="o">//</span><span class="mi">2</span><span class="p">),</span>
-                       <span class="n">endpoint</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span></div>
+                       <span class="n">endpoint</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="cqt_frequencies"><a class="viewcode-back" href="../../../generated/librosa.core.cqt_frequencies.html#librosa.core.cqt_frequencies">[docs]</a><span class="k">def</span> <span class="nf">cqt_frequencies</span><span class="p">(</span><span class="n">n_bins</span><span class="p">,</span> <span class="n">fmin</span><span class="p">,</span> <span class="n">bins_per_octave</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">tuning</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
@@ -965,7 +977,7 @@
     <span class="k">return</span> <span class="n">correction</span> <span class="o">*</span> <span class="n">fmin</span> <span class="o">*</span> <span class="n">frequencies</span></div>
 
 
-<div class="viewcode-block" id="mel_frequencies"><a class="viewcode-back" href="../../../generated/librosa.core.mel_frequencies.html#librosa.core.mel_frequencies">[docs]</a><span class="k">def</span> <span class="nf">mel_frequencies</span><span class="p">(</span><span class="n">n_mels</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span> <span class="n">fmin</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">fmax</span><span class="o">=</span><span class="mf">11025.0</span><span class="p">,</span> <span class="n">htk</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<div class="viewcode-block" id="mel_frequencies"><a class="viewcode-back" href="../../../generated/librosa.core.mel_frequencies.html#librosa.core.mel_frequencies">[docs]</a><span class="k">def</span> <span class="nf">mel_frequencies</span><span class="p">(</span><span class="n">n_mels</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span> <span class="n">fmin</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">fmax</span><span class="o">=</span><span class="mf">11025.0</span><span class="p">,</span> <span class="n">htk</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Compute the center frequencies of mel bands.</span>
 
 <span class="sd">    Parameters</span>
@@ -1104,7 +1116,7 @@
                             <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">f_sq</span> <span class="o">+</span> <span class="n">const</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
                             <span class="o">-</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">f_sq</span> <span class="o">+</span> <span class="n">const</span><span class="p">[</span><span class="mi">3</span><span class="p">]))</span>
 
-    <span class="k">if</span> <span class="n">min_db</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">min_db</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="n">min_db</span><span class="p">,</span> <span class="n">weights</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">weights</span></div>
@@ -1119,7 +1131,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2016, librosa development team.
+        &copy; Copyright 2013--2017, librosa development team.
 
     </p>
   </div>
@@ -1134,6 +1146,28 @@
 
   </div>
   
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: 0.5.0
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Tags</dt>
+            <dd><a href="../../../0.4.0rc1/index.html">0.4.0rc1</a></dd>
+            <dd><a href="../../../0.4.2/index.html">0.4.2</a></dd>
+            <dd><a href="../../../0.4.3/index.html">0.4.3</a></dd>
+            <dd><a href="../../../0.4.3rc0/index.html">0.4.3rc0</a></dd>
+            <dd><a href="../../../0.5.0/_modules/librosa/core/time_frequency.html">0.5.0</a></dd>
+            <dd><a href="../../../0.5.0rc0/index.html">0.5.0rc0</a></dd>
+        </dl>
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="../../../master/index.html">master</a></dd>
+        </dl>
+    </div>
+</div>
 
 
   
@@ -1141,7 +1175,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'0.4.3',
+            VERSION:'0.5.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

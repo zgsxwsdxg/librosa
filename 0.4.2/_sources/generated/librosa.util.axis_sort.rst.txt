@@ -1,0 +1,6 @@
+librosa.util.axis_sort
+======================
+
+.. currentmodule:: librosa.util
+
+.. autofunction:: axis_sort

@@ -1,0 +1,6 @@
+librosa.core.interp_harmonics
+=============================
+
+.. currentmodule:: librosa.core
+
+.. autofunction:: interp_harmonics

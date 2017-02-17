@@ -1,0 +1,6 @@
+librosa.output.write_wav
+========================
+
+.. currentmodule:: librosa.output
+
+.. autofunction:: write_wav

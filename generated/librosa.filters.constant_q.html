@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>librosa.filters.constant_q &mdash; librosa 0.4.3 documentation</title>
+  <title>librosa.filters.constant_q &mdash; librosa 0.5.0 documentation</title>
   
 
   
@@ -28,11 +28,16 @@
   
 
   
+    <link rel="stylesheet" href="../_static/banner.css" type="text/css" />
+  
 
   
-    <link rel="top" title="librosa 0.4.3 documentation" href="../index.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="librosa 0.5.0 documentation" href="../index.html"/>
         <link rel="up" title="Filters" href="../filters.html"/>
-        <link rel="next" title="librosa.filters.constant_q_lengths" href="librosa.filters.constant_q_lengths.html"/>
+        <link rel="next" title="librosa.filters.window_bandwidth" href="librosa.filters.window_bandwidth.html"/>
         <link rel="prev" title="librosa.filters.chroma" href="librosa.filters.chroma.html"/> 
 
   
@@ -61,7 +66,7 @@
             
             
               <div class="version">
-                0.4
+                0.5
               </div>
             
           
@@ -107,14 +112,15 @@
 <li class="toctree-l3 current"><a class="current reference internal" href="#">librosa.filters.constant_q</a></li>
 </ul>
 </li>
+<li class="toctree-l2"><a class="reference internal" href="../filters.html#window-functions">Window functions</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../filters.html#miscellaneous">Miscellaneous</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../filters.html#deprecated">Deprecated</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../cache.html">Caching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ioformats.html">Advanced I/O Use Cases</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Release notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
 </ul>
 
@@ -152,7 +158,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/generated/librosa.filters.constant_q.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/generated/librosa.filters.constant_q.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -162,17 +168,23 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="librosa-filters-constant-q">
+  
+
+
+
+
+
+<div class="section" id="librosa-filters-constant-q">
 <h1>librosa.filters.constant_q<a class="headerlink" href="#librosa-filters-constant-q" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="librosa.filters.constant_q">
-<code class="descclassname">librosa.filters.</code><code class="descname">constant_q</code><span class="sig-paren">(</span><em>sr</em>, <em>fmin=None</em>, <em>n_bins=84</em>, <em>bins_per_octave=12</em>, <em>tuning=0.0</em>, <em>window=None</em>, <em>filter_scale=1</em>, <em>pad_fft=True</em>, <em>norm=1</em>, <em>resolution=&lt;DEPRECATED parameter&gt;</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/librosa/filters.html#constant_q"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#librosa.filters.constant_q" title="Permalink to this definition">¶</a></dt>
+<code class="descclassname">librosa.filters.</code><code class="descname">constant_q</code><span class="sig-paren">(</span><em>sr</em>, <em>fmin=None</em>, <em>n_bins=84</em>, <em>bins_per_octave=12</em>, <em>tuning=0.0</em>, <em>window='hann'</em>, <em>filter_scale=1</em>, <em>pad_fft=True</em>, <em>norm=1</em>, <em>**kwargs</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/librosa/filters.html#constant_q"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#librosa.filters.constant_q" title="Permalink to this definition">¶</a></dt>
 <dd><p>Construct a constant-Q basis.</p>
-<p>This uses the filter bank described by <a class="reference internal" href="#r37" id="id1">[R37]</a>.</p>
-<table class="docutils citation" frame="void" id="r37" rules="none">
+<p>This uses the filter bank described by <a class="reference internal" href="#r39" id="id1">[R39]</a>.</p>
+<table class="docutils citation" frame="void" id="r39" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[R37]</a></td><td>McVicar, Matthew.
+<tr><td class="label"><a class="fn-backref" href="#id1">[R39]</a></td><td>McVicar, Matthew.
 &#8220;A machine learning approach to automatic chord extraction.&#8221;
 Dissertation, University of Bristol. 2013.</td></tr>
 </tbody>
@@ -201,10 +213,9 @@ Dissertation, University of Bristol. 2013.</td></tr>
 <blockquote>
 <div><p>Tuning deviation from A440 in fractions of a bin</p>
 </div></blockquote>
-<p><strong>window</strong> : function or <em class="xref py py-obj">None</em></p>
+<p><strong>window</strong> : string, tuple, number, or function</p>
 <blockquote>
-<div><p>Windowing function to apply to filters.
-Default: <a class="reference external" href="http://docs.scipy.org/doc/scipy/reference/generated/scipy.signal.hann.html#scipy.signal.hann" title="(in SciPy v0.17.1)"><code class="xref py py-obj docutils literal"><span class="pre">scipy.signal.hann</span></code></a></p>
+<div><p>Windowing function to apply to filters.</p>
 </div></blockquote>
 <p><strong>filter_scale</strong> : float &gt; 0 [scalar]</p>
 <blockquote>
@@ -226,15 +237,6 @@ See librosa.util.normalize</p>
 <blockquote>
 <div><p>Arguments to <em class="xref py py-obj">np.pad()</em> when <em class="xref py py-obj">pad==True</em>.</p>
 </div></blockquote>
-<p><strong>resolution</strong> : float</p>
-<blockquote>
-<div><div class="admonition warning">
-<p class="first admonition-title">Warning</p>
-<p class="last">This parameter name was in librosa 0.4.2
-Use the <em class="xref py py-obj">filter_scale</em> parameter instead.
-The <em class="xref py py-obj">resolution</em> parameter will be removed in librosa 0.5.0.</p>
-</div>
-</div></blockquote>
 </td>
 </tr>
 <tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"><strong>filters</strong> : np.ndarray, <em class="xref py py-obj">len(filters) == n_bins</em></p>
@@ -253,23 +255,25 @@ The <em class="xref py py-obj">resolution</em> parameter will be removed in libr
 <p class="first admonition-title">See also</p>
 <p class="last"><a class="reference internal" href="librosa.filters.constant_q_lengths.html#librosa.filters.constant_q_lengths" title="librosa.filters.constant_q_lengths"><code class="xref py py-obj docutils literal"><span class="pre">constant_q_lengths</span></code></a>, <a class="reference internal" href="librosa.core.cqt.html#librosa.core.cqt" title="librosa.core.cqt"><code class="xref py py-obj docutils literal"><span class="pre">librosa.core.cqt</span></code></a>, <a class="reference internal" href="librosa.util.normalize.html#librosa.util.normalize" title="librosa.util.normalize"><code class="xref py py-obj docutils literal"><span class="pre">librosa.util.normalize</span></code></a></p>
 </div>
+<p class="rubric">Notes</p>
+<p>This function caches at level 10.</p>
 <p class="rubric">Examples</p>
 <p>Use a shorter window for each filter</p>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">basis</span><span class="p">,</span> <span class="n">lengths</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">filters</span><span class="o">.</span><span class="n">constant_q</span><span class="p">(</span><span class="mi">22050</span><span class="p">,</span> <span class="n">filter_scale</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Plot one octave of filters in time and frequency</p>
-<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">basis</span><span class="p">,</span> <span class="n">lengths</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">filters</span><span class="o">.</span><span class="n">constant_q</span><span class="p">(</span><span class="mi">22050</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">basis</span><span class="p">,</span> <span class="n">lengths</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">filters</span><span class="o">.</span><span class="n">constant_q</span><span class="p">(</span><span class="mi">22050</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">notes</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">midi_to_note</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">24</span><span class="p">,</span> <span class="mi">24</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">basis</span><span class="p">)))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">basis</span><span class="p">,</span> <span class="n">notes</span><span class="p">)[:</span><span class="mi">12</span><span class="p">]):</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">basis</span><span class="p">,</span> <span class="n">notes</span><span class="p">[:</span><span class="mi">12</span><span class="p">])):</span>
 <span class="gp">... </span>    <span class="n">f_scale</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
 <span class="gp">... </span>    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="n">f_scale</span><span class="o">.</span><span class="n">real</span><span class="p">)</span>
 <span class="gp">... </span>    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="n">f_scale</span><span class="o">.</span><span class="n">imag</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">notes</span><span class="p">[:</span><span class="mi">12</span><span class="p">])),</span> <span class="n">notes</span><span class="p">[:</span><span class="mi">12</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">notes</span><span class="p">[:</span><span class="mi">12</span><span class="p">])),</span> <span class="n">notes</span><span class="p">[:</span><span class="mi">12</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;CQ filters&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;CQ filters (one octave, time domain)&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Time (samples at 22050 Hz)&#39;</span><span class="p">)</span>
@@ -279,13 +283,16 @@ The <em class="xref py py-obj">resolution</em> parameter will be removed in libr
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Keep only the positive frequencies</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">F</span> <span class="o">=</span> <span class="n">F</span><span class="p">[:,</span> <span class="p">:(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">F</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">//</span> <span class="mi">2</span><span class="p">)]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span><span class="p">(</span><span class="n">F</span><span class="p">,</span> <span class="n">x_axis</span><span class="o">=</span><span class="s1">&#39;linear&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">notes</span><span class="p">))[::</span><span class="mi">12</span><span class="p">],</span> <span class="n">notes</span><span class="p">[::</span><span class="mi">12</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">notes</span><span class="p">))[::</span><span class="mi">12</span><span class="p">],</span> <span class="n">notes</span><span class="p">[::</span><span class="mi">12</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;CQ filters&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;CQ filter magnitudes (frequency domain)&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
 </div>
 <p>(<a class="reference external" href="../generated/librosa-filters-constant_q-1.py">Source code</a>)</p>
+<div class="figure">
+<img alt="../_images/librosa-filters-constant_q-1.png" src="../_images/librosa-filters-constant_q-1.png" />
+</div>
 </dd></dl>
 
 </div>
@@ -297,7 +304,7 @@ The <em class="xref py py-obj">resolution</em> parameter will be removed in libr
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="librosa.filters.constant_q_lengths.html" class="btn btn-neutral float-right" title="librosa.filters.constant_q_lengths" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="librosa.filters.window_bandwidth.html" class="btn btn-neutral float-right" title="librosa.filters.window_bandwidth" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="librosa.filters.chroma.html" class="btn btn-neutral" title="librosa.filters.chroma" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
@@ -309,7 +316,7 @@ The <em class="xref py py-obj">resolution</em> parameter will be removed in libr
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2016, librosa development team.
+        &copy; Copyright 2013--2017, librosa development team.
 
     </p>
   </div>
@@ -324,6 +331,28 @@ The <em class="xref py py-obj">resolution</em> parameter will be removed in libr
 
   </div>
   
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: 0.5.0
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Tags</dt>
+            <dd><a href="../0.4.0rc1/generated/librosa.filters.constant_q.html">0.4.0rc1</a></dd>
+            <dd><a href="../0.4.2/generated/librosa.filters.constant_q.html">0.4.2</a></dd>
+            <dd><a href="../0.4.3/generated/librosa.filters.constant_q.html">0.4.3</a></dd>
+            <dd><a href="../0.4.3rc0/generated/librosa.filters.constant_q.html">0.4.3rc0</a></dd>
+            <dd><a href="../0.5.0/generated/librosa.filters.constant_q.html">0.5.0</a></dd>
+            <dd><a href="../0.5.0rc0/generated/librosa.filters.constant_q.html">0.5.0rc0</a></dd>
+        </dl>
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="../master/generated/librosa.filters.constant_q.html">master</a></dd>
+        </dl>
+    </div>
+</div>
 
 
   
@@ -331,7 +360,7 @@ The <em class="xref py py-obj">resolution</em> parameter will be removed in libr
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.4.3',
+            VERSION:'0.5.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

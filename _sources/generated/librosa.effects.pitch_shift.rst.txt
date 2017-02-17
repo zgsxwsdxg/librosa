@@ -1,0 +1,6 @@
+librosa.effects.pitch_shift
+===========================
+
+.. currentmodule:: librosa.effects
+
+.. autofunction:: pitch_shift

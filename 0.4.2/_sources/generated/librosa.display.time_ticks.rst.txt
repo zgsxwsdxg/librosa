@@ -1,0 +1,6 @@
+librosa.display.time_ticks
+==========================
+
+.. currentmodule:: librosa.display
+
+.. autofunction:: time_ticks

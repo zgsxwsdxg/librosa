@@ -1,0 +1,6 @@
+librosa.feature.spectral_bandwidth
+==================================
+
+.. currentmodule:: librosa.feature
+
+.. autofunction:: spectral_bandwidth

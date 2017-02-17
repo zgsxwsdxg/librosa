@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>librosa.feature.spectral &mdash; librosa 0.4.3 documentation</title>
+  <title>librosa.feature.spectral &mdash; librosa 0.5.0 documentation</title>
   
 
   
@@ -28,9 +28,14 @@
   
 
   
+    <link rel="stylesheet" href="../../../_static/banner.css" type="text/css" />
+  
 
   
-    <link rel="top" title="librosa 0.4.3 documentation" href="../../../index.html"/>
+        <link rel="index" title="Index"
+              href="../../../genindex.html"/>
+        <link rel="search" title="Search" href="../../../search.html"/>
+    <link rel="top" title="librosa 0.5.0 documentation" href="../../../index.html"/>
         <link rel="up" title="Module code" href="../../index.html"/> 
 
   
@@ -59,7 +64,7 @@
             
             
               <div class="version">
-                0.4
+                0.5
               </div>
             
           
@@ -99,9 +104,10 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../filters.html">Filters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../cache.html">Caching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ioformats.html">Advanced I/O Use Cases</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Release notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../glossary.html">Glossary</a></li>
 </ul>
 
@@ -147,25 +153,31 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <h1>Source code for librosa.feature.spectral</h1><div class="highlight"><pre>
+  
+
+
+
+
+
+<h1>Source code for librosa.feature.spectral</h1><div class="highlight"><pre>
 <span></span><span class="ch">#!/usr/bin/env python</span>
 <span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="sd">&quot;&quot;&quot;Spectral feature extraction&quot;&quot;&quot;</span>
 
-<span class="kn">import</span> <span class="nn">numpy</span> <span class="kn">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">scipy</span>
 <span class="kn">import</span> <span class="nn">scipy.signal</span>
 
-<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">util</span>
-<span class="kn">from</span> <span class="nn">..</span> <span class="kn">import</span> <span class="n">filters</span>
-<span class="kn">from</span> <span class="nn">..util.exceptions</span> <span class="kn">import</span> <span class="n">ParameterError</span>
-<span class="kn">from</span> <span class="nn">..util</span> <span class="kn">import</span> <span class="n">Deprecated</span><span class="p">,</span> <span class="n">rename_kw</span>
+<span class="kn">from</span> <span class="nn">..</span> <span class="k">import</span> <span class="n">util</span>
+<span class="kn">from</span> <span class="nn">..</span> <span class="k">import</span> <span class="n">filters</span>
+<span class="kn">from</span> <span class="nn">..util.exceptions</span> <span class="k">import</span> <span class="n">ParameterError</span>
+<span class="kn">from</span> <span class="nn">..util.deprecation</span> <span class="k">import</span> <span class="n">Deprecated</span><span class="p">,</span> <span class="n">rename_kw</span>
 
-<span class="kn">from</span> <span class="nn">..core.time_frequency</span> <span class="kn">import</span> <span class="n">fft_frequencies</span>
-<span class="kn">from</span> <span class="nn">..core.audio</span> <span class="kn">import</span> <span class="n">zero_crossings</span>
-<span class="kn">from</span> <span class="nn">..core.spectrum</span> <span class="kn">import</span> <span class="n">logamplitude</span><span class="p">,</span> <span class="n">_spectrogram</span>
-<span class="kn">from</span> <span class="nn">..core.constantq</span> <span class="kn">import</span> <span class="n">cqt</span><span class="p">,</span> <span class="n">hybrid_cqt</span>
-<span class="kn">from</span> <span class="nn">..core.pitch</span> <span class="kn">import</span> <span class="n">estimate_tuning</span>
+<span class="kn">from</span> <span class="nn">..core.time_frequency</span> <span class="k">import</span> <span class="n">fft_frequencies</span>
+<span class="kn">from</span> <span class="nn">..core.audio</span> <span class="k">import</span> <span class="n">zero_crossings</span><span class="p">,</span> <span class="n">to_mono</span>
+<span class="kn">from</span> <span class="nn">..core.spectrum</span> <span class="k">import</span> <span class="n">power_to_db</span><span class="p">,</span> <span class="n">_spectrogram</span>
+<span class="kn">from</span> <span class="nn">..core.constantq</span> <span class="k">import</span> <span class="n">cqt</span><span class="p">,</span> <span class="n">hybrid_cqt</span>
+<span class="kn">from</span> <span class="nn">..core.pitch</span> <span class="k">import</span> <span class="n">estimate_tuning</span>
 
 
 <span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;spectral_centroid&#39;</span><span class="p">,</span>
@@ -180,15 +192,12 @@
            <span class="s1">&#39;chroma_cens&#39;</span><span class="p">,</span>
            <span class="s1">&#39;melspectrogram&#39;</span><span class="p">,</span>
            <span class="s1">&#39;mfcc&#39;</span><span class="p">,</span>
-           <span class="s1">&#39;tonnetz&#39;</span><span class="p">,</span>
-           <span class="c1"># Deprecated functions</span>
-           <span class="s1">&#39;logfsgram&#39;</span><span class="p">,</span>
-           <span class="s1">&#39;chromagram&#39;</span><span class="p">]</span>
+           <span class="s1">&#39;tonnetz&#39;</span><span class="p">]</span>
 
 
 <span class="c1"># -- Spectral features -- #</span>
-<div class="viewcode-block" id="spectral_centroid"><a class="viewcode-back" href="../../../generated/librosa.feature.spectral_centroid.html#librosa.feature.spectral_centroid">[docs]</a><span class="k">def</span> <span class="nf">spectral_centroid</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="mi">22050</span><span class="p">,</span> <span class="n">S</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">n_fft</span><span class="o">=</span><span class="mi">2048</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span>
-                      <span class="n">freq</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="spectral_centroid"><a class="viewcode-back" href="../../../generated/librosa.feature.spectral_centroid.html#librosa.feature.spectral_centroid">[docs]</a><span class="k">def</span> <span class="nf">spectral_centroid</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="mi">22050</span><span class="p">,</span> <span class="n">S</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_fft</span><span class="o">=</span><span class="mi">2048</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span>
+                      <span class="n">freq</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Compute the spectral centroid.</span>
 
 <span class="sd">    Each frame of a magnitude spectrogram is normalized and treated as a</span>
@@ -265,7 +274,7 @@
 <span class="sd">    &gt;&gt;&gt; plt.xlim([0, cent.shape[-1]])</span>
 <span class="sd">    &gt;&gt;&gt; plt.legend()</span>
 <span class="sd">    &gt;&gt;&gt; plt.subplot(2, 1, 2)</span>
-<span class="sd">    &gt;&gt;&gt; librosa.display.specshow(librosa.logamplitude(S**2, ref_power=np.max),</span>
+<span class="sd">    &gt;&gt;&gt; librosa.display.specshow(librosa.amplitude_to_db(S, ref=np.max),</span>
 <span class="sd">    ...                          y_axis=&#39;log&#39;, x_axis=&#39;time&#39;)</span>
 <span class="sd">    &gt;&gt;&gt; plt.title(&#39;log Power spectrogram&#39;)</span>
 <span class="sd">    &gt;&gt;&gt; plt.tight_layout()</span>
@@ -281,7 +290,7 @@
                              <span class="s1">&#39;with non-negative energies&#39;</span><span class="p">)</span>
 
     <span class="c1"># Compute the center frequencies of each bin</span>
-    <span class="k">if</span> <span class="n">freq</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">freq</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">freq</span> <span class="o">=</span> <span class="n">fft_frequencies</span><span class="p">(</span><span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span> <span class="n">n_fft</span><span class="o">=</span><span class="n">n_fft</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">freq</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
@@ -289,11 +298,11 @@
 
     <span class="c1"># Column-normalize S</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">freq</span> <span class="o">*</span> <span class="n">util</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
-                  <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span></div>
+                  <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="spectral_bandwidth"><a class="viewcode-back" href="../../../generated/librosa.feature.spectral_bandwidth.html#librosa.feature.spectral_bandwidth">[docs]</a><span class="k">def</span> <span class="nf">spectral_bandwidth</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="mi">22050</span><span class="p">,</span> <span class="n">S</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">n_fft</span><span class="o">=</span><span class="mi">2048</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span>
-                       <span class="n">freq</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">centroid</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+<div class="viewcode-block" id="spectral_bandwidth"><a class="viewcode-back" href="../../../generated/librosa.feature.spectral_bandwidth.html#librosa.feature.spectral_bandwidth">[docs]</a><span class="k">def</span> <span class="nf">spectral_bandwidth</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="mi">22050</span><span class="p">,</span> <span class="n">S</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_fft</span><span class="o">=</span><span class="mi">2048</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span>
+                       <span class="n">freq</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">centroid</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Compute p&#39;th-order spectral bandwidth:</span>
 
 <span class="sd">        (sum_k S[k] * (freq[k] - centroid)**p)**(1/p)</span>
@@ -370,7 +379,7 @@
 <span class="sd">    &gt;&gt;&gt; plt.xlim([0, spec_bw.shape[-1]])</span>
 <span class="sd">    &gt;&gt;&gt; plt.legend()</span>
 <span class="sd">    &gt;&gt;&gt; plt.subplot(2, 1, 2)</span>
-<span class="sd">    &gt;&gt;&gt; librosa.display.specshow(librosa.logamplitude(S**2, ref_power=np.max),</span>
+<span class="sd">    &gt;&gt;&gt; librosa.display.specshow(librosa.amplitude_to_db(S, ref=np.max),</span>
 <span class="sd">    ...                          y_axis=&#39;log&#39;, x_axis=&#39;time&#39;)</span>
 <span class="sd">    &gt;&gt;&gt; plt.title(&#39;log Power spectrogram&#39;)</span>
 <span class="sd">    &gt;&gt;&gt; plt.tight_layout()</span>
@@ -386,14 +395,14 @@
         <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s1">&#39;Spectral bandwidth is only defined &#39;</span>
                              <span class="s1">&#39;with non-negative energies&#39;</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">centroid</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">centroid</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">centroid</span> <span class="o">=</span> <span class="n">spectral_centroid</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span> <span class="n">S</span><span class="o">=</span><span class="n">S</span><span class="p">,</span>
                                      <span class="n">n_fft</span><span class="o">=</span><span class="n">n_fft</span><span class="p">,</span>
                                      <span class="n">hop_length</span><span class="o">=</span><span class="n">hop_length</span><span class="p">,</span>
                                      <span class="n">freq</span><span class="o">=</span><span class="n">freq</span><span class="p">)</span>
 
     <span class="c1"># Compute the center frequencies of each bin</span>
-    <span class="k">if</span> <span class="n">freq</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">freq</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">freq</span> <span class="o">=</span> <span class="n">fft_frequencies</span><span class="p">(</span><span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span> <span class="n">n_fft</span><span class="o">=</span><span class="n">n_fft</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">freq</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
@@ -405,12 +414,12 @@
     <span class="k">if</span> <span class="n">norm</span><span class="p">:</span>
         <span class="n">S</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">S</span> <span class="o">*</span> <span class="n">deviation</span><span class="o">**</span><span class="n">p</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mf">1.</span><span class="o">/</span><span class="n">p</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">S</span> <span class="o">*</span> <span class="n">deviation</span><span class="o">**</span><span class="n">p</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mf">1.</span><span class="o">/</span><span class="n">p</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="spectral_contrast"><a class="viewcode-back" href="../../../generated/librosa.feature.spectral_contrast.html#librosa.feature.spectral_contrast">[docs]</a><span class="k">def</span> <span class="nf">spectral_contrast</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="mi">22050</span><span class="p">,</span> <span class="n">S</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">n_fft</span><span class="o">=</span><span class="mi">2048</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span>
-                      <span class="n">freq</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">fmin</span><span class="o">=</span><span class="mf">200.0</span><span class="p">,</span> <span class="n">n_bands</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">quantile</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span>
-                      <span class="n">linear</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<div class="viewcode-block" id="spectral_contrast"><a class="viewcode-back" href="../../../generated/librosa.feature.spectral_contrast.html#librosa.feature.spectral_contrast">[docs]</a><span class="k">def</span> <span class="nf">spectral_contrast</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="mi">22050</span><span class="p">,</span> <span class="n">S</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_fft</span><span class="o">=</span><span class="mi">2048</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span>
+                      <span class="n">freq</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fmin</span><span class="o">=</span><span class="mf">200.0</span><span class="p">,</span> <span class="n">n_bands</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">quantile</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span>
+                      <span class="n">linear</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Compute spectral contrast [1]_</span>
 
 <span class="sd">    .. [1] Jiang, Dan-Ning, Lie Lu, Hong-Jiang Zhang, Jian-Hua Tao,</span>
@@ -476,8 +485,8 @@
 <span class="sd">    &gt;&gt;&gt; import matplotlib.pyplot as plt</span>
 <span class="sd">    &gt;&gt;&gt; plt.figure()</span>
 <span class="sd">    &gt;&gt;&gt; plt.subplot(2, 1, 1)</span>
-<span class="sd">    &gt;&gt;&gt; librosa.display.specshow(librosa.logamplitude(S ** 2,</span>
-<span class="sd">    ...                                               ref_power=np.max),</span>
+<span class="sd">    &gt;&gt;&gt; librosa.display.specshow(librosa.amplitude_to_db(S,</span>
+<span class="sd">    ...                                                  ref=np.max),</span>
 <span class="sd">    ...                          y_axis=&#39;log&#39;)</span>
 <span class="sd">    &gt;&gt;&gt; plt.colorbar(format=&#39;%+2.0f dB&#39;)</span>
 <span class="sd">    &gt;&gt;&gt; plt.title(&#39;Power spectrogram&#39;)</span>
@@ -492,14 +501,14 @@
     <span class="n">S</span><span class="p">,</span> <span class="n">n_fft</span> <span class="o">=</span> <span class="n">_spectrogram</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">S</span><span class="o">=</span><span class="n">S</span><span class="p">,</span> <span class="n">n_fft</span><span class="o">=</span><span class="n">n_fft</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="n">hop_length</span><span class="p">)</span>
 
     <span class="c1"># Compute the center frequencies of each bin</span>
-    <span class="k">if</span> <span class="n">freq</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">freq</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">freq</span> <span class="o">=</span> <span class="n">fft_frequencies</span><span class="p">(</span><span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span> <span class="n">n_fft</span><span class="o">=</span><span class="n">n_fft</span><span class="p">)</span>
 
     <span class="n">freq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_1d</span><span class="p">(</span><span class="n">freq</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">freq</span><span class="o">.</span><span class="n">ndim</span> <span class="o">!=</span> <span class="mi">1</span> <span class="ow">or</span> <span class="nb">len</span><span class="p">(</span><span class="n">freq</span><span class="p">)</span> <span class="o">!=</span> <span class="n">S</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
         <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s1">&#39;freq.shape mismatch: expected &#39;</span>
-                             <span class="s1">&#39;({:d},)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">S</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+                             <span class="s1">&#39;(</span><span class="si">{:d}</span><span class="s1">,)&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">S</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
 
     <span class="k">if</span> <span class="n">n_bands</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">n_bands</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
         <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s1">&#39;n_bands must be a positive integer&#39;</span><span class="p">)</span>
@@ -522,10 +531,10 @@
         <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">flatnonzero</span><span class="p">(</span><span class="n">current_band</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">k</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">current_band</span><span class="p">[</span><span class="n">idx</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="n">current_band</span><span class="p">[</span><span class="n">idx</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
 
         <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="n">n_bands</span><span class="p">:</span>
-            <span class="n">current_band</span><span class="p">[</span><span class="n">idx</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="bp">True</span>
+            <span class="n">current_band</span><span class="p">[</span><span class="n">idx</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:]</span> <span class="o">=</span> <span class="kc">True</span>
 
         <span class="n">sub_band</span> <span class="o">=</span> <span class="n">S</span><span class="p">[</span><span class="n">current_band</span><span class="p">]</span>
 
@@ -544,11 +553,11 @@
     <span class="k">if</span> <span class="n">linear</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">peak</span> <span class="o">-</span> <span class="n">valley</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">logamplitude</span><span class="p">(</span><span class="n">peak</span><span class="p">)</span> <span class="o">-</span> <span class="n">logamplitude</span><span class="p">(</span><span class="n">valley</span><span class="p">)</span></div>
+        <span class="k">return</span> <span class="n">power_to_db</span><span class="p">(</span><span class="n">peak</span><span class="p">)</span> <span class="o">-</span> <span class="n">power_to_db</span><span class="p">(</span><span class="n">valley</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="spectral_rolloff"><a class="viewcode-back" href="../../../generated/librosa.feature.spectral_rolloff.html#librosa.feature.spectral_rolloff">[docs]</a><span class="k">def</span> <span class="nf">spectral_rolloff</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="mi">22050</span><span class="p">,</span> <span class="n">S</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">n_fft</span><span class="o">=</span><span class="mi">2048</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span>
-                     <span class="n">freq</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">roll_percent</span><span class="o">=</span><span class="mf">0.85</span><span class="p">):</span>
+<div class="viewcode-block" id="spectral_rolloff"><a class="viewcode-back" href="../../../generated/librosa.feature.spectral_rolloff.html#librosa.feature.spectral_rolloff">[docs]</a><span class="k">def</span> <span class="nf">spectral_rolloff</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="mi">22050</span><span class="p">,</span> <span class="n">S</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_fft</span><span class="o">=</span><span class="mi">2048</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span>
+                     <span class="n">freq</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">roll_percent</span><span class="o">=</span><span class="mf">0.85</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Compute roll-off frequency</span>
 
 <span class="sd">    Parameters</span>
@@ -613,7 +622,7 @@
 <span class="sd">    &gt;&gt;&gt; plt.xlim([0, rolloff.shape[-1]])</span>
 <span class="sd">    &gt;&gt;&gt; plt.legend()</span>
 <span class="sd">    &gt;&gt;&gt; plt.subplot(2, 1, 2)</span>
-<span class="sd">    &gt;&gt;&gt; librosa.display.specshow(librosa.logamplitude(S**2, ref_power=np.max),</span>
+<span class="sd">    &gt;&gt;&gt; librosa.display.specshow(librosa.amplitude_to_db(S, ref=np.max),</span>
 <span class="sd">    ...                          y_axis=&#39;log&#39;, x_axis=&#39;time&#39;)</span>
 <span class="sd">    &gt;&gt;&gt; plt.title(&#39;log Power spectrogram&#39;)</span>
 <span class="sd">    &gt;&gt;&gt; plt.tight_layout()</span>
@@ -633,7 +642,7 @@
                              <span class="s1">&#39;with non-negative energies&#39;</span><span class="p">)</span>
 
     <span class="c1"># Compute the center frequencies of each bin</span>
-    <span class="k">if</span> <span class="n">freq</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">freq</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">freq</span> <span class="o">=</span> <span class="n">fft_frequencies</span><span class="p">(</span><span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span> <span class="n">n_fft</span><span class="o">=</span><span class="n">n_fft</span><span class="p">)</span>
 
     <span class="c1"># Make sure that frequency can be broadcast</span>
@@ -646,27 +655,38 @@
 
     <span class="n">ind</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">total_energy</span> <span class="o">&lt;</span> <span class="n">threshold</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmin</span><span class="p">(</span><span class="n">ind</span> <span class="o">*</span> <span class="n">freq</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nanmin</span><span class="p">(</span><span class="n">ind</span> <span class="o">*</span> <span class="n">freq</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="rmse"><a class="viewcode-back" href="../../../generated/librosa.feature.rmse.html#librosa.feature.rmse">[docs]</a><span class="k">def</span> <span class="nf">rmse</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">S</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">n_fft</span><span class="o">=</span><span class="mi">2048</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="mi">512</span><span class="p">):</span>
-    <span class="sd">&#39;&#39;&#39;Compute root-mean-square (RMS) energy for each frame.</span>
+<div class="viewcode-block" id="rmse"><a class="viewcode-back" href="../../../generated/librosa.feature.rmse.html#librosa.feature.rmse">[docs]</a><span class="k">def</span> <span class="nf">rmse</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">S</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">frame_length</span><span class="o">=</span><span class="mi">2048</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span>
+         <span class="n">n_fft</span><span class="o">=</span><span class="n">Deprecated</span><span class="p">()):</span>
+    <span class="sd">&#39;&#39;&#39;Compute root-mean-square (RMS) energy for each frame, either from the</span>
+<span class="sd">    audio samples `y` or from a spectrogram `S`.</span>
+
+<span class="sd">    Computing the energy from audio samples is faster as it doesn&#39;t require a</span>
+<span class="sd">    STFT calculation. However, using a spectrogram will give a more accurate</span>
+<span class="sd">    representation of energy over time because its frames can be windowed,</span>
+<span class="sd">    thus prefer using `S` if it&#39;s already available.</span>
 
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
 <span class="sd">    y : np.ndarray [shape=(n,)] or None</span>
-<span class="sd">        audio time series</span>
+<span class="sd">        (optional) audio time series. Required if `S` is not input.</span>
 
 <span class="sd">    S : np.ndarray [shape=(d, t)] or None</span>
-<span class="sd">        (optional) spectrogram magnitude</span>
+<span class="sd">        (optional) spectrogram magnitude. Required if `y` is not input.</span>
 
-<span class="sd">    n_fft : int &gt; 0 [scalar]</span>
-<span class="sd">        FFT window size</span>
+<span class="sd">    frame_length : int &gt; 0 [scalar]</span>
+<span class="sd">        length of analysis frame (in samples) for energy calculation</span>
 
 <span class="sd">    hop_length : int &gt; 0 [scalar]</span>
 <span class="sd">        hop length for STFT. See `librosa.core.stft` for details.</span>
 
+<span class="sd">    n_fft : [DEPRECATED]</span>
+<span class="sd">        .. warning:: This parameter name was deprecated in librosa 0.5.0</span>
+<span class="sd">            Use the `frame_length` parameter instead.</span>
+<span class="sd">            The `n_fft` parameter will be removed in librosa 0.6.0.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -693,20 +713,39 @@
 <span class="sd">    &gt;&gt;&gt; plt.xlim([0, rms.shape[-1]])</span>
 <span class="sd">    &gt;&gt;&gt; plt.legend(loc=&#39;best&#39;)</span>
 <span class="sd">    &gt;&gt;&gt; plt.subplot(2, 1, 2)</span>
-<span class="sd">    &gt;&gt;&gt; librosa.display.specshow(librosa.logamplitude(S**2, ref_power=np.max),</span>
+<span class="sd">    &gt;&gt;&gt; librosa.display.specshow(librosa.amplitude_to_db(S, ref=np.max),</span>
 <span class="sd">    ...                          y_axis=&#39;log&#39;, x_axis=&#39;time&#39;)</span>
 <span class="sd">    &gt;&gt;&gt; plt.title(&#39;log Power spectrogram&#39;)</span>
 <span class="sd">    &gt;&gt;&gt; plt.tight_layout()</span>
 
+<span class="sd">    Use a STFT window of constant ones and no frame centering to get consistent</span>
+<span class="sd">    results with the RMS energy computed from the audio samples `y`</span>
+
+<span class="sd">    &gt;&gt;&gt; S = librosa.magphase(librosa.stft(y, window=np.ones, center=False))[0]</span>
+<span class="sd">    &gt;&gt;&gt; librosa.feature.rmse(S=S)</span>
+
 <span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">frame_length</span> <span class="o">=</span> <span class="n">rename_kw</span><span class="p">(</span><span class="s1">&#39;n_fft&#39;</span><span class="p">,</span> <span class="n">n_fft</span><span class="p">,</span>
+                             <span class="s1">&#39;frame_length&#39;</span><span class="p">,</span> <span class="n">frame_length</span><span class="p">,</span>
+                             <span class="s1">&#39;0.5&#39;</span><span class="p">,</span> <span class="s1">&#39;0.6&#39;</span><span class="p">)</span>
 
-    <span class="n">S</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">_spectrogram</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">S</span><span class="o">=</span><span class="n">S</span><span class="p">,</span> <span class="n">n_fft</span><span class="o">=</span><span class="n">n_fft</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="n">hop_length</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">y</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">S</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Either `y` or `S` should be input.&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">y</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">frame</span><span class="p">(</span><span class="n">to_mono</span><span class="p">(</span><span class="n">y</span><span class="p">),</span>
+                       <span class="n">frame_length</span><span class="o">=</span><span class="n">frame_length</span><span class="p">,</span>
+                       <span class="n">hop_length</span><span class="o">=</span><span class="n">hop_length</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">S</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">x</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">_spectrogram</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">S</span><span class="o">=</span><span class="n">S</span><span class="p">,</span>
+                            <span class="n">n_fft</span><span class="o">=</span><span class="n">frame_length</span><span class="p">,</span>
+                            <span class="n">hop_length</span><span class="o">=</span><span class="n">hop_length</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Either `y` or `S` must be input.&#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span></div>
 
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">S</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span></div>
 
-
-<div class="viewcode-block" id="poly_features"><a class="viewcode-back" href="../../../generated/librosa.feature.poly_features.html#librosa.feature.poly_features">[docs]</a><span class="k">def</span> <span class="nf">poly_features</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="mi">22050</span><span class="p">,</span> <span class="n">S</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">n_fft</span><span class="o">=</span><span class="mi">2048</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span>
-                  <span class="n">order</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="poly_features"><a class="viewcode-back" href="../../../generated/librosa.feature.poly_features.html#librosa.feature.poly_features">[docs]</a><span class="k">def</span> <span class="nf">poly_features</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="mi">22050</span><span class="p">,</span> <span class="n">S</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_fft</span><span class="o">=</span><span class="mi">2048</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span>
+                  <span class="n">order</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">freq</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Get coefficients of fitting an nth-order polynomial to the columns</span>
 <span class="sd">    of a spectrogram.</span>
 
@@ -740,53 +779,61 @@
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    coefficients : np.ndarray [shape=(order+1, t)]</span>
-<span class="sd">        polynomial coefficients for each frame</span>
+<span class="sd">        polynomial coefficients for each frame.</span>
+
+<span class="sd">        `coeffecients[0]` corresponds to the highest degree (`order`),</span>
+
+<span class="sd">        `coefficients[1]` corresponds to the next highest degree (`order-1`),</span>
+
+<span class="sd">        down to the constant term `coefficients[order]`.</span>
 
 <span class="sd">    Examples</span>
 <span class="sd">    --------</span>
 <span class="sd">    &gt;&gt;&gt; y, sr = librosa.load(librosa.util.example_audio_file())</span>
 <span class="sd">    &gt;&gt;&gt; S = np.abs(librosa.stft(y))</span>
 
-<span class="sd">    Line features</span>
+<span class="sd">    Fit a degree-0 polynomial (constant) to each frame</span>
 
-<span class="sd">    &gt;&gt;&gt; line = librosa.feature.poly_features(S=S, sr=sr)</span>
-<span class="sd">    &gt;&gt;&gt; line</span>
-<span class="sd">    array([[ -2.406e-08,  -5.051e-06, ...,  -1.103e-08,  -5.651e-09],</span>
-<span class="sd">           [  3.445e-04,   3.834e-02, ...,   2.661e-04,   2.239e-04]])</span>
+<span class="sd">    &gt;&gt;&gt; p0 = librosa.feature.poly_features(S=S, order=0)</span>
 
-<span class="sd">    Quadratic features</span>
+<span class="sd">    Fit a linear polynomial to each frame</span>
 
-<span class="sd">    &gt;&gt;&gt; quad = librosa.feature.poly_features(S=S, order=2)</span>
-<span class="sd">    &gt;&gt;&gt; quad</span>
-<span class="sd">    array([[  6.276e-12,   2.010e-09, ...,   1.493e-12,   1.000e-13],</span>
-<span class="sd">           [ -9.325e-08,  -2.721e-05, ...,  -2.749e-08,  -6.754e-09],</span>
-<span class="sd">           [  4.715e-04,   7.902e-02, ...,   2.963e-04,   2.259e-04]])</span>
+<span class="sd">    &gt;&gt;&gt; p1 = librosa.feature.poly_features(S=S, order=1)</span>
+
+<span class="sd">    Fit a quadratic to each frame</span>
+
+<span class="sd">    &gt;&gt;&gt; p2 = librosa.feature.poly_features(S=S, order=2)</span>
 
 <span class="sd">    Plot the results for comparison</span>
 
 <span class="sd">    &gt;&gt;&gt; import matplotlib.pyplot as plt</span>
-<span class="sd">    &gt;&gt;&gt; plt.figure()</span>
-<span class="sd">    &gt;&gt;&gt; plt.subplot(3, 1, 1)</span>
-<span class="sd">    &gt;&gt;&gt; librosa.display.specshow(line)</span>
-<span class="sd">    &gt;&gt;&gt; plt.colorbar()</span>
-<span class="sd">    &gt;&gt;&gt; plt.title(&#39;Line coefficients&#39;)</span>
-<span class="sd">    &gt;&gt;&gt; plt.subplot(3, 1, 2)</span>
-<span class="sd">    &gt;&gt;&gt; librosa.display.specshow(quad)</span>
-<span class="sd">    &gt;&gt;&gt; plt.colorbar()</span>
-<span class="sd">    &gt;&gt;&gt; plt.title(&#39;Quadratic coefficients&#39;)</span>
-<span class="sd">    &gt;&gt;&gt; plt.subplot(3, 1, 3)</span>
-<span class="sd">    &gt;&gt;&gt; librosa.display.specshow(librosa.logamplitude(S**2, ref_power=np.max),</span>
-<span class="sd">    ...                          y_axis=&#39;log&#39;, x_axis=&#39;time&#39;)</span>
-<span class="sd">    &gt;&gt;&gt; plt.title(&#39;log Power spectrogram&#39;)</span>
-<span class="sd">    &gt;&gt;&gt; plt.colorbar(format=&#39;%+2.0f dB&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; plt.figure(figsize=(8, 8))</span>
+<span class="sd">    &gt;&gt;&gt; ax = plt.subplot(4,1,1)</span>
+<span class="sd">    &gt;&gt;&gt; plt.plot(p2[2], label=&#39;order=2&#39;, alpha=0.8)</span>
+<span class="sd">    &gt;&gt;&gt; plt.plot(p1[1], label=&#39;order=1&#39;, alpha=0.8)</span>
+<span class="sd">    &gt;&gt;&gt; plt.plot(p0[0], label=&#39;order=0&#39;, alpha=0.8)</span>
+<span class="sd">    &gt;&gt;&gt; plt.xticks([])</span>
+<span class="sd">    &gt;&gt;&gt; plt.ylabel(&#39;Constant&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; plt.legend()</span>
+<span class="sd">    &gt;&gt;&gt; plt.subplot(4,1,2, sharex=ax)</span>
+<span class="sd">    &gt;&gt;&gt; plt.plot(p2[1], label=&#39;order=2&#39;, alpha=0.8)</span>
+<span class="sd">    &gt;&gt;&gt; plt.plot(p1[0], label=&#39;order=1&#39;, alpha=0.8)</span>
+<span class="sd">    &gt;&gt;&gt; plt.xticks([])</span>
+<span class="sd">    &gt;&gt;&gt; plt.ylabel(&#39;Linear&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; plt.subplot(4,1,3, sharex=ax)</span>
+<span class="sd">    &gt;&gt;&gt; plt.plot(p2[0], label=&#39;order=2&#39;, alpha=0.8)</span>
+<span class="sd">    &gt;&gt;&gt; plt.xticks([])</span>
+<span class="sd">    &gt;&gt;&gt; plt.ylabel(&#39;Quadratic&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; plt.subplot(4,1,4, sharex=ax)</span>
+<span class="sd">    &gt;&gt;&gt; librosa.display.specshow(librosa.amplitude_to_db(S, ref=np.max),</span>
+<span class="sd">    ...                          y_axis=&#39;log&#39;)</span>
 <span class="sd">    &gt;&gt;&gt; plt.tight_layout()</span>
-
 <span class="sd">    &#39;&#39;&#39;</span>
 
     <span class="n">S</span><span class="p">,</span> <span class="n">n_fft</span> <span class="o">=</span> <span class="n">_spectrogram</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">S</span><span class="o">=</span><span class="n">S</span><span class="p">,</span> <span class="n">n_fft</span><span class="o">=</span><span class="n">n_fft</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="n">hop_length</span><span class="p">)</span>
 
     <span class="c1"># Compute the center frequencies of each bin</span>
-    <span class="k">if</span> <span class="n">freq</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">freq</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">freq</span> <span class="o">=</span> <span class="n">fft_frequencies</span><span class="p">(</span><span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span> <span class="n">n_fft</span><span class="o">=</span><span class="n">n_fft</span><span class="p">)</span>
 
     <span class="c1"># If frequencies are constant over frames, then we only need to fit once</span>
@@ -800,7 +847,7 @@
     <span class="k">return</span> <span class="n">coefficients</span></div>
 
 
-<div class="viewcode-block" id="zero_crossing_rate"><a class="viewcode-back" href="../../../generated/librosa.feature.zero_crossing_rate.html#librosa.feature.zero_crossing_rate">[docs]</a><span class="k">def</span> <span class="nf">zero_crossing_rate</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">frame_length</span><span class="o">=</span><span class="mi">2048</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+<div class="viewcode-block" id="zero_crossing_rate"><a class="viewcode-back" href="../../../generated/librosa.feature.zero_crossing_rate.html#librosa.feature.zero_crossing_rate">[docs]</a><span class="k">def</span> <span class="nf">zero_crossing_rate</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">frame_length</span><span class="o">=</span><span class="mi">2048</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">center</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                        <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Compute the zero-crossing rate of an audio time series.</span>
 
@@ -854,16 +901,16 @@
     <span class="n">y_framed</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">frame</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">frame_length</span><span class="p">,</span> <span class="n">hop_length</span><span class="p">)</span>
 
     <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;axis&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">kwargs</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;pad&#39;</span><span class="p">,</span> <span class="bp">False</span><span class="p">)</span>
+    <span class="n">kwargs</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="s1">&#39;pad&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 
     <span class="n">crossings</span> <span class="o">=</span> <span class="n">zero_crossings</span><span class="p">(</span><span class="n">y_framed</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">crossings</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span></div>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">crossings</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
 
 <span class="c1"># -- Chroma --#</span>
-<div class="viewcode-block" id="chroma_stft"><a class="viewcode-back" href="../../../generated/librosa.feature.chroma_stft.html#librosa.feature.chroma_stft">[docs]</a><span class="k">def</span> <span class="nf">chroma_stft</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="mi">22050</span><span class="p">,</span> <span class="n">S</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">n_fft</span><span class="o">=</span><span class="mi">2048</span><span class="p">,</span>
-                <span class="n">hop_length</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">tuning</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="chroma_stft"><a class="viewcode-back" href="../../../generated/librosa.feature.chroma_stft.html#librosa.feature.chroma_stft">[docs]</a><span class="k">def</span> <span class="nf">chroma_stft</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="mi">22050</span><span class="p">,</span> <span class="n">S</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">n_fft</span><span class="o">=</span><span class="mi">2048</span><span class="p">,</span>
+                <span class="n">hop_length</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">tuning</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Compute a chromagram from a waveform or power spectrogram.</span>
 
 <span class="sd">    This implementation is derived from `chromagram_E` [1]_</span>
@@ -948,6 +995,7 @@
 <span class="sd">           [ 0.793,  0.663, ...,  0.964,  0.972]])</span>
 
 <span class="sd">    &gt;&gt;&gt; import matplotlib.pyplot as plt</span>
+<span class="sd">    &gt;&gt;&gt; plt.figure(figsize=(10, 4))</span>
 <span class="sd">    &gt;&gt;&gt; librosa.display.specshow(chroma, y_axis=&#39;chroma&#39;, x_axis=&#39;time&#39;)</span>
 <span class="sd">    &gt;&gt;&gt; plt.colorbar()</span>
 <span class="sd">    &gt;&gt;&gt; plt.title(&#39;Chromagram&#39;)</span>
@@ -960,7 +1008,7 @@
 
     <span class="n">n_chroma</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;n_chroma&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">tuning</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">tuning</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">tuning</span> <span class="o">=</span> <span class="n">estimate_tuning</span><span class="p">(</span><span class="n">S</span><span class="o">=</span><span class="n">S</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span> <span class="n">bins_per_octave</span><span class="o">=</span><span class="n">n_chroma</span><span class="p">)</span>
 
     <span class="c1"># Get the filter bank</span>
@@ -976,11 +1024,10 @@
     <span class="k">return</span> <span class="n">util</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="n">raw_chroma</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="n">norm</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="chroma_cqt"><a class="viewcode-back" href="../../../generated/librosa.feature.chroma_cqt.html#librosa.feature.chroma_cqt">[docs]</a><span class="k">def</span> <span class="nf">chroma_cqt</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="mi">22050</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">fmin</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
-               <span class="n">norm</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">tuning</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">n_chroma</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
-               <span class="n">n_octaves</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">bins_per_octave</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">cqt_mode</span><span class="o">=</span><span class="s1">&#39;full&#39;</span><span class="p">,</span>
-               <span class="n">mode</span><span class="o">=</span><span class="n">Deprecated</span><span class="p">()):</span>
-    <span class="sd">r&#39;&#39;&#39;Constant-Q chromagram</span>
+<div class="viewcode-block" id="chroma_cqt"><a class="viewcode-back" href="../../../generated/librosa.feature.chroma_cqt.html#librosa.feature.chroma_cqt">[docs]</a><span class="k">def</span> <span class="nf">chroma_cqt</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="mi">22050</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">fmin</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+               <span class="n">norm</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">inf</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">tuning</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_chroma</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
+               <span class="n">n_octaves</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bins_per_octave</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cqt_mode</span><span class="o">=</span><span class="s1">&#39;full&#39;</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&#39;&#39;&#39;Constant-Q chromagram</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -998,7 +1045,7 @@
 
 <span class="sd">    fmin : float &gt; 0</span>
 <span class="sd">        minimum frequency to analyze in the CQT.</span>
-<span class="sd">        Default: &#39;C2&#39; ~ 32.7 Hz</span>
+<span class="sd">        Default: &#39;C1&#39; ~= 32.7 Hz</span>
 
 <span class="sd">    norm : int &gt; 0, +-np.inf, or None</span>
 <span class="sd">        Column-wise normalization of the chromagram.</span>
@@ -1025,11 +1072,6 @@
 
 <span class="sd">    cqt_mode : [&#39;full&#39;, &#39;hybrid&#39;]</span>
 <span class="sd">        Constant-Q transform mode</span>
-
-<span class="sd">    mode : str</span>
-<span class="sd">        .. warning:: This parameter name was in librosa 0.4.2</span>
-<span class="sd">            Use the `cqt_mode` parameter instead.</span>
-<span class="sd">            The `mode` parameter will be removed in librosa 0.5.0.</span>
 
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
@@ -1070,20 +1112,17 @@
 
     <span class="n">cqt_func</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;full&#39;</span><span class="p">:</span> <span class="n">cqt</span><span class="p">,</span> <span class="s1">&#39;hybrid&#39;</span><span class="p">:</span> <span class="n">hybrid_cqt</span><span class="p">}</span>
 
-    <span class="n">cqt_mode</span> <span class="o">=</span> <span class="n">rename_kw</span><span class="p">(</span><span class="s1">&#39;mode&#39;</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="s1">&#39;cqt_mode&#39;</span><span class="p">,</span> <span class="n">cqt_mode</span><span class="p">,</span> <span class="s1">&#39;0.4.2&#39;</span><span class="p">,</span> <span class="s1">&#39;0.5.0&#39;</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">bins_per_octave</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">bins_per_octave</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">bins_per_octave</span> <span class="o">=</span> <span class="n">n_chroma</span>
 
     <span class="c1"># Build the CQT if we don&#39;t have one already</span>
-    <span class="k">if</span> <span class="n">C</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">C</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">C</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">cqt_func</span><span class="p">[</span><span class="n">cqt_mode</span><span class="p">](</span><span class="n">y</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span>
                                       <span class="n">hop_length</span><span class="o">=</span><span class="n">hop_length</span><span class="p">,</span>
                                       <span class="n">fmin</span><span class="o">=</span><span class="n">fmin</span><span class="p">,</span>
                                       <span class="n">n_bins</span><span class="o">=</span><span class="n">n_octaves</span> <span class="o">*</span> <span class="n">bins_per_octave</span><span class="p">,</span>
                                       <span class="n">bins_per_octave</span><span class="o">=</span><span class="n">bins_per_octave</span><span class="p">,</span>
-                                      <span class="n">tuning</span><span class="o">=</span><span class="n">tuning</span><span class="p">,</span>
-                                      <span class="n">real</span><span class="o">=</span><span class="bp">False</span><span class="p">))</span>
+                                      <span class="n">tuning</span><span class="o">=</span><span class="n">tuning</span><span class="p">))</span>
 
     <span class="c1"># Map to chroma</span>
     <span class="n">cq_to_chr</span> <span class="o">=</span> <span class="n">filters</span><span class="o">.</span><span class="n">cq_to_chroma</span><span class="p">(</span><span class="n">C</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
@@ -1093,21 +1132,21 @@
                                      <span class="n">window</span><span class="o">=</span><span class="n">window</span><span class="p">)</span>
     <span class="n">chroma</span> <span class="o">=</span> <span class="n">cq_to_chr</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">C</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">threshold</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">threshold</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">chroma</span><span class="p">[</span><span class="n">chroma</span> <span class="o">&lt;</span> <span class="n">threshold</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span>
 
     <span class="c1"># Normalize</span>
-    <span class="k">if</span> <span class="n">norm</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">norm</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">chroma</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="n">chroma</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="n">norm</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">chroma</span></div>
 
 
-<div class="viewcode-block" id="chroma_cens"><a class="viewcode-back" href="../../../generated/librosa.feature.chroma_cens.html#librosa.feature.chroma_cens">[docs]</a><span class="k">def</span> <span class="nf">chroma_cens</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="mi">22050</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">fmin</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
-                <span class="n">tuning</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">n_chroma</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
-                <span class="n">n_octaves</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">bins_per_octave</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">cqt_mode</span><span class="o">=</span><span class="s1">&#39;full&#39;</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+<div class="viewcode-block" id="chroma_cens"><a class="viewcode-back" href="../../../generated/librosa.feature.chroma_cens.html#librosa.feature.chroma_cens">[docs]</a><span class="k">def</span> <span class="nf">chroma_cens</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="mi">22050</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="n">fmin</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                <span class="n">tuning</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_chroma</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
+                <span class="n">n_octaves</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">bins_per_octave</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">cqt_mode</span><span class="o">=</span><span class="s1">&#39;full&#39;</span><span class="p">,</span> <span class="n">window</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                 <span class="n">norm</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">win_len_smooth</span><span class="o">=</span><span class="mi">41</span><span class="p">):</span>
-    <span class="sd">r&#39;&#39;&#39;Computes the chroma variant &quot;Chroma Energy Normalized&quot; (CENS), following [1]_.</span>
+    <span class="sa">r</span><span class="sd">&#39;&#39;&#39;Computes the chroma variant &quot;Chroma Energy Normalized&quot; (CENS), following [1]_.</span>
 
 <span class="sd">    .. [1] Meinard Müller and Sebastian Ewert</span>
 <span class="sd">           Chroma Toolbox: MATLAB implementations for extracting variants of chroma-based audio features</span>
@@ -1129,7 +1168,7 @@
 
 <span class="sd">    fmin : float &gt; 0</span>
 <span class="sd">        minimum frequency to analyze in the CQT.</span>
-<span class="sd">        Default: &#39;C2&#39; ~ 32.7 Hz</span>
+<span class="sd">        Default: &#39;C1&#39; ~= 32.7 Hz</span>
 
 <span class="sd">    norm : int &gt; 0, +-np.inf, or None</span>
 <span class="sd">        Column-wise normalization of the chromagram.</span>
@@ -1197,7 +1236,7 @@
                         <span class="n">fmin</span><span class="o">=</span><span class="n">fmin</span><span class="p">,</span>
                         <span class="n">bins_per_octave</span><span class="o">=</span><span class="n">bins_per_octave</span><span class="p">,</span>
                         <span class="n">tuning</span><span class="o">=</span><span class="n">tuning</span><span class="p">,</span>
-                        <span class="n">norm</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+                        <span class="n">norm</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                         <span class="n">n_chroma</span><span class="o">=</span><span class="n">n_chroma</span><span class="p">,</span>
                         <span class="n">n_octaves</span><span class="o">=</span><span class="n">n_octaves</span><span class="p">,</span>
                         <span class="n">cqt_mode</span><span class="o">=</span><span class="n">cqt_mode</span><span class="p">,</span>
@@ -1216,7 +1255,7 @@
         <span class="n">chroma_quant</span> <span class="o">+=</span> <span class="p">(</span><span class="n">chroma</span> <span class="o">&gt;</span> <span class="n">cur_quant_step</span><span class="p">)</span> <span class="o">*</span> <span class="n">QUANT_WEIGHTS</span><span class="p">[</span><span class="n">cur_quant_step_idx</span><span class="p">]</span>
 
     <span class="c1"># Apply temporal smoothing</span>
-    <span class="n">win</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">signal</span><span class="o">.</span><span class="n">hanning</span><span class="p">(</span><span class="n">win_len_smooth</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">sym</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">win</span> <span class="o">=</span> <span class="n">scipy</span><span class="o">.</span><span class="n">signal</span><span class="o">.</span><span class="n">hanning</span><span class="p">(</span><span class="n">win_len_smooth</span> <span class="o">+</span> <span class="mi">2</span><span class="p">,</span> <span class="n">sym</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">win</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">win</span><span class="p">)</span>
     <span class="n">win</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">atleast_2d</span><span class="p">(</span><span class="n">win</span><span class="p">)</span>
 
@@ -1226,7 +1265,7 @@
     <span class="k">return</span> <span class="n">util</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="n">cens</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="n">norm</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="tonnetz"><a class="viewcode-back" href="../../../generated/librosa.feature.tonnetz.html#librosa.feature.tonnetz">[docs]</a><span class="k">def</span> <span class="nf">tonnetz</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="mi">22050</span><span class="p">,</span> <span class="n">chroma</span><span class="o">=</span><span class="bp">None</span><span class="p">):</span>
+<div class="viewcode-block" id="tonnetz"><a class="viewcode-back" href="../../../generated/librosa.feature.tonnetz.html#librosa.feature.tonnetz">[docs]</a><span class="k">def</span> <span class="nf">tonnetz</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="mi">22050</span><span class="p">,</span> <span class="n">chroma</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="sd">&#39;&#39;&#39;Computes the tonal centroid features (tonnetz), following the method of</span>
 <span class="sd">    [1]_.</span>
 
@@ -1299,15 +1338,15 @@
 
 <span class="sd">    &#39;&#39;&#39;</span>
 
-    <span class="k">if</span> <span class="n">y</span> <span class="ow">is</span> <span class="bp">None</span> <span class="ow">and</span> <span class="n">chroma</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">y</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">chroma</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">ParameterError</span><span class="p">(</span><span class="s1">&#39;Either the audio samples or the chromagram must be &#39;</span>
                              <span class="s1">&#39;passed as an argument.&#39;</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">chroma</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">chroma</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">chroma</span> <span class="o">=</span> <span class="n">chroma_cqt</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">)</span>
 
     <span class="c1"># Generate Transformation matrix</span>
-    <span class="n">dim_map</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="n">chroma</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">endpoint</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+    <span class="n">dim_map</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="n">chroma</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">endpoint</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
     <span class="n">scale</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">([</span><span class="mf">7.</span> <span class="o">/</span> <span class="mi">6</span><span class="p">,</span> <span class="mf">7.</span> <span class="o">/</span> <span class="mi">6</span><span class="p">,</span>
                         <span class="mf">3.</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">3.</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span>
@@ -1329,7 +1368,7 @@
 
 
 <span class="c1"># -- Mel spectrogram and MFCCs -- #</span>
-<div class="viewcode-block" id="mfcc"><a class="viewcode-back" href="../../../generated/librosa.feature.mfcc.html#librosa.feature.mfcc">[docs]</a><span class="k">def</span> <span class="nf">mfcc</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="mi">22050</span><span class="p">,</span> <span class="n">S</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">n_mfcc</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="mfcc"><a class="viewcode-back" href="../../../generated/librosa.feature.mfcc.html#librosa.feature.mfcc">[docs]</a><span class="k">def</span> <span class="nf">mfcc</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="mi">22050</span><span class="p">,</span> <span class="n">S</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_mfcc</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Mel-frequency cepstral coefficients</span>
 
 <span class="sd">    Parameters</span>
@@ -1375,7 +1414,7 @@
 
 <span class="sd">    &gt;&gt;&gt; S = librosa.feature.melspectrogram(y=y, sr=sr, n_mels=128,</span>
 <span class="sd">    ...                                    fmax=8000)</span>
-<span class="sd">    &gt;&gt;&gt; librosa.feature.mfcc(S=librosa.logamplitude(S))</span>
+<span class="sd">    &gt;&gt;&gt; librosa.feature.mfcc(S=librosa.power_to_db(S))</span>
 <span class="sd">    array([[ -5.207e+02,  -4.898e+02, ...,  -5.207e+02,  -5.207e+02],</span>
 <span class="sd">           [ -2.576e-14,   4.054e+01, ...,  -3.997e-14,  -3.997e-14],</span>
 <span class="sd">           ...,</span>
@@ -1389,6 +1428,7 @@
 <span class="sd">    Visualize the MFCC series</span>
 
 <span class="sd">    &gt;&gt;&gt; import matplotlib.pyplot as plt</span>
+<span class="sd">    &gt;&gt;&gt; plt.figure(figsize=(10, 4))</span>
 <span class="sd">    &gt;&gt;&gt; librosa.display.specshow(mfccs, x_axis=&#39;time&#39;)</span>
 <span class="sd">    &gt;&gt;&gt; plt.colorbar()</span>
 <span class="sd">    &gt;&gt;&gt; plt.title(&#39;MFCC&#39;)</span>
@@ -1397,15 +1437,22 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">if</span> <span class="n">S</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">:</span>
-        <span class="n">S</span> <span class="o">=</span> <span class="n">logamplitude</span><span class="p">(</span><span class="n">melspectrogram</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">S</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">S</span> <span class="o">=</span> <span class="n">power_to_db</span><span class="p">(</span><span class="n">melspectrogram</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
 
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">filters</span><span class="o">.</span><span class="n">dct</span><span class="p">(</span><span class="n">n_mfcc</span><span class="p">,</span> <span class="n">S</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">S</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="melspectrogram"><a class="viewcode-back" href="../../../generated/librosa.feature.melspectrogram.html#librosa.feature.melspectrogram">[docs]</a><span class="k">def</span> <span class="nf">melspectrogram</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="mi">22050</span><span class="p">,</span> <span class="n">S</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">n_fft</span><span class="o">=</span><span class="mi">2048</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span>
-                   <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Compute a Mel-scaled power spectrogram.</span>
+<div class="viewcode-block" id="melspectrogram"><a class="viewcode-back" href="../../../generated/librosa.feature.melspectrogram.html#librosa.feature.melspectrogram">[docs]</a><span class="k">def</span> <span class="nf">melspectrogram</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="mi">22050</span><span class="p">,</span> <span class="n">S</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_fft</span><span class="o">=</span><span class="mi">2048</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span>
+                   <span class="n">power</span><span class="o">=</span><span class="mf">2.0</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Compute a mel-scaled spectrogram.</span>
+
+<span class="sd">    If a spectrogram input `S` is provided, then it is mapped directly onto</span>
+<span class="sd">    the mel basis `mel_f` by `mel_f.dot(S)`.</span>
+
+<span class="sd">    If a time-series input `y, sr` is provided, then its magnitude spectrogram</span>
+<span class="sd">    `S` is first computed, and then mapped onto the mel scale by</span>
+<span class="sd">    `mel_f.dot(S**power)`.  By default, `power=2` operates on a power spectrum.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -1416,7 +1463,7 @@
 <span class="sd">        sampling rate of `y`</span>
 
 <span class="sd">    S : np.ndarray [shape=(d, t)]</span>
-<span class="sd">        power spectrogram</span>
+<span class="sd">        spectrogram</span>
 
 <span class="sd">    n_fft : int &gt; 0 [scalar]</span>
 <span class="sd">        length of the FFT window</span>
@@ -1425,6 +1472,10 @@
 <span class="sd">        number of samples between successive frames.</span>
 <span class="sd">        See `librosa.core.stft`</span>
 
+<span class="sd">    power : float &gt; 0 [scalar]</span>
+<span class="sd">        Exponent for the magnitude melspectrogram.</span>
+<span class="sd">        e.g., 1 for energy, 2 for power, etc.</span>
+
 <span class="sd">    kwargs : additional keyword arguments</span>
 <span class="sd">      Mel filter bank parameters.</span>
 <span class="sd">      See `librosa.filters.mel` for details.</span>
@@ -1432,7 +1483,7 @@
 <span class="sd">    Returns</span>
 <span class="sd">    -------</span>
 <span class="sd">    S : np.ndarray [shape=(n_mels, t)]</span>
-<span class="sd">        Mel power spectrogram</span>
+<span class="sd">        Mel spectrogram</span>
 
 <span class="sd">    See Also</span>
 <span class="sd">    --------</span>
@@ -1463,8 +1514,9 @@
 <span class="sd">    ...                                     fmax=8000)</span>
 
 <span class="sd">    &gt;&gt;&gt; import matplotlib.pyplot as plt</span>
-<span class="sd">    &gt;&gt;&gt; librosa.display.specshow(librosa.logamplitude(S,</span>
-<span class="sd">    ...                                               ref_power=np.max),</span>
+<span class="sd">    &gt;&gt;&gt; plt.figure(figsize=(10, 4))</span>
+<span class="sd">    &gt;&gt;&gt; librosa.display.specshow(librosa.power_to_db(S,</span>
+<span class="sd">    ...                                              ref=np.max),</span>
 <span class="sd">    ...                          y_axis=&#39;mel&#39;, fmax=8000,</span>
 <span class="sd">    ...                          x_axis=&#39;time&#39;)</span>
 <span class="sd">    &gt;&gt;&gt; plt.colorbar(format=&#39;%+2.0f dB&#39;)</span>
@@ -1475,102 +1527,12 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">S</span><span class="p">,</span> <span class="n">n_fft</span> <span class="o">=</span> <span class="n">_spectrogram</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">S</span><span class="o">=</span><span class="n">S</span><span class="p">,</span> <span class="n">n_fft</span><span class="o">=</span><span class="n">n_fft</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="n">hop_length</span><span class="p">,</span>
-                            <span class="n">power</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+                            <span class="n">power</span><span class="o">=</span><span class="n">power</span><span class="p">)</span>
 
     <span class="c1"># Build a Mel filter</span>
     <span class="n">mel_basis</span> <span class="o">=</span> <span class="n">filters</span><span class="o">.</span><span class="n">mel</span><span class="p">(</span><span class="n">sr</span><span class="p">,</span> <span class="n">n_fft</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">mel_basis</span><span class="p">,</span> <span class="n">S</span><span class="p">)</span></div>
-
-
-<span class="c1"># Deprecated functions</span>
-<span class="nd">@util.decorators.deprecated</span><span class="p">(</span><span class="s1">&#39;0.4&#39;</span><span class="p">,</span> <span class="s1">&#39;0.5&#39;</span><span class="p">)</span>
-<div class="viewcode-block" id="logfsgram"><a class="viewcode-back" href="../../../generated/librosa.feature.logfsgram.html#librosa.feature.logfsgram">[docs]</a><span class="k">def</span> <span class="nf">logfsgram</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="mi">22050</span><span class="p">,</span> <span class="n">S</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">n_fft</span><span class="o">=</span><span class="mi">2048</span><span class="p">,</span>
-              <span class="n">hop_length</span><span class="o">=</span><span class="mi">512</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>  <span class="c1"># pragma: no cover</span>
-    <span class="sd">&#39;&#39;&#39;Compute a log-frequency spectrogram using a</span>
-<span class="sd">    fixed-window STFT.</span>
-
-<span class="sd">    .. warning:: Deprecated in librosa 0.4</span>
-<span class="sd">              Functionality is superseded by `librosa.core.pseudo_cqt`</span>
-
-<span class="sd">    Parameters</span>
-<span class="sd">    ----------</span>
-<span class="sd">    y : np.ndarray [shape=(n,)] or None</span>
-<span class="sd">        audio time series</span>
-
-<span class="sd">    sr : number &gt; 0 [scalar]</span>
-<span class="sd">        audio sampling rate of `y`</span>
-
-<span class="sd">    S : np.ndarray [shape=(d, t)] or None</span>
-<span class="sd">        (optional) power spectrogram</span>
-
-<span class="sd">    n_fft : int &gt; 0 [scalar]</span>
-<span class="sd">        FFT window size</span>
-
-<span class="sd">    hop_length : int &gt; 0 [scalar]</span>
-<span class="sd">        hop length for STFT. See `librosa.core.stft` for details.</span>
-
-<span class="sd">    bins_per_octave : int &gt; 0 [scalar]</span>
-<span class="sd">        Number of bins per octave. Defaults to 12.</span>
-
-<span class="sd">    tuning : float in `[-0.5,  0.5)` [scalar]</span>
-<span class="sd">        Deviation (in fractions of a bin) from A440 tuning.</span>
-
-<span class="sd">        If not provided, it will be automatically estimated.</span>
-
-<span class="sd">    kwargs : additional keyword arguments</span>
-<span class="sd">        See `librosa.filters.logfrequency`</span>
-
-<span class="sd">    Returns</span>
-<span class="sd">    -------</span>
-<span class="sd">    P : np.ndarray [shape=(n_pitches, t)]</span>
-<span class="sd">        `P[f, t]` contains the energy at pitch bin `f`, frame `t`.</span>
-
-
-<span class="sd">    Examples</span>
-<span class="sd">    --------</span>
-<span class="sd">    From time-series input</span>
-
-<span class="sd">    &gt;&gt;&gt; y, sr = librosa.load(librosa.util.example_audio_file())</span>
-<span class="sd">    &gt;&gt;&gt; L = librosa.feature.logfsgram(y=y, sr=sr)</span>
-<span class="sd">    &gt;&gt;&gt; L</span>
-<span class="sd">    array([[  1.309e-02,   1.228e+00, ...,   3.785e-08,   7.624e-09],</span>
-<span class="sd">           [  1.630e-24,   1.528e-22, ...,   4.710e-30,   9.488e-31],</span>
-<span class="sd">           ...,</span>
-<span class="sd">           [  2.617e-05,   3.807e-04, ...,   6.387e-08,   6.000e-08],</span>
-<span class="sd">           [  3.214e-05,   3.814e-04, ...,   7.599e-08,   6.046e-08]])</span>
-
-<span class="sd">    Plot the pseudo CQT</span>
-
-<span class="sd">    &gt;&gt;&gt; import matplotlib.pyplot as plt</span>
-<span class="sd">    &gt;&gt;&gt; plt.figure()</span>
-<span class="sd">    &gt;&gt;&gt; librosa.display.specshow(librosa.logamplitude(L,</span>
-<span class="sd">    ...                                               ref_power=np.max),</span>
-<span class="sd">    ...                          y_axis=&#39;cqt_hz&#39;, x_axis=&#39;time&#39;)</span>
-<span class="sd">    &gt;&gt;&gt; plt.title(&#39;Log-frequency power spectrogram&#39;)</span>
-<span class="sd">    &gt;&gt;&gt; plt.colorbar(format=&#39;%+2.0f dB&#39;)</span>
-<span class="sd">    &gt;&gt;&gt; plt.tight_layout()</span>
-
-<span class="sd">    &#39;&#39;&#39;</span>
-
-    <span class="n">S</span><span class="p">,</span> <span class="n">n_fft</span> <span class="o">=</span> <span class="n">_spectrogram</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="n">y</span><span class="p">,</span> <span class="n">S</span><span class="o">=</span><span class="n">S</span><span class="p">,</span> <span class="n">n_fft</span><span class="o">=</span><span class="n">n_fft</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="n">hop_length</span><span class="p">,</span>
-                            <span class="n">power</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-
-    <span class="c1"># If we don&#39;t have tuning already, grab it from S</span>
-    <span class="k">if</span> <span class="s1">&#39;tuning&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
-        <span class="n">bins_per_oct</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;bins_per_octave&#39;</span><span class="p">,</span> <span class="mi">12</span><span class="p">)</span>
-        <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;tuning&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">estimate_tuning</span><span class="p">(</span><span class="n">S</span><span class="o">=</span><span class="n">S</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span>
-                                           <span class="n">bins_per_octave</span><span class="o">=</span><span class="n">bins_per_oct</span><span class="p">)</span>
-
-    <span class="c1"># Build the CQ basis</span>
-    <span class="n">cq_basis</span> <span class="o">=</span> <span class="n">filters</span><span class="o">.</span><span class="n">logfrequency</span><span class="p">(</span><span class="n">sr</span><span class="p">,</span> <span class="n">n_fft</span><span class="o">=</span><span class="n">n_fft</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">cq_basis</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">S</span><span class="p">)</span></div>
-
-
-<span class="c1"># Moved functions</span>
-<span class="n">chromagram</span> <span class="o">=</span> <span class="n">util</span><span class="o">.</span><span class="n">decorators</span><span class="o">.</span><span class="n">moved</span><span class="p">(</span><span class="s1">&#39;librosa.feature.chromagram&#39;</span><span class="p">,</span>
-                                   <span class="s1">&#39;0.4&#39;</span><span class="p">,</span> <span class="s1">&#39;0.5&#39;</span><span class="p">)(</span><span class="n">chroma_stft</span><span class="p">)</span>
 </pre></div>
 
            </div>
@@ -1582,7 +1544,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2016, librosa development team.
+        &copy; Copyright 2013--2017, librosa development team.
 
     </p>
   </div>
@@ -1597,6 +1559,28 @@
 
   </div>
   
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: 0.5.0
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Tags</dt>
+            <dd><a href="../../../0.4.0rc1/index.html">0.4.0rc1</a></dd>
+            <dd><a href="../../../0.4.2/index.html">0.4.2</a></dd>
+            <dd><a href="../../../0.4.3/index.html">0.4.3</a></dd>
+            <dd><a href="../../../0.4.3rc0/index.html">0.4.3rc0</a></dd>
+            <dd><a href="../../../0.5.0/_modules/librosa/feature/spectral.html">0.5.0</a></dd>
+            <dd><a href="../../../0.5.0rc0/index.html">0.5.0rc0</a></dd>
+        </dl>
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="../../../master/index.html">master</a></dd>
+        </dl>
+    </div>
+</div>
 
 
   
@@ -1604,7 +1588,7 @@
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../../../',
-            VERSION:'0.4.3',
+            VERSION:'0.5.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

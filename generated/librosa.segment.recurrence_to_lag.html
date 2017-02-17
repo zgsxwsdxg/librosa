@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>librosa.segment.recurrence_to_lag &mdash; librosa 0.4.3 documentation</title>
+  <title>librosa.segment.recurrence_to_lag &mdash; librosa 0.5.0 documentation</title>
   
 
   
@@ -28,9 +28,14 @@
   
 
   
+    <link rel="stylesheet" href="../_static/banner.css" type="text/css" />
+  
 
   
-    <link rel="top" title="librosa 0.4.3 documentation" href="../index.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="librosa 0.5.0 documentation" href="../index.html"/>
         <link rel="up" title="Temporal segmentation" href="../segment.html"/>
         <link rel="next" title="librosa.segment.lag_to_recurrence" href="librosa.segment.lag_to_recurrence.html"/>
         <link rel="prev" title="librosa.segment.recurrence_matrix" href="librosa.segment.recurrence_matrix.html"/> 
@@ -61,7 +66,7 @@
             
             
               <div class="version">
-                0.4
+                0.5
               </div>
             
           
@@ -104,7 +109,6 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../segment.html#temporal-clustering">Temporal clustering</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../segment.html#deprecated">Deprecated</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../util.html">Utilities</a></li>
@@ -112,9 +116,10 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../filters.html">Filters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cache.html">Caching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ioformats.html">Advanced I/O Use Cases</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Release notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
 </ul>
 
@@ -152,7 +157,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/generated/librosa.segment.recurrence_to_lag.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/generated/librosa.segment.recurrence_to_lag.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -162,7 +167,13 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="librosa-segment-recurrence-to-lag">
+  
+
+
+
+
+
+<div class="section" id="librosa-segment-recurrence-to-lag">
 <h1>librosa.segment.recurrence_to_lag<a class="headerlink" href="#librosa-segment-recurrence-to-lag" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="librosa.segment.recurrence_to_lag">
@@ -187,7 +198,7 @@ the assumption of repetition.</p>
 </div></blockquote>
 <p><strong>axis</strong> : int</p>
 <blockquote>
-<div><p>The axis to keep as the <a class="reference external" href="http://docs.python.org/2/library/time.html#module-time" title="(in Python v2.7)"><code class="xref py py-obj docutils literal"><span class="pre">time</span></code></a> axis.
+<div><p>The axis to keep as the <a class="reference external" href="https://docs.python.org/3/library/time.html#module-time" title="(in Python v3.6)"><code class="xref py py-obj docutils literal"><span class="pre">time</span></code></a> axis.
 The alternate axis will be converted to lag coordinates.</p>
 </div></blockquote>
 </td>
@@ -222,7 +233,7 @@ or (time, lag) (if <em class="xref py py-obj">axis=0</em>) coordinates</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span><span class="p">(</span><span class="n">lag_pad</span><span class="p">,</span> <span class="n">x_axis</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="n">y_axis</span><span class="o">=</span><span class="s1">&#39;lag&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Lag (zero-padded)&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span><span class="p">(</span><span class="n">lag_nopad</span><span class="p">,</span> <span class="n">x_axis</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="n">y_axis</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span><span class="p">(</span><span class="n">lag_nopad</span><span class="p">,</span> <span class="n">x_axis</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Lag (no padding)&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 </pre></div>
@@ -254,7 +265,7 @@ or (time, lag) (if <em class="xref py py-obj">axis=0</em>) coordinates</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2016, librosa development team.
+        &copy; Copyright 2013--2017, librosa development team.
 
     </p>
   </div>
@@ -269,6 +280,28 @@ or (time, lag) (if <em class="xref py py-obj">axis=0</em>) coordinates</p>
 
   </div>
   
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: 0.5.0
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Tags</dt>
+            <dd><a href="../0.4.0rc1/generated/librosa.segment.recurrence_to_lag.html">0.4.0rc1</a></dd>
+            <dd><a href="../0.4.2/generated/librosa.segment.recurrence_to_lag.html">0.4.2</a></dd>
+            <dd><a href="../0.4.3/generated/librosa.segment.recurrence_to_lag.html">0.4.3</a></dd>
+            <dd><a href="../0.4.3rc0/generated/librosa.segment.recurrence_to_lag.html">0.4.3rc0</a></dd>
+            <dd><a href="../0.5.0/generated/librosa.segment.recurrence_to_lag.html">0.5.0</a></dd>
+            <dd><a href="../0.5.0rc0/generated/librosa.segment.recurrence_to_lag.html">0.5.0rc0</a></dd>
+        </dl>
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="../master/generated/librosa.segment.recurrence_to_lag.html">master</a></dd>
+        </dl>
+    </div>
+</div>
 
 
   
@@ -276,7 +309,7 @@ or (time, lag) (if <em class="xref py py-obj">axis=0</em>) coordinates</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.4.3',
+            VERSION:'0.5.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

@@ -1,0 +1,6 @@
+librosa.util.index_to_slice
+===========================
+
+.. currentmodule:: librosa.util
+
+.. autofunction:: index_to_slice

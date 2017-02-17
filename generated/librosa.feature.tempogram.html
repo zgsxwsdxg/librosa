@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>librosa.feature.tempogram &mdash; librosa 0.4.3 documentation</title>
+  <title>librosa.feature.tempogram &mdash; librosa 0.5.0 documentation</title>
   
 
   
@@ -28,9 +28,14 @@
   
 
   
+    <link rel="stylesheet" href="../_static/banner.css" type="text/css" />
+  
 
   
-    <link rel="top" title="librosa 0.4.3 documentation" href="../index.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="librosa 0.5.0 documentation" href="../index.html"/>
         <link rel="up" title="Feature extraction" href="../feature.html"/>
         <link rel="next" title="librosa.feature.delta" href="librosa.feature.delta.html"/>
         <link rel="prev" title="librosa.feature.zero_crossing_rate" href="librosa.feature.zero_crossing_rate.html"/> 
@@ -61,7 +66,7 @@
             
             
               <div class="version">
-                0.4
+                0.5
               </div>
             
           
@@ -96,7 +101,6 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../feature.html#feature-manipulation">Feature manipulation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../feature.html#deprecated">Deprecated</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../onset.html">Onset detection</a></li>
@@ -110,9 +114,10 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../filters.html">Filters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cache.html">Caching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ioformats.html">Advanced I/O Use Cases</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Release notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
 </ul>
 
@@ -150,7 +155,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/generated/librosa.feature.tempogram.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/generated/librosa.feature.tempogram.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -160,16 +165,22 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="librosa-feature-tempogram">
+  
+
+
+
+
+
+<div class="section" id="librosa-feature-tempogram">
 <h1>librosa.feature.tempogram<a class="headerlink" href="#librosa-feature-tempogram" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="librosa.feature.tempogram">
-<code class="descclassname">librosa.feature.</code><code class="descname">tempogram</code><span class="sig-paren">(</span><em>y=None</em>, <em>sr=22050</em>, <em>onset_envelope=None</em>, <em>hop_length=512</em>, <em>win_length=384</em>, <em>center=True</em>, <em>window=None</em>, <em>norm=inf</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/librosa/feature/rhythm.html#tempogram"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#librosa.feature.tempogram" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute the tempogram: local autocorrelation of the onset strength envelope. <a class="reference internal" href="#r35" id="id1">[R35]</a></p>
-<table class="docutils citation" frame="void" id="r35" rules="none">
+<code class="descclassname">librosa.feature.</code><code class="descname">tempogram</code><span class="sig-paren">(</span><em>y=None</em>, <em>sr=22050</em>, <em>onset_envelope=None</em>, <em>hop_length=512</em>, <em>win_length=384</em>, <em>center=True</em>, <em>window='hann'</em>, <em>norm=inf</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/librosa/feature/rhythm.html#tempogram"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#librosa.feature.tempogram" title="Permalink to this definition">¶</a></dt>
+<dd><p>Compute the tempogram: local autocorrelation of the onset strength envelope. <a class="reference internal" href="#r37" id="id1">[R37]</a></p>
+<table class="docutils citation" frame="void" id="r37" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[R35]</a></td><td>Grosche, Peter, Meinard Müller, and Frank Kurth.
+<tr><td class="label"><a class="fn-backref" href="#id1">[R37]</a></td><td>Grosche, Peter, Meinard Müller, and Frank Kurth.
 &#8220;Cyclic tempogram - A mid-level tempo representation for music signals.&#8221;
 ICASSP, 2010.</td></tr>
 </tbody>
@@ -205,10 +216,9 @@ The default settings (384) corresponds to <em class="xref py py-obj">384 * hop_l
 <div><p>If <em class="xref py py-obj">True</em>, onset autocorrelation windows are centered.
 If <em class="xref py py-obj">False</em>, windows are left-aligned.</p>
 </div></blockquote>
-<p><strong>window</strong> : None, function, np.ndarray [shape=(win_length,)]</p>
+<p><strong>window</strong> : string, function, number, tuple, or np.ndarray [shape=(win_length,)]</p>
 <blockquote>
-<div><p>Window function to apply to onset strength function.
-By default (<em class="xref py py-obj">None</em>), an asymmetric Hann window.</p>
+<div><p>A window specification as in <em class="xref py py-obj">core.stft</em>.</p>
 </div></blockquote>
 <p><strong>norm</strong> : {np.inf, -np.inf, 0, float &gt; 0, None}</p>
 <blockquote>
@@ -226,7 +236,6 @@ By default (<em class="xref py py-obj">None</em>), an asymmetric Hann window.</p
 <blockquote class="last">
 <div><p>if neither <em class="xref py py-obj">y</em> nor <em class="xref py py-obj">onset_envelope</em> are provided</p>
 <p>if <em class="xref py py-obj">win_length &lt; 1</em></p>
-<p>if <em class="xref py py-obj">window</em> is an array and <em class="xref py py-obj">len(window) != win_length</em></p>
 </div></blockquote>
 </td>
 </tr>
@@ -247,7 +256,8 @@ By default (<em class="xref py py-obj">None</em>), an asymmetric Hann window.</p
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ac_global</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">autocorrelate</span><span class="p">(</span><span class="n">oenv</span><span class="p">,</span> <span class="n">max_size</span><span class="o">=</span><span class="n">tempogram</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ac_global</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">normalize</span><span class="p">(</span><span class="n">ac_global</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># Estimate the global tempo for display purposes</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">tempo</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">beat</span><span class="o">.</span><span class="n">estimate_tempo</span><span class="p">(</span><span class="n">oenv</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="n">hop_length</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tempo</span> <span class="o">=</span> <span class="n">librosa</span><span class="o">.</span><span class="n">beat</span><span class="o">.</span><span class="n">tempo</span><span class="p">(</span><span class="n">onset_envelope</span><span class="o">=</span><span class="n">oenv</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span>
+<span class="gp">... </span>                           <span class="n">hop_length</span><span class="o">=</span><span class="n">hop_length</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
 </pre></div>
 </div>
 <div class="highlight-default"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
@@ -259,9 +269,11 @@ By default (<em class="xref py py-obj">None</em>), an asymmetric Hann window.</p
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># We&#39;ll truncate the display to a narrower range of tempi</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span><span class="p">(</span><span class="n">tempogram</span><span class="p">[:</span><span class="mi">100</span><span class="p">],</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="n">hop_length</span><span class="p">,</span>
-<span class="gp">&gt;&gt;&gt; </span>                         <span class="n">x_axis</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="n">y_axis</span><span class="o">=</span><span class="s1">&#39;tempo&#39;</span><span class="p">,</span>
-<span class="gp">... </span>                         <span class="n">tmin</span><span class="o">=</span><span class="n">tempo</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span> <span class="n">tmax</span><span class="o">=</span><span class="mi">2</span><span class="o">*</span><span class="n">tempo</span><span class="p">,</span> <span class="n">n_yticks</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">librosa</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">specshow</span><span class="p">(</span><span class="n">tempogram</span><span class="p">,</span> <span class="n">sr</span><span class="o">=</span><span class="n">sr</span><span class="p">,</span> <span class="n">hop_length</span><span class="o">=</span><span class="n">hop_length</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span>                         <span class="n">x_axis</span><span class="o">=</span><span class="s1">&#39;time&#39;</span><span class="p">,</span> <span class="n">y_axis</span><span class="o">=</span><span class="s1">&#39;tempo&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">tempo</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Estimated tempo=</span><span class="si">{:g}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tempo</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">frameon</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">framealpha</span><span class="o">=</span><span class="mf">0.75</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">tempogram</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">float</span><span class="p">(</span><span class="n">hop_length</span><span class="p">)</span> <span class="o">/</span> <span class="n">sr</span><span class="p">,</span>
 <span class="gp">... </span>                <span class="n">num</span><span class="o">=</span><span class="n">tempogram</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
@@ -277,6 +289,8 @@ By default (<em class="xref py py-obj">None</em>), an asymmetric Hann window.</p
 <span class="gp">... </span>             <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Mean local autocorrelation&#39;</span><span class="p">,</span> <span class="n">basex</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">semilogx</span><span class="p">(</span><span class="n">freqs</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="n">ac_global</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span> <span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.75</span><span class="p">,</span>
 <span class="gp">... </span>             <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Global autocorrelation&#39;</span><span class="p">,</span> <span class="n">basex</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">tempo</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=.</span><span class="mi">8</span><span class="p">,</span>
+<span class="gp">... </span>            <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Estimated tempo=</span><span class="si">{:g}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tempo</span><span class="p">))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">frameon</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;BPM&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;tight&#39;</span><span class="p">)</span>
@@ -311,7 +325,7 @@ By default (<em class="xref py py-obj">None</em>), an asymmetric Hann window.</p
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2016, librosa development team.
+        &copy; Copyright 2013--2017, librosa development team.
 
     </p>
   </div>
@@ -326,6 +340,28 @@ By default (<em class="xref py py-obj">None</em>), an asymmetric Hann window.</p
 
   </div>
   
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: 0.5.0
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Tags</dt>
+            <dd><a href="../0.4.0rc1/generated/librosa.feature.tempogram.html">0.4.0rc1</a></dd>
+            <dd><a href="../0.4.2/generated/librosa.feature.tempogram.html">0.4.2</a></dd>
+            <dd><a href="../0.4.3/generated/librosa.feature.tempogram.html">0.4.3</a></dd>
+            <dd><a href="../0.4.3rc0/generated/librosa.feature.tempogram.html">0.4.3rc0</a></dd>
+            <dd><a href="../0.5.0/generated/librosa.feature.tempogram.html">0.5.0</a></dd>
+            <dd><a href="../0.5.0rc0/generated/librosa.feature.tempogram.html">0.5.0rc0</a></dd>
+        </dl>
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="../master/generated/librosa.feature.tempogram.html">master</a></dd>
+        </dl>
+    </div>
+</div>
 
 
   
@@ -333,7 +369,7 @@ By default (<em class="xref py py-obj">None</em>), an asymmetric Hann window.</p
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.4.3',
+            VERSION:'0.5.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

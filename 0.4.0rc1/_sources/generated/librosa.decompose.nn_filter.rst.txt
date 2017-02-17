@@ -1,0 +1,6 @@
+librosa.decompose.nn_filter
+===========================
+
+.. currentmodule:: librosa.decompose
+
+.. autofunction:: nn_filter

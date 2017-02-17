@@ -1,0 +1,6 @@
+librosa.core.pitch_tuning
+=========================
+
+.. currentmodule:: librosa.core
+
+.. autofunction:: pitch_tuning

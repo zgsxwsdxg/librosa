@@ -1,0 +1,6 @@
+librosa.feature.chroma_cqt
+==========================
+
+.. currentmodule:: librosa.feature
+
+.. autofunction:: chroma_cqt

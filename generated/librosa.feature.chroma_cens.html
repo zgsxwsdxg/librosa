@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>librosa.feature.chroma_cens &mdash; librosa 0.4.3 documentation</title>
+  <title>librosa.feature.chroma_cens &mdash; librosa 0.5.0 documentation</title>
   
 
   
@@ -28,9 +28,14 @@
   
 
   
+    <link rel="stylesheet" href="../_static/banner.css" type="text/css" />
+  
 
   
-    <link rel="top" title="librosa 0.4.3 documentation" href="../index.html"/>
+        <link rel="index" title="Index"
+              href="../genindex.html"/>
+        <link rel="search" title="Search" href="../search.html"/>
+    <link rel="top" title="librosa 0.5.0 documentation" href="../index.html"/>
         <link rel="up" title="Feature extraction" href="../feature.html"/>
         <link rel="next" title="librosa.feature.melspectrogram" href="librosa.feature.melspectrogram.html"/>
         <link rel="prev" title="librosa.feature.chroma_cqt" href="librosa.feature.chroma_cqt.html"/> 
@@ -61,7 +66,7 @@
             
             
               <div class="version">
-                0.4
+                0.5
               </div>
             
           
@@ -108,7 +113,6 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../feature.html#rhythm-features">Rhythm features</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../feature.html#feature-manipulation">Feature manipulation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../feature.html#deprecated">Deprecated</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../onset.html">Onset detection</a></li>
@@ -122,9 +126,10 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../filters.html">Filters</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../cache.html">Caching</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../ioformats.html">Advanced I/O Use Cases</a></li>
 </ul>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Changes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../changelog.html">Release notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../glossary.html">Glossary</a></li>
 </ul>
 
@@ -162,7 +167,7 @@
       <li class="wy-breadcrumbs-aside">
         
           
-            <a href="../_sources/generated/librosa.feature.chroma_cens.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/generated/librosa.feature.chroma_cens.rst.txt" rel="nofollow"> View page source</a>
           
         
       </li>
@@ -172,16 +177,22 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <div class="section" id="librosa-feature-chroma-cens">
+  
+
+
+
+
+
+<div class="section" id="librosa-feature-chroma-cens">
 <h1>librosa.feature.chroma_cens<a class="headerlink" href="#librosa-feature-chroma-cens" title="Permalink to this headline">¶</a></h1>
 <dl class="function">
 <dt id="librosa.feature.chroma_cens">
 <code class="descclassname">librosa.feature.</code><code class="descname">chroma_cens</code><span class="sig-paren">(</span><em>y=None</em>, <em>sr=22050</em>, <em>C=None</em>, <em>hop_length=512</em>, <em>fmin=None</em>, <em>tuning=None</em>, <em>n_chroma=12</em>, <em>n_octaves=7</em>, <em>bins_per_octave=None</em>, <em>cqt_mode='full'</em>, <em>window=None</em>, <em>norm=2</em>, <em>win_len_smooth=41</em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/librosa/feature/spectral.html#chroma_cens"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#librosa.feature.chroma_cens" title="Permalink to this definition">¶</a></dt>
-<dd><p>Computes the chroma variant &#8220;Chroma Energy Normalized&#8221; (CENS), following <a class="reference internal" href="#r32" id="id1">[R32]</a>.</p>
-<table class="docutils citation" frame="void" id="r32" rules="none">
+<dd><p>Computes the chroma variant &#8220;Chroma Energy Normalized&#8221; (CENS), following <a class="reference internal" href="#r34" id="id1">[R34]</a>.</p>
+<table class="docutils citation" frame="void" id="r34" rules="none">
 <colgroup><col class="label" /><col /></colgroup>
 <tbody valign="top">
-<tr><td class="label"><a class="fn-backref" href="#id1">[R32]</a></td><td>Meinard Müller and Sebastian Ewert
+<tr><td class="label"><a class="fn-backref" href="#id1">[R34]</a></td><td>Meinard Müller and Sebastian Ewert
 Chroma Toolbox: MATLAB implementations for extracting variants of chroma-based audio features
 In Proceedings of the International Conference on Music Information Retrieval (ISMIR), 2011.</td></tr>
 </tbody>
@@ -209,7 +220,7 @@ In Proceedings of the International Conference on Music Information Retrieval (I
 <p><strong>fmin</strong> : float &gt; 0</p>
 <blockquote>
 <div><p>minimum frequency to analyze in the CQT.
-Default: &#8216;C2&#8217; ~ 32.7 Hz</p>
+Default: &#8216;C1&#8217; ~= 32.7 Hz</p>
 </div></blockquote>
 <p><strong>norm</strong> : int &gt; 0, +-np.inf, or None</p>
 <blockquote>
@@ -312,7 +323,7 @@ Default: 41</p>
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2016, librosa development team.
+        &copy; Copyright 2013--2017, librosa development team.
 
     </p>
   </div>
@@ -327,6 +338,28 @@ Default: 41</p>
 
   </div>
   
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: 0.5.0
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Tags</dt>
+            <dd><a href="../0.4.0rc1/generated/librosa.feature.chroma_cens.html">0.4.0rc1</a></dd>
+            <dd><a href="../0.4.2/index.html">0.4.2</a></dd>
+            <dd><a href="../0.4.3/generated/librosa.feature.chroma_cens.html">0.4.3</a></dd>
+            <dd><a href="../0.4.3rc0/generated/librosa.feature.chroma_cens.html">0.4.3rc0</a></dd>
+            <dd><a href="../0.5.0/generated/librosa.feature.chroma_cens.html">0.5.0</a></dd>
+            <dd><a href="../0.5.0rc0/generated/librosa.feature.chroma_cens.html">0.5.0rc0</a></dd>
+        </dl>
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="../master/generated/librosa.feature.chroma_cens.html">master</a></dd>
+        </dl>
+    </div>
+</div>
 
 
   
@@ -334,7 +367,7 @@ Default: 41</p>
     <script type="text/javascript">
         var DOCUMENTATION_OPTIONS = {
             URL_ROOT:'../',
-            VERSION:'0.4.3',
+            VERSION:'0.5.0',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
             HAS_SOURCE:  true

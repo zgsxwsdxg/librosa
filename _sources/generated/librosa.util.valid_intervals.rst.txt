@@ -1,0 +1,6 @@
+librosa.util.valid_intervals
+============================
+
+.. currentmodule:: librosa.util
+
+.. autofunction:: valid_intervals
